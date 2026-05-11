@@ -46,7 +46,12 @@ export function Metrics() {
         </div>
         <div className="grid gap-5 md:grid-cols-3 md:gap-6 md:items-stretch">
           {promises.map((p, i) => (
-            <article key={p.index} className="service-card flex h-full flex-col p-7 sm:p-8">
+            <article
+              key={p.index}
+              className={`service-card flex h-full flex-col p-7 sm:p-8 ${
+                i === 0 ? "tilt-left" : i === 2 ? "tilt-right" : "tilt-up"
+              }`}
+            >
               <span
                 className={`font-display text-5xl font-extrabold leading-none tracking-tight ${accents[i]}`}
               >
