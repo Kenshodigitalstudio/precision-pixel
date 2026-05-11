@@ -22,8 +22,9 @@ export function createStripeClient(env: StripeEnv): Stripe {
 
   return new Stripe(connectionApiKey, {
     apiVersion: '2026-03-25.dahlia',
-    httpClient: Stripe.createFetchHttpClient((url: string | URL, init?: RequestInit) => {
-      const gatewayUrl = url.toString().replace('https://api.stripe.com', GATEWAY_STRIPE_BASE);
+    httpClient: Stripe.createFetchHttpClient((url, init?: RequestInit) => {
+      const urlString = typeof url === 'string' ? url : url instanceof URL ? url.toString() : (url as Request).url;
+      const gatewayUrl = urlString.replace('https://api.stripe.com', GATEWAY_STRIPE_BASE);
       return fetch(gatewayUrl, {
         ...init,
         headers: {
