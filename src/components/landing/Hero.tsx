@@ -55,28 +55,28 @@ export function Hero() {
           <a
             ref={magneticRef}
             href="#contact"
-            className="btn-magnetic group inline-flex items-center gap-3 rounded-full bg-ink px-6 py-3.5 text-sm font-medium text-paper shadow-[var(--shadow-glow)] transition-colors hover:bg-electric"
+            className="btn-magnetic group inline-flex items-center gap-3 border-2 border-ink bg-ink px-6 py-4 text-sm font-bold uppercase tracking-wider text-paper shadow-[var(--shadow-hard)] transition-all hover:bg-electric hover:text-ink hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[var(--shadow-hard-lg)]"
           >
-            Réserver un appel de découverte
-            <span className="transition-transform duration-300 group-hover:translate-x-1">↗</span>
+            Prendre rendez-vous
+            <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
           </a>
           <a
-            href="#approche"
-            className="inline-flex items-center gap-2 rounded-full border border-border bg-card/50 px-6 py-3.5 text-sm font-medium text-ink backdrop-blur-md transition-colors hover:bg-card"
+            href="#services"
+            className="inline-flex items-center gap-2 border-2 border-ink bg-paper px-6 py-4 text-sm font-bold uppercase tracking-wider text-ink transition-all hover:bg-solar"
           >
-            Voir notre approche
+            Voir nos services
           </a>
         </div>
 
-        <div className="mt-20 grid max-w-3xl grid-cols-3 gap-8 border-t border-border/60 pt-8 text-sm">
+        <div className="mt-20 grid max-w-3xl grid-cols-3 gap-0 border-2 border-ink text-sm">
           {[
             { k: "Certifiés", v: "Google Partner" },
             { k: "GTM SS", v: "Server-side ready" },
             { k: "GA4 / BQ", v: "Attribution propre" },
-          ].map((it) => (
-            <div key={it.k}>
-              <div className="text-xs uppercase tracking-widest text-ink-soft">{it.k}</div>
-              <div className="mt-1 font-display text-base font-medium text-ink">{it.v}</div>
+          ].map((it, i) => (
+            <div key={it.k} className={`p-4 ${i < 2 ? "border-r-2 border-ink" : ""}`}>
+              <div className="font-mono text-[10px] uppercase tracking-widest text-ink-soft">{it.k}</div>
+              <div className="mt-1 font-display text-sm uppercase text-ink">{it.v}</div>
             </div>
           ))}
         </div>
