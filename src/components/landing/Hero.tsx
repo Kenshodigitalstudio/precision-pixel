@@ -8,21 +8,19 @@ export function Hero() {
   const title2 = ["Mesurez", "chaque", "euro."];
 
   return (
-    <section id="top" className="relative isolate overflow-hidden pt-32 pb-24 sm:pt-40 sm:pb-32">
+    <section id="top" className="relative isolate overflow-hidden pt-24 pb-20 sm:pt-28 sm:pb-24">
       <Aurora />
 
       <div className="relative mx-auto max-w-7xl px-6">
         <div
-          className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card/60 px-3 py-1.5 backdrop-blur-md text-xs font-medium text-ink-soft reveal"
+          className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/50 px-2.5 py-1 backdrop-blur-md text-[10.5px] font-medium uppercase tracking-[0.18em] text-ink-soft reveal"
           style={{ animationDelay: "0ms" }}
         >
           <span className="live-dot" />
-          <span>Tracking actif sur 47 comptes</span>
-          <span className="text-border">•</span>
-          <span className="text-ink">Paris</span>
+          <span>Tracking actif · 47 comptes</span>
         </div>
 
-        <h1 className="mt-8 font-display text-[clamp(2.75rem,7vw,6rem)] font-bold leading-[1.02] tracking-[-0.035em] text-ink">
+        <h1 className="mt-5 font-display text-[clamp(3.25rem,9.5vw,8rem)] font-bold leading-[0.95] tracking-[-0.045em] text-ink">
           <span className="word-reveal block">
             {title1.map((w, i) => (
               <span key={i} style={{ ["--i" as never]: i }}>
