@@ -39,12 +39,12 @@ export function Services() {
             </h2>
           </div>
           <p className="max-w-sm text-[15px] text-ink-soft">
-            Notre équipe pilote vos campagnes et votre tracking comme un opérateur
-            pilote une salle de marché — performance vérifiable, pas marketing à la louche.
+            Deux offres, simples et concrètes&nbsp;: un coaching live sur votre compte
+            Google Ads, et l'installation propre de votre tracking. Rien de superflu.
           </p>
         </div>
 
-        <div className="relative mt-14 grid gap-5 md:grid-cols-3 md:gap-6">
+        <div className="relative mt-14 grid gap-5 md:grid-cols-2 md:gap-6">
           {/* Decorative little sparkle */}
           <span aria-hidden className="absolute -top-6 left-1/2 hidden text-xl text-ink/60 md:block float-y">✦</span>
 
