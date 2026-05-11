@@ -1,43 +1,24 @@
 export function Aurora() {
   return (
     <div aria-hidden className="pointer-events-none absolute inset-0 overflow-hidden">
+      {/* Brutalist grid */}
       <div
-        className="aurora-blob"
+        className="absolute inset-0 opacity-[0.08]"
         style={{
-          width: 720,
-          height: 720,
-          top: "-15%",
-          left: "-10%",
-          background:
-            "radial-gradient(closest-side, color-mix(in oklab, var(--electric) 70%, white), transparent 70%)",
-          animation: "aurora-drift-1 22s ease-in-out infinite",
+          backgroundImage:
+            "linear-gradient(to right, var(--ink) 1px, transparent 1px), linear-gradient(to bottom, var(--ink) 1px, transparent 1px)",
+          backgroundSize: "64px 64px",
         }}
       />
+      {/* Solar pop block */}
       <div
-        className="aurora-blob"
-        style={{
-          width: 640,
-          height: 640,
-          top: "10%",
-          right: "-15%",
-          background:
-            "radial-gradient(closest-side, color-mix(in oklab, var(--mint) 75%, white), transparent 70%)",
-          animation: "aurora-drift-2 26s ease-in-out infinite",
-        }}
+        className="absolute -right-20 top-32 hidden h-72 w-72 border-2 border-ink bg-solar md:block"
+        style={{ animation: "aurora-drift-1 16s ease-in-out infinite" }}
       />
       <div
-        className="aurora-blob"
-        style={{
-          width: 560,
-          height: 560,
-          bottom: "-10%",
-          left: "30%",
-          background:
-            "radial-gradient(closest-side, color-mix(in oklab, var(--solar) 70%, white), transparent 70%)",
-          animation: "aurora-drift-3 30s ease-in-out infinite",
-        }}
+        className="absolute -left-10 bottom-10 hidden h-40 w-40 border-2 border-ink bg-electric md:block"
+        style={{ animation: "aurora-drift-2 20s ease-in-out infinite" }}
       />
-      <div className="noise" />
     </div>
   );
 }

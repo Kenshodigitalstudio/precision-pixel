@@ -94,7 +94,7 @@ export function Contact() {
 
         <form
           onSubmit={onSubmit}
-          className="space-y-6 rounded-[1.75rem] border border-border/60 bg-card/70 p-8 backdrop-blur-xl shadow-[var(--shadow-card)] sm:p-10"
+          className="space-y-6 border-2 border-ink bg-paper p-8 shadow-[var(--shadow-card)] sm:p-10"
         >
           <div className="grid gap-6 sm:grid-cols-2">
             <Field id="name" label="Nom complet" required />
@@ -133,11 +133,11 @@ export function Contact() {
           <button
             type="submit"
             disabled={loading}
-            className="group inline-flex w-full items-center justify-center gap-3 rounded-full bg-ink px-6 py-4 text-sm font-medium text-paper shadow-[var(--shadow-glow)] transition-colors hover:bg-electric disabled:opacity-60"
+            className="group inline-flex w-full items-center justify-center gap-3 border-2 border-ink bg-ink px-6 py-4 text-sm font-bold uppercase tracking-wider text-paper shadow-[var(--shadow-hard)] transition-all hover:bg-electric hover:text-ink hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[var(--shadow-hard-lg)] disabled:opacity-60"
           >
             {loading ? (
               <>
-                <span className="h-3.5 w-3.5 animate-spin rounded-full border border-paper/40 border-t-paper" />
+                <span className="h-3.5 w-3.5 animate-spin border-2 border-paper/40 border-t-paper" />
                 Envoi…
               </>
             ) : (

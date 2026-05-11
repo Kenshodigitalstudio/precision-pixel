@@ -15,16 +15,16 @@ export function TrackingVisual() {
   ];
 
   return (
-    <div className="relative h-56 w-full overflow-hidden rounded-2xl border border-border/60 bg-card/60 p-5 backdrop-blur-md">
+    <div className="relative h-56 w-full overflow-hidden border-2 border-ink bg-paper p-5">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <span className="live-dot" style={{ width: 6, height: 6 }} />
-          <span className="font-mono text-[10px] uppercase tracking-widest text-ink-soft">
+          <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink">
             Data flow — server-side
           </span>
         </div>
-        <span className="rounded-full bg-ink px-2 py-0.5 font-mono text-[10px] text-paper">
-          ● live
+        <span className="border-2 border-ink bg-electric px-2 py-0.5 font-mono text-[10px] font-bold text-ink">
+          ● LIVE
         </span>
       </div>
 

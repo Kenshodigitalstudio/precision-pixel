@@ -4,11 +4,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@import url("https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&family=Manrope:wght@300;400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 
 @theme inline {
-  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo Black", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
@@ -63,16 +64,16 @@
 }
 
 :root {
-  --radius: 1rem;
+  --radius: 0.25rem;
 
-  /* Brand palette */
-  --paper: oklch(0.99 0.003 240);
-  --ink: oklch(0.16 0.02 260);
-  --ink-soft: oklch(0.42 0.02 260);
-  --electric: oklch(0.58 0.22 264);
-  --electric-soft: oklch(0.78 0.12 250);
-  --solar: oklch(0.9 0.18 96);
-  --mint: oklch(0.88 0.13 155);
+  /* Brutalist Pop palette */
+  --paper: oklch(1 0 0);
+  --ink: oklch(0.12 0 0);
+  --ink-soft: oklch(0.35 0 0);
+  --electric: oklch(0.68 0.22 35);   /* orange #ff5722 vibe */
+  --electric-soft: oklch(0.78 0.16 40);
+  --solar: oklch(0.93 0.2 100);       /* yellow #ffeb3b vibe */
+  --mint: oklch(0.85 0.18 145);
 
   --background: var(--paper);
   --foreground: var(--ink);
@@ -90,8 +91,8 @@
   --accent-foreground: oklch(1 0 0);
   --destructive: oklch(0.6 0.22 27);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.92 0.008 250);
-  --input: oklch(0.92 0.008 250);
+  --border: oklch(0.12 0 0);
+  --input: oklch(0.12 0 0);
   --ring: var(--electric);
 
   --chart-1: var(--electric);
@@ -109,9 +110,10 @@
   --sidebar-border: oklch(0.92 0.008 250);
   --sidebar-ring: var(--electric);
 
-  --shadow-glow: 0 20px 60px -20px color-mix(in oklab, var(--electric) 35%, transparent);
-  --shadow-card: 0 1px 0 0 oklch(1 0 0 / 0.6) inset,
-    0 30px 60px -30px color-mix(in oklab, var(--ink) 25%, transparent);
+  --shadow-glow: 8px 8px 0 0 var(--ink);
+  --shadow-card: 10px 10px 0 0 var(--ink);
+  --shadow-hard: 6px 6px 0 0 var(--ink);
+  --shadow-hard-lg: 14px 14px 0 0 var(--ink);
 }
 
 @layer base {
@@ -209,65 +211,31 @@
   animation: draw-stroke 1400ms cubic-bezier(0.22, 1, 0.36, 1) 900ms forwards;
 }
 
-/* ---------- Service card: conic border + spotlight ---------- */
-@keyframes border-spin {
-  to { --border-angle: 360deg; }
-}
-@property --border-angle {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-
+/* ---------- Service card: brutalist hard-shadow shift ---------- */
 .service-card {
   position: relative;
   isolation: isolate;
-  transform-style: preserve-3d;
-  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  border: 2.5px solid var(--ink);
+  background: var(--paper);
+  box-shadow: var(--shadow-card);
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 320ms ease;
 }
-.service-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: conic-gradient(
-    from var(--border-angle, 0deg),
-    color-mix(in oklab, var(--electric) 70%, transparent),
-    color-mix(in oklab, var(--mint) 70%, transparent),
-    color-mix(in oklab, var(--solar) 70%, transparent),
-    color-mix(in oklab, var(--electric) 70%, transparent)
-  );
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  opacity: 0.25;
-  transition: opacity 500ms ease;
-  pointer-events: none;
-  z-index: 2;
+.service-card:hover {
+  transform: translate(-6px, -6px);
+  box-shadow: var(--shadow-hard-lg);
+  background: var(--solar);
 }
-.service-card:hover::before {
-  opacity: 1;
-  animation: border-spin 6s linear infinite;
+.service-card:hover .card-accent-bar {
+  width: 100%;
+  background: var(--ink);
 }
-.service-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(
-    400px circle at var(--mx, 50%) var(--my, 50%),
-    color-mix(in oklab, var(--electric) 18%, transparent),
-    transparent 60%
-  );
-  opacity: 0;
-  transition: opacity 400ms ease;
-  pointer-events: none;
-  z-index: 1;
-}
-.service-card:hover::after {
-  opacity: 1;
+.service-card .card-accent-bar {
+  height: 6px;
+  width: 28%;
+  background: var(--electric);
+  transition: width 500ms cubic-bezier(0.22, 1, 0.36, 1), background 320ms ease;
 }
 .service-card > * {
   position: relative;

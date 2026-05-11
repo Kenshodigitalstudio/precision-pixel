@@ -2,15 +2,15 @@ export function GoogleAdsVisual() {
   // 8 bars + trend line
   const bars = [38, 52, 44, 70, 58, 88, 76, 96];
   return (
-    <div className="relative h-56 w-full overflow-hidden rounded-2xl border border-border/60 bg-card/60 p-5 backdrop-blur-md">
+    <div className="relative h-56 w-full overflow-hidden border-2 border-ink bg-paper p-5">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <span className="h-1.5 w-1.5 rounded-full bg-electric" />
-          <span className="font-mono text-[10px] uppercase tracking-widest text-ink-soft">
+          <span className="h-2 w-2 bg-electric" />
+          <span className="font-mono text-[10px] font-bold uppercase tracking-widest text-ink">
             Campagnes / ROAS
           </span>
         </div>
-        <span className="rounded-full bg-ink px-2 py-0.5 font-mono text-[10px] text-paper">
+        <span className="border-2 border-ink bg-solar px-2 py-0.5 font-mono text-[10px] font-bold text-ink">
           +320%
         </span>
       </div>
