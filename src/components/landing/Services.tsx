@@ -79,7 +79,9 @@ export function Services() {
               </h3>
               <p className="text-[14.5px] leading-relaxed text-ink-soft">{s.desc}</p>
               <a
-                href="#contact"
+                href="https://calendar.app.google/qg7jgpvovovLnEoN9"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-ink"
               >
                 <span className="story-link">Prendre rendez-vous</span>
@@ -87,6 +89,13 @@ export function Services() {
               </a>
             </article>
           ))}
+        </div>
+
+        <div className="mt-10 flex justify-center">
+          <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-br from-solar via-amber-300 to-amber-500 px-5 py-2 font-display text-sm font-extrabold tracking-tight text-ink shadow-[0_8px_20px_-8px_rgba(0,0,0,0.25)]">
+            <span aria-hidden>✦</span>
+            Plus de services à venir
+          </span>
         </div>
       </div>
     </section>
