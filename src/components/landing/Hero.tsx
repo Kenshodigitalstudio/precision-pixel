@@ -1,11 +1,80 @@
 import { useMagnetic } from "@/hooks/use-magnetic";
-import tile1 from "@/assets/tile-1.jpg";
-import tile2 from "@/assets/tile-2.jpg";
-import tile3 from "@/assets/tile-3.jpg";
-import kenshoMark from "@/assets/kensho-mark.png";
+import { useEffect, useRef, useState } from "react";
+
+const CAL_URL = "https://calendar.app.google/qg7jgpvovovLnEoN9";
+
+type Slide = {
+  tag: string;
+  title: string;
+  desc: string;
+  price?: string;
+  gradient: string;
+  icon: string;
+  cta?: { label: string; href: string };
+};
+
+const slides: Slide[] = [
+  {
+    tag: "Audit Flash",
+    title: "RDV 30 min — Audit Google Ads",
+    desc: "Un appel Google Meet de 30 minutes pour passer votre compte au crible et repartir avec des actions concrètes.",
+    price: "150 €",
+    gradient: "from-sky/70 via-electric/60 to-electric-soft/70",
+    icon: "📞",
+    cta: { label: "Réserver", href: CAL_URL },
+  },
+  {
+    tag: "Tracking",
+    title: "Installation de tags & tracking",
+    desc: "Google Tag, conversions Ads, GA4, événements clés. Une donnée propre dès le premier clic.",
+    price: "100 €",
+    gradient: "from-mint/70 via-emerald-400/60 to-emerald-600/70",
+    icon: "⚙️",
+    cta: { label: "Réserver", href: CAL_URL },
+  },
+  {
+    tag: "Bientôt",
+    title: "Plus de services à venir",
+    desc: "Accompagnement long-terme, formations, ateliers d'équipe… On affine. Restez à l'écoute.",
+    gradient: "from-solar/70 via-amber-300/60 to-amber-500/70",
+    icon: "✦",
+  },
+];
 
 export function Hero() {
   const magneticRef = useMagnetic<HTMLAnchorElement>(0.2);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(0);
+
+  const goTo = (i: number) => {
+    const el = trackRef.current;
+    if (!el) return;
+    const child = el.children[i] as HTMLElement | undefined;
+    if (child) el.scrollTo({ left: child.offsetLeft - el.offsetLeft, behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const center = el.scrollLeft + el.clientWidth / 2;
+      let best = 0;
+      let bestDist = Infinity;
+      Array.from(el.children).forEach((c, i) => {
+        const child = c as HTMLElement;
+        const mid = child.offsetLeft - el.offsetLeft + child.clientWidth / 2;
+        const d = Math.abs(center - mid);
+        if (d < bestDist) {
+          bestDist = d;
+          best = i;
+        }
+      });
+      setActive(best);
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => el.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
     <section id="top" className="relative isolate overflow-hidden pt-24 pb-12 sm:pt-28 sm:pb-16">
@@ -33,7 +102,7 @@ export function Hero() {
         <div className="relative mt-8 flex justify-center">
           <a
             ref={magneticRef}
-            href="https://calendar.app.google/qg7jgpvovovLnEoN9"
+            href={CAL_URL}
             target="_blank"
             rel="noopener noreferrer"
             className="btn-magnetic group inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-sm font-semibold text-paper shadow-[var(--shadow-glow)] transition-colors hover:bg-electric"
@@ -43,31 +112,99 @@ export function Hero() {
           </a>
         </div>
 
-        {/* Portrait tiles row with dashed connectors */}
+        {/* Liquid glass services slider */}
         <div className="relative mt-14">
-          <svg
-            aria-hidden
-            viewBox="0 0 800 220"
-            className="pointer-events-none absolute inset-0 mx-auto h-full w-full -z-10"
-            preserveAspectRatio="none"
-          >
-            <path
-              className="squiggle-path"
-              d="M40 80 C 140 -10, 260 30, 320 110 C 380 190, 500 200, 580 130 C 660 60, 760 70, 780 150"
-              fill="none"
-              stroke="var(--ink)"
-              strokeOpacity="0.55"
-              strokeWidth="1.4"
-              strokeDasharray="5 7"
-              strokeLinecap="round"
-            />
-          </svg>
-
-          <div className="grid grid-cols-3 gap-3 sm:gap-6">
-            <Tile src={tile1} alt="Stratégie média" rotate="-rotate-2" mt="mt-0" />
-            <Tile src={tile2} alt="Conversion" rotate="rotate-1" mt="mt-6 sm:mt-10" badge />
-            <Tile src={tile3} alt="Data & tracking" rotate="-rotate-1" mt="mt-0" />
+          {/* Ambient color blobs behind glass */}
+          <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden rounded-[2rem]">
+            <div className="absolute -left-10 top-6 h-56 w-56 rounded-full bg-electric/30 blur-3xl" />
+            <div className="absolute right-0 bottom-0 h-64 w-64 rounded-full bg-solar/40 blur-3xl" />
+            <div className="absolute left-1/3 top-1/2 h-48 w-48 -translate-y-1/2 rounded-full bg-mint/30 blur-3xl" />
           </div>
+
+          <div
+            ref={trackRef}
+            className="hide-scrollbar flex snap-x snap-mandatory gap-5 overflow-x-auto scroll-smooth px-2 py-4 sm:gap-7"
+            style={{ scrollPadding: "0 1rem" }}
+          >
+            {slides.map((s, i) => (
+              <article
+                key={s.title}
+                className={`snap-center shrink-0 w-[85%] sm:w-[68%] md:w-[58%] rounded-[1.75rem] border border-white/40 bg-white/25 p-7 sm:p-9 text-left shadow-[0_20px_60px_-20px_rgba(0,0,0,0.25)] backdrop-blur-2xl transition-all duration-500 ${
+                  active === i ? "scale-100 opacity-100" : "scale-[0.96] opacity-80"
+                }`}
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <span
+                    className={`grid h-14 w-14 flex-none place-items-center rounded-full bg-gradient-to-br ${s.gradient} text-2xl shadow-[inset_0_-4px_0_0_rgba(0,0,0,0.05)] ring-1 ring-white/60 backdrop-blur-md`}
+                    aria-hidden
+                  >
+                    {s.icon}
+                  </span>
+                  {s.price && (
+                    <span
+                      className={`font-display text-3xl font-extrabold tracking-tight bg-gradient-to-br ${s.gradient} bg-clip-text text-transparent`}
+                    >
+                      {s.price}
+                    </span>
+                  )}
+                </div>
+
+                <span className="mt-6 inline-block font-mono text-[11px] uppercase tracking-[0.22em] text-ink-soft">
+                  {s.tag}
+                </span>
+                <h3 className="mt-2 font-display text-xl sm:text-2xl font-bold tracking-tight text-ink">
+                  {s.title}
+                </h3>
+                <p className="mt-3 text-[14.5px] leading-relaxed text-ink-soft">
+                  {s.desc}
+                </p>
+
+                {s.cta && (
+                  <a
+                    href={s.cta.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group/cta mt-6 inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-5 py-2.5 text-sm font-semibold text-ink backdrop-blur-md transition-all hover:bg-white/60 hover:-translate-y-0.5"
+                  >
+                    {s.cta.label}
+                    <span className="transition-transform group-hover/cta:translate-x-0.5">→</span>
+                  </a>
+                )}
+              </article>
+            ))}
+          </div>
+
+          {/* Dots */}
+          <div className="mt-5 flex items-center justify-center gap-2">
+            {slides.map((_, i) => (
+              <button
+                key={i}
+                aria-label={`Slide ${i + 1}`}
+                onClick={() => goTo(i)}
+                className={`h-2 rounded-full transition-all ${
+                  active === i ? "w-8 bg-ink" : "w-2 bg-ink/30 hover:bg-ink/50"
+                }`}
+              />
+            ))}
+          </div>
+
+          {/* Arrows */}
+          <button
+            type="button"
+            aria-label="Précédent"
+            onClick={() => goTo(Math.max(0, active - 1))}
+            className="absolute left-1 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-full border border-white/50 bg-white/40 p-3 text-ink backdrop-blur-md transition-all hover:bg-white/70 sm:flex"
+          >
+            ←
+          </button>
+          <button
+            type="button"
+            aria-label="Suivant"
+            onClick={() => goTo(Math.min(slides.length - 1, active + 1))}
+            className="absolute right-1 top-1/2 hidden -translate-y-1/2 items-center justify-center rounded-full border border-white/50 bg-white/40 p-3 text-ink backdrop-blur-md transition-all hover:bg-white/70 sm:flex"
+          >
+            →
+          </button>
         </div>
 
         {/* Certification badge */}
@@ -78,45 +215,5 @@ export function Hero() {
         </div>
       </div>
     </section>
-  );
-}
-
-function Tile({
-  src,
-  alt,
-  rotate,
-  mt,
-  badge,
-}: {
-  src: string;
-  alt: string;
-  rotate: string;
-  mt: string;
-  badge?: boolean;
-}) {
-  return (
-    <div className={`portrait-tile relative aspect-square ${rotate} ${mt}`}>
-      <img
-        src={src}
-        alt={alt}
-        width={768}
-        height={768}
-        className="h-full w-full object-cover"
-        loading="lazy"
-      />
-      {badge && (
-        <div className="absolute -bottom-6 left-1/2 hidden h-20 w-20 -translate-x-1/2 items-center justify-center rounded-full bg-ink text-paper sm:flex">
-          <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full animate-[spin_18s_linear_infinite]">
-            <defs>
-              <path id="circle-text" d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0" />
-            </defs>
-            <text fontSize="9" fill="currentColor" fontFamily="var(--font-mono)" letterSpacing="3">
-              <textPath href="#circle-text">PERFORMANCE · TRACKING · GOOGLE ADS · </textPath>
-            </text>
-          </svg>
-          <img src={kenshoMark} alt="" aria-hidden className="relative h-9 w-9 object-contain" />
-        </div>
-      )}
-    </div>
   );
 }
