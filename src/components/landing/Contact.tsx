@@ -34,7 +34,7 @@ export function Contact() {
       <div ref={ref} className="reveal mx-auto max-w-3xl px-6">
         <div className="text-center">
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-electric">
-            05 — Réserver
+            04 — Réserver
           </span>
           <h2 className="mt-3 font-display text-[clamp(2rem,4.4vw,3.75rem)] font-semibold leading-[1.05] tracking-[-0.03em]">
             Choisissez votre service.
@@ -84,7 +84,7 @@ export function Contact() {
 
         <div className="mt-20 border-t border-border/60 pt-16 text-center">
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-electric">
-            06 — Rejoignez-nous
+            05 — Rejoignez-nous
           </span>
           <h3 className="mt-3 font-display text-[clamp(1.75rem,3.4vw,2.75rem)] font-semibold leading-[1.1] tracking-[-0.02em]">
             Voulez-vous rejoindre nos experts&nbsp;?

@@ -30,7 +30,7 @@ export function Approach() {
       <div ref={ref} className="reveal mx-auto max-w-7xl px-6">
         <div className="mb-16 max-w-2xl">
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-electric">
-            04 — Les risques
+            03 — Les risques
           </span>
           <h2 className="mt-3 font-display text-[clamp(2rem,4.4vw,3.5rem)] font-semibold leading-[1.05] tracking-[-0.03em]">
             Ce qu'un compte sans expertise vous coûte vraiment.
