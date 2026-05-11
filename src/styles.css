@@ -359,3 +359,6 @@
   .reveal, .reveal-mask { opacity: 1; transform: none; clip-path: none; transition: none; }
   .service-card:hover::before { animation: none; }
 }
+
+.hide-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+.hide-scrollbar::-webkit-scrollbar { display: none; }
