@@ -4,10 +4,10 @@ export function Footer() {
       <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-6 sm:flex-row sm:items-center">
         <div className="flex items-center gap-2.5">
           <span className="grid h-8 w-8 place-items-center rounded-lg bg-ink text-paper font-display text-sm font-bold">
-            N
+            K
           </span>
           <span className="font-display text-sm font-semibold tracking-tight">
-            [Nom de l'agence]
+            Kensho Digital Studio
           </span>
         </div>
         <p className="text-xs text-ink-soft">
