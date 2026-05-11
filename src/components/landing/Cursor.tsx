@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
+import kenshoMark from "@/assets/kensho-mark.png";
 
 export function Cursor() {
-  const dotRef = useRef<HTMLDivElement>(null);
-  const ringRef = useRef<HTMLDivElement>(null);
+  const markRef = useRef<HTMLImageElement>(null);
   const [enabled, setEnabled] = useState(false);
 
   useEffect(() => {
@@ -13,15 +13,14 @@ export function Cursor() {
     let rx = 0, ry = 0, dx = 0, dy = 0;
     const onMove = (e: MouseEvent) => {
       dx = e.clientX; dy = e.clientY;
-      if (dotRef.current) {
-        dotRef.current.style.transform = `translate3d(${dx}px, ${dy}px, 0) translate(-50%, -50%)`;
-      }
     };
     const loop = () => {
+      // smooth trailing follow
       rx += (dx - rx) * 0.18;
       ry += (dy - ry) * 0.18;
-      if (ringRef.current) {
-        ringRef.current.style.transform = `translate3d(${rx}px, ${ry}px, 0) translate(-50%, -50%)`;
+      if (markRef.current) {
+        markRef.current.style.left = `${rx}px`;
+        markRef.current.style.top = `${ry}px`;
       }
       raf = requestAnimationFrame(loop);
     };
@@ -30,7 +29,7 @@ export function Cursor() {
     const onOver = (e: MouseEvent) => {
       const t = e.target as HTMLElement;
       const hover = t.closest("a, button, [data-cursor='hover']");
-      ringRef.current?.classList.toggle("is-hovering", !!hover);
+      markRef.current?.classList.toggle("is-hovering", !!hover);
     };
 
     window.addEventListener("mousemove", onMove);
@@ -43,10 +42,5 @@ export function Cursor() {
   }, []);
 
   if (!enabled) return null;
-  return (
-    <>
-      <div ref={dotRef} className="cursor-dot" />
-      <div ref={ringRef} className="cursor-ring" />
-    </>
-  );
+  return <img ref={markRef} src={kenshoMark} alt="" aria-hidden className="cursor-mark" />;
 }
