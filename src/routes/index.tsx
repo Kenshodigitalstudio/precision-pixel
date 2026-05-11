@@ -1,26 +1,49 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Toaster } from "@/components/ui/sonner";
+import { Nav } from "@/components/landing/Nav";
+import { Hero } from "@/components/landing/Hero";
+import { TrustStrip } from "@/components/landing/TrustStrip";
+import { Services } from "@/components/landing/Services";
+import { Metrics } from "@/components/landing/Metrics";
+import { Approach } from "@/components/landing/Approach";
+import { Contact } from "@/components/landing/Contact";
+import { Footer } from "@/components/landing/Footer";
+import { Cursor } from "@/components/landing/Cursor";
 
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: "Agence Google Ads & Tracking — Performance mesurable" },
+      {
+        name: "description",
+        content:
+          "Agence experte en pilotage Google Ads et tracking server-side. Audit, GA4, GTM SS, conformité RGPD. Transformez votre budget média en croissance mesurable.",
+      },
+      { property: "og:title", content: "Agence Google Ads & Tracking — Performance mesurable" },
+      {
+        property: "og:description",
+        content:
+          "Pilotage Google Ads & tracking server-side haut de gamme. Audit, GA4, GTM SS, attribution propre.",
+      },
+      { property: "og:type", content: "website" },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
-}
-
 function Index() {
-  return <PlaceholderIndex />;
+  return (
+    <main className="relative min-h-screen overflow-x-hidden">
+      <Cursor />
+      <Nav />
+      <Hero />
+      <TrustStrip />
+      <Services />
+      <Metrics />
+      <Approach />
+      <Contact />
+      <Footer />
+      <Toaster position="bottom-right" />
+    </main>
+  );
 }
