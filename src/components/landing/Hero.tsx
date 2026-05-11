@@ -1,5 +1,6 @@
 import { useMagnetic } from "@/hooks/use-magnetic";
 import { useEffect, useRef, useState } from "react";
+import { useStripeCheckout } from "@/hooks/useStripeCheckout";
 
 const CAL_URL = "https://calendar.app.google/qg7jgpvovovLnEoN9";
 
@@ -10,7 +11,7 @@ type Slide = {
   price?: string;
   gradient: string;
   icon: string;
-  cta?: { label: string; href: string };
+  cta?: { label: string; priceId: string };
 };
 
 const slides: Slide[] = [
@@ -21,7 +22,7 @@ const slides: Slide[] = [
     price: "150 €",
     gradient: "from-sky/70 via-electric/60 to-electric-soft/70",
     icon: "📞",
-    cta: { label: "Réserver", href: CAL_URL },
+    cta: { label: "Payer 150 €", priceId: "audit_google_ads_one_time" },
   },
   {
     tag: "Tracking",
@@ -30,7 +31,7 @@ const slides: Slide[] = [
     price: "100 €",
     gradient: "from-mint/70 via-emerald-400/60 to-emerald-600/70",
     icon: "⚙️",
-    cta: { label: "Réserver", href: CAL_URL },
+    cta: { label: "Payer 100 €", priceId: "tracking_installation_one_time" },
   },
 ];
 
