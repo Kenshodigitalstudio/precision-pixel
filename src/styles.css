@@ -110,9 +110,10 @@
   --sidebar-border: oklch(0.92 0.008 250);
   --sidebar-ring: var(--electric);
 
-  --shadow-glow: 0 20px 60px -20px color-mix(in oklab, var(--electric) 35%, transparent);
-  --shadow-card: 0 1px 0 0 oklch(1 0 0 / 0.6) inset,
-    0 30px 60px -30px color-mix(in oklab, var(--ink) 25%, transparent);
+  --shadow-glow: 8px 8px 0 0 var(--ink);
+  --shadow-card: 10px 10px 0 0 var(--ink);
+  --shadow-hard: 6px 6px 0 0 var(--ink);
+  --shadow-hard-lg: 14px 14px 0 0 var(--ink);
 }
 
 @layer base {
