@@ -93,10 +93,10 @@ export function Contact() {
           </p>
           <a
             href={`mailto:${EMAIL}?subject=Candidature%20Kensh%C5%8D%20Digital%20Studio`}
-            className="mt-8 inline-flex items-center gap-3 border-2 border-ink bg-ink px-6 py-4 text-sm font-bold uppercase tracking-wider text-paper shadow-[var(--shadow-hard)] transition-all hover:bg-electric hover:text-ink hover:-translate-x-1 hover:-translate-y-1 hover:shadow-[var(--shadow-hard-lg)]"
+            className="group mt-8 inline-flex items-center gap-3 rounded-full border border-white/40 bg-white/30 px-6 py-3.5 text-sm font-semibold tracking-wide text-ink shadow-[0_8px_30px_-8px_rgba(0,0,0,0.18)] backdrop-blur-md transition-all hover:bg-white/50 hover:-translate-y-0.5 hover:shadow-[0_12px_40px_-10px_rgba(0,0,0,0.25)]"
           >
             {EMAIL}
-            <span>↗</span>
+            <span className="transition-transform group-hover:translate-x-0.5">↗</span>
           </a>
         </div>
       </div>
