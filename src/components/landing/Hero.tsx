@@ -81,12 +81,12 @@ export function Hero() {
       <span aria-hidden className="float-y absolute left-[42%] top-[6%] text-xs text-ink/60 hidden sm:block" style={{ animationDelay: "2.7s" }}>✦</span>
 
       <div className="relative mx-auto max-w-6xl px-6 text-center">
-        <h1 className="relative mx-auto max-w-5xl font-display text-[clamp(3.75rem,11vw,8.5rem)] font-light leading-[0.95] tracking-[-0.04em] text-ink">
+        <h1 className="relative mx-auto max-w-5xl font-display text-[clamp(3.5rem,10vw,8rem)] font-light leading-[1.05] tracking-[-0.04em] text-ink pb-2">
           Kenshō
           <span className="block font-extralight text-ink-soft">Digital Studio</span>
         </h1>
 
-        <p className="relative mx-auto mt-6 max-w-xl text-[15px] sm:text-base text-ink-soft">
+        <p className="relative mx-auto mt-10 max-w-xl text-[15px] sm:text-base text-ink-soft">
           Pilotage Google Ads & tracking server-side. On transforme
           votre budget média en croissance mesurable.
         </p>
