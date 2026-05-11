@@ -38,6 +38,23 @@ export function Hero() {
   const magneticRef = useMagnetic<HTMLAnchorElement>(0.2);
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Progress 0 -> 1 over the first 420px of scroll
+  const p = Math.min(1, Math.max(0, scrollY / 420));
+  const titleOpacity = 1 - p;
+  const titleScale = 1 - p * 0.25;
+  const titleY = -p * 80;
+  const starOpacity = Math.min(1, p * 1.4);
+  const starScale = 0.4 + p * 1.1;
+  const starY = -p * 220;
 
   const goTo = (i: number) => {
     const el = trackRef.current;
