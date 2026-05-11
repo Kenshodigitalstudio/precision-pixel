@@ -12,7 +12,7 @@ type Service = {
 const services: Service[] = [
   {
     icon: "📞",
-    iconBg: "bg-coral/70",
+    iconBg: "bg-gradient-to-br from-sky via-electric to-electric-soft",
     title: "RDV 30 min — Audit & coaching Google Ads",
     desc: "Un appel Google Meet de 30 minutes pour passer votre compte au crible : réglages de base, structure des campagnes, points de friction. On vous montre quoi corriger et comment prendre la plateforme en main, sereinement.",
     price: "150 €",
@@ -20,7 +20,7 @@ const services: Service[] = [
   },
   {
     icon: "⚙️",
-    iconBg: "bg-solar/80",
+    iconBg: "bg-gradient-to-br from-mint via-emerald-400 to-emerald-600",
     title: "Installation de tags & tracking",
     desc: "On installe et configure vos tags pour vous : Google Tag, conversions Ads, GA4, événements clés. Une donnée propre dès le premier clic, sans devoir toucher au code.",
     price: "100 €",

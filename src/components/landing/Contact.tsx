@@ -11,7 +11,7 @@ const offers = [
     price: "150 €",
     gradient: "from-sky via-electric to-electric-soft",
     icon: "📞",
-    iconBg: "bg-coral/70",
+    iconBg: "bg-gradient-to-br from-sky via-electric to-electric-soft",
   },
   {
     tag: "Tracking",
@@ -20,7 +20,7 @@ const offers = [
     price: "100 €",
     gradient: "from-mint via-emerald-400 to-emerald-600",
     icon: "⚙️",
-    iconBg: "bg-solar/80",
+    iconBg: "bg-gradient-to-br from-mint via-emerald-400 to-emerald-600",
   },
 ];
 
