@@ -13,9 +13,9 @@ export function TrustStrip() {
         <h2 className="mt-4 font-display text-[clamp(1.5rem,3vw,2.25rem)] font-extrabold leading-[1.15] tracking-[-0.02em] text-ink">
           La vision de l'essentiel.
         </h2>
-        <p className="mt-6 text-[15px] leading-relaxed text-ink-soft">
-          Le marketing digital est souvent un brouillard technique.
-          Notre rôle&nbsp;? Apporter le <em className="not-italic font-semibold text-ink">Kenshō</em> — l'illumination — à votre structure.
+        <p className="mt-6 text-[15px] leading-relaxed text-ink-soft whitespace-pre-line">
+          Le marketing digital est souvent un brouillard technique. Notre rôle&nbsp;?&nbsp;
+          Apporter le <em className="not-italic font-semibold text-ink">Kenshō</em> l'illumination à votre structure.
         </p>
         <p className="mt-4 text-[15px] leading-relaxed text-ink-soft">
           Spécialisés dans l'accompagnement stratégique et l'implémentation technique (TAG),
