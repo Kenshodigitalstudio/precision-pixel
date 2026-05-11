@@ -13,14 +13,38 @@ export function Hero() {
 
       <div className="relative mx-auto max-w-7xl px-6">
         <div
-          className="inline-flex items-center gap-1.5 rounded-full border border-border/60 bg-card/50 px-2.5 py-1 backdrop-blur-md text-[10.5px] font-medium uppercase tracking-[0.18em] text-ink-soft reveal"
-          style={{ animationDelay: "0ms" }}
+          className="inline-flex items-center gap-2 border-2 border-ink bg-paper px-3 py-1.5 text-[10.5px] font-bold uppercase tracking-[0.2em] text-ink reveal is-visible"
         >
           <span className="live-dot" />
           <span>Tracking actif · 47 comptes</span>
         </div>
 
-        <h1 className="mt-5 font-display text-[clamp(3.25rem,9.5vw,8rem)] font-bold leading-[0.95] tracking-[-0.045em] text-ink">
+        <h1 className="mt-5 font-display text-[clamp(3rem,10vw,8.5rem)] uppercase leading-[0.9] tracking-[-0.02em] text-ink">
+          <span className="word-reveal block">
+            {title1.map((w, i) => (
+              <span key={i} style={{ ["--i" as never]: i }}>
+                {w}{" "}
+              </span>
+            ))}
+          </span>
+          <span className="word-reveal relative block">
+            {title2.map((w, i) => {
+              const isHL = w.startsWith("chaque");
+              return (
+                <span key={i} style={{ ["--i" as never]: title1.length + i }} className={isHL ? "relative" : ""}>
+                  {isHL ? (
+                    <span className="relative inline-block">
+                      <span className="relative z-10">{w}</span>
+                      <span aria-hidden className="absolute inset-x-[-2%] bottom-[8%] -z-0 h-[45%] w-[104%] bg-solar" />
+                    </span>
+                  ) : (
+                    w
+                  )}{" "}
+                </span>
+              );
+            })}
+          </span>
+        </h1>
           <span className="word-reveal block">
             {title1.map((w, i) => (
               <span key={i} style={{ ["--i" as never]: i }}>
