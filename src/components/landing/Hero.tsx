@@ -39,6 +39,7 @@ export function Hero() {
   const magneticRef = useMagnetic<HTMLAnchorElement>(0.2);
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+  const { openCheckout, closeCheckout, isOpen, checkoutElement } = useStripeCheckout();
 
   const goTo = (i: number) => {
     const el = trackRef.current;
@@ -157,15 +158,14 @@ export function Hero() {
                 </p>
 
                 {s.cta && (
-                  <a
-                    href={s.cta.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    type="button"
+                    onClick={() => openCheckout({ priceId: s.cta!.priceId })}
                     className="group/cta mt-6 inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-5 py-2.5 text-sm font-semibold text-ink backdrop-blur-md transition-all hover:bg-white/60 hover:-translate-y-0.5"
                   >
                     {s.cta.label}
                     <span className="transition-transform group-hover/cta:translate-x-0.5">→</span>
-                  </a>
+                  </button>
                 )}
               </article>
             ))}
