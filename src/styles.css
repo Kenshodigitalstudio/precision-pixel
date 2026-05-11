@@ -211,65 +211,31 @@
   animation: draw-stroke 1400ms cubic-bezier(0.22, 1, 0.36, 1) 900ms forwards;
 }
 
-/* ---------- Service card: conic border + spotlight ---------- */
-@keyframes border-spin {
-  to { --border-angle: 360deg; }
-}
-@property --border-angle {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 0deg;
-}
-
+/* ---------- Service card: brutalist hard-shadow shift ---------- */
 .service-card {
   position: relative;
   isolation: isolate;
-  transform-style: preserve-3d;
-  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  border: 2.5px solid var(--ink);
+  background: var(--paper);
+  box-shadow: var(--shadow-card);
+  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 320ms ease;
 }
-.service-card::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  padding: 1px;
-  background: conic-gradient(
-    from var(--border-angle, 0deg),
-    color-mix(in oklab, var(--electric) 70%, transparent),
-    color-mix(in oklab, var(--mint) 70%, transparent),
-    color-mix(in oklab, var(--solar) 70%, transparent),
-    color-mix(in oklab, var(--electric) 70%, transparent)
-  );
-  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
-  -webkit-mask-composite: xor;
-          mask-composite: exclude;
-  opacity: 0.25;
-  transition: opacity 500ms ease;
-  pointer-events: none;
-  z-index: 2;
+.service-card:hover {
+  transform: translate(-6px, -6px);
+  box-shadow: var(--shadow-hard-lg);
+  background: var(--solar);
 }
-.service-card:hover::before {
-  opacity: 1;
-  animation: border-spin 6s linear infinite;
+.service-card:hover .card-accent-bar {
+  width: 100%;
+  background: var(--ink);
 }
-.service-card::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(
-    400px circle at var(--mx, 50%) var(--my, 50%),
-    color-mix(in oklab, var(--electric) 18%, transparent),
-    transparent 60%
-  );
-  opacity: 0;
-  transition: opacity 400ms ease;
-  pointer-events: none;
-  z-index: 1;
-}
-.service-card:hover::after {
-  opacity: 1;
+.service-card .card-accent-bar {
+  height: 6px;
+  width: 28%;
+  background: var(--electric);
+  transition: width 500ms cubic-bezier(0.22, 1, 0.36, 1), background 320ms ease;
 }
 .service-card > * {
   position: relative;
