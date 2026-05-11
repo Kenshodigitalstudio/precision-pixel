@@ -9,22 +9,16 @@ type Service = {
 
 const services: Service[] = [
   {
-    icon: "📣",
+    icon: "🎥",
     iconBg: "bg-coral/70",
-    title: "Google Ads",
-    desc: "Audit forensique, restructuration par intention, bidding au signal. Chaque euro investi piloté comme un actif.",
+    title: "RDV 30 min — Audit & coaching Google Ads",
+    desc: "Un appel Google Meet de 30 minutes pour passer votre compte au crible : réglages de base, structure des campagnes, points de friction. On vous montre quoi corriger et comment prendre la plateforme en main, sereinement.",
   },
   {
-    icon: "📊",
+    icon: "🏷️",
     iconBg: "bg-solar/80",
-    title: "Tracking & Data",
-    desc: "GTM server-side, GA4, Enhanced Conversions, consent mode v2. Une donnée propre, du clic à la marge.",
-  },
-  {
-    icon: "✉️",
-    iconBg: "bg-lilac/80",
-    title: "Stratégie & Reporting",
-    desc: "Reporting orienté P&L, attribution multi-touch, recommandations actionnables. Pas de vanity metrics.",
+    title: "Installation de tags & tracking",
+    desc: "On installe et configure vos tags pour vous : Google Tag, conversions Ads, GA4, événements clés. Une donnée propre dès le premier clic, sans devoir toucher au code.",
   },
 ];
 
