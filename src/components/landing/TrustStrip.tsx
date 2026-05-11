@@ -1,9 +1,11 @@
 import { useReveal } from "@/hooks/use-reveal";
+import { Sparkles } from "./Sparkles";
 
 export function TrustStrip() {
   const ref = useReveal<HTMLDivElement>();
   return (
-    <section className="relative border-y border-border/60 bg-card/30 py-16 backdrop-blur-sm">
+    <section className="relative overflow-hidden border-y border-border/60 bg-card/30 py-16 backdrop-blur-sm">
+      <Sparkles variant="default" />
       <div ref={ref} className="reveal mx-auto max-w-3xl px-6 text-center">
         <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-electric">
           Kenshō Digital Studio
