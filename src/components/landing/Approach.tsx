@@ -33,7 +33,7 @@ export function Approach() {
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-electric">
             04 — Méthode
           </span>
-          <h2 className="mt-3 font-display text-[clamp(2rem,4.4vw,3.5rem)] font-600 leading-[1.05] tracking-[-0.03em]">
+          <h2 className="mt-3 font-display text-[clamp(2rem,4.4vw,3.5rem)] font-semibold leading-[1.05] tracking-[-0.03em]">
             Une méthode courte. Une exigence longue.
           </h2>
         </div>
@@ -65,7 +65,7 @@ export function Approach() {
               </div>
               <div className="mt-6">
                 <div className="flex items-baseline gap-3">
-                  <h3 className="font-display text-xl font-600 tracking-tight">{s.t}</h3>
+                  <h3 className="font-display text-xl font-semibold tracking-tight">{s.t}</h3>
                   <span className="font-mono text-xs text-ink-soft">{s.d}</span>
                 </div>
                 <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">{s.body}</p>

@@ -13,7 +13,7 @@ export function Services() {
             <span className="font-mono text-xs uppercase tracking-[0.25em] text-electric">
               02 — Services
             </span>
-            <h2 className="mt-3 font-display text-[clamp(2rem,4.4vw,3.75rem)] font-600 leading-[1.05] tracking-[-0.03em]">
+            <h2 className="mt-3 font-display text-[clamp(2rem,4.4vw,3.75rem)] font-semibold leading-[1.05] tracking-[-0.03em]">
               Deux disciplines. Un seul objectif&nbsp;: la performance vérifiable.
             </h2>
           </div>

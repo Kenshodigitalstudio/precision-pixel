@@ -70,7 +70,7 @@ export function Contact() {
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-electric">
             05 — Contact
           </span>
-          <h2 className="mt-3 font-display text-[clamp(2rem,4.4vw,3.75rem)] font-600 leading-[1.05] tracking-[-0.03em]">
+          <h2 className="mt-3 font-display text-[clamp(2rem,4.4vw,3.75rem)] font-semibold leading-[1.05] tracking-[-0.03em]">
             Parlons performance.
           </h2>
           <p className="mt-6 max-w-md text-[15px] leading-relaxed text-ink-soft">

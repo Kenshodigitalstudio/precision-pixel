@@ -22,7 +22,7 @@ export function Hero() {
           <span className="text-ink">Paris</span>
         </div>
 
-        <h1 className="mt-8 font-display text-[clamp(2.75rem,7vw,6rem)] font-700 leading-[1.02] tracking-[-0.035em] text-ink">
+        <h1 className="mt-8 font-display text-[clamp(2.75rem,7vw,6rem)] font-bold leading-[1.02] tracking-[-0.035em] text-ink">
           <span className="word-reveal block">
             {title1.map((w, i) => (
               <span key={i} style={{ ["--i" as never]: i }}>

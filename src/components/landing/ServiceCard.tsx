@@ -26,7 +26,7 @@ export function ServiceCard({ index, eyebrow, title, paragraph, bullets, visual 
           <span className="text-[10px] uppercase tracking-[0.25em] text-ink-soft">{eyebrow}</span>
         </header>
 
-        <h3 className="font-display text-[clamp(1.5rem,2.4vw,2.25rem)] font-600 leading-[1.1] tracking-[-0.02em] text-ink">
+        <h3 className="font-display text-[clamp(1.5rem,2.4vw,2.25rem)] font-semibold leading-[1.1] tracking-[-0.02em] text-ink">
           {title}
         </h3>
 
