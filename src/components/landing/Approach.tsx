@@ -3,24 +3,21 @@ import { useReveal } from "@/hooks/use-reveal";
 const steps = [
   {
     k: "01",
-    t: "Audit",
-    d: "J+7",
+    t: "Dépenses de budget inutiles",
     body:
-      "Plongée forensique dans votre compte, votre tracking et votre funnel. Nous identifions les fuites de budget, les angles morts d'attribution et les opportunités structurelles.",
+      "Sans expertise, le budget part dans des mots-clés non rentables, des audiences mal ciblées et des enchères mal calibrées. Chaque euro mal dépensé est un euro qui ne reviendra pas.",
   },
   {
     k: "02",
-    t: "Architecture",
-    d: "J+21",
+    t: "Mauvaise utilisation des données",
     body:
-      "Refonte des campagnes, déploiement du tracking server-side, intégration GA4/BigQuery. Nous construisons l'infrastructure qui rendra l'optimisation possible.",
+      "Un tracking approximatif, ce sont des décisions prises sur des chiffres faux. Conversions doublées, événements manquants, attribution cassée : vous pilotez à l'aveugle.",
   },
   {
     k: "03",
-    t: "Scale",
-    d: "J+30",
+    t: "Perte d'opportunités face à la concurrence",
     body:
-      "Pilotage continu, expérimentation rigoureuse, reporting marge. Nous transformons la performance en routine reproductible.",
+      "Pendant que vous tâtonnez, vos concurrents structurent, mesurent et scalent. Chaque mois sans expertise est un mois d'avance offert à ceux qui font les choses correctement.",
   },
 ];
 
@@ -31,10 +28,10 @@ export function Approach() {
       <div ref={ref} className="reveal mx-auto max-w-7xl px-6">
         <div className="mb-16 max-w-2xl">
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-electric">
-            04 — Méthode
+            04 — Les risques
           </span>
           <h2 className="mt-3 font-display text-[clamp(2rem,4.4vw,3.5rem)] font-semibold leading-[1.05] tracking-[-0.03em]">
-            Une méthode courte. Une exigence longue.
+            Ce qu'un compte sans expertise vous coûte vraiment.
           </h2>
         </div>
 
@@ -64,10 +61,7 @@ export function Approach() {
                 {s.k}
               </div>
               <div className="mt-6">
-                <div className="flex items-baseline gap-3">
-                  <h3 className="font-display text-xl font-semibold tracking-tight">{s.t}</h3>
-                  <span className="font-mono text-xs text-ink-soft">{s.d}</span>
-                </div>
+                <h3 className="font-display text-xl font-semibold tracking-tight">{s.t}</h3>
                 <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">{s.body}</p>
               </div>
               {i < steps.length - 1 && (

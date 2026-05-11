@@ -11,20 +11,20 @@ type Service = {
 
 const services: Service[] = [
   {
-    icon: "🎥",
+    icon: "📞",
     iconBg: "bg-coral/70",
     title: "RDV 30 min — Audit & coaching Google Ads",
     desc: "Un appel Google Meet de 30 minutes pour passer votre compte au crible : réglages de base, structure des campagnes, points de friction. On vous montre quoi corriger et comment prendre la plateforme en main, sereinement.",
     price: "150 €",
-    priceGradient: "bg-gradient-to-br from-sky via-electric to-electric-soft",
+    priceGradient: "from-sky via-electric to-electric-soft",
   },
   {
-    icon: "🏷️",
+    icon: "⚙️",
     iconBg: "bg-solar/80",
     title: "Installation de tags & tracking",
     desc: "On installe et configure vos tags pour vous : Google Tag, conversions Ads, GA4, événements clés. Une donnée propre dès le premier clic, sans devoir toucher au code.",
     price: "100 €",
-    priceGradient: "bg-gradient-to-br from-mint via-emerald-400 to-emerald-600",
+    priceGradient: "from-mint via-emerald-400 to-emerald-600",
   },
 ];
 
@@ -51,7 +51,6 @@ export function Services() {
         </div>
 
         <div className="relative mt-14 grid gap-5 md:grid-cols-2 md:gap-6">
-          {/* Decorative little sparkle */}
           <span aria-hidden className="absolute -top-6 left-1/2 hidden text-xl text-ink/60 md:block float-y">✦</span>
 
           {services.map((s, i) => (
@@ -69,7 +68,7 @@ export function Services() {
                   {s.icon}
                 </div>
                 <span
-                  className={`inline-flex items-center rounded-full px-4 py-1.5 font-display text-lg font-extrabold tracking-tight text-paper shadow-[0_8px_20px_-8px_rgba(0,0,0,0.25)] ${s.priceGradient}`}
+                  className={`font-display text-3xl font-extrabold tracking-tight bg-gradient-to-br ${s.priceGradient} bg-clip-text text-transparent drop-shadow-sm`}
                 >
                   {s.price}
                 </span>
