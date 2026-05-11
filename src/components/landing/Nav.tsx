@@ -46,7 +46,9 @@ export function Nav() {
           <li><a href="#contact" className="hover:text-ink transition-colors">Contact</a></li>
         </ul>
         <a
-          href="#contact"
+          href="https://calendar.app.google/qg7jgpvovovLnEoN9"
+          target="_blank"
+          rel="noopener noreferrer"
           className="group inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2 text-sm font-medium text-paper transition-colors hover:bg-electric"
         >
           Rendez-vous

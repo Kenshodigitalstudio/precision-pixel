@@ -15,35 +15,8 @@ export function Hero() {
       <span aria-hidden className="float-y absolute left-[18%] bottom-[8%] text-lg text-ink/60 hidden sm:block" style={{ animationDelay: "2.4s" }}>✺</span>
 
       <div className="relative mx-auto max-w-6xl px-6 text-center">
-        {/* Big squiggle behind the title */}
-        <svg
-          aria-hidden
-          viewBox="0 0 800 320"
-          className="pointer-events-none absolute inset-x-0 top-0 mx-auto h-[420px] w-[min(95%,800px)] -z-10 opacity-80"
-          preserveAspectRatio="none"
-        >
-          <path
-            className="squiggle-path"
-            d="M120 60 C 60 120, 60 230, 180 260 C 320 290, 480 220, 620 250 C 740 275, 760 180, 700 130 C 640 80, 520 100, 420 60 C 320 20, 200 20, 120 60 Z"
-            fill="none"
-            stroke="var(--ink)"
-            strokeOpacity="0.5"
-            strokeWidth="1.4"
-            strokeDasharray="6 8"
-            strokeLinecap="round"
-          />
-        </svg>
-
         <h1 className="relative mx-auto max-w-4xl font-display text-[clamp(2.75rem,8vw,6rem)] font-extrabold leading-[1] tracking-[-0.035em] text-ink">
-          <span className="relative inline-block">
-            <span className="relative z-10">Agence</span>
-            {/* Yellow blob behind */}
-            <span
-              aria-hidden
-              className="absolute inset-x-[-8%] top-[8%] -z-0 h-[88%] w-[116%] rounded-[42%_58%_55%_45%/55%_45%_55%_45%] bg-solar"
-            />
-          </span>{" "}
-          marketing
+          Agence marketing
           <br />
           digital.
         </h1>
@@ -56,7 +29,9 @@ export function Hero() {
         <div className="relative mt-8 flex justify-center">
           <a
             ref={magneticRef}
-            href="#contact"
+            href="https://calendar.app.google/qg7jgpvovovLnEoN9"
+            target="_blank"
+            rel="noopener noreferrer"
             className="btn-magnetic group inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-sm font-semibold text-paper shadow-[var(--shadow-glow)] transition-colors hover:bg-electric"
           >
             <span>Prendre rendez-vous</span>
@@ -91,23 +66,12 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Stats row */}
-        <div className="relative mt-16 grid grid-cols-2 gap-y-6 sm:grid-cols-4">
-          {[
-            { v: "+320%", k: "ROAS moyen" },
-            { v: "47", k: "Comptes pilotés" },
-            { v: "12M€", k: "Budget média géré" },
-            { v: "100%", k: "Conforme RGPD" },
-          ].map((s) => (
-            <div key={s.k} className="text-center">
-              <div className="font-display text-3xl sm:text-4xl font-extrabold tracking-tight text-ink">
-                {s.v}
-              </div>
-              <div className="mt-1 font-mono text-[10px] uppercase tracking-[0.18em] text-ink-soft">
-                {s.k}
-              </div>
-            </div>
-          ))}
+        {/* Certification badge */}
+        <div className="relative mt-16 flex justify-center">
+          <span className="inline-flex items-center gap-2.5 rounded-full border-2 border-ink bg-paper px-5 py-2.5 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-ink shadow-[var(--shadow-hard)]">
+            <span aria-hidden className="h-2 w-2 rounded-full bg-electric" />
+            Experts certifiés Google Ads
+          </span>
         </div>
       </div>
     </section>
