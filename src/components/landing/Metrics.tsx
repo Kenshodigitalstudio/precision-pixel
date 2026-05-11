@@ -34,7 +34,7 @@ export function Metrics() {
   const ref = useReveal<HTMLDivElement>();
 
   return (
-    <section id="metrics" className="relative py-24 sm:py-32">
+    <section id="metrics" className="relative py-14 sm:py-20">
       <div ref={ref} className="mx-auto max-w-7xl px-6">
         <div className="mb-12 max-w-2xl">
           <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-soft">

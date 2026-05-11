@@ -8,7 +8,7 @@ export function Hero() {
   const magneticRef = useMagnetic<HTMLAnchorElement>(0.2);
 
   return (
-    <section id="top" className="relative isolate overflow-hidden pt-28 pb-20 sm:pt-32 sm:pb-28">
+    <section id="top" className="relative isolate overflow-hidden pt-24 pb-12 sm:pt-28 sm:pb-16">
       {/* Decorative floating sparkles */}
       <span aria-hidden className="float-y absolute left-[8%] top-[18%] text-2xl text-ink/70 hidden sm:block">✦</span>
       <span aria-hidden className="float-y absolute right-[12%] top-[22%] text-xl text-ink/70 hidden sm:block" style={{ animationDelay: "1.2s" }}>✦</span>

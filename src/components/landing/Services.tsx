@@ -32,7 +32,7 @@ export function Services() {
   const ref = useReveal<HTMLDivElement>();
 
   return (
-    <section id="services" className="relative py-24 sm:py-32">
+    <section id="services" className="relative py-14 sm:py-20">
       <div ref={ref} className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-xl">
