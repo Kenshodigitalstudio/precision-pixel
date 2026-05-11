@@ -24,7 +24,7 @@ const steps = [
 export function Approach() {
   const ref = useReveal<HTMLDivElement>();
   return (
-    <section id="approche" className="relative py-32 sm:py-40">
+    <section id="approche" className="relative py-16 sm:py-20">
       <div ref={ref} className="reveal mx-auto max-w-7xl px-6">
         <div className="mb-16 max-w-2xl">
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-electric">
