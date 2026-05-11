@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import kenshoMark from "@/assets/kensho-mark.png";
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -27,7 +28,13 @@ export function Nav() {
         style={{ width: `${progress}%`, transition: "width 120ms linear" }}
       />
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <a href="#top" className="flex items-center gap-2">
+        <a href="#top" className="flex items-center gap-2.5">
+          <img
+            src={kenshoMark}
+            alt=""
+            aria-hidden
+            className="h-8 w-8 object-contain"
+          />
           <span className="font-display text-base font-bold tracking-tight text-ink">
             Kensho Digital Studio
           </span>
