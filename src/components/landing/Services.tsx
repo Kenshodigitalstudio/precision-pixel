@@ -1,4 +1,5 @@
 import { useReveal } from "@/hooks/use-reveal";
+import { Sparkles } from "./Sparkles";
 
 type Service = {
   icon: string;
@@ -32,7 +33,8 @@ export function Services() {
   const ref = useReveal<HTMLDivElement>();
 
   return (
-    <section id="services" className="relative py-14 sm:py-20">
+    <section id="services" className="relative overflow-hidden py-14 sm:py-20">
+      <Sparkles variant="dense" />
       <div ref={ref} className="mx-auto max-w-6xl px-6">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-xl">

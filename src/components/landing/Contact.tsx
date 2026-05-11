@@ -1,4 +1,5 @@
 import { useReveal } from "@/hooks/use-reveal";
+import { Sparkles } from "./Sparkles";
 
 const CAL_URL = "https://calendar.app.google/qg7jgpvovovLnEoN9";
 const EMAIL = "kenshodigitalstudio@gmail.com";
@@ -28,7 +29,8 @@ export function Contact() {
   const ref = useReveal<HTMLDivElement>();
 
   return (
-    <section id="contact" className="relative py-16 sm:py-20">
+    <section id="contact" className="relative overflow-hidden py-16 sm:py-20">
+      <Sparkles variant="dense" />
       <div ref={ref} className="reveal mx-auto max-w-3xl px-6">
         <div className="text-center">
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-electric">

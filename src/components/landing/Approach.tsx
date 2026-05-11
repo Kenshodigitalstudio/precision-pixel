@@ -1,4 +1,5 @@
 import { useReveal } from "@/hooks/use-reveal";
+import { Sparkles } from "./Sparkles";
 
 const steps = [
   {
@@ -24,7 +25,8 @@ const steps = [
 export function Approach() {
   const ref = useReveal<HTMLDivElement>();
   return (
-    <section id="approche" className="relative py-16 sm:py-20">
+    <section id="approche" className="relative overflow-hidden py-16 sm:py-20">
+      <Sparkles variant="default" />
       <div ref={ref} className="reveal mx-auto max-w-7xl px-6">
         <div className="mb-16 max-w-2xl">
           <span className="font-mono text-xs uppercase tracking-[0.25em] text-electric">

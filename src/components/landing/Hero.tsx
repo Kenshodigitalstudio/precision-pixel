@@ -13,6 +13,10 @@ export function Hero() {
       <span aria-hidden className="float-y absolute left-[8%] top-[18%] text-2xl text-ink/70 hidden sm:block">✦</span>
       <span aria-hidden className="float-y absolute right-[12%] top-[22%] text-xl text-ink/70 hidden sm:block" style={{ animationDelay: "1.2s" }}>✦</span>
       <span aria-hidden className="float-y absolute left-[18%] bottom-[8%] text-lg text-ink/60 hidden sm:block" style={{ animationDelay: "2.4s" }}>✺</span>
+      <span aria-hidden className="float-y absolute right-[6%] top-[55%] text-base text-ink/60 hidden sm:block" style={{ animationDelay: "0.8s" }}>✦</span>
+      <span aria-hidden className="float-y absolute left-[3%] top-[55%] text-sm text-ink/55 hidden sm:block" style={{ animationDelay: "3.1s" }}>✺</span>
+      <span aria-hidden className="float-y absolute right-[22%] bottom-[14%] text-lg text-ink/60 hidden sm:block" style={{ animationDelay: "1.8s" }}>✦</span>
+      <span aria-hidden className="float-y absolute left-[42%] top-[6%] text-xs text-ink/60 hidden sm:block" style={{ animationDelay: "2.7s" }}>✦</span>
 
       <div className="relative mx-auto max-w-6xl px-6 text-center">
         <h1 className="relative mx-auto max-w-4xl font-display text-[clamp(2.75rem,8vw,6rem)] font-extrabold leading-[1] tracking-[-0.035em] text-ink">

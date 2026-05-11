@@ -1,4 +1,5 @@
 import { useReveal } from "@/hooks/use-reveal";
+import { Sparkles } from "./Sparkles";
 
 type Promise = {
   index: string;
@@ -34,7 +35,8 @@ export function Metrics() {
   const ref = useReveal<HTMLDivElement>();
 
   return (
-    <section id="metrics" className="relative py-14 sm:py-20">
+    <section id="metrics" className="relative overflow-hidden py-14 sm:py-20">
+      <Sparkles variant="dense" />
       <div ref={ref} className="mx-auto max-w-7xl px-6">
         <div className="mb-12 max-w-2xl">
           <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-soft">
