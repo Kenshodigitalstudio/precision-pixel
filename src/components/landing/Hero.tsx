@@ -45,45 +45,6 @@ export function Hero() {
             })}
           </span>
         </h1>
-          <span className="word-reveal block">
-            {title1.map((w, i) => (
-              <span key={i} style={{ ["--i" as never]: i }}>
-                {w}{" "}
-              </span>
-            ))}
-          </span>
-          <span className="word-reveal relative block">
-            {title2.map((w, i) => {
-              const isHL = w.startsWith("chaque");
-              return (
-                <span key={i} style={{ ["--i" as never]: title1.length + i }} className={isHL ? "relative" : ""}>
-                  {isHL ? (
-                    <span className="relative inline-block">
-                      <span className="relative z-10">{w}</span>
-                      <svg
-                        aria-hidden
-                        className="highlight-svg absolute inset-x-[-4%] bottom-[10%] -z-0 h-[55%] w-[108%]"
-                        viewBox="0 0 200 40"
-                        preserveAspectRatio="none"
-                      >
-                        <path
-                          d="M4 28 C 40 8, 120 4, 196 22 C 180 32, 60 38, 4 28 Z"
-                          fill="none"
-                          stroke="var(--solar)"
-                          strokeWidth="14"
-                          strokeLinecap="round"
-                          opacity="0.85"
-                        />
-                      </svg>
-                    </span>
-                  ) : (
-                    w
-                  )}{" "}
-                </span>
-              );
-            })}
-          </span>
-        </h1>
 
         <p className="mt-8 max-w-2xl text-lg text-ink-soft leading-relaxed reveal is-visible">
           Nous pilotons vos campagnes Google Ads et industrialisons votre tracking
