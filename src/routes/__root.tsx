@@ -72,14 +72,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "Kensho Digital Studio" },
+      { name: "description", content: "Kensho Digital Studio : l'expertise Google Ads combinée au tracking server-side. Une approche haute précision pour piloter votre performance et vos revenus." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "Kensho Digital Studio" },
+      { property: "og:description", content: "Kensho Digital Studio : l'expertise Google Ads combinée au tracking server-side. Une approche haute précision pour piloter votre performance et vos revenus." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "Kensho Digital Studio" },
+      { name: "twitter:description", content: "Kensho Digital Studio : l'expertise Google Ads combinée au tracking server-side. Une approche haute précision pour piloter votre performance et vos revenus." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/86992d2f-0ad2-4e09-a87f-f3717c3dab54/id-preview-399b0f39--c58bba01-5b74-499a-b456-2583d28710b8.lovable.app-1778516897300.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/86992d2f-0ad2-4e09-a87f-f3717c3dab54/id-preview-399b0f39--c58bba01-5b74-499a-b456-2583d28710b8.lovable.app-1778516897300.png" },
     ],
     links: [
       {
