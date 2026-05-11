@@ -3,7 +3,6 @@ import { Toaster } from "@/components/ui/sonner";
 import { Nav } from "@/components/landing/Nav";
 import { Hero } from "@/components/landing/Hero";
 import { TrustStrip } from "@/components/landing/TrustStrip";
-import { Services } from "@/components/landing/Services";
 import { Metrics } from "@/components/landing/Metrics";
 import { Approach } from "@/components/landing/Approach";
 import { Contact } from "@/components/landing/Contact";
@@ -39,7 +38,6 @@ function Index() {
       <Nav />
       <Hero />
       <TrustStrip />
-      <Services />
       <Metrics />
       <Approach />
       <Contact />

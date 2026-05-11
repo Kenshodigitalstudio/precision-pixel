@@ -40,7 +40,7 @@ export function Metrics() {
       <div ref={ref} className="mx-auto max-w-7xl px-6">
         <div className="mb-12 max-w-2xl">
           <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-soft">
-            03 — Pourquoi nous
+            02 — Pourquoi nous
           </span>
           <h2 className="mt-3 font-display text-[clamp(1.75rem,3.4vw,2.75rem)] font-extrabold leading-[1.1] tracking-[-0.02em] text-ink">
             Ce qu'on vous garantit, dès le premier appel.
