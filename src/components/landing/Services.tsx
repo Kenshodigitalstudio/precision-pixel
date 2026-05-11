@@ -5,6 +5,8 @@ type Service = {
   iconBg: string;
   title: string;
   desc: string;
+  price: string;
+  priceGradient: string;
 };
 
 const services: Service[] = [
@@ -13,12 +15,16 @@ const services: Service[] = [
     iconBg: "bg-coral/70",
     title: "RDV 30 min — Audit & coaching Google Ads",
     desc: "Un appel Google Meet de 30 minutes pour passer votre compte au crible : réglages de base, structure des campagnes, points de friction. On vous montre quoi corriger et comment prendre la plateforme en main, sereinement.",
+    price: "49 €",
+    priceGradient: "bg-gradient-to-br from-sky via-electric to-electric-soft",
   },
   {
     icon: "🏷️",
     iconBg: "bg-solar/80",
     title: "Installation de tags & tracking",
     desc: "On installe et configure vos tags pour vous : Google Tag, conversions Ads, GA4, événements clés. Une donnée propre dès le premier clic, sans devoir toucher au code.",
+    price: "149 €",
+    priceGradient: "bg-gradient-to-br from-mint via-emerald-400 to-emerald-600",
   },
 ];
 
@@ -55,11 +61,18 @@ export function Services() {
                 i === 1 ? "md:translate-y-6" : ""
               }`}
             >
-              <div
-                className={`grid h-12 w-12 place-items-center rounded-full ${s.iconBg} text-xl shadow-[inset_0_-4px_0_0_rgba(0,0,0,0.05)]`}
-                aria-hidden
-              >
-                {s.icon}
+              <div className="flex items-center justify-between gap-4">
+                <div
+                  className={`grid h-12 w-12 place-items-center rounded-full ${s.iconBg} text-xl shadow-[inset_0_-4px_0_0_rgba(0,0,0,0.05)]`}
+                  aria-hidden
+                >
+                  {s.icon}
+                </div>
+                <span
+                  className={`inline-flex items-center rounded-full px-4 py-1.5 font-display text-lg font-extrabold tracking-tight text-paper shadow-[0_8px_20px_-8px_rgba(0,0,0,0.25)] ${s.priceGradient}`}
+                >
+                  {s.price}
+                </span>
               </div>
               <h3 className="font-display text-xl font-bold tracking-tight text-ink">
                 {s.title}
