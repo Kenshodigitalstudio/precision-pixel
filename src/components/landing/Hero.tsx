@@ -32,13 +32,6 @@ const slides: Slide[] = [
     icon: "⚙️",
     cta: { label: "Réserver", href: CAL_URL },
   },
-  {
-    tag: "Bientôt",
-    title: "Plus de services à venir",
-    desc: "Accompagnement long-terme, formations, ateliers d'équipe… On affine. Restez à l'écoute.",
-    gradient: "from-solar/70 via-amber-300/60 to-amber-500/70",
-    icon: "✦",
-  },
 ];
 
 export function Hero() {
