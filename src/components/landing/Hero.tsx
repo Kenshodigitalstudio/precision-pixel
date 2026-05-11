@@ -105,8 +105,12 @@ export function Hero() {
             href={CAL_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-magnetic group inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-sm font-semibold text-paper shadow-[var(--shadow-glow)] transition-colors hover:bg-electric"
+            className="btn-magnetic group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-white/40 bg-white/30 px-7 py-3.5 text-sm font-semibold tracking-wide text-ink shadow-[0_10px_40px_-10px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:bg-white/50 hover:shadow-[0_16px_50px_-12px_rgba(0,0,0,0.32)]"
           >
+            <span
+              aria-hidden
+              className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-sky/40 via-electric/30 to-solar/40 opacity-90"
+            />
             <span>Prendre rendez-vous</span>
             <span className="transition-transform group-hover:translate-x-1">↗</span>
           </a>
