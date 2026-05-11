@@ -20,8 +20,14 @@ const promises: Promise[] = [
   {
     index: "03",
     title: "Un contact humain avant le RDV",
-    desc: "Dès votre prise de rendez-vous, l'expert qui s'occupera de vous prend contact pour se présenter, comprendre votre contexte et confirmer le créneau. Pas de robot, pas de file d'attente.",
+    desc: "Dès la prise de rendez-vous, l'expert qui s'occupera de vous prend contact pour se présenter et confirmer le créneau. Pas de robot, pas de file d'attente.",
   },
+];
+
+const accents = [
+  "text-coral",
+  "text-electric",
+  "text-mint",
 ];
 
 export function Metrics() {
