@@ -135,9 +135,11 @@
   }
   body {
     background:
-      radial-gradient(80% 60% at 10% 0%, color-mix(in oklab, var(--coral) 35%, transparent), transparent 70%),
-      radial-gradient(70% 55% at 90% 10%, color-mix(in oklab, var(--lilac) 35%, transparent), transparent 70%),
-      radial-gradient(60% 50% at 50% 100%, color-mix(in oklab, var(--sky) 25%, transparent), transparent 70%),
+      radial-gradient(55% 45% at 8% 0%, color-mix(in oklab, var(--coral) 75%, transparent), transparent 65%),
+      radial-gradient(55% 45% at 95% 8%, color-mix(in oklab, var(--lilac) 78%, transparent), transparent 65%),
+      radial-gradient(45% 40% at 50% 45%, color-mix(in oklab, var(--solar) 55%, transparent), transparent 70%),
+      radial-gradient(50% 45% at 15% 95%, color-mix(in oklab, var(--mint) 65%, transparent), transparent 70%),
+      radial-gradient(55% 45% at 90% 100%, color-mix(in oklab, var(--sky) 75%, transparent), transparent 70%),
       var(--paper);
     background-attachment: fixed;
     color: var(--color-foreground);
