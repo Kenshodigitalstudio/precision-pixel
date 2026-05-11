@@ -44,16 +44,18 @@ export function Metrics() {
             Ce qu'on vous garantit, dès le premier appel.
           </h2>
         </div>
-        <div className="grid gap-5 md:grid-cols-3 md:gap-6">
-          {promises.map((p) => (
-            <article key={p.index} className="service-card flex flex-col gap-4 p-7 sm:p-8">
-              <span className="font-mono text-[11px] font-medium uppercase tracking-[0.2em] text-ink">
-                [ {p.index} ]
+        <div className="grid gap-5 md:grid-cols-3 md:gap-6 md:items-stretch">
+          {promises.map((p, i) => (
+            <article key={p.index} className="service-card flex h-full flex-col p-7 sm:p-8">
+              <span
+                className={`font-display text-5xl font-extrabold leading-none tracking-tight ${accents[i]}`}
+              >
+                {p.index}
               </span>
-              <h3 className="font-display text-xl font-bold tracking-tight text-ink">
+              <h3 className="mt-5 min-h-[3.5rem] font-display text-xl font-bold tracking-tight text-ink">
                 {p.title}
               </h3>
-              <p className="text-[14.5px] leading-relaxed text-ink-soft">{p.desc}</p>
+              <p className="mt-3 text-[14.5px] leading-relaxed text-ink-soft">{p.desc}</p>
             </article>
           ))}
         </div>
