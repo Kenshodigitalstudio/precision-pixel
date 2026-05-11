@@ -33,7 +33,7 @@ export function Nav() {
             src={kenshoMark}
             alt=""
             aria-hidden
-            className="h-8 w-8 object-contain"
+            className="h-12 w-12 object-contain"
           />
           <span className="font-display text-base font-light tracking-[-0.02em] text-ink">
             Kenshō <span className="font-extralight text-ink-soft">Digital Studio</span>
