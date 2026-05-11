@@ -15,7 +15,7 @@ const services: Service[] = [
     iconBg: "bg-coral/70",
     title: "RDV 30 min — Audit & coaching Google Ads",
     desc: "Un appel Google Meet de 30 minutes pour passer votre compte au crible : réglages de base, structure des campagnes, points de friction. On vous montre quoi corriger et comment prendre la plateforme en main, sereinement.",
-    price: "49 €",
+    price: "150 €",
     priceGradient: "bg-gradient-to-br from-sky via-electric to-electric-soft",
   },
   {
@@ -23,7 +23,7 @@ const services: Service[] = [
     iconBg: "bg-solar/80",
     title: "Installation de tags & tracking",
     desc: "On installe et configure vos tags pour vous : Google Tag, conversions Ads, GA4, événements clés. Une donnée propre dès le premier clic, sans devoir toucher au code.",
-    price: "149 €",
+    price: "100 €",
     priceGradient: "bg-gradient-to-br from-mint via-emerald-400 to-emerald-600",
   },
 ];
@@ -79,7 +79,9 @@ export function Services() {
               </h3>
               <p className="text-[14.5px] leading-relaxed text-ink-soft">{s.desc}</p>
               <a
-                href="#contact"
+                href="https://calendar.app.google/qg7jgpvovovLnEoN9"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="mt-auto inline-flex items-center gap-1.5 text-sm font-semibold text-ink"
               >
                 <span className="story-link">Prendre rendez-vous</span>
@@ -87,6 +89,13 @@ export function Services() {
               </a>
             </article>
           ))}
+        </div>
+
+        <div className="mt-10 flex justify-center">
+          <span className="inline-flex items-center gap-2 rounded-full bg-gradient-to-br from-solar via-amber-300 to-amber-500 px-5 py-2 font-display text-sm font-extrabold tracking-tight text-ink shadow-[0_8px_20px_-8px_rgba(0,0,0,0.25)]">
+            <span aria-hidden>✦</span>
+            Plus de services à venir
+          </span>
         </div>
       </div>
     </section>
