@@ -1,5 +1,6 @@
 import { useReveal } from "@/hooks/use-reveal";
 import { Sparkles } from "./Sparkles";
+import { useStripeCheckout } from "@/hooks/useStripeCheckout";
 
 const CAL_URL = "https://calendar.app.google/qg7jgpvovovLnEoN9";
 const EMAIL = "kenshodigitalstudio@gmail.com";
@@ -10,6 +11,7 @@ const offers = [
     title: "RDV 30 min — Audit & coaching Google Ads",
     desc: "Un appel Google Meet de 30 minutes pour passer votre compte au crible et repartir avec des actions concrètes.",
     price: "150 €",
+    priceId: "audit_google_ads_one_time",
     gradient: "from-sky via-electric to-electric-soft",
     icon: "📞",
     iconBg: "bg-gradient-to-br from-sky via-electric to-electric-soft",
@@ -19,6 +21,7 @@ const offers = [
     title: "Installation de tags & tracking",
     desc: "Google Tag, conversions Ads, GA4, événements clés. Une donnée propre dès le premier clic.",
     price: "100 €",
+    priceId: "tracking_installation_one_time",
     gradient: "from-mint via-emerald-400 to-emerald-600",
     icon: "⚙️",
     iconBg: "bg-gradient-to-br from-mint via-emerald-400 to-emerald-600",
