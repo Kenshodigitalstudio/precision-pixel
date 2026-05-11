@@ -7,6 +7,7 @@ import { Services } from "@/components/landing/Services";
 import { Metrics } from "@/components/landing/Metrics";
 import { Approach } from "@/components/landing/Approach";
 import { Contact } from "@/components/landing/Contact";
+import { ExtraRequest } from "@/components/landing/ExtraRequest";
 import { Footer } from "@/components/landing/Footer";
 
 
@@ -42,6 +43,7 @@ function Index() {
       <Metrics />
       <Approach />
       <Contact />
+      <ExtraRequest />
       <Footer />
       <Toaster position="bottom-right" />
     </main>
