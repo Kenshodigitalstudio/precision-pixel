@@ -68,8 +68,7 @@ export function Hero() {
 
         {/* Certification badge */}
         <div className="relative mt-16 flex justify-center">
-          <span className="inline-flex items-center gap-2.5 rounded-full border-2 border-ink bg-paper px-5 py-2.5 font-mono text-[11px] font-medium uppercase tracking-[0.18em] text-ink shadow-[var(--shadow-hard)]">
-            <span aria-hidden className="h-2 w-2 rounded-full bg-electric" />
+          <span className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-br from-sky via-electric to-electric-soft bg-clip-text text-transparent drop-shadow-sm">
             Experts certifiés Google Ads
           </span>
         </div>
