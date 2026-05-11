@@ -61,11 +61,18 @@ export function Services() {
                 i === 1 ? "md:translate-y-6" : ""
               }`}
             >
-              <div
-                className={`grid h-12 w-12 place-items-center rounded-full ${s.iconBg} text-xl shadow-[inset_0_-4px_0_0_rgba(0,0,0,0.05)]`}
-                aria-hidden
-              >
-                {s.icon}
+              <div className="flex items-center justify-between gap-4">
+                <div
+                  className={`grid h-12 w-12 place-items-center rounded-full ${s.iconBg} text-xl shadow-[inset_0_-4px_0_0_rgba(0,0,0,0.05)]`}
+                  aria-hidden
+                >
+                  {s.icon}
+                </div>
+                <span
+                  className={`inline-flex items-center rounded-full px-4 py-1.5 font-display text-lg font-extrabold tracking-tight text-paper shadow-[0_8px_20px_-8px_rgba(0,0,0,0.25)] ${s.priceGradient}`}
+                >
+                  {s.price}
+                </span>
               </div>
               <h3 className="font-display text-xl font-bold tracking-tight text-ink">
                 {s.title}
