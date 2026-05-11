@@ -29,7 +29,7 @@ export function Nav() {
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <a href="#top" className="flex items-center gap-2">
           <span className="font-display text-base font-bold tracking-tight text-ink">
-            [Nom de l'agence]
+            Kensho Digital Studio
           </span>
         </a>
         <ul className="hidden items-center gap-7 text-sm font-medium text-ink-soft md:flex">
