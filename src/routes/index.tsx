@@ -8,6 +8,7 @@ import { Metrics } from "@/components/landing/Metrics";
 import { Approach } from "@/components/landing/Approach";
 import { Contact } from "@/components/landing/Contact";
 import { Footer } from "@/components/landing/Footer";
+import { Cursor } from "@/components/landing/Cursor";
 
 
 export const Route = createFileRoute("/")({
@@ -43,6 +44,7 @@ function Index() {
       <Contact />
       <Footer />
       <Toaster position="bottom-right" />
+      <Cursor />
     </main>
   );
 }
