@@ -2,6 +2,7 @@ import { useMagnetic } from "@/hooks/use-magnetic";
 import tile1 from "@/assets/tile-1.jpg";
 import tile2 from "@/assets/tile-2.jpg";
 import tile3 from "@/assets/tile-3.jpg";
+import kenshoMark from "@/assets/kensho-mark.png";
 
 export function Hero() {
   const magneticRef = useMagnetic<HTMLAnchorElement>(0.2);
@@ -146,7 +147,7 @@ function Tile({
               <textPath href="#circle-text">PERFORMANCE · TRACKING · GOOGLE ADS · </textPath>
             </text>
           </svg>
-          <span className="text-solar">★</span>
+          <img src={kenshoMark} alt="" aria-hidden className="relative h-9 w-9 object-contain" />
         </div>
       )}
     </div>
