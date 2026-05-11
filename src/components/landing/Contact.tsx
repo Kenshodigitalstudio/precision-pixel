@@ -94,7 +94,7 @@ export function Contact() {
 
         <form
           onSubmit={onSubmit}
-          className="space-y-6 rounded-[1.75rem] border border-border/60 bg-card/70 p-8 backdrop-blur-xl shadow-[var(--shadow-card)] sm:p-10"
+          className="space-y-6 border-2 border-ink bg-paper p-8 shadow-[var(--shadow-card)] sm:p-10"
         >
           <div className="grid gap-6 sm:grid-cols-2">
             <Field id="name" label="Nom complet" required />
