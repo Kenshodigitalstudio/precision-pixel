@@ -4,11 +4,12 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@import url("https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap");
 
 @theme inline {
-  --font-display: "Archivo Black", ui-sans-serif, system-ui, sans-serif;
-  --font-sans: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-hand: "Caveat", ui-serif, system-ui, cursive;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
 
   --radius-sm: calc(var(--radius) - 4px);
@@ -47,6 +48,11 @@
   --color-electric-soft: var(--electric-soft);
   --color-solar: var(--solar);
   --color-mint: var(--mint);
+  --color-coral: var(--coral);
+  --color-lilac: var(--lilac);
+  --color-sky: var(--sky);
+  --color-paper-2: var(--paper-2);
+  --color-paper-3: var(--paper-3);
 
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
@@ -64,16 +70,21 @@
 }
 
 :root {
-  --radius: 0.25rem;
+  --radius: 1.5rem;
 
-  /* Brutalist Pop palette */
-  --paper: oklch(1 0 0);
-  --ink: oklch(0.12 0 0);
-  --ink-soft: oklch(0.35 0 0);
-  --electric: oklch(0.68 0.22 35);   /* orange #ff5722 vibe */
-  --electric-soft: oklch(0.78 0.16 40);
-  --solar: oklch(0.93 0.2 100);       /* yellow #ffeb3b vibe */
-  --mint: oklch(0.85 0.18 145);
+  /* Soft pastel agency palette */
+  --paper: oklch(0.985 0.012 85);          /* warm cream */
+  --paper-2: oklch(0.96 0.025 75);         /* peach cream */
+  --paper-3: oklch(0.94 0.04 300);         /* lavender mist */
+  --ink: oklch(0.18 0.015 270);
+  --ink-soft: oklch(0.45 0.02 270);
+  --electric: oklch(0.65 0.18 265);        /* soft indigo */
+  --electric-soft: oklch(0.82 0.1 265);
+  --solar: oklch(0.92 0.16 95);            /* warm yellow blob */
+  --mint: oklch(0.88 0.1 165);             /* pastel green */
+  --coral: oklch(0.82 0.12 35);            /* peach */
+  --lilac: oklch(0.82 0.09 305);           /* lavender */
+  --sky: oklch(0.85 0.09 230);             /* powder blue */
 
   --background: var(--paper);
   --foreground: var(--ink);
@@ -83,37 +94,36 @@
   --popover-foreground: var(--ink);
   --primary: var(--ink);
   --primary-foreground: var(--paper);
-  --secondary: oklch(0.96 0.005 250);
+  --secondary: oklch(0.96 0.02 80);
   --secondary-foreground: var(--ink);
-  --muted: oklch(0.96 0.005 250);
+  --muted: oklch(0.96 0.015 80);
   --muted-foreground: var(--ink-soft);
-  --accent: var(--electric);
-  --accent-foreground: oklch(1 0 0);
-  --destructive: oklch(0.6 0.22 27);
+  --accent: var(--solar);
+  --accent-foreground: var(--ink);
+  --destructive: oklch(0.65 0.22 27);
   --destructive-foreground: oklch(1 0 0);
-  --border: oklch(0.12 0 0);
-  --input: oklch(0.12 0 0);
+  --border: oklch(0.9 0.015 80);
+  --input: oklch(0.9 0.015 80);
   --ring: var(--electric);
 
   --chart-1: var(--electric);
   --chart-2: var(--mint);
   --chart-3: var(--solar);
-  --chart-4: oklch(0.7 0.15 280);
-  --chart-5: oklch(0.6 0.12 200);
+  --chart-4: var(--lilac);
+  --chart-5: var(--coral);
 
-  --sidebar: oklch(0.99 0.003 240);
+  --sidebar: var(--paper);
   --sidebar-foreground: var(--ink);
   --sidebar-primary: var(--ink);
   --sidebar-primary-foreground: var(--paper);
-  --sidebar-accent: oklch(0.96 0.005 250);
+  --sidebar-accent: oklch(0.96 0.015 80);
   --sidebar-accent-foreground: var(--ink);
-  --sidebar-border: oklch(0.92 0.008 250);
+  --sidebar-border: oklch(0.9 0.015 80);
   --sidebar-ring: var(--electric);
 
-  --shadow-glow: 8px 8px 0 0 var(--ink);
-  --shadow-card: 10px 10px 0 0 var(--ink);
-  --shadow-hard: 6px 6px 0 0 var(--ink);
-  --shadow-hard-lg: 14px 14px 0 0 var(--ink);
+  --shadow-glow: 0 24px 60px -28px color-mix(in oklab, var(--ink) 35%, transparent);
+  --shadow-card: 0 18px 40px -22px color-mix(in oklab, var(--ink) 25%, transparent);
+  --shadow-soft: 0 10px 30px -12px color-mix(in oklab, var(--ink) 18%, transparent);
 }
 
 @layer base {
@@ -124,10 +134,14 @@
     scroll-behavior: smooth;
   }
   body {
-    background-color: var(--color-background);
+    background:
+      radial-gradient(80% 60% at 10% 0%, color-mix(in oklab, var(--coral) 35%, transparent), transparent 70%),
+      radial-gradient(70% 55% at 90% 10%, color-mix(in oklab, var(--lilac) 35%, transparent), transparent 70%),
+      radial-gradient(60% 50% at 50% 100%, color-mix(in oklab, var(--sky) 25%, transparent), transparent 70%),
+      var(--paper);
+    background-attachment: fixed;
     color: var(--color-foreground);
     font-family: var(--font-sans);
-    font-feature-settings: "ss01", "cv11";
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -211,35 +225,49 @@
   animation: draw-stroke 1400ms cubic-bezier(0.22, 1, 0.36, 1) 900ms forwards;
 }
 
-/* ---------- Service card: brutalist hard-shadow shift ---------- */
+/* ---------- Service card: soft lift ---------- */
 .service-card {
   position: relative;
   isolation: isolate;
-  border: 2.5px solid var(--ink);
-  background: var(--paper);
-  box-shadow: var(--shadow-card);
-  transition: transform 320ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 320ms cubic-bezier(0.22, 1, 0.36, 1),
-    background-color 320ms ease;
+  border-radius: 1.75rem;
+  background: oklch(1 0 0 / 0.85);
+  border: 1px solid color-mix(in oklab, var(--ink) 8%, transparent);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(8px);
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 .service-card:hover {
-  transform: translate(-6px, -6px);
-  box-shadow: var(--shadow-hard-lg);
-  background: var(--solar);
+  transform: translateY(-6px) rotate(-0.4deg);
+  box-shadow: var(--shadow-card);
 }
-.service-card:hover .card-accent-bar {
-  width: 100%;
-  background: var(--ink);
+
+/* ---------- Dashed squiggle draw ---------- */
+@keyframes squiggle-draw {
+  to { stroke-dashoffset: 0; }
 }
-.service-card .card-accent-bar {
-  height: 6px;
-  width: 28%;
-  background: var(--electric);
-  transition: width 500ms cubic-bezier(0.22, 1, 0.36, 1), background 320ms ease;
+.squiggle-path {
+  stroke-dasharray: 1400;
+  stroke-dashoffset: 1400;
+  animation: squiggle-draw 2400ms cubic-bezier(0.22, 1, 0.36, 1) 400ms forwards;
 }
-.service-card > * {
-  position: relative;
-  z-index: 3;
+
+/* ---------- Floating sparkle ---------- */
+@keyframes float-y {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%      { transform: translateY(-10px) rotate(8deg); }
+}
+.float-y { animation: float-y 5s ease-in-out infinite; }
+
+/* ---------- Portrait tile ---------- */
+.portrait-tile {
+  border-radius: 2rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.portrait-tile:hover {
+  transform: translateY(-8px) rotate(-1deg);
 }
 
 /* ---------- Buttons ---------- */
