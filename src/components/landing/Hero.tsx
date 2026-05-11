@@ -38,6 +38,23 @@ export function Hero() {
   const magneticRef = useMagnetic<HTMLAnchorElement>(0.2);
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+  const [scrollY, setScrollY] = useState(0);
+
+  useEffect(() => {
+    const onScroll = () => setScrollY(window.scrollY);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  // Progress 0 -> 1 over the first 420px of scroll
+  const p = Math.min(1, Math.max(0, scrollY / 420));
+  const titleOpacity = 1 - p;
+  const titleScale = 1 - p * 0.25;
+  const titleY = -p * 80;
+  const starOpacity = Math.min(1, p * 1.4);
+  const starScale = 0.4 + p * 1.1;
+  const starY = -p * 220;
 
   const goTo = (i: number) => {
     const el = trackRef.current;
@@ -81,10 +98,30 @@ export function Hero() {
       <span aria-hidden className="float-y absolute left-[42%] top-[6%] text-xs text-ink/60 hidden sm:block" style={{ animationDelay: "2.7s" }}>✦</span>
 
       <div className="relative mx-auto max-w-6xl px-6 text-center">
-        <h1 className="relative mx-auto max-w-5xl font-display text-[clamp(3.75rem,11vw,8.5rem)] font-light leading-[0.95] tracking-[-0.04em] text-ink">
-          Kenshō
-          <span className="block font-extralight text-ink-soft">Digital Studio</span>
-        </h1>
+        <div className="relative mx-auto" style={{ height: "clamp(7rem, 13vw, 11rem)" }}>
+          <h1
+            className="relative mx-auto max-w-5xl font-display text-[clamp(3.75rem,11vw,8.5rem)] font-light leading-[0.95] tracking-[-0.04em] text-ink will-change-transform"
+            style={{
+              opacity: titleOpacity,
+              transform: `translateY(${titleY}px) scale(${titleScale})`,
+              pointerEvents: p > 0.6 ? "none" : "auto",
+            }}
+          >
+            Kenshō
+            <span className="block font-extralight text-ink-soft">Digital Studio</span>
+          </h1>
+          <span
+            aria-hidden
+            className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 text-[clamp(3rem,9vw,6rem)] text-ink will-change-transform"
+            style={{
+              opacity: starOpacity,
+              transform: `translate(-50%, ${starY}px) scale(${starScale}) rotate(${p * 180}deg)`,
+              textShadow: "0 0 24px rgba(99,102,241,0.35), 0 0 60px rgba(250,204,21,0.25)",
+            }}
+          >
+            ✦
+          </span>
+        </div>
 
         <p className="relative mx-auto mt-6 max-w-xl text-[15px] sm:text-base text-ink-soft">
           Pilotage Google Ads & tracking server-side. On transforme
