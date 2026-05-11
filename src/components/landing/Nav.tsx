@@ -35,8 +35,8 @@ export function Nav() {
             aria-hidden
             className="h-8 w-8 object-contain"
           />
-          <span className="font-display text-base font-bold tracking-tight text-ink">
-            Kensho Digital Studio
+          <span className="font-display text-base font-light tracking-[-0.02em] text-ink">
+            Kenshō <span className="font-extralight text-ink-soft">Digital Studio</span>
           </span>
         </a>
         <ul className="hidden items-center gap-7 text-sm font-medium text-ink-soft md:flex">
