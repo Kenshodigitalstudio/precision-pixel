@@ -227,7 +227,7 @@
   animation: draw-stroke 1400ms cubic-bezier(0.22, 1, 0.36, 1) 900ms forwards;
 }
 
-/* ---------- Service card: soft lift ---------- */
+/* ---------- Service card: pronounced lift + gradient glow ---------- */
 .service-card {
   position: relative;
   isolation: isolate;
@@ -236,13 +236,32 @@
   border: 1px solid color-mix(in oklab, var(--ink) 8%, transparent);
   box-shadow: var(--shadow-soft);
   backdrop-filter: blur(8px);
-  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 420ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 520ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.service-card::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: linear-gradient(135deg, var(--coral), var(--solar), var(--lilac));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 520ms cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+  z-index: 1;
 }
 .service-card:hover {
-  transform: translateY(-6px) rotate(-0.4deg);
-  box-shadow: var(--shadow-card);
+  transform: translateY(-12px) rotate(-0.6deg) scale(1.015);
+  box-shadow: 0 30px 60px -20px color-mix(in oklab, var(--coral) 35%, transparent),
+              0 14px 30px -12px color-mix(in oklab, var(--ink) 18%, transparent);
+  border-color: color-mix(in oklab, var(--ink) 14%, transparent);
 }
+.service-card:hover::after { opacity: 1; }
 
 /* ---------- Dashed squiggle draw ---------- */
 @keyframes squiggle-draw {
