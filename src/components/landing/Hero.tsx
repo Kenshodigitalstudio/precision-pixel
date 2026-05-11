@@ -87,8 +87,8 @@ export function Hero() {
         </h1>
 
         <p className="relative mx-auto mt-10 max-w-xl text-[15px] sm:text-base text-ink-soft">
-          Pilotage Google Ads & tracking server-side. On transforme
-          votre budget média en croissance mesurable.
+          Performance Google Ads & Tracking Server-Side. On transforme
+          votre budget en revenus mesurables.
         </p>
 
         <div className="relative mt-8 flex justify-center">
