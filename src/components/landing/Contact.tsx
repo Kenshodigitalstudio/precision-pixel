@@ -31,6 +31,8 @@ const offers = [
 export function Contact() {
   const ref = useReveal<HTMLDivElement>();
 
+  const { openCheckout, closeCheckout, isOpen, checkoutElement } = useStripeCheckout();
+
   return (
     <section id="contact" className="relative overflow-hidden py-16 sm:py-20">
       <Sparkles variant="dense" />
@@ -49,12 +51,11 @@ export function Contact() {
 
         <div className="mt-14 flex flex-col gap-5">
           {offers.map((o) => (
-            <a
+            <button
               key={o.title}
-              href={CAL_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="service-card group flex flex-col gap-4 p-7 sm:flex-row sm:items-center sm:gap-6 sm:p-8"
+              type="button"
+              onClick={() => openCheckout({ priceId: o.priceId })}
+              className="service-card group flex flex-col gap-4 p-7 text-left sm:flex-row sm:items-center sm:gap-6 sm:p-8"
             >
               <div
                 className={`grid h-14 w-14 flex-none place-items-center rounded-full ${o.iconBg} text-2xl shadow-[inset_0_-4px_0_0_rgba(0,0,0,0.05)]`}
@@ -78,10 +79,10 @@ export function Contact() {
                   {o.price}
                 </span>
                 <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink transition-transform group-hover:translate-x-1">
-                  Réserver <span>→</span>
+                  Payer <span>→</span>
                 </span>
               </div>
-            </a>
+            </button>
           ))}
         </div>
 
