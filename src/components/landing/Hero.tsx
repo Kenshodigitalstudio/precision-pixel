@@ -1,5 +1,6 @@
 import { useMagnetic } from "@/hooks/use-magnetic";
 import { useEffect, useRef, useState } from "react";
+import { useStripeCheckout } from "@/hooks/useStripeCheckout";
 
 const CAL_URL = "https://calendar.app.google/qg7jgpvovovLnEoN9";
 
@@ -10,7 +11,7 @@ type Slide = {
   price?: string;
   gradient: string;
   icon: string;
-  cta?: { label: string; href: string };
+  cta?: { label: string; priceId: string };
 };
 
 const slides: Slide[] = [
@@ -21,7 +22,7 @@ const slides: Slide[] = [
     price: "150 €",
     gradient: "from-sky/70 via-electric/60 to-electric-soft/70",
     icon: "📞",
-    cta: { label: "Réserver", href: CAL_URL },
+    cta: { label: "Payer 150 €", priceId: "audit_google_ads_one_time" },
   },
   {
     tag: "Tracking",
@@ -30,7 +31,7 @@ const slides: Slide[] = [
     price: "100 €",
     gradient: "from-mint/70 via-emerald-400/60 to-emerald-600/70",
     icon: "⚙️",
-    cta: { label: "Réserver", href: CAL_URL },
+    cta: { label: "Payer 100 €", priceId: "tracking_installation_one_time" },
   },
 ];
 
@@ -38,6 +39,7 @@ export function Hero() {
   const magneticRef = useMagnetic<HTMLAnchorElement>(0.2);
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+  const { openCheckout, closeCheckout, isOpen, checkoutElement } = useStripeCheckout();
 
   const goTo = (i: number) => {
     const el = trackRef.current;
@@ -156,15 +158,14 @@ export function Hero() {
                 </p>
 
                 {s.cta && (
-                  <a
-                    href={s.cta.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button
+                    type="button"
+                    onClick={() => openCheckout({ priceId: s.cta!.priceId })}
                     className="group/cta mt-6 inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-5 py-2.5 text-sm font-semibold text-ink backdrop-blur-md transition-all hover:bg-white/60 hover:-translate-y-0.5"
                   >
                     {s.cta.label}
                     <span className="transition-transform group-hover/cta:translate-x-0.5">→</span>
-                  </a>
+                  </button>
                 )}
               </article>
             ))}
@@ -222,6 +223,28 @@ export function Hero() {
           </span>
         </div>
       </div>
+
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+          onClick={closeCheckout}
+        >
+          <div
+            className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-2 sm:p-4 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={closeCheckout}
+              aria-label="Fermer"
+              className="absolute right-3 top-3 z-10 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-ink shadow hover:bg-white"
+            >
+              ✕
+            </button>
+            {checkoutElement}
+          </div>
+        </div>
+      )}
     </section>
   );
 }

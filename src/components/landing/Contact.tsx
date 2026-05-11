@@ -1,5 +1,6 @@
 import { useReveal } from "@/hooks/use-reveal";
 import { Sparkles } from "./Sparkles";
+import { useStripeCheckout } from "@/hooks/useStripeCheckout";
 
 const CAL_URL = "https://calendar.app.google/qg7jgpvovovLnEoN9";
 const EMAIL = "kenshodigitalstudio@gmail.com";
@@ -10,6 +11,7 @@ const offers = [
     title: "RDV 30 min — Audit & coaching Google Ads",
     desc: "Un appel Google Meet de 30 minutes pour passer votre compte au crible et repartir avec des actions concrètes.",
     price: "150 €",
+    priceId: "audit_google_ads_one_time",
     gradient: "from-sky via-electric to-electric-soft",
     icon: "📞",
     iconBg: "bg-gradient-to-br from-sky via-electric to-electric-soft",
@@ -19,6 +21,7 @@ const offers = [
     title: "Installation de tags & tracking",
     desc: "Google Tag, conversions Ads, GA4, événements clés. Une donnée propre dès le premier clic.",
     price: "100 €",
+    priceId: "tracking_installation_one_time",
     gradient: "from-mint via-emerald-400 to-emerald-600",
     icon: "⚙️",
     iconBg: "bg-gradient-to-br from-mint via-emerald-400 to-emerald-600",
@@ -27,6 +30,8 @@ const offers = [
 
 export function Contact() {
   const ref = useReveal<HTMLDivElement>();
+
+  const { openCheckout, closeCheckout, isOpen, checkoutElement } = useStripeCheckout();
 
   return (
     <section id="contact" className="relative overflow-hidden py-16 sm:py-20">
@@ -46,12 +51,11 @@ export function Contact() {
 
         <div className="mt-14 flex flex-col gap-5">
           {offers.map((o) => (
-            <a
+            <button
               key={o.title}
-              href={CAL_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="service-card group flex flex-col gap-4 p-7 sm:flex-row sm:items-center sm:gap-6 sm:p-8"
+              type="button"
+              onClick={() => openCheckout({ priceId: o.priceId })}
+              className="service-card group flex flex-col gap-4 p-7 text-left sm:flex-row sm:items-center sm:gap-6 sm:p-8"
             >
               <div
                 className={`grid h-14 w-14 flex-none place-items-center rounded-full ${o.iconBg} text-2xl shadow-[inset_0_-4px_0_0_rgba(0,0,0,0.05)]`}
@@ -75,10 +79,10 @@ export function Contact() {
                   {o.price}
                 </span>
                 <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-ink transition-transform group-hover:translate-x-1">
-                  Réserver <span>→</span>
+                  Payer <span>→</span>
                 </span>
               </div>
-            </a>
+            </button>
           ))}
         </div>
 
@@ -102,6 +106,28 @@ export function Contact() {
           </a>
         </div>
       </div>
+
+      {isOpen && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
+          onClick={closeCheckout}
+        >
+          <div
+            className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-2 sm:p-4 shadow-2xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              type="button"
+              onClick={closeCheckout}
+              aria-label="Fermer"
+              className="absolute right-3 top-3 z-10 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-ink shadow hover:bg-white"
+            >
+              ✕
+            </button>
+            {checkoutElement}
+          </div>
+        </div>
+      )}
     </section>
   );
 }
