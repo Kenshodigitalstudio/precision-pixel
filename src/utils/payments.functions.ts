@@ -25,6 +25,7 @@ export const createCheckoutSession = createServerFn({ method: "POST" })
       mode: "payment",
       ui_mode: "embedded_page",
       return_url: data.returnUrl,
+      metadata: { priceId: data.priceId },
     });
 
     return session.client_secret;
