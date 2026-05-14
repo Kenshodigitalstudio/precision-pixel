@@ -29,7 +29,7 @@ async function handleCheckoutCompleted(session: any, env: StripeEnv) {
     console.error("Failed to fetch line items:", e);
   }
 
-  const { error } = await getSupabase().from("orders").upsert(
+  const { error } = await (getSupabase().from("orders") as any).upsert(
     {
       stripe_session_id: session.id,
       stripe_payment_intent_id: typeof session.payment_intent === "string" ? session.payment_intent : null,
