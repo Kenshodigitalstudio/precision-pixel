@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
+import { Sparkles } from "@/components/landing/Sparkles";
 
 const CALENDLY_URL = "https://calendly.com/kenshodigitalstudio/30min";
 
