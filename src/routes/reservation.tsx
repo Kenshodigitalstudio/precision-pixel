@@ -25,15 +25,7 @@ export const Route = createFileRoute("/reservation")({
 });
 
 function ReservationPage() {
-  useEffect(() => {
-    const id = "calendly-widget-script";
-    if (document.getElementById(id)) return;
-    const s = document.createElement("script");
-    s.id = id;
-    s.src = "https://assets.calendly.com/assets/external/widget.js";
-    s.async = true;
-    document.body.appendChild(s);
-  }, []);
+  // Calendly is embedded directly via iframe below for reliability.
 
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-paper text-ink">
