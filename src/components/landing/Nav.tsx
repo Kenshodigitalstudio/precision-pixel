@@ -46,19 +46,17 @@ export function Nav() {
           <li><a href="#approche" className="hover:text-ink transition-colors">Approche</a></li>
           <li><a href="#contact" className="hover:text-ink transition-colors">Contact</a></li>
         </ul>
-        <a
-          href="https://calendar.app.google/qg7jgpvovovLnEoN9"
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          to="/reservation"
           className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-white/40 bg-white/30 px-4 py-2 text-sm font-semibold text-ink shadow-[0_6px_20px_-6px_rgba(0,0,0,0.2)] backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:bg-white/50"
         >
           <span
             aria-hidden
             className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-sky/40 via-electric/30 to-solar/40 opacity-90"
           />
-          Rendez-vous
+          Prendre rendez-vous
           <span className="transition-transform group-hover:translate-x-0.5">↗</span>
-        </a>
+        </Link>
       </nav>
     </header>
   );
