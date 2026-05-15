@@ -45,15 +45,13 @@ export function ServiceCard({ index, eyebrow, title, paragraph, bullets, visual 
 
         <div className="mt-auto">{visual}</div>
 
-        <a
-          href="https://calendar.app.google/qg7jgpvovovLnEoN9"
-          target="_blank"
-          rel="noopener noreferrer"
+        <Link
+          to="/reservation"
           className="group/cta inline-flex items-center justify-between gap-3 border-2 border-ink bg-ink px-5 py-3.5 text-sm font-bold uppercase tracking-wider text-paper transition-all hover:bg-electric hover:text-ink"
         >
           <span>Prendre rendez-vous</span>
           <span className="transition-transform duration-300 group-hover/cta:translate-x-1">→</span>
-        </a>
+        </Link>
       </article>
     </div>
   );
