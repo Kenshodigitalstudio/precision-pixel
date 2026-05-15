@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect } from "react";
 import { Sparkles } from "@/components/landing/Sparkles";
 
 const CALENDLY_URL = "https://calendly.com/kenshodigitalstudio/30min";
@@ -25,15 +24,7 @@ export const Route = createFileRoute("/reservation")({
 });
 
 function ReservationPage() {
-  useEffect(() => {
-    const id = "calendly-widget-script";
-    if (document.getElementById(id)) return;
-    const s = document.createElement("script");
-    s.id = id;
-    s.src = "https://assets.calendly.com/assets/external/widget.js";
-    s.async = true;
-    document.body.appendChild(s);
-  }, []);
+  // Calendly is embedded directly via iframe below for reliability.
 
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-paper text-ink">
@@ -81,12 +72,25 @@ function ReservationPage() {
 
       <div className="mx-auto max-w-4xl px-4 pb-24 sm:px-6">
         <div className="overflow-hidden rounded-[1.75rem] border border-white/40 bg-white/30 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.18)] backdrop-blur-2xl">
-          <div
-            className="calendly-inline-widget"
-            data-url={`${CALENDLY_URL}?hide_gdpr_banner=1&background_color=ffffff&text_color=1a1a1a&primary_color=1a1a1a`}
-            style={{ minWidth: "320px", height: "720px" }}
+          <iframe
+            src={`${CALENDLY_URL}?hide_gdpr_banner=1&background_color=ffffff&text_color=1a1a1a&primary_color=1a1a1a`}
+            title="Réserver un créneau avec Kenshō Digital Studio"
+            className="block h-[720px] w-full border-0"
+            loading="lazy"
           />
         </div>
+
+        <p className="mt-6 text-center text-sm text-ink-soft">
+          Le widget ne s'affiche pas&nbsp;?{" "}
+          <a
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-ink underline underline-offset-4 hover:text-electric"
+          >
+            Ouvrir Calendly dans un nouvel onglet ↗
+          </a>
+        </p>
       </div>
     </main>
   );
