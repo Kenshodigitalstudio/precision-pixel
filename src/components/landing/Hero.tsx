@@ -1,8 +1,6 @@
-import { useMagnetic } from "@/hooks/use-magnetic";
 import { useEffect, useRef, useState } from "react";
-import { useStripeCheckout } from "@/hooks/useStripeCheckout";
-
-const CAL_URL = "https://calendar.app.google/qg7jgpvovovLnEoN9";
+import { Link } from "@tanstack/react-router";
+import { useMagnetic } from "@/hooks/use-magnetic";
 
 type Slide = {
   tag: string;
@@ -11,7 +9,7 @@ type Slide = {
   price?: string;
   gradient: string;
   icon: string;
-  cta?: { label: string; priceId: string };
+  cta?: { label: string };
 };
 
 const slides: Slide[] = [
@@ -22,7 +20,7 @@ const slides: Slide[] = [
     price: "150 €",
     gradient: "from-sky/70 via-electric/60 to-electric-soft/70",
     icon: "📞",
-    cta: { label: "Payer 150 €", priceId: "audit_google_ads_one_time" },
+    cta: { label: "Prendre rendez-vous" },
   },
   {
     tag: "Tracking",
@@ -31,7 +29,7 @@ const slides: Slide[] = [
     price: "100 €",
     gradient: "from-mint/70 via-emerald-400/60 to-emerald-600/70",
     icon: "⚙️",
-    cta: { label: "Payer 100 €", priceId: "tracking_installation_one_time" },
+    cta: { label: "Prendre rendez-vous" },
   },
 ];
 
@@ -39,7 +37,6 @@ export function Hero() {
   const magneticRef = useMagnetic<HTMLAnchorElement>(0.2);
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
-  const { openCheckout, closeCheckout, isOpen, checkoutElement } = useStripeCheckout();
 
   const goTo = (i: number) => {
     const el = trackRef.current;
@@ -94,11 +91,9 @@ export function Hero() {
         </p>
 
         <div className="relative mt-8 flex justify-center">
-          <a
+          <Link
             ref={magneticRef}
-            href={CAL_URL}
-            target="_blank"
-            rel="noopener noreferrer"
+            to="/reservation"
             className="btn-magnetic group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-white/40 bg-white/30 px-7 py-3.5 text-sm font-semibold tracking-wide text-ink shadow-[0_10px_40px_-10px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:bg-white/50 hover:shadow-[0_16px_50px_-12px_rgba(0,0,0,0.32)]"
           >
             <span
@@ -107,12 +102,11 @@ export function Hero() {
             />
             <span>Prendre rendez-vous</span>
             <span className="transition-transform group-hover:translate-x-1">↗</span>
-          </a>
+          </Link>
         </div>
 
         {/* Liquid glass services slider */}
         <div className="relative mt-14">
-          {/* Ambient color blobs behind glass */}
           <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden rounded-[2rem]">
             <div className="absolute -left-10 top-6 h-56 w-56 rounded-full bg-electric/30 blur-3xl" />
             <div className="absolute right-0 bottom-0 h-64 w-64 rounded-full bg-solar/40 blur-3xl" />
@@ -158,20 +152,18 @@ export function Hero() {
                 </p>
 
                 {s.cta && (
-                  <button
-                    type="button"
-                    onClick={() => openCheckout({ priceId: s.cta!.priceId })}
+                  <Link
+                    to="/reservation"
                     className="group/cta mt-6 inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-5 py-2.5 text-sm font-semibold text-ink backdrop-blur-md transition-all hover:bg-white/60 hover:-translate-y-0.5"
                   >
                     {s.cta.label}
                     <span className="transition-transform group-hover/cta:translate-x-0.5">→</span>
-                  </button>
+                  </Link>
                 )}
               </article>
             ))}
           </div>
 
-          {/* Dots */}
           <div className="mt-5 flex items-center justify-center gap-2">
             {slides.map((_, i) => (
               <button
@@ -185,7 +177,6 @@ export function Hero() {
             ))}
           </div>
 
-          {/* Arrows */}
           <button
             type="button"
             aria-label="Précédent"
@@ -204,7 +195,6 @@ export function Hero() {
           </button>
         </div>
 
-        {/* Liquid glass "coming soon" bar */}
         <div className="mt-8 flex justify-center">
           <span className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full border border-white/40 bg-white/30 px-5 py-2.5 font-display text-sm font-semibold tracking-tight text-ink shadow-[0_8px_24px_-8px_rgba(0,0,0,0.2)] backdrop-blur-xl">
             <span
@@ -216,35 +206,12 @@ export function Hero() {
           </span>
         </div>
 
-        {/* Certification badge */}
         <div className="relative mt-16 flex justify-center">
           <span className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-br from-sky via-electric to-electric-soft bg-clip-text text-transparent drop-shadow-sm">
             Experts certifiés Google Ads
           </span>
         </div>
       </div>
-
-      {isOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-sm"
-          onClick={closeCheckout}
-        >
-          <div
-            className="relative w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl bg-white p-2 sm:p-4 shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              type="button"
-              onClick={closeCheckout}
-              aria-label="Fermer"
-              className="absolute right-3 top-3 z-10 grid h-9 w-9 place-items-center rounded-full bg-white/90 text-ink shadow hover:bg-white"
-            >
-              ✕
-            </button>
-            {checkoutElement}
-          </div>
-        </div>
-      )}
     </section>
   );
 }
