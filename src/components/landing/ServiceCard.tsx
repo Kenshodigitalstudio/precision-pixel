@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Link } from "@tanstack/react-router";
 import { useReveal } from "@/hooks/use-reveal";
 
 type Props = {
