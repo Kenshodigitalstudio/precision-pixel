@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect } from "react";
+import { Sparkles } from "@/components/landing/Sparkles";
 
 const CALENDLY_URL = "https://calendly.com/kenshodigitalstudio/30min";
 
@@ -36,7 +37,18 @@ function ReservationPage() {
 
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-paper text-ink">
-      <div className="mx-auto max-w-3xl px-6 pt-16 pb-10 sm:pt-24">
+      {/* Ambient color blobs (same vibe as the landing) */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute -left-20 top-10 h-72 w-72 rounded-full bg-electric/30 blur-3xl" />
+        <div className="absolute right-0 top-1/3 h-80 w-80 rounded-full bg-solar/40 blur-3xl" />
+        <div className="absolute left-1/3 bottom-0 h-72 w-72 rounded-full bg-mint/30 blur-3xl" />
+        <div className="absolute right-1/4 bottom-1/4 h-64 w-64 rounded-full bg-sky/30 blur-3xl" />
+      </div>
+
+      {/* Floating sparkles */}
+      <Sparkles variant="dense" />
+
+      <div className="relative mx-auto max-w-3xl px-6 pt-16 pb-10 sm:pt-24">
         <Link
           to="/"
           className="font-mono text-[11px] uppercase tracking-[0.25em] text-ink-soft hover:text-ink transition-colors"
