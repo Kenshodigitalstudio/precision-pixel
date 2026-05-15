@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "@tanstack/react-router";
 import kenshoMark from "@/assets/kensho-mark.png";
 
 export function Nav() {
