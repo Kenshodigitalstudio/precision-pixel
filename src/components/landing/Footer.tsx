@@ -1,3 +1,4 @@
+import { Link } from "@tanstack/react-router";
 import kenshoMark from "@/assets/kensho-mark.png";
 
 export function Footer() {
@@ -13,10 +14,11 @@ export function Footer() {
         <p className="text-xs text-ink-soft">
           © {new Date().getFullYear()} — Agence Google Ads & Tracking. Paris.
         </p>
-        <div className="flex items-center gap-6 text-xs text-ink-soft">
-          <a href="#contact" className="hover:text-ink">Contact</a>
-          <a href="#" className="hover:text-ink">Mentions légales</a>
-          <a href="#" className="hover:text-ink">RGPD</a>
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-ink-soft">
+          <a href="/#contact" className="hover:text-ink">Contact</a>
+          <Link to="/mentions-legales" className="hover:text-ink">Mentions légales</Link>
+          <Link to="/politique-confidentialite" className="hover:text-ink">Politique de confidentialité</Link>
+          <Link to="/cgv" className="hover:text-ink">CGV</Link>
         </div>
       </div>
     </footer>
