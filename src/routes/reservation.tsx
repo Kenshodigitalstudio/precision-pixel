@@ -11,7 +11,7 @@ export const Route = createFileRoute("/reservation")({
       {
         name: "description",
         content:
-          "Réservez votre créneau Google Meet avec un expert Kenshō Digital Studio. Devis personnalisé envoyé par email après votre prise de rendez-vous.",
+          "Réservez votre créneau Google Meet avec un expert Kenshō Digital Studio.",
       },
       { property: "og:title", content: "Réservation — Kenshō Digital Studio" },
       {
@@ -61,11 +61,9 @@ function ReservationPage() {
           <p className="mx-auto mt-8 max-w-xl text-[15px] leading-relaxed text-ink-soft">
             Bienvenue chez Kenshō Digital Studio. Remplissez les informations
             ci-dessous pour réserver votre créneau Google Meet avec l'un de nos
-            experts. Suite à votre prise de rendez-vous, un devis personnalisé
-            vous sera transmis par email. Un membre de notre équipe prendra
-            également contact avec vous avant le rendez-vous pour confirmer
-            votre créneau et répondre à vos premières questions. À très vite,
-            Kenshō Digital Studio.
+            experts. Un membre de notre équipe prendra également contact avec
+            vous avant le rendez-vous pour confirmer votre créneau et répondre à
+            vos premières questions. À très vite, Kenshō Digital Studio.
           </p>
         </div>
       </div>
