@@ -14,6 +14,7 @@ import { Route as PolitiqueConfidentialiteRouteImport } from './routes/politique
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as CgvRouteImport } from './routes/cgv'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ReservationConfirmationRouteImport } from './routes/reservation.confirmation'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 
@@ -43,6 +44,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReservationConfirmationRoute = ReservationConfirmationRouteImport.update({
+  id: '/confirmation',
+  path: '/confirmation',
+  getParentRoute: () => ReservationRoute,
+} as any)
 const CheckoutReturnRoute = CheckoutReturnRouteImport.update({
   id: '/checkout/return',
   path: '/checkout/return',
@@ -60,8 +66,9 @@ export interface FileRoutesByFullPath {
   '/cgv': typeof CgvRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
-  '/reservation': typeof ReservationRoute
+  '/reservation': typeof ReservationRouteWithChildren
   '/checkout/return': typeof CheckoutReturnRoute
+  '/reservation/confirmation': typeof ReservationConfirmationRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
 }
 export interface FileRoutesByTo {
@@ -69,8 +76,9 @@ export interface FileRoutesByTo {
   '/cgv': typeof CgvRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
-  '/reservation': typeof ReservationRoute
+  '/reservation': typeof ReservationRouteWithChildren
   '/checkout/return': typeof CheckoutReturnRoute
+  '/reservation/confirmation': typeof ReservationConfirmationRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
 }
 export interface FileRoutesById {
@@ -79,8 +87,9 @@ export interface FileRoutesById {
   '/cgv': typeof CgvRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
-  '/reservation': typeof ReservationRoute
+  '/reservation': typeof ReservationRouteWithChildren
   '/checkout/return': typeof CheckoutReturnRoute
+  '/reservation/confirmation': typeof ReservationConfirmationRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
 }
 export interface FileRouteTypes {
@@ -92,6 +101,7 @@ export interface FileRouteTypes {
     | '/politique-confidentialite'
     | '/reservation'
     | '/checkout/return'
+    | '/reservation/confirmation'
     | '/api/public/payments/webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -101,6 +111,7 @@ export interface FileRouteTypes {
     | '/politique-confidentialite'
     | '/reservation'
     | '/checkout/return'
+    | '/reservation/confirmation'
     | '/api/public/payments/webhook'
   id:
     | '__root__'
@@ -110,6 +121,7 @@ export interface FileRouteTypes {
     | '/politique-confidentialite'
     | '/reservation'
     | '/checkout/return'
+    | '/reservation/confirmation'
     | '/api/public/payments/webhook'
   fileRoutesById: FileRoutesById
 }
@@ -118,7 +130,7 @@ export interface RootRouteChildren {
   CgvRoute: typeof CgvRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   PolitiqueConfidentialiteRoute: typeof PolitiqueConfidentialiteRoute
-  ReservationRoute: typeof ReservationRoute
+  ReservationRoute: typeof ReservationRouteWithChildren
   CheckoutReturnRoute: typeof CheckoutReturnRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
 }
@@ -160,6 +172,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reservation/confirmation': {
+      id: '/reservation/confirmation'
+      path: '/confirmation'
+      fullPath: '/reservation/confirmation'
+      preLoaderRoute: typeof ReservationConfirmationRouteImport
+      parentRoute: typeof ReservationRoute
+    }
     '/checkout/return': {
       id: '/checkout/return'
       path: '/checkout/return'
@@ -177,12 +196,24 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface ReservationRouteChildren {
+  ReservationConfirmationRoute: typeof ReservationConfirmationRoute
+}
+
+const ReservationRouteChildren: ReservationRouteChildren = {
+  ReservationConfirmationRoute: ReservationConfirmationRoute,
+}
+
+const ReservationRouteWithChildren = ReservationRoute._addFileChildren(
+  ReservationRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CgvRoute: CgvRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
   PolitiqueConfidentialiteRoute: PolitiqueConfidentialiteRoute,
-  ReservationRoute: ReservationRoute,
+  ReservationRoute: ReservationRouteWithChildren,
   CheckoutReturnRoute: CheckoutReturnRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
 }
