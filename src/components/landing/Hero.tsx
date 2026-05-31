@@ -12,7 +12,9 @@ type Slide = {
   cta?: { label: string };
 };
 
-const slides: Slide[] = [
+type ServiceKey = "audit_flash" | "tracking_setup";
+
+const slides: (Slide & { service: ServiceKey })[] = [
   {
     tag: "Audit Flash",
     title: "RDV 30 min — Audit Google Ads",
@@ -20,7 +22,8 @@ const slides: Slide[] = [
     price: "150 €",
     gradient: "from-sky/70 via-electric/60 to-electric-soft/70",
     icon: "📞",
-    cta: { label: "Prendre rendez-vous" },
+    cta: { label: "Réserver & payer" },
+    service: "audit_flash",
   },
   {
     tag: "Tracking",
@@ -29,7 +32,8 @@ const slides: Slide[] = [
     price: "100 €",
     gradient: "from-mint/70 via-emerald-400/60 to-emerald-600/70",
     icon: "⚙️",
-    cta: { label: "Prendre rendez-vous" },
+    cta: { label: "Réserver & payer" },
+    service: "tracking_setup",
   },
 ];
 
@@ -154,6 +158,7 @@ export function Hero() {
                 {s.cta && (
                   <Link
                     to="/reservation"
+                    search={{ service: s.service }}
                     className="group/cta mt-6 inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-5 py-2.5 text-sm font-semibold text-ink backdrop-blur-md transition-all hover:bg-white/60 hover:-translate-y-0.5"
                   >
                     {s.cta.label}
