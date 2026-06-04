@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import kenshoMark from "@/assets/kensho-mark.png";
+
 
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
@@ -30,16 +30,11 @@ export function Nav() {
       />
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <a href="#top" className="flex items-center gap-2.5">
-          <img
-            src={kenshoMark}
-            alt=""
-            aria-hidden
-            className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 object-contain shrink-0"
-          />
           <span className="font-display text-base font-light tracking-[-0.02em] text-ink">
             Kenshō <span className="font-extralight text-ink-soft">Digital Studio</span>
           </span>
         </a>
+
         <ul className="hidden items-center gap-7 text-sm font-medium text-ink-soft md:flex">
           <li><a href="#services" className="hover:text-ink transition-colors">Services</a></li>
           <li><a href="#metrics" className="hover:text-ink transition-colors">Résultats</a></li>
