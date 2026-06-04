@@ -10,6 +10,8 @@ type Slide = {
   gradient: string;
   icon: string;
   cta?: { label: string };
+  href?: string;
+  premium?: boolean;
 };
 
 type ServiceKey = "audit_flash" | "tracking_setup";
@@ -26,16 +28,18 @@ const slides: (Slide & { service: ServiceKey })[] = [
     service: "audit_flash",
   },
   {
-    tag: "Tracking",
-    title: "Installation de tags & tracking",
-    desc: "Google Tag, conversions Ads, GA4, événements clés. Une donnée propre dès le premier clic.",
-    price: "100 €",
-    gradient: "from-mint/70 via-emerald-400/60 to-emerald-600/70",
-    icon: "⚙️",
-    cta: { label: "Réserver & payer" },
+    tag: "Votre Entreprise",
+    title: "Landing page sur-mesure",
+    desc: "Une page premium pensée pour convertir : design soigné, message clair, tracking intégré. Votre vitrine, optimisée pour la performance.",
+    gradient: "from-solar/70 via-amber-300/60 to-mint/60",
+    icon: "✦",
+    cta: { label: "Découvrir l'offre" },
+    href: "/services/google-ads",
+    premium: true,
     service: "tracking_setup",
   },
 ];
+
 
 export function Hero() {
   const magneticRef = useMagnetic<HTMLAnchorElement>(0.2);
@@ -125,10 +129,23 @@ export function Hero() {
             {slides.map((s, i) => (
               <article
                 key={s.title}
-                className={`snap-center shrink-0 w-[85%] sm:w-[68%] md:w-[58%] rounded-[1.75rem] border border-white/40 bg-white/25 p-7 sm:p-9 text-left shadow-[0_20px_60px_-20px_rgba(0,0,0,0.25)] backdrop-blur-2xl transition-all duration-500 ${
-                  active === i ? "scale-100 opacity-100" : "scale-[0.96] opacity-80"
-                }`}
+                className={`relative snap-center shrink-0 w-[85%] sm:w-[68%] md:w-[58%] rounded-[1.75rem] border p-7 sm:p-9 text-left backdrop-blur-2xl transition-all duration-500 ${
+                  s.premium
+                    ? "border-amber-300/60 bg-gradient-to-br from-white/40 via-amber-50/40 to-white/30 shadow-[0_30px_80px_-20px_rgba(234,179,8,0.45)] ring-1 ring-amber-200/50"
+                    : "border-white/40 bg-white/25 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.25)]"
+                } ${active === i ? "scale-100 opacity-100" : "scale-[0.96] opacity-80"}`}
               >
+                {s.premium && (
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute inset-0 -z-10 rounded-[1.75rem] bg-gradient-to-br from-solar/20 via-amber-200/15 to-mint/15 blur-xl"
+                  />
+                )}
+                {s.premium && (
+                  <span className="absolute -top-3 left-7 inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-solar via-amber-400 to-mint px-3 py-1 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-ink shadow-[0_4px_14px_-2px_rgba(234,179,8,0.6)]">
+                    ✦ Premium
+                  </span>
+                )}
                 <div className="flex items-start justify-between gap-4">
                   <span
                     className={`grid h-14 w-14 flex-none place-items-center rounded-full bg-gradient-to-br ${s.gradient} text-2xl shadow-[inset_0_-4px_0_0_rgba(0,0,0,0.05)] ring-1 ring-white/60 backdrop-blur-md`}
@@ -157,9 +174,13 @@ export function Hero() {
 
                 {s.cta && (
                   <Link
-                    to="/reservation"
-                    search={{ service: s.service }}
-                    className="group/cta mt-6 inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-5 py-2.5 text-sm font-semibold text-ink backdrop-blur-md transition-all hover:bg-white/60 hover:-translate-y-0.5"
+                    to={s.href ?? "/reservation"}
+                    {...(s.href ? {} : { search: { service: s.service } })}
+                    className={
+                      s.premium
+                        ? "group/cta mt-6 inline-flex items-center gap-2 rounded-full border border-amber-300/70 bg-gradient-to-r from-solar/80 via-amber-300/80 to-mint/70 px-5 py-2.5 text-sm font-semibold text-ink shadow-[0_10px_30px_-8px_rgba(234,179,8,0.55)] backdrop-blur-md transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_36px_-8px_rgba(234,179,8,0.7)]"
+                        : "group/cta mt-6 inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-5 py-2.5 text-sm font-semibold text-ink backdrop-blur-md transition-all hover:bg-white/60 hover:-translate-y-0.5"
+                    }
                   >
                     {s.cta.label}
                     <span className="transition-transform group-hover/cta:translate-x-0.5">→</span>
@@ -167,6 +188,7 @@ export function Hero() {
                 )}
               </article>
             ))}
+
           </div>
 
           <div className="mt-5 flex items-center justify-center gap-2">
