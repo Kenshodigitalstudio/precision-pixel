@@ -210,7 +210,9 @@ export function Hero() {
               className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-solar/40 via-amber-300/30 to-mint/30 opacity-90"
             />
             <span aria-hidden>✦</span>
-            Découvrir nos services Google Ads
+            <div className="flex flex-col text-left leading-none">
+              <span>VOTRE ENTREPRISE</span>
+            </div>
             <span className="transition-transform group-hover:translate-x-1">→</span>
           </Link>
         </div>
