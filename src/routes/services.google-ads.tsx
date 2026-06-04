@@ -262,9 +262,9 @@ function GoogleAdsPage() {
               </div>
               <div>
                 <h2 className="font-display text-2xl sm:text-3xl font-extrabold leading-tight tracking-tight">
-                  <span className="bg-gradient-to-r from-[color:var(--electric)] to-[color:var(--lilac)] bg-clip-text text-transparent">Plus de visibilité.</span>{" "}
-                  <span className="bg-gradient-to-r from-[color:var(--lilac)] to-[color:var(--coral)] bg-clip-text text-transparent">Plus de clics.</span>{" "}
-                  <span className="bg-gradient-to-r from-[color:var(--coral)] to-[color:var(--solar)] bg-clip-text text-transparent">Plus de clients.</span>
+                  <span className="block bg-gradient-to-r from-[color:var(--electric)] to-[color:var(--lilac)] bg-clip-text text-transparent">Plus de visibilité.</span>
+                  <span className="block bg-gradient-to-r from-[color:var(--lilac)] to-[color:var(--coral)] bg-clip-text text-transparent">Plus de clics.</span>
+                  <span className="block bg-gradient-to-r from-[color:var(--coral)] to-[color:var(--solar)] bg-clip-text text-transparent">Plus de clients.</span>
                 </h2>
                 <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-ink-soft">
                   Confiez-nous vos Google Ads et concentrez-vous sur ce que vous faites de mieux :{" "}
@@ -349,7 +349,7 @@ function PillarCard({ p, i }: { p: (typeof PILLARS)[number]; i: number }) {
       style={{ transitionDelay: `${i * 100}ms` }}
     >
       <span aria-hidden className={`absolute -inset-1 rounded-[2rem] bg-gradient-to-br ${p.halo} blur-xl opacity-70`} />
-      <div className="relative flex flex-col items-center text-center rounded-[2rem] border border-white/60 bg-white/55 px-5 py-7 backdrop-blur-2xl shadow-[inset_0_-8px_0_0_rgba(255,255,255,0.4),0_22px_50px_-22px_rgba(0,0,0,0.25)] transition-transform duration-500 group-hover:-translate-y-1">
+      <div className="relative flex h-full flex-col items-center text-center rounded-[2rem] border border-white/60 bg-white/55 px-5 py-7 backdrop-blur-2xl shadow-[inset_0_-8px_0_0_rgba(255,255,255,0.4),0_22px_50px_-22px_rgba(0,0,0,0.25)] transition-transform duration-500 group-hover:-translate-y-1">
         <div className="relative">
           <span aria-hidden className={`absolute -inset-2 rounded-3xl bg-gradient-to-br ${p.halo} blur-lg opacity-80`} />
           <span
