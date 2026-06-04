@@ -14,6 +14,7 @@ import { Route as PolitiqueConfidentialiteRouteImport } from './routes/politique
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as CgvRouteImport } from './routes/cgv'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ServicesGoogleAdsRouteImport } from './routes/services.google-ads'
 import { Route as ReservationConfirmationRouteImport } from './routes/reservation.confirmation'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
@@ -44,6 +45,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ServicesGoogleAdsRoute = ServicesGoogleAdsRouteImport.update({
+  id: '/services/google-ads',
+  path: '/services/google-ads',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReservationConfirmationRoute = ReservationConfirmationRouteImport.update({
   id: '/confirmation',
   path: '/confirmation',
@@ -69,6 +75,7 @@ export interface FileRoutesByFullPath {
   '/reservation': typeof ReservationRouteWithChildren
   '/checkout/return': typeof CheckoutReturnRoute
   '/reservation/confirmation': typeof ReservationConfirmationRoute
+  '/services/google-ads': typeof ServicesGoogleAdsRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
 }
 export interface FileRoutesByTo {
@@ -79,6 +86,7 @@ export interface FileRoutesByTo {
   '/reservation': typeof ReservationRouteWithChildren
   '/checkout/return': typeof CheckoutReturnRoute
   '/reservation/confirmation': typeof ReservationConfirmationRoute
+  '/services/google-ads': typeof ServicesGoogleAdsRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
 }
 export interface FileRoutesById {
@@ -90,6 +98,7 @@ export interface FileRoutesById {
   '/reservation': typeof ReservationRouteWithChildren
   '/checkout/return': typeof CheckoutReturnRoute
   '/reservation/confirmation': typeof ReservationConfirmationRoute
+  '/services/google-ads': typeof ServicesGoogleAdsRoute
   '/api/public/payments/webhook': typeof ApiPublicPaymentsWebhookRoute
 }
 export interface FileRouteTypes {
@@ -102,6 +111,7 @@ export interface FileRouteTypes {
     | '/reservation'
     | '/checkout/return'
     | '/reservation/confirmation'
+    | '/services/google-ads'
     | '/api/public/payments/webhook'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -112,6 +122,7 @@ export interface FileRouteTypes {
     | '/reservation'
     | '/checkout/return'
     | '/reservation/confirmation'
+    | '/services/google-ads'
     | '/api/public/payments/webhook'
   id:
     | '__root__'
@@ -122,6 +133,7 @@ export interface FileRouteTypes {
     | '/reservation'
     | '/checkout/return'
     | '/reservation/confirmation'
+    | '/services/google-ads'
     | '/api/public/payments/webhook'
   fileRoutesById: FileRoutesById
 }
@@ -132,6 +144,7 @@ export interface RootRouteChildren {
   PolitiqueConfidentialiteRoute: typeof PolitiqueConfidentialiteRoute
   ReservationRoute: typeof ReservationRouteWithChildren
   CheckoutReturnRoute: typeof CheckoutReturnRoute
+  ServicesGoogleAdsRoute: typeof ServicesGoogleAdsRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
 }
 
@@ -170,6 +183,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/services/google-ads': {
+      id: '/services/google-ads'
+      path: '/services/google-ads'
+      fullPath: '/services/google-ads'
+      preLoaderRoute: typeof ServicesGoogleAdsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reservation/confirmation': {
@@ -215,8 +235,19 @@ const rootRouteChildren: RootRouteChildren = {
   PolitiqueConfidentialiteRoute: PolitiqueConfidentialiteRoute,
   ReservationRoute: ReservationRouteWithChildren,
   CheckoutReturnRoute: CheckoutReturnRoute,
+  ServicesGoogleAdsRoute: ServicesGoogleAdsRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
