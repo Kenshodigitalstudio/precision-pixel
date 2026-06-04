@@ -257,7 +257,7 @@ function GoogleAdsPage() {
               <div className="relative flex-none">
                 <span aria-hidden className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-coral/40 via-pink-300/30 to-lilac/40 blur-xl" />
                 <span className="relative grid h-20 w-20 place-items-center rounded-3xl bg-white/70 ring-1 ring-white/70 shadow-[inset_0_-6px_0_0_rgba(0,0,0,0.04),0_20px_40px_-20px_rgba(0,0,0,0.25)] backdrop-blur-xl animate-[float-y_6s_ease-in-out_infinite]">
-                  <TargetIcon className="h-12 w-12" />
+                  <RocketIcon className="h-12 w-12" />
                 </span>
               </div>
               <div>
