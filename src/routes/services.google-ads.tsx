@@ -13,7 +13,7 @@ export const Route = createFileRoute("/services/google-ads")({
       {
         name: "description",
         content:
-          "On gère vos Google Ads, vous récoltez les résultats. Découvrez notre service complet pour développer votre business.",
+          "On gère votre Google Ads, vous récoltez les résultats. Découvrez notre service complet pour développer votre business.",
       },
     ],
   }),
@@ -159,7 +159,7 @@ function GoogleAdsPage() {
 
           {/* Headline */}
           <h1 className="mt-6 font-display text-[clamp(2rem,5.5vw,4.25rem)] font-extrabold leading-[1.05] tracking-[-0.035em] text-ink">
-            On gère vos{" "}
+            On gère votre{" "}
             <span className="bg-gradient-to-r from-[color:var(--electric)] via-[color:var(--lilac)] to-[color:var(--coral)] bg-clip-text text-transparent">
               Google Ads
             </span>
