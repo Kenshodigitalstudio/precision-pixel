@@ -280,6 +280,16 @@ function GoogleAdsPage() {
 
       <Footer />
 
+      {/* Retour à l'accueil — tout en bas */}
+      <div className="flex justify-center pb-10">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/30 px-5 py-2.5 text-sm font-medium text-ink-soft backdrop-blur-md transition hover:bg-white/50 hover:text-ink"
+        >
+          ← Retour à l'accueil
+        </Link>
+      </div>
+
       {/* keyframes locaux */}
       <style>{`
         @keyframes bubble-pop {
