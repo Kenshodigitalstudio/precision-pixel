@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { z } from "zod";
@@ -53,8 +52,7 @@ export const Route = createFileRoute("/reservation")({
 });
 
 function ReservationPage() {
-  const { service: initialService } = Route.useSearch();
-  const [service, setService] = useState<ServiceKey>(initialService);
+  const { service } = Route.useSearch() as { service: ServiceKey };
   const { openCheckout, isOpen, checkoutElement } = useStripeCheckout();
 
   const current = SERVICES[service];
@@ -108,28 +106,7 @@ function ReservationPage() {
 
       <section className="mx-auto max-w-3xl px-4 pb-24 sm:px-6">
         <div className="rounded-[1.75rem] border border-white/40 bg-white/30 p-6 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.18)] backdrop-blur-2xl sm:p-8">
-          <div className="flex flex-wrap gap-2">
-            {(Object.keys(SERVICES) as ServiceKey[]).map((key) => {
-              const s = SERVICES[key];
-              const isActive = service === key;
-              return (
-                <button
-                  key={key}
-                  type="button"
-                  onClick={() => setService(key)}
-                  className={`rounded-full border px-4 py-2 text-sm font-semibold transition-all ${
-                    isActive
-                      ? "border-ink bg-ink text-paper"
-                      : "border-white/60 bg-white/40 text-ink hover:bg-white/70"
-                  }`}
-                >
-                  {s.label} — {s.price}
-                </button>
-              );
-            })}
-          </div>
-
-          <div className="mt-6 flex flex-col items-start justify-between gap-6 rounded-2xl border border-white/50 bg-white/40 p-6 sm:flex-row sm:items-center">
+          <div className="flex flex-col items-start justify-between gap-6 rounded-2xl border border-white/50 bg-white/40 p-6 sm:flex-row sm:items-center">
             <div>
               <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-soft">
                 {current.tagline}
