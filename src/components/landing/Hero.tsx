@@ -233,7 +233,7 @@ export function Hero() {
             />
             <span aria-hidden>✦</span>
             <div className="flex flex-col text-left leading-none">
-              <span>GESTION MENSUELLE DE VOTRE COMPTE</span>
+              <span>VOTRE ENTREPRISE</span>
             </div>
             <span className="transition-transform group-hover:translate-x-1">→</span>
           </Link>
