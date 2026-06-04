@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useRef, useState } from "react";
 import { Nav } from "@/components/landing/Nav";
 import { Footer } from "@/components/landing/Footer";
+import { ExtraRequest } from "@/components/landing/ExtraRequest";
 import { useReveal } from "@/hooks/use-reveal";
 import { useMagnetic } from "@/hooks/use-magnetic";
 
