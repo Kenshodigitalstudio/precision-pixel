@@ -5,7 +5,7 @@ import { useMagnetic } from "@/hooks/use-magnetic";
 type Slide = {
   tag: string;
   title: string;
-  desc: string;
+  desc: React.ReactNode;
   price?: string;
   gradient: string;
   icon: string;
@@ -29,8 +29,26 @@ const slides: (Slide & { service: ServiceKey })[] = [
   },
   {
     tag: "Votre Entreprise",
-    title: "Landing page sur-mesure",
-    desc: "Une page premium pensée pour convertir : design soigné, message clair, tracking intégré. Votre vitrine, optimisée pour la performance.",
+    title: "gestion mensuelle de votre compte",
+    desc: (
+      <>
+        Avec <strong>"Votre Business"</strong>, on fait totalement différent :
+        <br />
+        <br />
+        On ne te dit pas juste quoi faire.
+        <br />
+        <span className="font-semibold">👉 On le fait POUR toi.</span>
+        <br />
+        <br />
+        ✔️ Création complète de tes campagnes Google Ads
+        <br />
+        ✔️ Optimisation continue pour maximiser tes résultats
+        <br />
+        ✔️ Suivi des performances et ajustements stratégiques
+        <br />
+        ✔️ Accompagnement réel, pas juste des conseils
+      </>
+    ),
     gradient: "from-solar/70 via-amber-300/60 to-mint/60",
     icon: "✦",
     cta: { label: "Découvrir l'offre" },
