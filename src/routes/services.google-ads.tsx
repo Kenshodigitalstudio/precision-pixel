@@ -345,20 +345,23 @@ function PillarCard({ p, i }: { p: (typeof PILLARS)[number]; i: number }) {
   return (
     <div
       ref={ref}
-      className="reveal group relative flex flex-col items-center text-center"
+      className="reveal group relative"
       style={{ transitionDelay: `${i * 100}ms` }}
     >
-      <div className="relative">
-        <span aria-hidden className={`absolute -inset-2 rounded-3xl bg-gradient-to-br ${p.halo} blur-lg opacity-80`} />
-        <span
-          className="relative grid h-20 w-20 place-items-center rounded-3xl bg-white/80 ring-1 ring-white/70 shadow-[inset_0_-6px_0_0_rgba(0,0,0,0.05),0_18px_38px_-18px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-transform duration-500 group-hover:-translate-y-1 group-hover:rotate-[-4deg]"
-          style={{ animation: `float-y 6s ease-in-out ${i * 0.4}s infinite` }}
-        >
-          <Icon className="h-11 w-11" />
-        </span>
+      <span aria-hidden className={`absolute -inset-1 rounded-[2rem] bg-gradient-to-br ${p.halo} blur-xl opacity-70`} />
+      <div className="relative flex flex-col items-center text-center rounded-[2rem] border border-white/60 bg-white/55 px-5 py-7 backdrop-blur-2xl shadow-[inset_0_-8px_0_0_rgba(255,255,255,0.4),0_22px_50px_-22px_rgba(0,0,0,0.25)] transition-transform duration-500 group-hover:-translate-y-1">
+        <div className="relative">
+          <span aria-hidden className={`absolute -inset-2 rounded-3xl bg-gradient-to-br ${p.halo} blur-lg opacity-80`} />
+          <span
+            className="relative grid h-24 w-24 place-items-center rounded-3xl bg-white/85 ring-1 ring-white/70 shadow-[inset_0_-6px_0_0_rgba(0,0,0,0.05),0_18px_38px_-18px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-transform duration-500 group-hover:-translate-y-1 group-hover:rotate-[-4deg]"
+            style={{ animation: `float-y 6s ease-in-out ${i * 0.4}s infinite` }}
+          >
+            <Icon className="h-14 w-14" />
+          </span>
+        </div>
+        <h3 className={`mt-6 font-display text-xl sm:text-2xl font-extrabold tracking-tight ${p.accent}`}>{p.title}</h3>
+        <p className="mt-2 text-[15px] sm:text-base leading-relaxed text-ink-soft">{p.sub}</p>
       </div>
-      <h3 className={`mt-5 font-display text-base font-bold ${p.accent}`}>{p.title}</h3>
-      <p className="mt-1 text-[13px] leading-relaxed text-ink-soft">{p.sub}</p>
     </div>
   );
 }
