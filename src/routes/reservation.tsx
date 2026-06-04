@@ -53,8 +53,7 @@ export const Route = createFileRoute("/reservation")({
 });
 
 function ReservationPage() {
-  const { service: initialService } = Route.useSearch();
-  const [service, setService] = useState<ServiceKey>(initialService);
+  const { service } = Route.useSearch();
   const { openCheckout, isOpen, checkoutElement } = useStripeCheckout();
 
   const current = SERVICES[service];
