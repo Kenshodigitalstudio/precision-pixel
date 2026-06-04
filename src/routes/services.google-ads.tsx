@@ -32,86 +32,102 @@ function GoogleAdsIcon({ className = "" }: { className?: string }) {
   );
 }
 
-function TargetIcon({ className = "" }: { className?: string }) {
+function RocketIcon({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 48 48" className={className} aria-hidden>
       <defs>
-        <linearGradient id="tg-grad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#ff6f91" />
-          <stop offset="60%" stopColor="#ff4d6d" />
-          <stop offset="100%" stopColor="#a855f7" />
-        </linearGradient>
-      </defs>
-      <circle cx="22" cy="26" r="16" fill="url(#tg-grad)" />
-      <circle cx="22" cy="26" r="10" fill="white" fillOpacity="0.15" />
-      <circle cx="22" cy="26" r="4" fill="white" />
-      <path d="M22 26 L42 6" stroke="#1f2937" strokeWidth="2.5" strokeLinecap="round" />
-      <path d="M36 6 L42 6 L42 12" stroke="#1f2937" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
-    </svg>
-  );
-}
-
-function BarChartIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 48 48" className={className} aria-hidden>
-      <defs>
-        <linearGradient id="bc-grad" x1="0" y1="1" x2="0" y2="0">
+        <linearGradient id="rk-grad" x1="0" y1="0" x2="1" y2="1">
           <stop offset="0%" stopColor="#60a5fa" />
           <stop offset="100%" stopColor="#a855f7" />
         </linearGradient>
       </defs>
-      <rect x="8" y="28" width="7" height="14" rx="2" fill="url(#bc-grad)" />
-      <rect x="18" y="22" width="7" height="20" rx="2" fill="url(#bc-grad)" />
-      <rect x="28" y="14" width="7" height="28" rx="2" fill="url(#bc-grad)" />
-      <path d="M6 22 L18 14 L28 18 L42 6" stroke="#a855f7" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      <path d="M36 6 L42 6 L42 12" stroke="#a855f7" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />
+      <path d="M24 4 C32 10 36 18 36 28 L36 34 L12 34 L12 28 C12 18 16 10 24 4 Z" fill="url(#rk-grad)" />
+      <circle cx="24" cy="20" r="4" fill="white" />
+      <path d="M12 30 L6 36 L6 42 L14 38 Z" fill="#ff6f91" />
+      <path d="M36 30 L42 36 L42 42 L34 38 Z" fill="#ff6f91" />
+      <path d="M20 38 L24 46 L28 38 Z" fill="#FBBC04" />
     </svg>
   );
 }
 
-function ReportIcon({ className = "" }: { className?: string }) {
+function GearsIcon({ className = "" }: { className?: string }) {
   return (
     <svg viewBox="0 0 48 48" className={className} aria-hidden>
       <defs>
-        <linearGradient id="rp-grad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#34d399" />
-          <stop offset="100%" stopColor="#10b981" />
+        <linearGradient id="gr-grad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#ff6f91" />
+          <stop offset="100%" stopColor="#a855f7" />
         </linearGradient>
       </defs>
-      <path d="M12 6 h18 l8 8 v26 a2 2 0 0 1 -2 2 H12 a2 2 0 0 1 -2 -2 V8 a2 2 0 0 1 2 -2 Z" fill="white" stroke="url(#rp-grad)" strokeWidth="2" />
-      <path d="M30 6 v8 h8" fill="none" stroke="url(#rp-grad)" strokeWidth="2" />
-      <rect x="16" y="28" width="3" height="8" rx="1" fill="#34d399" />
-      <rect x="22" y="24" width="3" height="12" rx="1" fill="#10b981" />
-      <rect x="28" y="20" width="3" height="16" rx="1" fill="#059669" />
-      <path d="M16 22 L22 18 L28 20 L34 14" stroke="#10b981" strokeWidth="1.5" fill="none" strokeLinecap="round" />
+      <path d="M30 18 l3 -1 l-1 -4 l-4 1 l-2 -3 l-4 2 l-2 -2 l-3 3 l-3 -1 l-1 4 l-3 1 l1 4 l-2 3 l3 3 l-1 3 l4 2 l1 3 l4 -1 l3 2 l3 -3 l3 1 l1 -4 l3 -1 l-1 -4 l2 -3 l-3 -3 z" fill="url(#gr-grad)" />
+      <circle cx="20" cy="22" r="5" fill="white" />
+      <circle cx="34" cy="34" r="8" fill="#FBBC04" />
+      <circle cx="34" cy="34" r="3" fill="white" />
+    </svg>
+  );
+}
+
+function PulseIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 48 48" className={className} aria-hidden>
+      <defs>
+        <linearGradient id="pl-grad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#a855f7" />
+          <stop offset="100%" stopColor="#60a5fa" />
+        </linearGradient>
+      </defs>
+      <circle cx="24" cy="24" r="20" fill="url(#pl-grad)" />
+      <circle cx="24" cy="24" r="13" fill="white" fillOpacity="0.2" />
+      <path d="M8 24 L16 24 L20 14 L26 34 L30 22 L34 28 L40 24" stroke="white" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="40" cy="24" r="3" fill="#FBBC04" />
+    </svg>
+  );
+}
+
+function SparkleDocIcon({ className = "" }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 48 48" className={className} aria-hidden>
+      <defs>
+        <linearGradient id="sd-grad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#34d399" />
+          <stop offset="100%" stopColor="#60a5fa" />
+        </linearGradient>
+      </defs>
+      <path d="M10 6 h20 l10 10 v26 a2 2 0 0 1 -2 2 H10 a2 2 0 0 1 -2 -2 V8 a2 2 0 0 1 2 -2 Z" fill="url(#sd-grad)" />
+      <path d="M30 6 v10 h10" fill="white" fillOpacity="0.3" />
+      <circle cx="18" cy="28" r="2" fill="white" />
+      <circle cx="26" cy="28" r="2" fill="white" />
+      <circle cx="34" cy="28" r="2" fill="white" />
+      <rect x="14" y="34" width="20" height="2" rx="1" fill="white" fillOpacity="0.7" />
+      <path d="M36 10 l1 3 l3 1 l-3 1 l-1 3 l-1 -3 l-3 -1 l3 -1 z" fill="#FBBC04" />
     </svg>
   );
 }
 
 const PILLARS = [
   {
-    Icon: GoogleAdsIcon,
+    Icon: RocketIcon,
     title: "Création",
     sub: "de campagnes performantes",
     halo: "from-sky/60 via-electric/40 to-electric-soft/60",
     accent: "text-electric",
   },
   {
-    Icon: TargetIcon,
+    Icon: GearsIcon,
     title: "Gestion",
     sub: "et optimisation continues",
     halo: "from-coral/60 via-pink-300/50 to-lilac/60",
     accent: "text-[color:var(--coral)]",
   },
   {
-    Icon: BarChartIcon,
+    Icon: PulseIcon,
     title: "Suivi",
     sub: "des performances en temps réel",
     halo: "from-lilac/60 via-electric-soft/50 to-sky/60",
     accent: "text-[color:var(--lilac)]",
   },
   {
-    Icon: ReportIcon,
+    Icon: SparkleDocIcon,
     title: "Rapports clairs",
     sub: "et analyses régulières",
     halo: "from-mint/60 via-emerald-200/50 to-sky/50",
@@ -241,7 +257,7 @@ function GoogleAdsPage() {
               <div className="relative flex-none">
                 <span aria-hidden className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-coral/40 via-pink-300/30 to-lilac/40 blur-xl" />
                 <span className="relative grid h-20 w-20 place-items-center rounded-3xl bg-white/70 ring-1 ring-white/70 shadow-[inset_0_-6px_0_0_rgba(0,0,0,0.04),0_20px_40px_-20px_rgba(0,0,0,0.25)] backdrop-blur-xl animate-[float-y_6s_ease-in-out_infinite]">
-                  <TargetIcon className="h-12 w-12" />
+                  <RocketIcon className="h-12 w-12" />
                 </span>
               </div>
               <div>
@@ -329,20 +345,23 @@ function PillarCard({ p, i }: { p: (typeof PILLARS)[number]; i: number }) {
   return (
     <div
       ref={ref}
-      className="reveal group relative flex flex-col items-center text-center"
+      className="reveal group relative"
       style={{ transitionDelay: `${i * 100}ms` }}
     >
-      <div className="relative">
-        <span aria-hidden className={`absolute -inset-2 rounded-3xl bg-gradient-to-br ${p.halo} blur-lg opacity-80`} />
-        <span
-          className="relative grid h-20 w-20 place-items-center rounded-3xl bg-white/80 ring-1 ring-white/70 shadow-[inset_0_-6px_0_0_rgba(0,0,0,0.05),0_18px_38px_-18px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-transform duration-500 group-hover:-translate-y-1 group-hover:rotate-[-4deg]"
-          style={{ animation: `float-y 6s ease-in-out ${i * 0.4}s infinite` }}
-        >
-          <Icon className="h-11 w-11" />
-        </span>
+      <span aria-hidden className={`absolute -inset-1 rounded-[2rem] bg-gradient-to-br ${p.halo} blur-xl opacity-70`} />
+      <div className="relative flex flex-col items-center text-center rounded-[2rem] border border-white/60 bg-white/55 px-5 py-7 backdrop-blur-2xl shadow-[inset_0_-8px_0_0_rgba(255,255,255,0.4),0_22px_50px_-22px_rgba(0,0,0,0.25)] transition-transform duration-500 group-hover:-translate-y-1">
+        <div className="relative">
+          <span aria-hidden className={`absolute -inset-2 rounded-3xl bg-gradient-to-br ${p.halo} blur-lg opacity-80`} />
+          <span
+            className="relative grid h-24 w-24 place-items-center rounded-3xl bg-white/85 ring-1 ring-white/70 shadow-[inset_0_-6px_0_0_rgba(0,0,0,0.05),0_18px_38px_-18px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-transform duration-500 group-hover:-translate-y-1 group-hover:rotate-[-4deg]"
+            style={{ animation: `float-y 6s ease-in-out ${i * 0.4}s infinite` }}
+          >
+            <Icon className="h-14 w-14" />
+          </span>
+        </div>
+        <h3 className={`mt-6 font-display text-xl sm:text-2xl font-extrabold tracking-tight ${p.accent}`}>{p.title}</h3>
+        <p className="mt-2 text-[15px] sm:text-base leading-relaxed text-ink-soft">{p.sub}</p>
       </div>
-      <h3 className={`mt-5 font-display text-base font-bold ${p.accent}`}>{p.title}</h3>
-      <p className="mt-1 text-[13px] leading-relaxed text-ink-soft">{p.sub}</p>
     </div>
   );
 }
