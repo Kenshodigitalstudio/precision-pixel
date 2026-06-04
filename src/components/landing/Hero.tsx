@@ -10,6 +10,8 @@ type Slide = {
   gradient: string;
   icon: string;
   cta?: { label: string };
+  href?: string;
+  premium?: boolean;
 };
 
 type ServiceKey = "audit_flash" | "tracking_setup";
@@ -26,16 +28,18 @@ const slides: (Slide & { service: ServiceKey })[] = [
     service: "audit_flash",
   },
   {
-    tag: "Tracking",
-    title: "Installation de tags & tracking",
-    desc: "Google Tag, conversions Ads, GA4, événements clés. Une donnée propre dès le premier clic.",
-    price: "100 €",
-    gradient: "from-mint/70 via-emerald-400/60 to-emerald-600/70",
-    icon: "⚙️",
-    cta: { label: "Réserver & payer" },
+    tag: "Votre Entreprise",
+    title: "Landing page sur-mesure",
+    desc: "Une page premium pensée pour convertir : design soigné, message clair, tracking intégré. Votre vitrine, optimisée pour la performance.",
+    gradient: "from-solar/70 via-amber-300/60 to-mint/60",
+    icon: "✦",
+    cta: { label: "Découvrir l'offre" },
+    href: "/services/google-ads",
+    premium: true,
     service: "tracking_setup",
   },
 ];
+
 
 export function Hero() {
   const magneticRef = useMagnetic<HTMLAnchorElement>(0.2);
