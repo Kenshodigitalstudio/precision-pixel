@@ -1,56 +1,43 @@
 ## Objectif
 
-Sur la page `/reservation`, le visiteur :
-1. Réserve son créneau via le widget Calendly (existant).
-2. Voit ensuite un bloc de paiement Stripe pour régler **Audit Flash 150 €** ou **Tracking 100 €** selon le service choisi avant d'arriver.
-3. Reçoit une page de confirmation après paiement.
+Inverser l'ordre actuel sur `/reservation` :
+1. **Étape 1 — Paiement Stripe** (embedded checkout, déjà en place)
+2. **Étape 2 — Calendly** sur la page de confirmation, qui génère automatiquement le lien Google Meet et l'envoie par email au client
 
-Aucune automatisation TVA (statut micro-entrepreneur, art. 293B).
+Aucune API Google à brancher : Calendly est déjà configuré pour créer un événement Google Meet à chaque réservation. Le client reçoit le lien Meet dans son email de confirmation Calendly + invitation calendrier.
 
-## Étapes
+## Changements
 
-### 1. Créer les produits Stripe (test → live au publish)
-Via `payments--batch_create_product` :
-- `audit_flash` → prix `audit_flash_onetime` — 150 € EUR, one-time, qty 1/1, tax_code `txcd_20030000` (services professionnels)
-- `tracking_setup` → prix `tracking_setup_onetime` — 100 € EUR, one-time, qty 1/1, même tax_code
+### 1. `src/routes/reservation.tsx`
+- Supprimer l'étape Calendly (iframe + bloc "Étape 1").
+- Renommer "Étape 2" en simple bloc paiement centré, avec :
+  - Le sélecteur de service (Audit Flash / Tracking)
+  - La carte service + bouton "Payer X €"
+  - L'embedded Stripe checkout inline
+- Mettre à jour le sous-titre : "Réglez votre service, puis choisissez votre créneau Google Meet juste après."
+- Le `returnUrl` reste `/reservation/confirmation?session_id={CHECKOUT_SESSION_ID}` et passe en plus `&service=...` pour savoir quel service afficher après.
 
-(Le tax_code reste obligatoire côté Stripe mais n'active aucune collecte sans `automatic_tax`.)
+### 2. `src/routes/reservation.confirmation.tsx`
+- Ajouter `service` au `validateSearch` (optionnel, défaut `audit_flash`).
+- Nouveau layout en deux blocs :
+  1. **Confirmation paiement** — bandeau vert "Paiement reçu ✓", message court "Dernière étape : choisissez votre créneau ci-dessous. Vous recevrez le lien Google Meet par email."
+  2. **Calendly iframe** — même intégration que sur `/reservation` actuellement, pleine largeur, 720px de haut. URL Calendly inchangée (`calendly.com/kenshodigitalstudio/30min`) qui génère déjà automatiquement un lien Google Meet à chaque RDV pris.
+- Garder le lien "Retour à l'accueil" en bas.
 
-### 2. Fichiers serveur Stripe
-- `src/lib/stripe.server.ts` — utilitaire `createStripeClient` + `getStripeErrorMessage` (gateway Lovable, version copiée verbatim de la doc).
-- `src/lib/stripe.ts` — client navigateur `getStripe()` + `getStripeEnvironment()` dérivé du préfixe du token.
-- `src/utils/payments.functions.ts` — `createCheckoutSession` (server function, `ui_mode: "embedded_page"`, `payment_intent_data.description = product.name`, **sans** `managed_payments` ni `automatic_tax`).
+### 3. Aucun changement Stripe / produits / server functions
+- Les produits `audit_flash` et `tracking_setup` existent déjà.
+- `createCheckoutSession` est inchangée.
+- Aucun nouveau secret nécessaire.
 
-Packages : `bun add stripe@22.0.2 @stripe/stripe-js@9.2.0 @stripe/react-stripe-js@6.2.0`.
+## Pourquoi Calendly suffit pour le Meet
 
-### 3. Composants front
-- `src/components/StripeEmbeddedCheckout.tsx` — provider + `<EmbeddedCheckout />`.
-- `src/components/PaymentTestModeBanner.tsx` — bandeau "mode test" tant que le token est `pk_test_` (affiché en haut de `/reservation`).
-- `src/hooks/useStripeCheckout.tsx` — `openCheckout` / `checkoutElement`.
+Le compte Calendly de Kenshō Digital Studio est déjà connecté à Google Calendar + Google Meet (configuration côté Calendly). À chaque créneau réservé via le widget :
+- Calendly crée l'événement dans ton Google Calendar
+- Google génère automatiquement un lien Meet unique pour cet événement
+- Le client et toi recevez tous les deux l'invitation par email + dans le calendrier, avec le lien Meet
 
-### 4. Refonte de `/reservation`
-- Lire `?service=audit_flash` ou `?service=tracking_setup` via `validateSearch`. Défaut : `audit_flash`.
-- Mapping local : `{ audit_flash: { priceId: "audit_flash_onetime", label: "Audit Flash", price: "150 €" }, tracking_setup: { priceId: "tracking_setup_onetime", label: "Tracking", price: "100 €" } }`.
-- Layout en deux étapes (même fond / sparkles conservés) :
-  1. **Étape 1 — Réserver votre créneau** : iframe Calendly actuelle.
-  2. **Étape 2 — Régler le service** : carte glassmorphism avec le service sélectionné, son prix, et bouton `Payer 150 €` qui appelle `openCheckout({ priceId, returnUrl: window.location.origin + "/reservation/confirmation?session_id={CHECKOUT_SESSION_ID}" })`. Le `<EmbeddedCheckout>` s'affiche inline juste en dessous.
-- Petit sélecteur (2 onglets) pour basculer entre les deux services si besoin.
+Aucun code custom Google Calendar API à écrire, aucune OAuth à brancher.
 
-### 5. Boutons sur le Hero
-Dans `src/components/landing/Hero.tsx`, les deux CTA "Prendre rendez-vous" deviennent :
-- Audit Flash → `<Link to="/reservation" search={{ service: "audit_flash" }}>`
-- Tracking → `<Link to="/reservation" search={{ service: "tracking_setup" }}>`
+## Prérequis côté Calendly (à vérifier une seule fois)
 
-### 6. Page de confirmation
-- `src/routes/reservation.confirmation.tsx` — lit `session_id` via `validateSearch`, affiche un message "Paiement reçu — à très vite", lien retour `/`.
-
-### 7. Vérifications
-- `payments--get_go_live_status` n'est pas requis pour la preview (token sandbox déjà présent).
-- Tester en preview avec carte `4242 4242 4242 4242`.
-- En production, le paiement live ne fonctionnera qu'une fois le go-live Stripe terminé (étapes 2-5 côté dashboard Stripe).
-
-## Détails techniques
-
-- `attachSupabaseAuth` : non nécessaire ici (checkout anonyme, pas de `requireSupabaseAuth` sur la server function).
-- Pas de webhook nécessaire à ce stade (pas de base utilisateur à mettre à jour). Possible ajout futur si vous voulez recevoir un email automatique à chaque paiement.
-- Aucun changement de design : on conserve `bg-paper`, blobs de couleur et `<Sparkles />` actuels.
+Dans `calendly.com/event_types` → ton événement "30min" → **Location** → choisir **Google Meet conferencing**. Si ce n'est pas déjà fait, à activer manuellement (rien à coder).
