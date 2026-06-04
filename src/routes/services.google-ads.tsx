@@ -262,9 +262,9 @@ function GoogleAdsPage() {
               </div>
               <div>
                 <h2 className="font-display text-2xl sm:text-3xl font-extrabold leading-tight tracking-tight">
-                  <span className="bg-gradient-to-r from-[color:var(--electric)] to-[color:var(--lilac)] bg-clip-text text-transparent">Plus de visibilité.</span>{" "}
-                  <span className="bg-gradient-to-r from-[color:var(--lilac)] to-[color:var(--coral)] bg-clip-text text-transparent">Plus de clics.</span>{" "}
-                  <span className="bg-gradient-to-r from-[color:var(--coral)] to-[color:var(--solar)] bg-clip-text text-transparent">Plus de clients.</span>
+                  <span className="block bg-gradient-to-r from-[color:var(--electric)] to-[color:var(--lilac)] bg-clip-text text-transparent">Plus de visibilité.</span>
+                  <span className="block bg-gradient-to-r from-[color:var(--lilac)] to-[color:var(--coral)] bg-clip-text text-transparent">Plus de clics.</span>
+                  <span className="block bg-gradient-to-r from-[color:var(--coral)] to-[color:var(--solar)] bg-clip-text text-transparent">Plus de clients.</span>
                 </h2>
                 <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-ink-soft">
                   Confiez-nous vos Google Ads et concentrez-vous sur ce que vous faites de mieux :{" "}
