@@ -5,7 +5,7 @@ import { useMagnetic } from "@/hooks/use-magnetic";
 type Slide = {
   tag: string;
   title: string;
-  desc: string;
+  desc: React.ReactNode;
   price?: string;
   gradient: string;
   icon: string;
