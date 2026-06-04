@@ -201,14 +201,18 @@ export function Hero() {
         </div>
 
         <div className="mt-8 flex justify-center">
-          <span className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full border border-white/40 bg-white/30 px-5 py-2.5 font-display text-sm font-semibold tracking-tight text-ink shadow-[0_8px_24px_-8px_rgba(0,0,0,0.2)] backdrop-blur-xl">
+          <Link
+            to="/services/google-ads"
+            className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full border border-white/40 bg-white/30 px-5 py-2.5 font-display text-sm font-semibold tracking-tight text-ink shadow-[0_8px_24px_-8px_rgba(0,0,0,0.2)] backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:bg-white/50"
+          >
             <span
               aria-hidden
               className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-solar/40 via-amber-300/30 to-mint/30 opacity-90"
             />
             <span aria-hidden>✦</span>
-            Plus de services à venir
-          </span>
+            Découvrir nos services Google Ads
+            <span className="transition-transform group-hover:translate-x-1">→</span>
+          </Link>
         </div>
 
         <div className="relative mt-16 flex justify-center">
