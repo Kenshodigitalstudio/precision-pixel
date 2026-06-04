@@ -52,7 +52,7 @@ export const Route = createFileRoute("/reservation")({
 });
 
 function ReservationPage() {
-  const { service } = Route.useSearch();
+  const { service } = Route.useSearch() as { service: ServiceKey };
   const { openCheckout, isOpen, checkoutElement } = useStripeCheckout();
 
   const current = SERVICES[service];
