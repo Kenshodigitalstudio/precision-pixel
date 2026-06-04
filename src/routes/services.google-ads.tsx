@@ -278,6 +278,32 @@ function GoogleAdsPage() {
         </div>
       </section>
 
+      {/* Besoin spécifique — même bloc que la landing principale */}
+      <ExtraRequest />
+
+      {/* Note : gestion des réseaux sociaux sur devis */}
+      <section className="relative pb-16">
+        <div className="mx-auto max-w-3xl px-6">
+          <div className="relative overflow-hidden rounded-[2rem] border border-white/50 bg-white/40 p-8 sm:p-10 text-center backdrop-blur-2xl shadow-[0_24px_70px_-30px_rgba(0,0,0,0.25)]">
+            <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+              <div className="absolute left-1/2 top-0 h-56 w-72 -translate-x-1/2 rounded-full bg-lilac/30 blur-3xl" />
+              <div className="absolute right-0 bottom-0 h-40 w-40 rounded-full bg-coral/30 blur-3xl" />
+            </div>
+            <span className="font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--lilac)]">
+              Sur devis
+            </span>
+            <h3 className="mt-3 font-display text-[clamp(1.4rem,2.6vw,2rem)] font-semibold leading-tight tracking-[-0.02em] text-ink">
+              Gestion de vos réseaux sociaux
+            </h3>
+            <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-ink-soft">
+              Un service de <span className="font-semibold text-ink">gestion de réseaux sociaux</span>{" "}
+              (création de contenus, planification, community management) peut être
+              ajouté à votre accompagnement&nbsp;: contactez-nous pour un devis personnalisé.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Final CTA — Service disponible cet été (pas de lien) */}
       <section className="relative pb-28">
         <div ref={finalReveal} className="reveal mx-auto max-w-4xl px-6 text-center">
