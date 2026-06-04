@@ -106,28 +106,28 @@ function SparkleDocIcon({ className = "" }: { className?: string }) {
 
 const PILLARS = [
   {
-    Icon: GoogleAdsIcon,
+    Icon: RocketIcon,
     title: "Création",
     sub: "de campagnes performantes",
     halo: "from-sky/60 via-electric/40 to-electric-soft/60",
     accent: "text-electric",
   },
   {
-    Icon: TargetIcon,
+    Icon: GearsIcon,
     title: "Gestion",
     sub: "et optimisation continues",
     halo: "from-coral/60 via-pink-300/50 to-lilac/60",
     accent: "text-[color:var(--coral)]",
   },
   {
-    Icon: BarChartIcon,
+    Icon: PulseIcon,
     title: "Suivi",
     sub: "des performances en temps réel",
     halo: "from-lilac/60 via-electric-soft/50 to-sky/60",
     accent: "text-[color:var(--lilac)]",
   },
   {
-    Icon: ReportIcon,
+    Icon: SparkleDocIcon,
     title: "Rapports clairs",
     sub: "et analyses régulières",
     halo: "from-mint/60 via-emerald-200/50 to-sky/50",
