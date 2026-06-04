@@ -1,19 +1,27 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import { zodValidator, fallback } from "@tanstack/zod-adapter";
+import { z } from "zod";
 import { Sparkles } from "@/components/landing/Sparkles";
 
+const CALENDLY_URL = "https://calendly.com/kenshodigitalstudio/30min";
+
+const searchSchema = z.object({
+  session_id: z.string().optional(),
+  service: fallback(z.enum(["audit_flash", "tracking_setup"]), "audit_flash").default(
+    "audit_flash",
+  ),
+});
+
 export const Route = createFileRoute("/reservation/confirmation")({
-  validateSearch: (search: Record<string, unknown>): { session_id?: string } => ({
-    session_id:
-      typeof search.session_id === "string" ? search.session_id : undefined,
-  }),
+  validateSearch: zodValidator(searchSchema),
   component: ConfirmationPage,
   head: () => ({
     meta: [
-      { title: "Paiement confirmé — Kenshō Digital Studio" },
+      { title: "Paiement confirmé — Choisissez votre créneau" },
       {
         name: "description",
         content:
-          "Votre paiement a bien été reçu. À très vite chez Kenshō Digital Studio.",
+          "Paiement reçu. Dernière étape : choisissez votre créneau Google Meet avec Kenshō Digital Studio.",
       },
     ],
   }),
@@ -32,36 +40,59 @@ function ConfirmationPage() {
 
       <Sparkles variant="dense" />
 
-      <div className="relative mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center px-6 py-24 text-center">
-        <span className="grid h-16 w-16 place-items-center rounded-full border border-white/50 bg-white/40 text-3xl shadow-[0_20px_60px_-20px_rgba(0,0,0,0.25)] backdrop-blur-2xl">
-          ✓
-        </span>
-
-        <span className="mt-8 font-mono text-xs uppercase tracking-[0.25em] text-electric">
-          Paiement reçu
-        </span>
-        <h1 className="mt-4 font-display text-[clamp(2rem,4.4vw,3.25rem)] font-light leading-[1.05] tracking-[-0.03em]">
-          Merci, votre paiement
-          <span className="block font-extralight text-ink-soft">
-            est bien confirmé.
+      <div className="relative mx-auto max-w-3xl px-6 pt-16 pb-8 sm:pt-24">
+        <div className="text-center">
+          <span className="mx-auto grid h-14 w-14 place-items-center rounded-full border border-emerald-300/60 bg-emerald-50/80 text-2xl text-emerald-700 shadow-[0_20px_60px_-20px_rgba(16,185,129,0.4)] backdrop-blur-2xl">
+            ✓
           </span>
-        </h1>
+          <span className="mt-6 inline-block font-mono text-xs uppercase tracking-[0.25em] text-emerald-700">
+            Paiement reçu
+          </span>
+          <h1 className="mt-4 font-display text-[clamp(1.75rem,4vw,2.75rem)] font-light leading-[1.1] tracking-[-0.03em]">
+            Dernière étape —
+            <span className="block font-extralight text-ink-soft">
+              choisissez votre créneau Google Meet
+            </span>
+          </h1>
+          <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-ink-soft">
+            Sélectionnez le créneau qui vous convient ci-dessous. Vous recevrez
+            immédiatement un email de confirmation avec le lien Google Meet et
+            l'invitation calendrier.
+          </p>
+        </div>
+      </div>
 
-        <p className="mt-8 max-w-md text-[15px] leading-relaxed text-ink-soft">
-          Un email de confirmation vous est envoyé. Notre équipe vous contactera
-          avant votre rendez-vous Google Meet pour préparer la session ensemble.
-          À très vite, Kenshō Digital Studio.
+      <section className="mx-auto max-w-4xl px-4 pb-16 sm:px-6">
+        <div className="overflow-hidden rounded-[1.75rem] border border-white/40 bg-white/30 shadow-[0_20px_60px_-20px_rgba(0,0,0,0.18)] backdrop-blur-2xl">
+          <iframe
+            src={`${CALENDLY_URL}?hide_gdpr_banner=1&background_color=ffffff&text_color=1a1a1a&primary_color=1a1a1a`}
+            title="Choisir un créneau Google Meet avec Kenshō Digital Studio"
+            className="block h-[720px] w-full border-0"
+            loading="lazy"
+          />
+        </div>
+        <p className="mt-4 text-center text-sm text-ink-soft">
+          Le widget ne s'affiche pas&nbsp;?{" "}
+          <a
+            href={CALENDLY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-semibold text-ink underline underline-offset-4 hover:text-electric"
+          >
+            Ouvrir Calendly dans un nouvel onglet ↗
+          </a>
         </p>
+      </section>
 
+      <div className="relative mx-auto max-w-3xl px-6 pb-24 text-center">
         {sessionId && (
-          <p className="mt-6 font-mono text-[11px] text-ink-soft/70">
-            Référence : {sessionId.slice(0, 24)}…
+          <p className="font-mono text-[11px] text-ink-soft/70">
+            Référence paiement : {sessionId.slice(0, 24)}…
           </p>
         )}
-
         <Link
           to="/"
-          className="mt-10 inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-6 py-3 text-sm font-semibold text-ink backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-white/70"
+          className="mt-6 inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-6 py-3 text-sm font-semibold text-ink backdrop-blur-md transition-all hover:-translate-y-0.5 hover:bg-white/70"
         >
           ← Retour à l'accueil
         </Link>
