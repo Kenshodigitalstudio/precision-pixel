@@ -197,12 +197,16 @@ function GoogleAdsPage() {
           </div>
 
           <div className="mt-10 flex justify-center">
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/30 px-5 py-2.5 text-sm font-medium text-ink-soft backdrop-blur-md transition hover:bg-white/50 hover:text-ink"
+            <a
+              href="mailto:kenshodigitalstudio@gmail.com?subject=Envie%20de%20rejoindre%20vos%20%C3%A9quipes%20!%20(Gestion%20de%20comptes)"
+              className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-7 py-3.5 text-sm font-semibold text-white shadow-[0_10px_30px_-8px_rgba(251,146,60,0.45)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_40px_-10px_rgba(249,115,22,0.55)]"
             >
-              ← Retour à l'accueil
-            </Link>
+              <span className="absolute inset-0 bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500" />
+              <span className="absolute inset-0 bg-gradient-to-r from-amber-300 via-orange-300 to-amber-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+              <span aria-hidden className="relative">✦</span>
+              <span className="relative">Devenez le partenaire clé de nos clients. Nos équipes de gestion de comptes recrutent !</span>
+              <span className="relative transition-transform duration-300 group-hover:translate-x-0.5">↗</span>
+            </a>
           </div>
         </div>
       </section>
@@ -275,6 +279,16 @@ function GoogleAdsPage() {
       </section>
 
       <Footer />
+
+      {/* Retour à l'accueil — tout en bas */}
+      <div className="flex justify-center pb-10">
+        <Link
+          to="/"
+          className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/30 px-5 py-2.5 text-sm font-medium text-ink-soft backdrop-blur-md transition hover:bg-white/50 hover:text-ink"
+        >
+          ← Retour à l'accueil
+        </Link>
+      </div>
 
       {/* keyframes locaux */}
       <style>{`
