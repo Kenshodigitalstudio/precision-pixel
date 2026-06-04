@@ -177,13 +177,15 @@ function GoogleAdsPage() {
             </span>
           </p>
 
-          {/* Stats badges bubbly */}
+          {/* Stats badges — apparition striking puis disparition en boucle */}
           <div className="mt-7 flex flex-wrap items-center justify-center gap-2.5">
             {STAT_BADGES.map((b, i) => (
               <span
                 key={b.label}
-                className="group inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/50 px-3.5 py-1.5 text-[12.5px] font-medium text-ink backdrop-blur-xl shadow-[0_8px_24px_-12px_rgba(0,0,0,0.25)] animate-[bubble-pop_650ms_cubic-bezier(0.22,1.5,0.36,1)_both] hover:-translate-y-0.5 transition-transform"
-                style={{ animationDelay: `${300 + i * 120}ms` }}
+                className="group inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/50 px-3.5 py-1.5 text-[12.5px] font-medium text-ink backdrop-blur-xl shadow-[0_8px_24px_-12px_rgba(0,0,0,0.25)] will-change-transform"
+                style={{
+                  animation: `striking-pop 4.5s cubic-bezier(0.22,1.5,0.36,1) ${i * 0.5}s infinite`,
+                }}
               >
                 <span className="text-ink-soft">{b.label}</span>
                 <span className="font-display font-bold tabular-nums text-ink">{b.value}</span>
@@ -280,6 +282,14 @@ function GoogleAdsPage() {
           0%   { opacity: 0; transform: translateY(8px) scale(0.85); }
           60%  { opacity: 1; transform: translateY(-2px) scale(1.04); }
           100% { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes striking-pop {
+          0%   { opacity: 0; transform: translateY(14px) scale(0.4) rotate(-6deg); filter: blur(6px); }
+          12%  { opacity: 1; transform: translateY(-4px) scale(1.18) rotate(2deg); filter: blur(0); box-shadow: 0 0 0 6px rgba(255,255,255,0.5), 0 18px 40px -12px rgba(255,77,109,0.5); }
+          22%  { transform: translateY(0) scale(1) rotate(0deg); }
+          70%  { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
+          90%  { opacity: 0; transform: translateY(-10px) scale(0.92); filter: blur(3px); }
+          100% { opacity: 0; transform: translateY(-10px) scale(0.92); filter: blur(3px); }
         }
         @keyframes blob {
           0%, 100% { transform: translate(0,0) scale(1); }
