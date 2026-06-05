@@ -42,6 +42,9 @@ function Index() {
       <Metrics />
       <Approach />
       <Contact />
+      <AuditCard />
+      <ExpertsTeam />
+      <SocialTeaser />
       <ExtraRequest />
       <Footer />
       <Toaster position="bottom-right" />
