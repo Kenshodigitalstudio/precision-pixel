@@ -278,14 +278,6 @@ function GoogleAdsPage() {
         </div>
       </section>
 
-      {/* Audit Google Ads (glassmorphism) */}
-      <AuditCard />
-
-      {/* Équipe de freelances experts */}
-      <ExpertsTeam />
-
-      {/* Teaser réseaux sociaux */}
-      <SocialTeaser />
 
       {/* Besoin spécifique — même bloc que la landing principale */}
       <ExtraRequest />
