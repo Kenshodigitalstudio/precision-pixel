@@ -7,6 +7,7 @@ import { Metrics } from "@/components/landing/Metrics";
 import { Approach } from "@/components/landing/Approach";
 import { Contact } from "@/components/landing/Contact";
 import { ExtraRequest } from "@/components/landing/ExtraRequest";
+import { AuditCard, ExpertsTeam, SocialTeaser } from "@/components/landing/AuditExperts";
 import { Footer } from "@/components/landing/Footer";
 
 
