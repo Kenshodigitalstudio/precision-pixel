@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import { Nav } from "@/components/landing/Nav";
 import { Footer } from "@/components/landing/Footer";
 import { ExtraRequest } from "@/components/landing/ExtraRequest";
-import { AuditCard, ExpertsTeam, SocialTeaser } from "@/components/landing/AuditExperts";
 import { useReveal } from "@/hooks/use-reveal";
 import { useMagnetic } from "@/hooks/use-magnetic";
 
@@ -279,14 +278,6 @@ function GoogleAdsPage() {
         </div>
       </section>
 
-      {/* Audit Google Ads (glassmorphism) */}
-      <AuditCard />
-
-      {/* Équipe de freelances experts */}
-      <ExpertsTeam />
-
-      {/* Teaser réseaux sociaux */}
-      <SocialTeaser />
 
       {/* Besoin spécifique — même bloc que la landing principale */}
       <ExtraRequest />
