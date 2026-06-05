@@ -10,6 +10,8 @@ import { ExtraRequest } from "@/components/landing/ExtraRequest";
 import { AuditCard, ExpertsTeam, SocialTeaser } from "@/components/landing/AuditExperts";
 import { Footer } from "@/components/landing/Footer";
 
+
+
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
@@ -17,7 +19,14 @@ export const Route = createFileRoute("/")({
       { title: "Agence Google Ads & Tracking — Performance mesurable" },
       {
         name: "description",
-        content: "Agence experte en pilotage Google Ads et tracking server-side.",
+        content:
+          "Agence experte en pilotage Google Ads et tracking server-side. Audit, GA4, GTM SS, conformité RGPD. Transformez votre budget média en croissance mesurable.",
+      },
+      { property: "og:title", content: "Agence Google Ads & Tracking — Performance mesurable" },
+      {
+        property: "og:description",
+        content:
+          "Pilotage Google Ads & tracking server-side haut de gamme. Audit, GA4, GTM SS, attribution propre.",
       },
       { property: "og:type", content: "website" },
     ],
@@ -30,12 +39,12 @@ function Index() {
       <Nav />
       <Hero />
       <TrustStrip />
-      <AuditCard />
-      <ExpertsTeam />
-      <SocialTeaser />
       <Metrics />
       <Approach />
       <Contact />
+      <AuditCard />
+      <ExpertsTeam />
+      <SocialTeaser />
       <ExtraRequest />
       <Footer />
       <Toaster position="bottom-right" />

@@ -8,16 +8,13 @@ export function Footer() {
           Kensho Digital Studio
         </span>
         <p className="text-xs text-ink-soft">
-          {"© "}{new Date().getFullYear()}{" — Agence Google Ads & Tracking. Paris."}
+          © {new Date().getFullYear()} — Agence Google Ads & Tracking. Paris.
         </p>
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-ink-soft">
           <a href="/#contact" className="hover:text-ink">Contact</a>
-          <Link to="/mentions-legales" className="hover:text-ink">{"Mentions légales"}</Link>
-          <Link to="/politique-confidentialite" className="hover:text-ink">{"Politique de confidentialité"}</Link>
+          <Link to="/mentions-legales" className="hover:text-ink">Mentions légales</Link>
+          <Link to="/politique-confidentialite" className="hover:text-ink">Politique de confidentialité</Link>
           <Link to="/cgv" className="hover:text-ink">CGV</Link>
-          <a href="https://www.instagram.com/kenshodigitalstudio/" target="_blank" rel="noopener noreferrer" className="hover:text-pink-500 transition-colors">
-            {"@kenshodigitalstudio"}
-          </a>
         </div>
       </div>
     </footer>
