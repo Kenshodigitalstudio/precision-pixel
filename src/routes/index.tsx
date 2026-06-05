@@ -17,6 +17,28 @@ export const Route = createFileRoute("/")({
       { title: "Agence Google Ads & Tracking — Performance mesurable" },
       {
         name: "description",
-        content: "Agence experte en pilotage Google Ads et tracking server-side. Audit, GA4, GTM SS, conformité RGPD. Transformez votre budget média en croissance mesurable.",
+        content: "Agence experte en pilotage Google Ads et tracking server-side.",
       },
-      { property: "og:title", content: "Agence Google Ads & Tracking — Performance mesurable" }
+      { property: "og:type", content: "website" },
+    ],
+  }),
+});
+
+function Index() {
+  return (
+    <main className="relative min-h-screen overflow-x-hidden">
+      <Nav />
+      <Hero />
+      <TrustStrip />
+      <AuditCard />
+      <ExpertsTeam />
+      <SocialTeaser />
+      <Metrics />
+      <Approach />
+      <Contact />
+      <ExtraRequest />
+      <Footer />
+      <Toaster position="bottom-right" />
+    </main>
+  );
+}
