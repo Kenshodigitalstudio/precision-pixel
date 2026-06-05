@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from "react";
 import { Nav } from "@/components/landing/Nav";
 import { Footer } from "@/components/landing/Footer";
 import { ExtraRequest } from "@/components/landing/ExtraRequest";
-import { AuditCard, ExpertsTeam, SocialTeaser } from "@/components/landing/AuditExperts";
 import { useReveal } from "@/hooks/use-reveal";
 import { useMagnetic } from "@/hooks/use-magnetic";
 
