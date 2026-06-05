@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
+import kenshoLogo from "@/assets/kensho-logo.jpg.asset.json";
 
 
 export function Nav() {
@@ -30,9 +31,11 @@ export function Nav() {
       />
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <a href="#top" className="flex items-center gap-2.5">
-          <span className="font-display text-base font-light tracking-[-0.02em] text-ink">
-            Kenshō <span className="font-extralight text-ink-soft">Digital Studio</span>
-          </span>
+          <img
+            src={kenshoLogo.url}
+            alt="Kenshō Digital Studio"
+            className="h-8 w-auto sm:h-9"
+          />
         </a>
 
         <ul className="hidden items-center gap-7 text-sm font-medium text-ink-soft md:flex">

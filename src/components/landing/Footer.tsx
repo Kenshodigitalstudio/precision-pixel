@@ -1,12 +1,15 @@
 import { Link } from "@tanstack/react-router";
+import kenshoLogo from "@/assets/kensho-logo.jpg.asset.json";
 
 export function Footer() {
   return (
     <footer className="relative border-t border-border/60 bg-card/30 py-12 backdrop-blur-sm">
       <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-6 px-6 sm:flex-row sm:items-center">
-        <span className="font-display text-sm font-semibold tracking-tight">
-          Kensho Digital Studio
-        </span>
+        <img
+          src={kenshoLogo.url}
+          alt="Kenshō Digital Studio"
+          className="h-7 w-auto"
+        />
         <p className="text-xs text-ink-soft">
           © {new Date().getFullYear()} — Agence Google Ads & Tracking. Paris.
         </p>
