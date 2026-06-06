@@ -1,4 +1,5 @@
 import { useState, FormEvent } from "react";
+import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
 /* ---------------- SECTION 1 : Audit Google Ads ---------------- */
@@ -80,8 +81,9 @@ export function AuditCard() {
           </ul>
 
           <div className="mt-10 flex justify-end">
-            <a
-              href="#"
+            <Link
+              to="/reservation"
+              search={{ service: "audit_flash" }}
               className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-white/60 bg-white/30 px-6 py-3 text-sm font-semibold text-ink backdrop-blur-xl shadow-[0_10px_30px_-12px_rgba(59,130,246,0.55)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/50 hover:shadow-[0_18px_40px_-12px_rgba(99,102,241,0.7)]"
             >
               <span
@@ -94,10 +96,20 @@ export function AuditCard() {
               />
               <span>Réserver mon Audit</span>
               <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
-            </a>
+            </Link>
           </div>
         </motion.div>
       </div>
+
+      {/* Sticky mobile CTA */}
+      <Link
+        to="/reservation"
+        search={{ service: "audit_flash" }}
+        className="fixed inset-x-3 bottom-3 z-40 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-500 via-electric to-indigo-600 px-5 py-3.5 text-sm font-bold text-white shadow-[0_18px_40px_-12px_rgba(59,130,246,0.7)] backdrop-blur-md sm:hidden"
+      >
+        Réserver mon Audit — 150€
+        <span>→</span>
+      </Link>
 
       <style>{`
         @keyframes audit-glow {
