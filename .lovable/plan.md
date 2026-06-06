@@ -1,43 +1,62 @@
-## Objectif
+## Modifications de la page d'accueil
 
-Inverser l'ordre actuel sur `/reservation` :
-1. **Étape 1 — Paiement Stripe** (embedded checkout, déjà en place)
-2. **Étape 2 — Calendly** sur la page de confirmation, qui génère automatiquement le lien Google Meet et l'envoie par email au client
+### 1. Réorganisation des sections (`src/routes/index.tsx`)
 
-Aucune API Google à brancher : Calendly est déjà configuré pour créer un événement Google Meet à chaque réservation. Le client reçoit le lien Meet dans son email de confirmation Calendly + invitation calendrier.
+Nouvel ordre :
 
-## Changements
+```text
+Nav
+Hero (les 2 bulles principales)
+AuditCard          ← remonté tout en haut, juste sous Hero
+TrustStrip
+Metrics
+Approach
+Contact
+ExtraRequest
+ExpertsTeam        ← « Pourquoi des freelances ? » descendu en bas
+SocialTeaser
+Footer
+```
 
-### 1. `src/routes/reservation.tsx`
-- Supprimer l'étape Calendly (iframe + bloc "Étape 1").
-- Renommer "Étape 2" en simple bloc paiement centré, avec :
-  - Le sélecteur de service (Audit Flash / Tracking)
-  - La carte service + bouton "Payer X €"
-  - L'embedded Stripe checkout inline
-- Mettre à jour le sous-titre : "Réglez votre service, puis choisissez votre créneau Google Meet juste après."
-- Le `returnUrl` reste `/reservation/confirmation?session_id={CHECKOUT_SESSION_ID}` et passe en plus `&service=...` pour savoir quel service afficher après.
+### 2. Bulle « Votre Entreprise » dans le Hero (`src/components/landing/Hero.tsx`)
 
-### 2. `src/routes/reservation.confirmation.tsx`
-- Ajouter `service` au `validateSearch` (optionnel, défaut `audit_flash`).
-- Nouveau layout en deux blocs :
-  1. **Confirmation paiement** — bandeau vert "Paiement reçu ✓", message court "Dernière étape : choisissez votre créneau ci-dessous. Vous recevrez le lien Google Meet par email."
-  2. **Calendly iframe** — même intégration que sur `/reservation` actuellement, pleine largeur, 720px de haut. URL Calendly inchangée (`calendly.com/kenshodigitalstudio/30min`) qui génère déjà automatiquement un lien Google Meet à chaque RDV pris.
-- Garder le lien "Retour à l'accueil" en bas.
+Dans la 2ᵉ slide premium :
+- Remplacer `"Votre Business"` par `VOTRE ENTREPRISE` (en majuscules, gras).
+- Passer tout le texte au vouvoiement :
+  - « On ne te dit pas juste quoi faire. » → « On ne vous dit pas juste quoi faire. »
+  - « On le fait POUR toi. » → « On le fait POUR vous. »
+  - « Création complète de tes campagnes Google Ads » → « Création complète de vos campagnes Google Ads »
+  - « Optimisation continue pour maximiser tes résultats » → « Optimisation continue pour maximiser vos résultats »
 
-### 3. Aucun changement Stripe / produits / server functions
-- Les produits `audit_flash` et `tracking_setup` existent déjà.
-- `createCheckoutSession` est inchangée.
-- Aucun nouveau secret nécessaire.
+### 3. Section « Pourquoi des freelances ? » enrichie (`src/components/landing/AuditExperts.tsx`)
 
-## Pourquoi Calendly suffit pour le Meet
+Ajouter 4 experts supplémentaires à la liste `EXPERTS` (toujours en flottement, avec positions et délais répartis pour éviter les chevauchements) :
 
-Le compte Calendly de Kenshō Digital Studio est déjà connecté à Google Calendar + Google Meet (configuration côté Calendly). À chaque créneau réservé via le widget :
-- Calendly crée l'événement dans ton Google Calendar
-- Google génère automatiquement un lien Meet unique pour cet événement
-- Le client et toi recevez tous les deux l'invitation par email + dans le calendrier, avec le lien Meet
+- Sofia — Madrid, Espagne 🇪🇸
+- Aïcha — Marrakech, Maroc 🇲🇦
+- Liam — Londres, Royaume-Uni 🇬🇧
+- Noah — Berlin, Allemagne 🇩🇪
 
-Aucun code custom Google Calendar API à écrire, aucune OAuth à brancher.
+Total : 10 bulles d'experts + la bulle générique « … ». La hauteur du conteneur passe à `h-[520px] sm:h-[560px]` pour laisser respirer les bulles.
 
-## Prérequis côté Calendly (à vérifier une seule fois)
+### 4. Logo Kenshō cliquable vers l'accueil (`src/components/landing/Nav.tsx`)
 
-Dans `calendly.com/event_types` → ton événement "30min" → **Location** → choisir **Google Meet conferencing**. Si ce n'est pas déjà fait, à activer manuellement (rien à coder).
+Remplacer le `<a href="#top">` actuel par un `<Link to="/">` de `@tanstack/react-router`, pour que le clic ramène toujours sur la page d'accueil, même depuis `/services/google-ads`, `/reservation`, les pages légales, etc.
+
+### 5. Lien Instagram dans le footer (`src/components/landing/Footer.tsx`)
+
+Ajouter dans le bloc de liens un lien externe :
+
+```text
+Instagram → https://www.instagram.com/kenshodigitalstudio/
+```
+
+- `target="_blank"`, `rel="noopener noreferrer"`
+- Même style discret que les autres liens du footer (`text-xs text-ink-soft hover:text-ink`)
+- Petit pictogramme « ↗ » pour signaler le lien externe
+
+## Détails techniques
+
+- Aucune modification de logique métier, ni du backend, ni des routes — uniquement présentation et contenu.
+- AuditCard, ExpertsTeam et SocialTeaser restent dans `AuditExperts.tsx` (juste l'ordre de rendu change dans `index.tsx`).
+- Pas de nouvelle dépendance.

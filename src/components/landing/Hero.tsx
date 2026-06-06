@@ -32,17 +32,17 @@ const slides: (Slide & { service: ServiceKey })[] = [
     title: "gestion mensuelle de votre compte",
     desc: (
       <>
-        Avec <strong>"Votre Business"</strong>, on fait totalement différent :
+        Avec <strong>VOTRE ENTREPRISE</strong>, on fait totalement différent :
         <br />
         <br />
-        On ne te dit pas juste quoi faire.
+        On ne vous dit pas juste quoi faire.
         <br />
-        <span className="font-semibold">👉 On le fait POUR toi.</span>
+        <span className="font-semibold">👉 On le fait POUR vous.</span>
         <br />
         <br />
-        ✔️ Création complète de tes campagnes Google Ads
+        ✔️ Création complète de vos campagnes Google Ads
         <br />
-        ✔️ Optimisation continue pour maximiser tes résultats
+        ✔️ Optimisation continue pour maximiser vos résultats
         <br />
         ✔️ Suivi des performances et ajustements stratégiques
         <br />
