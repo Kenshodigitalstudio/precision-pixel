@@ -8,6 +8,8 @@ import { Approach } from "@/components/landing/Approach";
 import { Contact } from "@/components/landing/Contact";
 import { ExtraRequest } from "@/components/landing/ExtraRequest";
 import { AuditCard, ExpertsTeam, SocialTeaser } from "@/components/landing/AuditExperts";
+import { Counters } from "@/components/landing/Counters";
+import { Faq } from "@/components/landing/Faq";
 import { Footer } from "@/components/landing/Footer";
 
 
@@ -35,9 +37,10 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   return (
-    <main className="relative min-h-screen overflow-x-hidden">
+    <main className="relative min-h-screen overflow-x-hidden pb-24 sm:pb-0">
       <Nav />
       <Hero />
+      <Counters />
       <AuditCard />
       <TrustStrip />
       <Metrics />
@@ -46,6 +49,7 @@ function Index() {
       <ExtraRequest />
       <ExpertsTeam />
       <SocialTeaser />
+      <Faq />
       <Footer />
       <Toaster position="bottom-right" />
     </main>
