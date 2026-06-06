@@ -38,14 +38,14 @@ function Index() {
     <main className="relative min-h-screen overflow-x-hidden">
       <Nav />
       <Hero />
+      <AuditCard />
       <TrustStrip />
       <Metrics />
       <Approach />
       <Contact />
-      <AuditCard />
+      <ExtraRequest />
       <ExpertsTeam />
       <SocialTeaser />
-      <ExtraRequest />
       <Footer />
       <Toaster position="bottom-right" />
     </main>

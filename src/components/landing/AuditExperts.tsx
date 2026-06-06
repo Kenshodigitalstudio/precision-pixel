@@ -112,12 +112,16 @@ type Expert = {
 };
 
 const EXPERTS: Expert[] = [
-  { name: "Illya",   city: "Bali",      country: "Indonésie", flag: "🇮🇩", gradient: "from-coral to-solar",        pos: { top: "8%",  left: "18%" }, delay: 0 },
-  { name: "Camille", city: "Paris",     country: "France",    flag: "🇫🇷", gradient: "from-electric to-lilac",     pos: { top: "22%", left: "62%" }, delay: 0.4 },
-  { name: "Yuki",    city: "Tokyo",     country: "Japon",     flag: "🇯🇵", gradient: "from-lilac to-coral",        pos: { top: "44%", left: "10%" }, delay: 0.8 },
-  { name: "Thomas",  city: "Montréal",  country: "Canada",    flag: "🇨🇦", gradient: "from-sky to-electric",       pos: { top: "52%", left: "48%" }, delay: 1.2 },
-  { name: "Miguel",  city: "Lisbonne",  country: "Portugal",  flag: "🇵🇹", gradient: "from-solar to-coral",        pos: { top: "70%", left: "72%" }, delay: 1.6 },
-  { name: "Chloé",   city: "Sydney",    country: "Australie", flag: "🇦🇺", gradient: "from-mint to-sky",           pos: { top: "75%", left: "22%" }, delay: 2.0 },
+  { name: "Illya",   city: "Bali",      country: "Indonésie",     flag: "🇮🇩", gradient: "from-coral to-solar",    pos: { top: "6%",  left: "14%" }, delay: 0 },
+  { name: "Camille", city: "Paris",     country: "France",        flag: "🇫🇷", gradient: "from-electric to-lilac", pos: { top: "10%", left: "52%" }, delay: 0.3 },
+  { name: "Liam",    city: "Londres",   country: "Royaume-Uni",   flag: "🇬🇧", gradient: "from-sky to-mint",       pos: { top: "18%", left: "78%" }, delay: 0.6 },
+  { name: "Yuki",    city: "Tokyo",     country: "Japon",         flag: "🇯🇵", gradient: "from-lilac to-coral",    pos: { top: "32%", left: "6%"  }, delay: 0.9 },
+  { name: "Sofia",   city: "Madrid",    country: "Espagne",       flag: "🇪🇸", gradient: "from-coral to-lilac",    pos: { top: "36%", left: "38%" }, delay: 1.2 },
+  { name: "Thomas",  city: "Montréal",  country: "Canada",        flag: "🇨🇦", gradient: "from-sky to-electric",   pos: { top: "42%", left: "68%" }, delay: 1.5 },
+  { name: "Noah",    city: "Berlin",    country: "Allemagne",     flag: "🇩🇪", gradient: "from-electric to-sky",   pos: { top: "58%", left: "18%" }, delay: 1.8 },
+  { name: "Aïcha",   city: "Marrakech", country: "Maroc",         flag: "🇲🇦", gradient: "from-solar to-mint",     pos: { top: "62%", left: "50%" }, delay: 2.1 },
+  { name: "Miguel",  city: "Lisbonne",  country: "Portugal",      flag: "🇵🇹", gradient: "from-solar to-coral",    pos: { top: "70%", left: "78%" }, delay: 2.4 },
+  { name: "Chloé",   city: "Sydney",    country: "Australie",     flag: "🇦🇺", gradient: "from-mint to-sky",       pos: { top: "80%", left: "30%" }, delay: 2.7 },
 ];
 
 function ExpertBubble({ e }: { e: Expert }) {
@@ -153,7 +157,7 @@ export function ExpertsTeam() {
     <section className="relative px-6 py-16 sm:py-20">
       <div className="mx-auto grid max-w-6xl gap-12 md:grid-cols-2 md:items-center">
         {/* LEFT — bubbles */}
-        <div className="relative h-[420px] sm:h-[460px] rounded-[2rem] border border-white/40 bg-white/20 backdrop-blur-xl overflow-hidden">
+        <div className="relative h-[520px] sm:h-[560px] rounded-[2rem] border border-white/40 bg-white/20 backdrop-blur-xl overflow-hidden">
           <div aria-hidden className="pointer-events-none absolute inset-0">
             <div className="absolute left-1/3 top-1/4 h-40 w-40 rounded-full bg-electric/20 blur-3xl" />
             <div className="absolute right-1/4 bottom-1/4 h-44 w-44 rounded-full bg-coral/20 blur-3xl" />

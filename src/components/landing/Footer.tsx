@@ -12,6 +12,14 @@ export function Footer() {
         </p>
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-ink-soft">
           <a href="/#contact" className="hover:text-ink">Contact</a>
+          <a
+            href="https://www.instagram.com/kenshodigitalstudio/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 hover:text-ink"
+          >
+            Instagram <span aria-hidden>↗</span>
+          </a>
           <Link to="/mentions-legales" className="hover:text-ink">Mentions légales</Link>
           <Link to="/politique-confidentialite" className="hover:text-ink">Politique de confidentialité</Link>
           <Link to="/cgv" className="hover:text-ink">CGV</Link>

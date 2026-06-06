@@ -29,11 +29,11 @@ export function Nav() {
         style={{ width: `${progress}%`, transition: "width 120ms linear" }}
       />
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <a href="#top" className="flex items-center gap-2.5">
+        <Link to="/" className="flex items-center gap-2.5">
           <span className="font-display text-base font-light tracking-[-0.02em] text-ink">
             Kenshō <span className="font-extralight text-ink-soft">Digital Studio</span>
           </span>
-        </a>
+        </Link>
 
         <ul className="hidden items-center gap-7 text-sm font-medium text-ink-soft md:flex">
           <li><a href="#services" className="hover:text-ink transition-colors">Services</a></li>
