@@ -152,7 +152,7 @@ function ExpertBubble({ e }: { e: Expert }) {
   return (
     <div
       className="absolute"
-      style={{ top: e.pos.top, left: e.pos.left, animation: `float-y 6s ease-in-out ${e.delay}s infinite` }}
+      style={{ top: e.pos.top, left: e.pos.left, animation: `bubble-float 6s ease-in-out ${e.delay}s infinite` }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
@@ -190,13 +190,19 @@ export function ExpertsTeam() {
           {/* generic "..." */}
           <div
             className="absolute"
-            style={{ top: "30%", left: "82%", animation: "float-y 7s ease-in-out 1s infinite" }}
+            style={{ top: "30%", left: "82%", animation: "bubble-float 7s ease-in-out 1s infinite" }}
           >
             <div className="grid h-[60px] w-[60px] place-items-center rounded-full border border-white/60 bg-white/50 text-ink-soft font-bold backdrop-blur-xl shadow-md">
               …
             </div>
           </div>
         </div>
+        <style>{`
+          @keyframes bubble-float {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-10px); }
+          }
+        `}</style>
 
         {/* RIGHT — text */}
         <motion.div
