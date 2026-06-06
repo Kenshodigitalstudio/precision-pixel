@@ -62,7 +62,29 @@ const slides: (Slide & { service: ServiceKey })[] = [
 export function Hero() {
   const magneticRef = useMagnetic<HTMLAnchorElement>(0.2);
   const trackRef = useRef<HTMLDivElement>(null);
+  const parallaxRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
+
+  useEffect(() => {
+    const el = parallaxRef.current;
+    if (!el) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+    let raf = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => {
+        const y = window.scrollY * 0.2;
+        el.style.transform = `translate3d(0, ${y}px, 0)`;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(raf);
+    };
+  }, []);
 
   const goTo = (i: number) => {
     const el = trackRef.current;
@@ -96,6 +118,16 @@ export function Hero() {
 
   return (
     <section id="top" className="relative isolate overflow-hidden pt-24 pb-12 sm:pt-28 sm:pb-16">
+      {/* Parallax background gradient */}
+      <div
+        aria-hidden
+        ref={parallaxRef}
+        className="pointer-events-none absolute inset-x-0 -top-20 -z-10 h-[120%] will-change-transform"
+      >
+        <div className="absolute left-[10%] top-[10%] h-72 w-72 rounded-full bg-electric/20 blur-3xl" />
+        <div className="absolute right-[8%] top-[30%] h-80 w-80 rounded-full bg-solar/25 blur-3xl" />
+        <div className="absolute left-[30%] bottom-[5%] h-72 w-72 rounded-full bg-mint/20 blur-3xl" />
+      </div>
       {/* Decorative floating sparkles */}
       <span aria-hidden className="float-y absolute left-[8%] top-[18%] text-2xl text-ink/70 hidden sm:block">✦</span>
       <span aria-hidden className="float-y absolute right-[12%] top-[22%] text-xl text-ink/70 hidden sm:block" style={{ animationDelay: "1.2s" }}>✦</span>
@@ -116,7 +148,7 @@ export function Hero() {
           votre budget en revenus mesurables.
         </p>
 
-        <div className="relative mt-8 flex justify-center">
+        <div className="relative mt-8 flex flex-col items-center gap-3">
           <Link
             ref={magneticRef}
             to="/reservation"
@@ -129,6 +161,15 @@ export function Hero() {
             <span>Prendre rendez-vous</span>
             <span className="transition-transform group-hover:translate-x-1">↗</span>
           </Link>
+          <a
+            href="#audit"
+            className="group relative inline-flex items-center gap-1.5 overflow-hidden rounded-full border border-white/50 bg-white/40 px-5 py-2 text-xs font-semibold backdrop-blur-xl shadow-[0_6px_18px_-8px_rgba(59,130,246,0.5)] transition-all hover:-translate-y-0.5 hover:bg-white/60"
+          >
+            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+              Audit Flash — 150€
+            </span>
+            <span className="text-blue-600 transition-transform group-hover:translate-x-0.5">→</span>
+          </a>
         </div>
 
         {/* Liquid glass services slider */}

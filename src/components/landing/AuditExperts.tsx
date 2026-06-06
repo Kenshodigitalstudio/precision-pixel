@@ -13,7 +13,7 @@ const AUDIT_BULLETS = [
 
 export function AuditCard() {
   return (
-    <section className="relative px-6 py-16 sm:py-20">
+    <section id="audit" className="relative px-6 py-16 sm:py-20">
       <div className="relative mx-auto max-w-5xl">
         {/* halo animé */}
         <div
@@ -34,12 +34,18 @@ export function AuditCard() {
           className="relative overflow-hidden rounded-[2.25rem] border border-white/40 bg-white/10 p-8 sm:p-12 backdrop-blur-2xl shadow-[0_30px_80px_-30px_rgba(59,130,246,0.45)]"
           style={{ WebkitBackdropFilter: undefined as never }}
         >
-          {/* badge */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-4 py-1.5 backdrop-blur-xl shadow-[0_6px_18px_-8px_rgba(59,130,246,0.4)]">
-            <span className="text-sm">✅</span>
-            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-[12px] font-bold uppercase tracking-wider text-transparent">
-              Expert Certifié Google Ads
-            </span>
+          {/* top row : badges */}
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-4 py-1.5 backdrop-blur-xl shadow-[0_6px_18px_-8px_rgba(59,130,246,0.4)]">
+              <span className="text-sm">✅</span>
+              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-[12px] font-bold uppercase tracking-wider text-transparent">
+                Expert Certifié Google Ads
+              </span>
+            </div>
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-orange-400 via-coral to-rose-500 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-white shadow-[0_8px_22px_-8px_rgba(251,113,90,0.7)]">
+              <span>⚡</span>
+              <span>Places limitées</span>
+            </div>
           </div>
 
           <h2 className="mt-6 font-display text-[clamp(2rem,5vw,3.5rem)] font-extrabold leading-[1.05] tracking-[-0.03em]">
@@ -47,6 +53,10 @@ export function AuditCard() {
               Audit Google Ads — 150€
             </span>
           </h2>
+
+          <p className="mt-2 text-sm text-ink-soft/80">
+            Prochaine disponibilité : cette semaine
+          </p>
 
           <p className="mt-4 max-w-2xl text-lg text-ink-soft">
             Un regard expert sur vos campagnes. En 30 minutes, on identifie ce qui
