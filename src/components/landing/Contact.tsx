@@ -45,12 +45,19 @@ export function Contact() {
         </div>
 
         <div className="mt-14 flex flex-col gap-5">
-          {offers.map((o) => (
+          {offers.map((o, i) => (
             <Link
               key={o.title}
               to="/reservation"
-              className="service-card group flex flex-col gap-4 p-7 text-left sm:flex-row sm:items-center sm:gap-6 sm:p-8"
+              className={`service-card group relative flex flex-col gap-4 p-7 text-left sm:flex-row sm:items-center sm:gap-6 sm:p-8 ${
+                i === 0 ? "ring-2 ring-blue-400/50" : ""
+              }`}
             >
+              {i === 0 && (
+                <span className="absolute -top-3 left-6 inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-amber-400 via-solar to-orange-500 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-ink shadow-[0_8px_22px_-8px_rgba(251,191,36,0.7)]">
+                  ⭐ Recommandé
+                </span>
+              )}
               <div
                 className={`grid h-14 w-14 flex-none place-items-center rounded-full ${o.iconBg} text-2xl shadow-[inset_0_-4px_0_0_rgba(0,0,0,0.05)]`}
                 aria-hidden

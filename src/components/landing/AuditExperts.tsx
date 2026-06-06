@@ -1,4 +1,5 @@
 import { useState, FormEvent } from "react";
+import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
 /* ---------------- SECTION 1 : Audit Google Ads ---------------- */
@@ -13,7 +14,7 @@ const AUDIT_BULLETS = [
 
 export function AuditCard() {
   return (
-    <section className="relative px-6 py-16 sm:py-20">
+    <section id="audit" className="relative px-6 py-16 sm:py-20">
       <div className="relative mx-auto max-w-5xl">
         {/* halo animé */}
         <div
@@ -34,12 +35,18 @@ export function AuditCard() {
           className="relative overflow-hidden rounded-[2.25rem] border border-white/40 bg-white/10 p-8 sm:p-12 backdrop-blur-2xl shadow-[0_30px_80px_-30px_rgba(59,130,246,0.45)]"
           style={{ WebkitBackdropFilter: undefined as never }}
         >
-          {/* badge */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-4 py-1.5 backdrop-blur-xl shadow-[0_6px_18px_-8px_rgba(59,130,246,0.4)]">
-            <span className="text-sm">✅</span>
-            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-[12px] font-bold uppercase tracking-wider text-transparent">
-              Expert Certifié Google Ads
-            </span>
+          {/* top row : badges */}
+          <div className="flex flex-wrap items-start justify-between gap-3">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-4 py-1.5 backdrop-blur-xl shadow-[0_6px_18px_-8px_rgba(59,130,246,0.4)]">
+              <span className="text-sm">✅</span>
+              <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-[12px] font-bold uppercase tracking-wider text-transparent">
+                Expert Certifié Google Ads
+              </span>
+            </div>
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-orange-400 via-coral to-rose-500 px-3.5 py-1.5 text-[11px] font-bold uppercase tracking-wider text-white shadow-[0_8px_22px_-8px_rgba(251,113,90,0.7)]">
+              <span>⚡</span>
+              <span>Places limitées</span>
+            </div>
           </div>
 
           <h2 className="mt-6 font-display text-[clamp(2rem,5vw,3.5rem)] font-extrabold leading-[1.05] tracking-[-0.03em]">
@@ -47,6 +54,10 @@ export function AuditCard() {
               Audit Google Ads — 150€
             </span>
           </h2>
+
+          <p className="mt-2 text-sm text-ink-soft/80">
+            Prochaine disponibilité : cette semaine
+          </p>
 
           <p className="mt-4 max-w-2xl text-lg text-ink-soft">
             Un regard expert sur vos campagnes. En 30 minutes, on identifie ce qui
@@ -70,8 +81,9 @@ export function AuditCard() {
           </ul>
 
           <div className="mt-10 flex justify-end">
-            <a
-              href="#"
+            <Link
+              to="/reservation"
+              search={{ service: "audit_flash" }}
               className="group relative inline-flex items-center gap-2 overflow-hidden rounded-full border border-white/60 bg-white/30 px-6 py-3 text-sm font-semibold text-ink backdrop-blur-xl shadow-[0_10px_30px_-12px_rgba(59,130,246,0.55)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/50 hover:shadow-[0_18px_40px_-12px_rgba(99,102,241,0.7)]"
             >
               <span
@@ -84,10 +96,20 @@ export function AuditCard() {
               />
               <span>Réserver mon Audit</span>
               <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
-            </a>
+            </Link>
           </div>
         </motion.div>
       </div>
+
+      {/* Sticky mobile CTA */}
+      <Link
+        to="/reservation"
+        search={{ service: "audit_flash" }}
+        className="fixed inset-x-3 bottom-3 z-40 inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-blue-500 via-electric to-indigo-600 px-5 py-3.5 text-sm font-bold text-white shadow-[0_18px_40px_-12px_rgba(59,130,246,0.7)] backdrop-blur-md sm:hidden"
+      >
+        Réserver mon Audit — 150€
+        <span>→</span>
+      </Link>
 
       <style>{`
         @keyframes audit-glow {
@@ -130,7 +152,7 @@ function ExpertBubble({ e }: { e: Expert }) {
   return (
     <div
       className="absolute"
-      style={{ top: e.pos.top, left: e.pos.left, animation: `float-y 6s ease-in-out ${e.delay}s infinite` }}
+      style={{ top: e.pos.top, left: e.pos.left, animation: `bubble-float 6s ease-in-out ${e.delay}s infinite` }}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
@@ -168,13 +190,19 @@ export function ExpertsTeam() {
           {/* generic "..." */}
           <div
             className="absolute"
-            style={{ top: "30%", left: "82%", animation: "float-y 7s ease-in-out 1s infinite" }}
+            style={{ top: "30%", left: "82%", animation: "bubble-float 7s ease-in-out 1s infinite" }}
           >
             <div className="grid h-[60px] w-[60px] place-items-center rounded-full border border-white/60 bg-white/50 text-ink-soft font-bold backdrop-blur-xl shadow-md">
               …
             </div>
           </div>
         </div>
+        <style>{`
+          @keyframes bubble-float {
+            0%, 100% { transform: translateY(0); }
+            50%      { transform: translateY(-10px); }
+          }
+        `}</style>
 
         {/* RIGHT — text */}
         <motion.div
