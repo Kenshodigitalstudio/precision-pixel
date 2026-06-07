@@ -247,8 +247,14 @@ function GoogleAdsPage() {
         </div>
       </section>
 
+      </section>
+
+      {/* Exemples de rapports — section premium */}
+      <ReportShowcase />
+
       {/* Promise bloc — icône cible glass bubbly */}
       <section className="relative pb-24">
+
         <div className="mx-auto max-w-4xl px-6">
           <div
             ref={promiseReveal}
