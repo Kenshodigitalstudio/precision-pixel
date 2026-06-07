@@ -144,9 +144,10 @@ export function Hero() {
         </h1>
 
         <p className="relative mx-auto mt-10 max-w-xl text-[15px] sm:text-base text-ink-soft">
-          Performance Google Ads & Tracking Server-Side. On transforme
-          votre budget en revenus mesurables.
+          L'agence digitale certifiée qui transforme votre budget en croissance mesurable.
         </p>
+
+
 
         <div className="relative mt-8 flex flex-col items-center gap-3">
           <Link
