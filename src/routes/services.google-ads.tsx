@@ -3,8 +3,10 @@ import { useEffect, useRef, useState } from "react";
 import { Nav } from "@/components/landing/Nav";
 import { Footer } from "@/components/landing/Footer";
 import { ExtraRequest } from "@/components/landing/ExtraRequest";
+import { ReportShowcase } from "@/components/landing/ReportShowcase";
 import { useReveal } from "@/hooks/use-reveal";
 import { useMagnetic } from "@/hooks/use-magnetic";
+
 
 export const Route = createFileRoute("/services/google-ads")({
   component: GoogleAdsPage,
