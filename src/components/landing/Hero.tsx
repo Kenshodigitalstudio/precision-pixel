@@ -162,16 +162,9 @@ export function Hero() {
             <span>Prendre rendez-vous</span>
             <span className="transition-transform group-hover:translate-x-1">↗</span>
           </Link>
-          <a
-            href="#audit"
-            className="group relative inline-flex items-center gap-1.5 overflow-hidden rounded-full border border-white/50 bg-white/40 px-5 py-2 text-xs font-semibold backdrop-blur-xl shadow-[0_6px_18px_-8px_rgba(59,130,246,0.5)] transition-all hover:-translate-y-0.5 hover:bg-white/60"
-          >
-            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              Audit Flash — 150€
-            </span>
-            <span className="text-blue-600 transition-transform group-hover:translate-x-0.5">→</span>
-          </a>
         </div>
+
+
 
         {/* Liquid glass services slider */}
         <div className="relative mt-14">
