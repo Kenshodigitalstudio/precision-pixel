@@ -247,7 +247,7 @@ function GoogleAdsPage() {
         </div>
       </section>
 
-      </section>
+
 
       {/* Exemples de rapports — section premium */}
       <ReportShowcase />
