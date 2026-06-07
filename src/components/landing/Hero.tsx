@@ -144,9 +144,10 @@ export function Hero() {
         </h1>
 
         <p className="relative mx-auto mt-10 max-w-xl text-[15px] sm:text-base text-ink-soft">
-          Performance Google Ads & Tracking Server-Side. On transforme
-          votre budget en revenus mesurables.
+          L'agence digitale certifiée qui transforme votre budget en croissance mesurable.
         </p>
+
+
 
         <div className="relative mt-8 flex flex-col items-center gap-3">
           <Link
@@ -161,16 +162,9 @@ export function Hero() {
             <span>Prendre rendez-vous</span>
             <span className="transition-transform group-hover:translate-x-1">↗</span>
           </Link>
-          <a
-            href="#audit"
-            className="group relative inline-flex items-center gap-1.5 overflow-hidden rounded-full border border-white/50 bg-white/40 px-5 py-2 text-xs font-semibold backdrop-blur-xl shadow-[0_6px_18px_-8px_rgba(59,130,246,0.5)] transition-all hover:-translate-y-0.5 hover:bg-white/60"
-          >
-            <span className="bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
-              Audit Flash — 150€
-            </span>
-            <span className="text-blue-600 transition-transform group-hover:translate-x-0.5">→</span>
-          </a>
         </div>
+
+
 
         {/* Liquid glass services slider */}
         <div className="relative mt-14">
@@ -281,29 +275,8 @@ export function Hero() {
           </button>
         </div>
 
-        <div className="mt-8 flex justify-center">
-          <Link
-            to="/services/google-ads"
-            className="group relative inline-flex items-center gap-2.5 overflow-hidden rounded-full border border-white/40 bg-white/30 px-5 py-2.5 font-display text-sm font-semibold tracking-tight text-ink shadow-[0_8px_24px_-8px_rgba(0,0,0,0.2)] backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:bg-white/50"
-          >
-            <span
-              aria-hidden
-              className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-br from-solar/40 via-amber-300/30 to-mint/30 opacity-90"
-            />
-            <span aria-hidden>✦</span>
-            <div className="flex flex-col text-left leading-none">
-              <span>VOTRE ENTREPRISE</span>
-            </div>
-            <span className="transition-transform group-hover:translate-x-1">→</span>
-          </Link>
-        </div>
-
-        <div className="relative mt-16 flex justify-center">
-          <span className="font-display text-2xl sm:text-3xl font-extrabold tracking-tight bg-gradient-to-br from-sky via-electric to-electric-soft bg-clip-text text-transparent drop-shadow-sm">
-            Experts certifiés Google Ads
-          </span>
-        </div>
       </div>
     </section>
   );
 }
+

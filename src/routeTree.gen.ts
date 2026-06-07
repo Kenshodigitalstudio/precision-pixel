@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ReservationRouteImport } from './routes/reservation'
 import { Route as PolitiqueConfidentialiteRouteImport } from './routes/politique-confidentialite'
+import { Route as NotreEquipeRouteImport } from './routes/notre-equipe'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as CgvRouteImport } from './routes/cgv'
 import { Route as IndexRouteImport } from './routes/index'
@@ -30,6 +31,11 @@ const PolitiqueConfidentialiteRoute =
     path: '/politique-confidentialite',
     getParentRoute: () => rootRouteImport,
   } as any)
+const NotreEquipeRoute = NotreEquipeRouteImport.update({
+  id: '/notre-equipe',
+  path: '/notre-equipe',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
   id: '/mentions-legales',
   path: '/mentions-legales',
@@ -71,6 +77,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cgv': typeof CgvRoute
   '/mentions-legales': typeof MentionsLegalesRoute
+  '/notre-equipe': typeof NotreEquipeRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
   '/reservation': typeof ReservationRouteWithChildren
   '/checkout/return': typeof CheckoutReturnRoute
@@ -82,6 +89,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cgv': typeof CgvRoute
   '/mentions-legales': typeof MentionsLegalesRoute
+  '/notre-equipe': typeof NotreEquipeRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
   '/reservation': typeof ReservationRouteWithChildren
   '/checkout/return': typeof CheckoutReturnRoute
@@ -94,6 +102,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/cgv': typeof CgvRoute
   '/mentions-legales': typeof MentionsLegalesRoute
+  '/notre-equipe': typeof NotreEquipeRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
   '/reservation': typeof ReservationRouteWithChildren
   '/checkout/return': typeof CheckoutReturnRoute
@@ -107,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/cgv'
     | '/mentions-legales'
+    | '/notre-equipe'
     | '/politique-confidentialite'
     | '/reservation'
     | '/checkout/return'
@@ -118,6 +128,7 @@ export interface FileRouteTypes {
     | '/'
     | '/cgv'
     | '/mentions-legales'
+    | '/notre-equipe'
     | '/politique-confidentialite'
     | '/reservation'
     | '/checkout/return'
@@ -129,6 +140,7 @@ export interface FileRouteTypes {
     | '/'
     | '/cgv'
     | '/mentions-legales'
+    | '/notre-equipe'
     | '/politique-confidentialite'
     | '/reservation'
     | '/checkout/return'
@@ -141,6 +153,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CgvRoute: typeof CgvRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
+  NotreEquipeRoute: typeof NotreEquipeRoute
   PolitiqueConfidentialiteRoute: typeof PolitiqueConfidentialiteRoute
   ReservationRoute: typeof ReservationRouteWithChildren
   CheckoutReturnRoute: typeof CheckoutReturnRoute
@@ -162,6 +175,13 @@ declare module '@tanstack/react-router' {
       path: '/politique-confidentialite'
       fullPath: '/politique-confidentialite'
       preLoaderRoute: typeof PolitiqueConfidentialiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notre-equipe': {
+      id: '/notre-equipe'
+      path: '/notre-equipe'
+      fullPath: '/notre-equipe'
+      preLoaderRoute: typeof NotreEquipeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/mentions-legales': {
@@ -232,6 +252,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CgvRoute: CgvRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
+  NotreEquipeRoute: NotreEquipeRoute,
   PolitiqueConfidentialiteRoute: PolitiqueConfidentialiteRoute,
   ReservationRoute: ReservationRouteWithChildren,
   CheckoutReturnRoute: CheckoutReturnRoute,
