@@ -60,7 +60,7 @@ const slides: (Slide & { service: ServiceKey })[] = [
 
 
 export function Hero() {
-  const magneticRef = useMagnetic<HTMLAnchorElement>(0.2);
+  
   const trackRef = useRef<HTMLDivElement>(null);
   const parallaxRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(0);
