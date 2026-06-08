@@ -148,7 +148,7 @@ function GoogleAdsPage() {
   const heroReveal = useReveal<HTMLDivElement>();
   const pillarsReveal = useReveal<HTMLDivElement>();
   const promiseReveal = useReveal<HTMLDivElement>();
-  const finalReveal = useReveal<HTMLDivElement>();
+  
 
   return (
     <main className="relative min-h-screen overflow-x-hidden">
