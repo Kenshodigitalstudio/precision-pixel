@@ -303,22 +303,8 @@ function GoogleAdsPage() {
         </div>
       </section>
 
-      {/* Final CTA — Service disponible cet été (pas de lien) */}
-      <section className="relative pb-28">
-        <div ref={finalReveal} className="reveal mx-auto max-w-4xl px-6 text-center">
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/50 bg-white/40 p-10 backdrop-blur-2xl shadow-[0_30px_80px_-30px_rgba(0,0,0,0.28)]">
-            <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-              <div className="absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-gradient-to-br from-coral/40 via-solar/30 to-lilac/40 blur-3xl animate-[blob_12s_ease-in-out_infinite]" />
-            </div>
-            <div className="inline-flex items-center gap-3 rounded-full border border-white/60 bg-white/60 px-6 py-3 backdrop-blur-xl shadow-[0_12px_30px_-12px_rgba(0,0,0,0.2)] animate-[bubble-pop_700ms_cubic-bezier(0.22,1.5,0.36,1)_both]">
-              <span aria-hidden className="grid h-7 w-7 place-items-center rounded-full bg-gradient-to-br from-coral via-solar to-lilac text-white text-sm">☀</span>
-              <span className="font-mono text-xs sm:text-[13px] font-bold uppercase tracking-[0.22em] text-ink">
-                Service disponible cet été
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
+
+
 
       <Footer />
 
