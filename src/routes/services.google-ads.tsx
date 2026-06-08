@@ -354,29 +354,47 @@ function GoogleAdsPage() {
 function PillarCard({ p, i }: { p: (typeof PILLARS)[number]; i: number }) {
   const ref = useReveal<HTMLDivElement>();
   const Icon = p.Icon;
+  const num = String(i + 1).padStart(2, "0");
   return (
     <div
       ref={ref}
-      className="reveal group relative"
-      style={{ transitionDelay: `${i * 100}ms` }}
+      className="reveal group relative overflow-hidden rounded-2xl border border-white/[0.08] p-6 pt-10 transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_20px_60px_-20px_rgba(120,140,255,0.35)]"
+      style={{
+        background: "rgba(15,15,25,0.75)",
+        backdropFilter: "blur(24px)",
+        WebkitBackdropFilter: "blur(24px)",
+        transitionDelay: `${i * 80}ms`,
+      }}
     >
-      <span aria-hidden className={`absolute -inset-1 rounded-[2rem] bg-gradient-to-br ${p.halo} blur-xl opacity-70`} />
-      <div className="relative flex h-full flex-col items-center text-center rounded-[2rem] border border-white/60 bg-white/55 px-5 py-7 backdrop-blur-2xl shadow-[inset_0_-8px_0_0_rgba(255,255,255,0.4),0_22px_50px_-22px_rgba(0,0,0,0.25)] transition-transform duration-500 group-hover:-translate-y-1">
-        <div className="relative">
-          <span aria-hidden className={`absolute -inset-2 rounded-3xl bg-gradient-to-br ${p.halo} blur-lg opacity-80`} />
-          <span
-            className="relative grid h-24 w-24 place-items-center rounded-3xl bg-white/85 ring-1 ring-white/70 shadow-[inset_0_-6px_0_0_rgba(0,0,0,0.05),0_18px_38px_-18px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-transform duration-500 group-hover:-translate-y-1 group-hover:rotate-[-4deg]"
-            style={{ animation: `float-y 6s ease-in-out ${i * 0.4}s infinite` }}
-          >
-            <Icon className="h-14 w-14" />
-          </span>
+      <span
+        aria-hidden
+        className="pointer-events-none absolute left-4 top-2 select-none leading-none"
+        style={{
+          fontFamily: "'Cormorant Garamond', 'Times New Roman', serif",
+          fontWeight: 300,
+          fontSize: "72px",
+          color: "rgba(255,255,255,0.12)",
+        }}
+      >
+        {num}
+      </span>
+      <div className="relative flex flex-col items-start gap-4">
+        <span className="grid h-12 w-12 place-items-center rounded-full border border-white/15 bg-white/[0.03]">
+          <Icon className="h-7 w-7 [&_*]:!fill-white [&_path]:!stroke-white" />
+        </span>
+        <div>
+          <h3 className="text-white" style={{ fontWeight: 500, fontSize: "1.1rem" }}>
+            {p.title}
+          </h3>
+          <p className="mt-1" style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.875rem" }}>
+            {p.sub}
+          </p>
         </div>
-        <h3 className={`mt-6 font-display text-xl sm:text-2xl font-extrabold tracking-tight ${p.accent}`}>{p.title}</h3>
-        <p className="mt-2 text-[15px] sm:text-base leading-relaxed text-ink-soft">{p.sub}</p>
       </div>
     </div>
   );
 }
+
 
 function Bubbles() {
   // bulles flottantes pleines page (bubbly)
