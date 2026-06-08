@@ -148,7 +148,7 @@ function GoogleAdsPage() {
   const heroReveal = useReveal<HTMLDivElement>();
   const pillarsReveal = useReveal<HTMLDivElement>();
   const promiseReveal = useReveal<HTMLDivElement>();
-  const finalReveal = useReveal<HTMLDivElement>();
+  
 
   return (
     <main className="relative min-h-screen overflow-x-hidden">
@@ -215,18 +215,8 @@ function GoogleAdsPage() {
             ))}
           </div>
 
-          <div className="mt-10 flex justify-center">
-            <a
-              href="mailto:kenshodigitalstudio@gmail.com?subject=Envie%20de%20rejoindre%20vos%20%C3%A9quipes%20!%20(Gestion%20de%20comptes)"
-              className="group relative inline-flex items-center gap-3 overflow-hidden rounded-full px-7 py-3.5 text-sm font-semibold text-white shadow-[0_10px_30px_-8px_rgba(251,146,60,0.45)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_40px_-10px_rgba(249,115,22,0.55)]"
-            >
-              <span className="absolute inset-0 bg-gradient-to-r from-amber-400 via-orange-400 to-amber-500" />
-              <span className="absolute inset-0 bg-gradient-to-r from-amber-300 via-orange-300 to-amber-400 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-              <span aria-hidden className="relative">✦</span>
-              <span className="relative">Devenez le partenaire clé de nos clients. Nos équipes de gestion de comptes recrutent !</span>
-              <span className="relative transition-transform duration-300 group-hover:translate-x-0.5">↗</span>
-            </a>
-          </div>
+
+
         </div>
       </section>
 
@@ -238,7 +228,7 @@ function GoogleAdsPage() {
               <div className="absolute -left-12 top-0 h-48 w-48 rounded-full bg-coral/30 blur-3xl animate-[blob_9s_ease-in-out_infinite]" />
               <div className="absolute right-0 bottom-0 h-56 w-56 rounded-full bg-lilac/30 blur-3xl animate-[blob_11s_ease-in-out_infinite]" style={{ animationDelay: "1.5s" }} />
             </div>
-            <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {PILLARS.map((p, i) => (
                 <PillarCard key={p.title} p={p} i={i} />
               ))}
@@ -313,22 +303,8 @@ function GoogleAdsPage() {
         </div>
       </section>
 
-      {/* Final CTA — Service disponible cet été (pas de lien) */}
-      <section className="relative pb-28">
-        <div ref={finalReveal} className="reveal mx-auto max-w-4xl px-6 text-center">
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/50 bg-white/40 p-10 backdrop-blur-2xl shadow-[0_30px_80px_-30px_rgba(0,0,0,0.28)]">
-            <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-              <div className="absolute left-1/2 top-0 h-72 w-72 -translate-x-1/2 rounded-full bg-gradient-to-br from-coral/40 via-solar/30 to-lilac/40 blur-3xl animate-[blob_12s_ease-in-out_infinite]" />
-            </div>
-            <div className="inline-flex items-center gap-3 rounded-full border border-white/60 bg-white/60 px-6 py-3 backdrop-blur-xl shadow-[0_12px_30px_-12px_rgba(0,0,0,0.2)] animate-[bubble-pop_700ms_cubic-bezier(0.22,1.5,0.36,1)_both]">
-              <span aria-hidden className="grid h-7 w-7 place-items-center rounded-full bg-gradient-to-br from-coral via-solar to-lilac text-white text-sm">☀</span>
-              <span className="font-mono text-xs sm:text-[13px] font-bold uppercase tracking-[0.22em] text-ink">
-                Service disponible cet été
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
+
+
 
       <Footer />
 
@@ -378,29 +354,47 @@ function GoogleAdsPage() {
 function PillarCard({ p, i }: { p: (typeof PILLARS)[number]; i: number }) {
   const ref = useReveal<HTMLDivElement>();
   const Icon = p.Icon;
+  const num = String(i + 1).padStart(2, "0");
   return (
     <div
       ref={ref}
-      className="reveal group relative"
-      style={{ transitionDelay: `${i * 100}ms` }}
+      className="reveal group relative overflow-hidden rounded-2xl border border-white/[0.08] p-6 pt-10 transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_20px_60px_-20px_rgba(120,140,255,0.35)]"
+      style={{
+        background: "rgba(15,15,25,0.75)",
+        backdropFilter: "blur(24px)",
+        WebkitBackdropFilter: "blur(24px)",
+        transitionDelay: `${i * 80}ms`,
+      }}
     >
-      <span aria-hidden className={`absolute -inset-1 rounded-[2rem] bg-gradient-to-br ${p.halo} blur-xl opacity-70`} />
-      <div className="relative flex h-full flex-col items-center text-center rounded-[2rem] border border-white/60 bg-white/55 px-5 py-7 backdrop-blur-2xl shadow-[inset_0_-8px_0_0_rgba(255,255,255,0.4),0_22px_50px_-22px_rgba(0,0,0,0.25)] transition-transform duration-500 group-hover:-translate-y-1">
-        <div className="relative">
-          <span aria-hidden className={`absolute -inset-2 rounded-3xl bg-gradient-to-br ${p.halo} blur-lg opacity-80`} />
-          <span
-            className="relative grid h-24 w-24 place-items-center rounded-3xl bg-white/85 ring-1 ring-white/70 shadow-[inset_0_-6px_0_0_rgba(0,0,0,0.05),0_18px_38px_-18px_rgba(0,0,0,0.25)] backdrop-blur-xl transition-transform duration-500 group-hover:-translate-y-1 group-hover:rotate-[-4deg]"
-            style={{ animation: `float-y 6s ease-in-out ${i * 0.4}s infinite` }}
-          >
-            <Icon className="h-14 w-14" />
-          </span>
+      <span
+        aria-hidden
+        className="pointer-events-none absolute left-4 top-2 select-none leading-none"
+        style={{
+          fontFamily: "'Cormorant Garamond', 'Times New Roman', serif",
+          fontWeight: 300,
+          fontSize: "72px",
+          color: "rgba(255,255,255,0.12)",
+        }}
+      >
+        {num}
+      </span>
+      <div className="relative flex flex-col items-start gap-4">
+        <span className="grid h-12 w-12 place-items-center rounded-full border border-white/15 bg-white/[0.03]">
+          <Icon className="h-7 w-7 [&_*]:!fill-white [&_path]:!stroke-white" />
+        </span>
+        <div>
+          <h3 className="text-white" style={{ fontWeight: 500, fontSize: "1.1rem" }}>
+            {p.title}
+          </h3>
+          <p className="mt-1" style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.875rem" }}>
+            {p.sub}
+          </p>
         </div>
-        <h3 className={`mt-6 font-display text-xl sm:text-2xl font-extrabold tracking-tight ${p.accent}`}>{p.title}</h3>
-        <p className="mt-2 text-[15px] sm:text-base leading-relaxed text-ink-soft">{p.sub}</p>
       </div>
     </div>
   );
 }
+
 
 function Bubbles() {
   // bulles flottantes pleines page (bubbly)
