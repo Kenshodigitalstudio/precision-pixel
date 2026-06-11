@@ -112,29 +112,25 @@ const PILLARS = [
     Icon: RocketIcon,
     title: "Création",
     sub: "de campagnes performantes",
-    halo: "from-sky/60 via-electric/40 to-electric-soft/60",
-    accent: "text-electric",
+    body: "Nous concevons vos campagnes Search, Display et Shopping de A à Z, avec une structure pensée pour maximiser votre Quality Score et minimiser vos coûts dès le lancement.",
   },
   {
     Icon: GearsIcon,
     title: "Gestion",
     sub: "et optimisation continues",
-    halo: "from-coral/60 via-pink-300/50 to-lilac/60",
-    accent: "text-[color:var(--coral)]",
+    body: "Optimisation hebdomadaire des enchères, des mots-clés et des annonces pour améliorer continuellement vos performances et votre ROAS.",
   },
   {
     Icon: PulseIcon,
     title: "Suivi",
     sub: "des performances en temps réel",
-    halo: "from-lilac/60 via-electric-soft/50 to-sky/60",
-    accent: "text-[color:var(--lilac)]",
+    body: "Mise en place du tracking des conversions via Google Tag Manager. Vous savez exactement ce que chaque euro dépensé vous rapporte.",
   },
   {
     Icon: SparkleDocIcon,
     title: "Rapports clairs",
     sub: "et analyses régulières",
-    halo: "from-mint/60 via-emerald-200/50 to-sky/50",
-    accent: "text-emerald-600",
+    body: "Rapport mensuel personnalisé avec les métriques qui comptent vraiment : impressions, clics, conversions, coût/conv. et recommandations.",
   },
 ];
 
@@ -228,7 +224,7 @@ function GoogleAdsPage() {
               <div className="absolute -left-12 top-0 h-48 w-48 rounded-full bg-coral/30 blur-3xl animate-[blob_9s_ease-in-out_infinite]" />
               <div className="absolute right-0 bottom-0 h-56 w-56 rounded-full bg-lilac/30 blur-3xl animate-[blob_11s_ease-in-out_infinite]" style={{ animationDelay: "1.5s" }} />
             </div>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               {PILLARS.map((p, i) => (
                 <PillarCard key={p.title} p={p} i={i} />
               ))}
@@ -358,36 +354,41 @@ function PillarCard({ p, i }: { p: (typeof PILLARS)[number]; i: number }) {
   return (
     <div
       ref={ref}
-      className="reveal group relative overflow-hidden rounded-2xl border border-white/[0.08] p-6 pt-10 transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_20px_60px_-20px_rgba(120,140,255,0.35)]"
+      className="reveal group relative overflow-hidden rounded-2xl p-7 pt-12 transition-all duration-300 hover:-translate-y-[3px] hover:shadow-[0_28px_70px_-25px_rgba(0,0,0,0.22)]"
       style={{
-        background: "rgba(15,15,25,0.75)",
-        backdropFilter: "blur(24px)",
-        WebkitBackdropFilter: "blur(24px)",
+        background: "rgba(255,255,255,0.6)",
+        border: "1px solid rgba(255,255,255,0.5)",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
+        boxShadow: "0 18px 50px -25px rgba(0,0,0,0.18)",
         transitionDelay: `${i * 80}ms`,
       }}
     >
       <span
         aria-hidden
-        className="pointer-events-none absolute left-4 top-2 select-none leading-none"
+        className="pointer-events-none absolute left-5 top-1 select-none leading-none"
         style={{
           fontFamily: "'Cormorant Garamond', 'Times New Roman', serif",
           fontWeight: 300,
-          fontSize: "72px",
-          color: "rgba(255,255,255,0.12)",
+          fontSize: "80px",
+          color: "rgba(0,0,0,0.08)",
         }}
       >
         {num}
       </span>
       <div className="relative flex flex-col items-start gap-4">
-        <span className="grid h-12 w-12 place-items-center rounded-full border border-white/15 bg-white/[0.03]">
-          <Icon className="h-7 w-7 [&_*]:!fill-white [&_path]:!stroke-white" />
+        <span className="grid h-12 w-12 place-items-center rounded-full border border-black/10 bg-white/60">
+          <Icon className="h-7 w-7 [&_*]:!fill-[rgba(30,30,40,0.7)] [&_path]:!stroke-[rgba(30,30,40,0.7)]" />
         </span>
         <div>
-          <h3 className="text-white" style={{ fontWeight: 500, fontSize: "1.1rem" }}>
+          <h3 className="text-ink" style={{ fontWeight: 600, fontSize: "1.2rem" }}>
             {p.title}
           </h3>
-          <p className="mt-1" style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.875rem" }}>
+          <p className="mt-1" style={{ color: "rgba(30,30,40,0.55)", fontSize: "0.9rem" }}>
             {p.sub}
+          </p>
+          <p className="mt-3 text-[14px] leading-relaxed" style={{ color: "rgba(30,30,40,0.7)" }}>
+            {p.body}
           </p>
         </div>
       </div>

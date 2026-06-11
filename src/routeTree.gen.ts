@@ -13,6 +13,7 @@ import { Route as ReservationRouteImport } from './routes/reservation'
 import { Route as PolitiqueConfidentialiteRouteImport } from './routes/politique-confidentialite'
 import { Route as NotreEquipeRouteImport } from './routes/notre-equipe'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
+import { Route as ConfirmationRouteImport } from './routes/confirmation'
 import { Route as CgvRouteImport } from './routes/cgv'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesGoogleAdsRouteImport } from './routes/services.google-ads'
@@ -39,6 +40,11 @@ const NotreEquipeRoute = NotreEquipeRouteImport.update({
 const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
   id: '/mentions-legales',
   path: '/mentions-legales',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfirmationRoute = ConfirmationRouteImport.update({
+  id: '/confirmation',
+  path: '/confirmation',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CgvRoute = CgvRouteImport.update({
@@ -76,6 +82,7 @@ const ApiPublicPaymentsWebhookRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/cgv': typeof CgvRoute
+  '/confirmation': typeof ConfirmationRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/notre-equipe': typeof NotreEquipeRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
@@ -88,6 +95,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/cgv': typeof CgvRoute
+  '/confirmation': typeof ConfirmationRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/notre-equipe': typeof NotreEquipeRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
@@ -101,6 +109,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/cgv': typeof CgvRoute
+  '/confirmation': typeof ConfirmationRoute
   '/mentions-legales': typeof MentionsLegalesRoute
   '/notre-equipe': typeof NotreEquipeRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
@@ -115,6 +124,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/cgv'
+    | '/confirmation'
     | '/mentions-legales'
     | '/notre-equipe'
     | '/politique-confidentialite'
@@ -127,6 +137,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/cgv'
+    | '/confirmation'
     | '/mentions-legales'
     | '/notre-equipe'
     | '/politique-confidentialite'
@@ -139,6 +150,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/cgv'
+    | '/confirmation'
     | '/mentions-legales'
     | '/notre-equipe'
     | '/politique-confidentialite'
@@ -152,6 +164,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CgvRoute: typeof CgvRoute
+  ConfirmationRoute: typeof ConfirmationRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   NotreEquipeRoute: typeof NotreEquipeRoute
   PolitiqueConfidentialiteRoute: typeof PolitiqueConfidentialiteRoute
@@ -189,6 +202,13 @@ declare module '@tanstack/react-router' {
       path: '/mentions-legales'
       fullPath: '/mentions-legales'
       preLoaderRoute: typeof MentionsLegalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/confirmation': {
+      id: '/confirmation'
+      path: '/confirmation'
+      fullPath: '/confirmation'
+      preLoaderRoute: typeof ConfirmationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cgv': {
@@ -251,6 +271,7 @@ const ReservationRouteWithChildren = ReservationRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CgvRoute: CgvRoute,
+  ConfirmationRoute: ConfirmationRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
   NotreEquipeRoute: NotreEquipeRoute,
   PolitiqueConfidentialiteRoute: PolitiqueConfidentialiteRoute,
