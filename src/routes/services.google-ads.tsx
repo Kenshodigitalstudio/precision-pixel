@@ -112,29 +112,25 @@ const PILLARS = [
     Icon: RocketIcon,
     title: "Création",
     sub: "de campagnes performantes",
-    halo: "from-sky/60 via-electric/40 to-electric-soft/60",
-    accent: "text-electric",
+    body: "Nous concevons vos campagnes Search, Display et Shopping de A à Z, avec une structure pensée pour maximiser votre Quality Score et minimiser vos coûts dès le lancement.",
   },
   {
     Icon: GearsIcon,
     title: "Gestion",
     sub: "et optimisation continues",
-    halo: "from-coral/60 via-pink-300/50 to-lilac/60",
-    accent: "text-[color:var(--coral)]",
+    body: "Optimisation hebdomadaire des enchères, des mots-clés et des annonces pour améliorer continuellement vos performances et votre ROAS.",
   },
   {
     Icon: PulseIcon,
     title: "Suivi",
     sub: "des performances en temps réel",
-    halo: "from-lilac/60 via-electric-soft/50 to-sky/60",
-    accent: "text-[color:var(--lilac)]",
+    body: "Mise en place du tracking des conversions via Google Tag Manager. Vous savez exactement ce que chaque euro dépensé vous rapporte.",
   },
   {
     Icon: SparkleDocIcon,
     title: "Rapports clairs",
     sub: "et analyses régulières",
-    halo: "from-mint/60 via-emerald-200/50 to-sky/50",
-    accent: "text-emerald-600",
+    body: "Rapport mensuel personnalisé avec les métriques qui comptent vraiment : impressions, clics, conversions, coût/conv. et recommandations.",
   },
 ];
 
