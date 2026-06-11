@@ -354,36 +354,41 @@ function PillarCard({ p, i }: { p: (typeof PILLARS)[number]; i: number }) {
   return (
     <div
       ref={ref}
-      className="reveal group relative overflow-hidden rounded-2xl border border-white/[0.08] p-6 pt-10 transition-all duration-300 hover:-translate-y-1 hover:border-white/20 hover:shadow-[0_20px_60px_-20px_rgba(120,140,255,0.35)]"
+      className="reveal group relative overflow-hidden rounded-2xl p-7 pt-12 transition-all duration-300 hover:-translate-y-[3px] hover:shadow-[0_28px_70px_-25px_rgba(0,0,0,0.22)]"
       style={{
-        background: "rgba(15,15,25,0.75)",
-        backdropFilter: "blur(24px)",
-        WebkitBackdropFilter: "blur(24px)",
+        background: "rgba(255,255,255,0.6)",
+        border: "1px solid rgba(255,255,255,0.5)",
+        backdropFilter: "blur(20px)",
+        WebkitBackdropFilter: "blur(20px)",
+        boxShadow: "0 18px 50px -25px rgba(0,0,0,0.18)",
         transitionDelay: `${i * 80}ms`,
       }}
     >
       <span
         aria-hidden
-        className="pointer-events-none absolute left-4 top-2 select-none leading-none"
+        className="pointer-events-none absolute left-5 top-1 select-none leading-none"
         style={{
           fontFamily: "'Cormorant Garamond', 'Times New Roman', serif",
           fontWeight: 300,
-          fontSize: "72px",
-          color: "rgba(255,255,255,0.12)",
+          fontSize: "80px",
+          color: "rgba(0,0,0,0.08)",
         }}
       >
         {num}
       </span>
       <div className="relative flex flex-col items-start gap-4">
-        <span className="grid h-12 w-12 place-items-center rounded-full border border-white/15 bg-white/[0.03]">
-          <Icon className="h-7 w-7 [&_*]:!fill-white [&_path]:!stroke-white" />
+        <span className="grid h-12 w-12 place-items-center rounded-full border border-black/10 bg-white/60">
+          <Icon className="h-7 w-7 [&_*]:!fill-[rgba(30,30,40,0.7)] [&_path]:!stroke-[rgba(30,30,40,0.7)]" />
         </span>
         <div>
-          <h3 className="text-white" style={{ fontWeight: 500, fontSize: "1.1rem" }}>
+          <h3 className="text-ink" style={{ fontWeight: 600, fontSize: "1.2rem" }}>
             {p.title}
           </h3>
-          <p className="mt-1" style={{ color: "rgba(255,255,255,0.55)", fontSize: "0.875rem" }}>
+          <p className="mt-1" style={{ color: "rgba(30,30,40,0.55)", fontSize: "0.9rem" }}>
             {p.sub}
+          </p>
+          <p className="mt-3 text-[14px] leading-relaxed" style={{ color: "rgba(30,30,40,0.7)" }}>
+            {p.body}
           </p>
         </div>
       </div>
