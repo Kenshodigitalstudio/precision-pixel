@@ -224,7 +224,7 @@ function GoogleAdsPage() {
               <div className="absolute -left-12 top-0 h-48 w-48 rounded-full bg-coral/30 blur-3xl animate-[blob_9s_ease-in-out_infinite]" />
               <div className="absolute right-0 bottom-0 h-56 w-56 rounded-full bg-lilac/30 blur-3xl animate-[blob_11s_ease-in-out_infinite]" style={{ animationDelay: "1.5s" }} />
             </div>
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               {PILLARS.map((p, i) => (
                 <PillarCard key={p.title} p={p} i={i} />
               ))}
