@@ -36,10 +36,8 @@ export function Nav() {
         </Link>
 
         <ul className="hidden items-center gap-7 text-sm font-medium text-ink-soft md:flex">
-          <li><a href="#services" className="hover:text-ink transition-colors">Services</a></li>
-          <li><a href="#metrics" className="hover:text-ink transition-colors">Résultats</a></li>
-          <li><a href="#approche" className="hover:text-ink transition-colors">Approche</a></li>
-          <li><a href="#contact" className="hover:text-ink transition-colors">Contact</a></li>
+          <li><Link to="/services/google-ads" className="hover:text-ink transition-colors">VOTRE ENTREPRISE</Link></li>
+          <li><Link to="/notre-equipe" className="hover:text-ink transition-colors">Notre équipe</Link></li>
         </ul>
         <Link
           to="/reservation"
