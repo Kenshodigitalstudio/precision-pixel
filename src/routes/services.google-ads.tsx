@@ -366,16 +366,11 @@ function PillarCard({ p, i }: { p: (typeof PILLARS)[number]; i: number }) {
     >
       <span
         aria-hidden
-        className="pointer-events-none absolute left-5 top-1 select-none leading-none"
-        style={{
-          fontFamily: "'Cormorant Garamond', 'Times New Roman', serif",
-          fontWeight: 300,
-          fontSize: "80px",
-          color: "rgba(0,0,0,0.08)",
-        }}
+        className="pointer-events-none absolute left-5 top-2 select-none font-display text-[64px] font-extrabold leading-none tracking-[-0.04em] text-ink/10"
       >
         {num}
       </span>
+
       <div className="relative flex flex-col items-start gap-4">
         <span className="grid h-12 w-12 place-items-center rounded-full border border-black/10 bg-white/60">
           <Icon className="h-7 w-7 [&_*]:!fill-[rgba(30,30,40,0.7)] [&_path]:!stroke-[rgba(30,30,40,0.7)]" />
