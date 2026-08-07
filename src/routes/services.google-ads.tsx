@@ -381,16 +381,17 @@ function PillarCard({ p, i }: { p: (typeof PILLARS)[number]; i: number }) {
           <Icon className="h-7 w-7 [&_*]:!fill-[rgba(30,30,40,0.7)] [&_path]:!stroke-[rgba(30,30,40,0.7)]" />
         </span>
         <div>
-          <h3 className="text-ink" style={{ fontWeight: 600, fontSize: "1.2rem" }}>
+          <h3 className="font-display text-xl font-semibold tracking-[-0.02em] text-ink">
             {p.title}
           </h3>
-          <p className="mt-1" style={{ color: "rgba(30,30,40,0.55)", fontSize: "0.9rem" }}>
+          <p className="mt-1 text-sm text-ink-soft">
             {p.sub}
           </p>
-          <p className="mt-3 text-[14px] leading-relaxed" style={{ color: "rgba(30,30,40,0.7)" }}>
+          <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">
             {p.body}
           </p>
         </div>
+
       </div>
     </div>
   );
