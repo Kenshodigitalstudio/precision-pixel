@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { Nav } from "@/components/landing/Nav";
 import { Footer } from "@/components/landing/Footer";
 import { ExtraRequest } from "@/components/landing/ExtraRequest";
@@ -342,6 +342,75 @@ function GoogleAdsPage() {
           50%  { transform: translateY(-22px) translateX(6px) scale(1.05); opacity: 1; }
           100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.7; }
         }
+
+        /* --- numéros cochés comme des tâches faites --- */
+        .tick-box {
+          border-color: color-mix(in oklab, var(--electric) 32%, transparent);
+          background: rgba(255, 255, 255, 0.75);
+        }
+        .is-visible .tick-box {
+          animation: tick-fill 480ms cubic-bezier(0.22, 1.4, 0.36, 1) var(--tick-delay, 0ms) both;
+        }
+        @keyframes tick-fill {
+          0% {
+            background: rgba(255, 255, 255, 0.75);
+            transform: scale(1);
+            box-shadow: none;
+          }
+          55% {
+            background: linear-gradient(135deg, var(--electric), var(--lilac) 55%, var(--coral));
+            transform: scale(1.32);
+            box-shadow: 0 0 0 8px color-mix(in oklab, var(--lilac) 22%, transparent);
+          }
+          100% {
+            background: linear-gradient(135deg, var(--electric), var(--lilac) 55%, var(--coral));
+            transform: scale(1);
+            box-shadow: 0 0 0 4px color-mix(in oklab, var(--lilac) 14%, transparent);
+          }
+        }
+        .tick-mark {
+          stroke-dasharray: 100;
+          stroke-dashoffset: 100;
+        }
+        .is-visible .tick-mark {
+          animation: tick-draw 360ms cubic-bezier(0.65, 0, 0.35, 1) var(--tick-mark-delay, 0ms) forwards;
+        }
+        @keyframes tick-draw {
+          to { stroke-dashoffset: 0; }
+        }
+        .strike-line {
+          stroke-dasharray: 100;
+          stroke-dashoffset: 100;
+        }
+        .is-visible .strike-line {
+          animation: strike-draw 520ms cubic-bezier(0.22, 1, 0.36, 1) var(--strike-delay, 0ms) forwards;
+        }
+        @keyframes strike-draw {
+          to { stroke-dashoffset: 0; }
+        }
+        .num-done {
+          transition:
+            opacity 600ms ease var(--num-fade-delay, 0ms),
+            filter 600ms ease var(--num-fade-delay, 0ms);
+        }
+        .is-visible .num-done {
+          opacity: 0.5;
+          filter: blur(0.2px);
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .tick-box {
+            animation: none;
+            background: linear-gradient(135deg, var(--electric), var(--lilac) 55%, var(--coral));
+          }
+          .tick-mark,
+          .strike-line {
+            animation: none;
+            stroke-dashoffset: 0;
+          }
+          .num-done {
+            opacity: 0.6;
+          }
+        }
       `}</style>
     </main>
   );
@@ -366,9 +435,59 @@ function PillarCard({ p, i }: { p: (typeof PILLARS)[number]; i: number }) {
     >
       <span
         aria-hidden
-        className="pointer-events-none absolute right-5 top-2 select-none font-display text-[64px] font-extrabold leading-none tracking-[-0.04em] text-ink/10"
+        className="pointer-events-none absolute right-5 top-2 flex select-none items-center gap-3"
+        style={
+          {
+            "--tick-delay": `${140 + i * 420}ms`,
+            "--tick-mark-delay": `${340 + i * 420}ms`,
+            "--strike-delay": `${470 + i * 420}ms`,
+            "--num-fade-delay": `${780 + i * 420}ms`,
+          } as CSSProperties
+        }
       >
-        {num}
+        <span className="tick-box grid h-6 w-6 flex-none place-items-center rounded-full border">
+          <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden>
+            <path
+              className="tick-mark"
+              d="M5 12.5 L10 17.5 L19 7"
+              fill="none"
+              stroke="white"
+              strokeWidth="3.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              pathLength={100}
+            />
+          </svg>
+        </span>
+        <span className="relative block">
+          <span className="num-done block font-display text-[64px] font-extrabold leading-none tracking-[-0.04em] text-ink/10">
+            {num}
+          </span>
+          <svg
+            viewBox="0 0 100 10"
+            preserveAspectRatio="none"
+            className="absolute inset-x-0 top-1/2 h-[9px] w-full -translate-y-1/2 overflow-visible"
+            aria-hidden
+          >
+            <defs>
+              <linearGradient id={`strike-${i}`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100" y2="0">
+                <stop offset="0%" style={{ stopColor: "var(--electric)" }} />
+                <stop offset="55%" style={{ stopColor: "var(--lilac)" }} />
+                <stop offset="100%" style={{ stopColor: "var(--coral)" }} />
+              </linearGradient>
+            </defs>
+            <path
+              className="strike-line"
+              d="M2 6 Q 50 3.4 98 5.4"
+              fill="none"
+              stroke={`url(#strike-${i})`}
+              strokeWidth="5"
+              strokeLinecap="round"
+              vectorEffect="non-scaling-stroke"
+              pathLength={100}
+            />
+          </svg>
+        </span>
       </span>
 
       <div className="relative flex flex-col items-start gap-4">
