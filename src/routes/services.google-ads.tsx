@@ -470,7 +470,7 @@ function PillarCard({ p, i }: { p: (typeof PILLARS)[number]; i: number }) {
             aria-hidden
           >
             <defs>
-              <linearGradient id={`strike-${i}`} x1="0" y1="0" x2="1" y2="0">
+              <linearGradient id={`strike-${i}`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100" y2="0">
                 <stop offset="0%" style={{ stopColor: "var(--electric)" }} />
                 <stop offset="55%" style={{ stopColor: "var(--lilac)" }} />
                 <stop offset="100%" style={{ stopColor: "var(--coral)" }} />
@@ -478,7 +478,7 @@ function PillarCard({ p, i }: { p: (typeof PILLARS)[number]; i: number }) {
             </defs>
             <path
               className="strike-line"
-              d="M2 5 H98"
+              d="M2 6 Q 50 3.4 98 5.4"
               fill="none"
               stroke={`url(#strike-${i})`}
               strokeWidth="5"
