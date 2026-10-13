@@ -366,7 +366,7 @@ function PillarCard({ p, i }: { p: (typeof PILLARS)[number]; i: number }) {
     >
       <span
         aria-hidden
-        className="pointer-events-none absolute left-5 top-2 select-none font-display text-[64px] font-extrabold leading-none tracking-[-0.04em] text-ink/10"
+        className="pointer-events-none absolute right-5 top-2 select-none font-display text-[64px] font-extrabold leading-none tracking-[-0.04em] text-ink/10"
       >
         {num}
       </span>
@@ -376,16 +376,20 @@ function PillarCard({ p, i }: { p: (typeof PILLARS)[number]; i: number }) {
           <Icon className="h-7 w-7 [&_*]:!fill-[rgba(30,30,40,0.7)] [&_path]:!stroke-[rgba(30,30,40,0.7)]" />
         </span>
         <div>
-          <h3 className="font-display text-xl font-semibold tracking-[-0.02em] text-ink">
-            {p.title}
+          <h3 className="font-display text-[clamp(1.5rem,2.6vw,2rem)] font-extrabold leading-[1.08] tracking-[-0.035em]">
+            <span className="bg-gradient-to-r from-[color:var(--electric)] via-[color:color-mix(in_oklch,var(--lilac)_55%,var(--ink))] to-[color:color-mix(in_oklch,var(--coral)_55%,var(--ink))] bg-clip-text text-transparent">
+              {p.title}
+            </span>
           </h3>
-          <p className="mt-1 text-sm text-ink-soft">
+          <p className="mt-1.5 font-display text-base font-medium leading-snug tracking-[-0.01em] text-ink-soft sm:text-lg">
             {p.sub}
           </p>
-          <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">
+
+          <p className="mt-3 font-display text-[15px] leading-relaxed text-ink-soft">
             {p.body}
           </p>
         </div>
+
 
       </div>
     </div>
