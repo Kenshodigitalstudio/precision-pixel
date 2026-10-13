@@ -376,16 +376,21 @@ function PillarCard({ p, i }: { p: (typeof PILLARS)[number]; i: number }) {
           <Icon className="h-7 w-7 [&_*]:!fill-[rgba(30,30,40,0.7)] [&_path]:!stroke-[rgba(30,30,40,0.7)]" />
         </span>
         <div>
-          <h3 className="font-display text-xl font-semibold tracking-[-0.02em] text-ink">
-            {p.title}
+          <h3 className="font-display text-[clamp(1.5rem,2.6vw,2rem)] font-extrabold leading-[1.08] tracking-[-0.035em]">
+            <span className="bg-gradient-to-r from-[color:var(--electric)] via-[color:var(--lilac)] to-[color:var(--coral)] bg-clip-text text-transparent">
+              {p.title}
+            </span>
           </h3>
-          <p className="mt-1 text-sm text-ink-soft">
-            {p.sub}
+          <p className="mt-1.5 font-display text-base font-medium leading-snug tracking-[-0.025em] sm:text-lg">
+            <span className="bg-gradient-to-r from-[color:var(--lilac)] via-[color:var(--sky)] to-[color:var(--electric-soft)] bg-clip-text text-transparent">
+              {p.sub}
+            </span>
           </p>
-          <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">
+          <p className="mt-3 font-display text-[15px] leading-relaxed text-ink-soft">
             {p.body}
           </p>
         </div>
+
 
       </div>
     </div>
