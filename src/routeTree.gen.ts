@@ -9,21 +9,41 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ReservationRouteImport } from './routes/reservation'
-import { Route as PolitiqueConfidentialiteRouteImport } from './routes/politique-confidentialite'
-import { Route as NotreEquipeRouteImport } from './routes/notre-equipe'
-import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
-import { Route as ConfirmationRouteImport } from './routes/confirmation'
-import { Route as CgvRouteImport } from './routes/cgv'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ServicesGoogleAdsRouteImport } from './routes/services.google-ads'
-import { Route as ReservationConfirmationRouteImport } from './routes/reservation.confirmation'
+import { Route as CgvRouteImport } from './routes/cgv'
+import { Route as ConfirmationRouteImport } from './routes/confirmation'
+import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
+import { Route as NotreEquipeRouteImport } from './routes/notre-equipe'
+import { Route as PolitiqueConfidentialiteRouteImport } from './routes/politique-confidentialite'
+import { Route as ReservationRouteImport } from './routes/reservation'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
+import { Route as ReservationConfirmationRouteImport } from './routes/reservation.confirmation'
+import { Route as ServicesGoogleAdsRouteImport } from './routes/services.google-ads'
 import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/public/payments/webhook'
 
-const ReservationRoute = ReservationRouteImport.update({
-  id: '/reservation',
-  path: '/reservation',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CgvRoute = CgvRouteImport.update({
+  id: '/cgv',
+  path: '/cgv',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfirmationRoute = ConfirmationRouteImport.update({
+  id: '/confirmation',
+  path: '/confirmation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
+  id: '/mentions-legales',
+  path: '/mentions-legales',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotreEquipeRoute = NotreEquipeRouteImport.update({
+  id: '/notre-equipe',
+  path: '/notre-equipe',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PolitiqueConfidentialiteRoute =
@@ -32,34 +52,14 @@ const PolitiqueConfidentialiteRoute =
     path: '/politique-confidentialite',
     getParentRoute: () => rootRouteImport,
   } as any)
-const NotreEquipeRoute = NotreEquipeRouteImport.update({
-  id: '/notre-equipe',
-  path: '/notre-equipe',
+const ReservationRoute = ReservationRouteImport.update({
+  id: '/reservation',
+  path: '/reservation',
   getParentRoute: () => rootRouteImport,
 } as any)
-const MentionsLegalesRoute = MentionsLegalesRouteImport.update({
-  id: '/mentions-legales',
-  path: '/mentions-legales',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ConfirmationRoute = ConfirmationRouteImport.update({
-  id: '/confirmation',
-  path: '/confirmation',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CgvRoute = CgvRouteImport.update({
-  id: '/cgv',
-  path: '/cgv',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ServicesGoogleAdsRoute = ServicesGoogleAdsRouteImport.update({
-  id: '/services/google-ads',
-  path: '/services/google-ads',
+const CheckoutReturnRoute = CheckoutReturnRouteImport.update({
+  id: '/checkout/return',
+  path: '/checkout/return',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ReservationConfirmationRoute = ReservationConfirmationRouteImport.update({
@@ -67,9 +67,9 @@ const ReservationConfirmationRoute = ReservationConfirmationRouteImport.update({
   path: '/confirmation',
   getParentRoute: () => ReservationRoute,
 } as any)
-const CheckoutReturnRoute = CheckoutReturnRouteImport.update({
-  id: '/checkout/return',
-  path: '/checkout/return',
+const ServicesGoogleAdsRoute = ServicesGoogleAdsRouteImport.update({
+  id: '/services/google-ads',
+  path: '/services/google-ads',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiPublicPaymentsWebhookRoute =
@@ -176,39 +176,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/reservation': {
-      id: '/reservation'
-      path: '/reservation'
-      fullPath: '/reservation'
-      preLoaderRoute: typeof ReservationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/politique-confidentialite': {
-      id: '/politique-confidentialite'
-      path: '/politique-confidentialite'
-      fullPath: '/politique-confidentialite'
-      preLoaderRoute: typeof PolitiqueConfidentialiteRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/notre-equipe': {
-      id: '/notre-equipe'
-      path: '/notre-equipe'
-      fullPath: '/notre-equipe'
-      preLoaderRoute: typeof NotreEquipeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/mentions-legales': {
-      id: '/mentions-legales'
-      path: '/mentions-legales'
-      fullPath: '/mentions-legales'
-      preLoaderRoute: typeof MentionsLegalesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/confirmation': {
-      id: '/confirmation'
-      path: '/confirmation'
-      fullPath: '/confirmation'
-      preLoaderRoute: typeof ConfirmationRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cgv': {
@@ -218,18 +190,46 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CgvRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/confirmation': {
+      id: '/confirmation'
+      path: '/confirmation'
+      fullPath: '/confirmation'
+      preLoaderRoute: typeof ConfirmationRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/google-ads': {
-      id: '/services/google-ads'
-      path: '/services/google-ads'
-      fullPath: '/services/google-ads'
-      preLoaderRoute: typeof ServicesGoogleAdsRouteImport
+    '/mentions-legales': {
+      id: '/mentions-legales'
+      path: '/mentions-legales'
+      fullPath: '/mentions-legales'
+      preLoaderRoute: typeof MentionsLegalesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notre-equipe': {
+      id: '/notre-equipe'
+      path: '/notre-equipe'
+      fullPath: '/notre-equipe'
+      preLoaderRoute: typeof NotreEquipeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/politique-confidentialite': {
+      id: '/politique-confidentialite'
+      path: '/politique-confidentialite'
+      fullPath: '/politique-confidentialite'
+      preLoaderRoute: typeof PolitiqueConfidentialiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reservation': {
+      id: '/reservation'
+      path: '/reservation'
+      fullPath: '/reservation'
+      preLoaderRoute: typeof ReservationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/checkout/return': {
+      id: '/checkout/return'
+      path: '/checkout/return'
+      fullPath: '/checkout/return'
+      preLoaderRoute: typeof CheckoutReturnRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reservation/confirmation': {
@@ -239,11 +239,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReservationConfirmationRouteImport
       parentRoute: typeof ReservationRoute
     }
-    '/checkout/return': {
-      id: '/checkout/return'
-      path: '/checkout/return'
-      fullPath: '/checkout/return'
-      preLoaderRoute: typeof CheckoutReturnRouteImport
+    '/services/google-ads': {
+      id: '/services/google-ads'
+      path: '/services/google-ads'
+      fullPath: '/services/google-ads'
+      preLoaderRoute: typeof ServicesGoogleAdsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/public/payments/webhook': {
