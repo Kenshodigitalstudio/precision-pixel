@@ -188,7 +188,7 @@ function GoogleAdsPage() {
           <p className="mx-auto mt-5 max-w-2xl font-display text-lg sm:text-xl font-medium text-ink-soft">
             Découvrez{" "}
             <span className="font-extrabold bg-gradient-to-r from-[color:var(--electric)] via-[color:var(--lilac)] to-[color:var(--coral)] bg-clip-text text-transparent">
-              VOTRE ENTREPRISE.
+              VOTRE ENTREPRISE.Service disponible debut 2027.
             </span>
           </p>
 
