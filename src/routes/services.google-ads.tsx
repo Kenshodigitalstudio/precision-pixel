@@ -366,7 +366,7 @@ function PillarCard({ p, i }: { p: (typeof PILLARS)[number]; i: number }) {
     >
       <span
         aria-hidden
-        className="pointer-events-none absolute left-5 top-2 select-none font-display text-[64px] font-extrabold leading-none tracking-[-0.04em] text-ink/10"
+        className="pointer-events-none absolute right-5 top-2 select-none font-display text-[64px] font-extrabold leading-none tracking-[-0.04em] text-ink/10"
       >
         {num}
       </span>
@@ -377,11 +377,11 @@ function PillarCard({ p, i }: { p: (typeof PILLARS)[number]; i: number }) {
         </span>
         <div>
           <h3 className="font-display text-[clamp(1.5rem,2.6vw,2rem)] font-extrabold leading-[1.08] tracking-[-0.035em]">
-            <span className="bg-gradient-to-r from-[color:var(--electric)] via-[color:var(--lilac)] to-[color:var(--coral)] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[color:var(--electric)] via-[color:color-mix(in_oklch,var(--lilac)_55%,var(--ink))] to-[color:color-mix(in_oklch,var(--coral)_55%,var(--ink))] bg-clip-text text-transparent">
               {p.title}
             </span>
           </h3>
-          <p className="mt-1.5 font-display text-base font-medium leading-snug tracking-[-0.025em] text-ink-soft sm:text-lg">
+          <p className="mt-1.5 font-display text-base font-medium leading-snug tracking-[-0.01em] text-ink-soft sm:text-lg">
             {p.sub}
           </p>
 
