@@ -372,8 +372,8 @@ function PillarCard({ p, i }: { p: (typeof PILLARS)[number]; i: number }) {
       </span>
 
       <div className="relative flex flex-col items-start gap-4">
-        <span className="grid h-12 w-12 place-items-center rounded-full border border-black/10 bg-white/60">
-          <Icon className="h-7 w-7 [&_*]:!fill-[rgba(30,30,40,0.7)] [&_path]:!stroke-[rgba(30,30,40,0.7)]" />
+        <span className="grid h-12 w-12 place-items-center rounded-full border border-black/10 bg-white/60 shadow-[inset_0_1px_2px_rgba(255,255,255,0.9)]">
+          <Icon className="h-7 w-7 drop-shadow-[0_3px_6px_rgba(0,0,0,0.18)]" />
         </span>
         <div>
           <h3 className="font-display text-[clamp(1.5rem,2.6vw,2rem)] font-extrabold leading-[1.08] tracking-[-0.035em]">
