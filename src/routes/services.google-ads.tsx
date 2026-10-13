@@ -381,11 +381,10 @@ function PillarCard({ p, i }: { p: (typeof PILLARS)[number]; i: number }) {
               {p.title}
             </span>
           </h3>
-          <p className="mt-1.5 font-display text-base font-medium leading-snug tracking-[-0.025em] sm:text-lg">
-            <span className="bg-gradient-to-r from-[color:var(--lilac)] via-[color:var(--sky)] to-[color:var(--electric-soft)] bg-clip-text text-transparent">
-              {p.sub}
-            </span>
+          <p className="mt-1.5 font-display text-base font-medium leading-snug tracking-[-0.025em] text-ink-soft sm:text-lg">
+            {p.sub}
           </p>
+
           <p className="mt-3 font-display text-[15px] leading-relaxed text-ink-soft">
             {p.body}
           </p>
