@@ -12,11 +12,13 @@ type Slide = {
   cta?: { label: string };
   href?: string;
   premium?: boolean;
+  colorful?: boolean;
+  badge?: string;
 };
 
 type ServiceKey = "audit_flash" | "tracking_setup";
 
-const slides: (Slide & { service: ServiceKey })[] = [
+const slides: (Slide & { service?: ServiceKey })[] = [
   {
     tag: "Audit Flash",
     title: "RDV 30 min — Audit Google Ads",
@@ -26,6 +28,26 @@ const slides: (Slide & { service: ServiceKey })[] = [
     icon: "📞",
     cta: { label: "Réserver & payer" },
     service: "audit_flash",
+  },
+  {
+    tag: "VOTRE ENTREPRISE",
+    title: "Gestion mensuelle de votre compte Google Ads",
+    desc: "On ne vous dit pas juste quoi faire. On le fait pour vous : création complète des campagnes, optimisation continue et suivi des performances.",
+    gradient: "from-electric/70 via-lilac/60 to-coral/70",
+    icon: "🚀",
+    cta: { label: "Découvrir le service" },
+    href: "/services/google-ads",
+  },
+  {
+    tag: "Réseaux sociaux",
+    title: "Gestion de vos réseaux sociaux",
+    desc: "Instagram, TikTok, LinkedIn, YouTube… on fait rayonner votre marque là où vos clients passent du temps.",
+    gradient: "from-coral/80 via-solar/70 to-lilac/80",
+    icon: "📣",
+    cta: { label: "Découvrir le service" },
+    href: "/reseaux-sociaux",
+    colorful: true,
+    badge: "Sur devis",
   },
 ];
 
