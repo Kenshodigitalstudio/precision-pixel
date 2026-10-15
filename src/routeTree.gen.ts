@@ -15,6 +15,7 @@ import { Route as ConfirmationRouteImport } from './routes/confirmation'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as NotreEquipeRouteImport } from './routes/notre-equipe'
 import { Route as PolitiqueConfidentialiteRouteImport } from './routes/politique-confidentialite'
+import { Route as ReseauxSociauxRouteImport } from './routes/reseaux-sociaux'
 import { Route as ReservationRouteImport } from './routes/reservation'
 import { Route as VotreEntrepriseRouteImport } from './routes/votre-entreprise'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
@@ -53,6 +54,11 @@ const PolitiqueConfidentialiteRoute =
     path: '/politique-confidentialite',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ReseauxSociauxRoute = ReseauxSociauxRouteImport.update({
+  id: '/reseaux-sociaux',
+  path: '/reseaux-sociaux',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReservationRoute = ReservationRouteImport.update({
   id: '/reservation',
   path: '/reservation',
@@ -92,6 +98,7 @@ export interface FileRoutesByFullPath {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/notre-equipe': typeof NotreEquipeRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
+  '/reseaux-sociaux': typeof ReseauxSociauxRoute
   '/reservation': typeof ReservationRouteWithChildren
   '/votre-entreprise': typeof VotreEntrepriseRoute
   '/checkout/return': typeof CheckoutReturnRoute
@@ -106,6 +113,7 @@ export interface FileRoutesByTo {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/notre-equipe': typeof NotreEquipeRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
+  '/reseaux-sociaux': typeof ReseauxSociauxRoute
   '/reservation': typeof ReservationRouteWithChildren
   '/votre-entreprise': typeof VotreEntrepriseRoute
   '/checkout/return': typeof CheckoutReturnRoute
@@ -121,6 +129,7 @@ export interface FileRoutesById {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/notre-equipe': typeof NotreEquipeRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
+  '/reseaux-sociaux': typeof ReseauxSociauxRoute
   '/reservation': typeof ReservationRouteWithChildren
   '/votre-entreprise': typeof VotreEntrepriseRoute
   '/checkout/return': typeof CheckoutReturnRoute
@@ -137,6 +146,7 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/notre-equipe'
     | '/politique-confidentialite'
+    | '/reseaux-sociaux'
     | '/reservation'
     | '/votre-entreprise'
     | '/checkout/return'
@@ -151,6 +161,7 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/notre-equipe'
     | '/politique-confidentialite'
+    | '/reseaux-sociaux'
     | '/reservation'
     | '/votre-entreprise'
     | '/checkout/return'
@@ -165,6 +176,7 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/notre-equipe'
     | '/politique-confidentialite'
+    | '/reseaux-sociaux'
     | '/reservation'
     | '/votre-entreprise'
     | '/checkout/return'
@@ -180,6 +192,7 @@ export interface RootRouteChildren {
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   NotreEquipeRoute: typeof NotreEquipeRoute
   PolitiqueConfidentialiteRoute: typeof PolitiqueConfidentialiteRoute
+  ReseauxSociauxRoute: typeof ReseauxSociauxRoute
   ReservationRoute: typeof ReservationRouteWithChildren
   VotreEntrepriseRoute: typeof VotreEntrepriseRoute
   CheckoutReturnRoute: typeof CheckoutReturnRoute
@@ -229,6 +242,13 @@ declare module '@tanstack/react-router' {
       path: '/politique-confidentialite'
       fullPath: '/politique-confidentialite'
       preLoaderRoute: typeof PolitiqueConfidentialiteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/reseaux-sociaux': {
+      id: '/reseaux-sociaux'
+      path: '/reseaux-sociaux'
+      fullPath: '/reseaux-sociaux'
+      preLoaderRoute: typeof ReseauxSociauxRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/reservation': {
@@ -295,6 +315,7 @@ const rootRouteChildren: RootRouteChildren = {
   MentionsLegalesRoute: MentionsLegalesRoute,
   NotreEquipeRoute: NotreEquipeRoute,
   PolitiqueConfidentialiteRoute: PolitiqueConfidentialiteRoute,
+  ReseauxSociauxRoute: ReseauxSociauxRoute,
   ReservationRoute: ReservationRouteWithChildren,
   VotreEntrepriseRoute: VotreEntrepriseRoute,
   CheckoutReturnRoute: CheckoutReturnRoute,
