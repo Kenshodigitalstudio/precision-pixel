@@ -16,6 +16,7 @@ import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as NotreEquipeRouteImport } from './routes/notre-equipe'
 import { Route as PolitiqueConfidentialiteRouteImport } from './routes/politique-confidentialite'
 import { Route as ReservationRouteImport } from './routes/reservation'
+import { Route as VotreEntrepriseRouteImport } from './routes/votre-entreprise'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
 import { Route as ReservationConfirmationRouteImport } from './routes/reservation.confirmation'
 import { Route as ServicesGoogleAdsRouteImport } from './routes/services.google-ads'
@@ -57,6 +58,11 @@ const ReservationRoute = ReservationRouteImport.update({
   path: '/reservation',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VotreEntrepriseRoute = VotreEntrepriseRouteImport.update({
+  id: '/votre-entreprise',
+  path: '/votre-entreprise',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CheckoutReturnRoute = CheckoutReturnRouteImport.update({
   id: '/checkout/return',
   path: '/checkout/return',
@@ -87,6 +93,7 @@ export interface FileRoutesByFullPath {
   '/notre-equipe': typeof NotreEquipeRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
   '/reservation': typeof ReservationRouteWithChildren
+  '/votre-entreprise': typeof VotreEntrepriseRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/reservation/confirmation': typeof ReservationConfirmationRoute
   '/services/google-ads': typeof ServicesGoogleAdsRoute
@@ -100,6 +107,7 @@ export interface FileRoutesByTo {
   '/notre-equipe': typeof NotreEquipeRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
   '/reservation': typeof ReservationRouteWithChildren
+  '/votre-entreprise': typeof VotreEntrepriseRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/reservation/confirmation': typeof ReservationConfirmationRoute
   '/services/google-ads': typeof ServicesGoogleAdsRoute
@@ -114,6 +122,7 @@ export interface FileRoutesById {
   '/notre-equipe': typeof NotreEquipeRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
   '/reservation': typeof ReservationRouteWithChildren
+  '/votre-entreprise': typeof VotreEntrepriseRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/reservation/confirmation': typeof ReservationConfirmationRoute
   '/services/google-ads': typeof ServicesGoogleAdsRoute
@@ -129,6 +138,7 @@ export interface FileRouteTypes {
     | '/notre-equipe'
     | '/politique-confidentialite'
     | '/reservation'
+    | '/votre-entreprise'
     | '/checkout/return'
     | '/reservation/confirmation'
     | '/services/google-ads'
@@ -142,6 +152,7 @@ export interface FileRouteTypes {
     | '/notre-equipe'
     | '/politique-confidentialite'
     | '/reservation'
+    | '/votre-entreprise'
     | '/checkout/return'
     | '/reservation/confirmation'
     | '/services/google-ads'
@@ -155,6 +166,7 @@ export interface FileRouteTypes {
     | '/notre-equipe'
     | '/politique-confidentialite'
     | '/reservation'
+    | '/votre-entreprise'
     | '/checkout/return'
     | '/reservation/confirmation'
     | '/services/google-ads'
@@ -169,6 +181,7 @@ export interface RootRouteChildren {
   NotreEquipeRoute: typeof NotreEquipeRoute
   PolitiqueConfidentialiteRoute: typeof PolitiqueConfidentialiteRoute
   ReservationRoute: typeof ReservationRouteWithChildren
+  VotreEntrepriseRoute: typeof VotreEntrepriseRoute
   CheckoutReturnRoute: typeof CheckoutReturnRoute
   ServicesGoogleAdsRoute: typeof ServicesGoogleAdsRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
@@ -225,6 +238,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReservationRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/votre-entreprise': {
+      id: '/votre-entreprise'
+      path: '/votre-entreprise'
+      fullPath: '/votre-entreprise'
+      preLoaderRoute: typeof VotreEntrepriseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/checkout/return': {
       id: '/checkout/return'
       path: '/checkout/return'
@@ -276,6 +296,7 @@ const rootRouteChildren: RootRouteChildren = {
   NotreEquipeRoute: NotreEquipeRoute,
   PolitiqueConfidentialiteRoute: PolitiqueConfidentialiteRoute,
   ReservationRoute: ReservationRouteWithChildren,
+  VotreEntrepriseRoute: VotreEntrepriseRoute,
   CheckoutReturnRoute: CheckoutReturnRoute,
   ServicesGoogleAdsRoute: ServicesGoogleAdsRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,
