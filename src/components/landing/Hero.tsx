@@ -222,11 +222,13 @@ export function Hero() {
                 {s.cta && (
                   <Link
                     to={s.href ?? "/reservation"}
-                    {...(s.href ? {} : { search: { service: s.service } })}
+                    {...(s.href || !s.service ? {} : { search: { service: s.service } })}
                     className={
                       s.premium
                         ? "group/cta mt-6 inline-flex items-center gap-2 rounded-full border border-amber-300/70 bg-gradient-to-r from-solar/80 via-amber-300/80 to-mint/70 px-5 py-2.5 text-sm font-semibold text-ink shadow-[0_10px_30px_-8px_rgba(234,179,8,0.55)] backdrop-blur-md transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_36px_-8px_rgba(234,179,8,0.7)]"
-                        : "group/cta mt-6 inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-5 py-2.5 text-sm font-semibold text-ink backdrop-blur-md transition-all hover:bg-white/60 hover:-translate-y-0.5"
+                        : s.colorful
+                          ? "group/cta mt-6 inline-flex items-center gap-2 rounded-full border border-white/60 bg-gradient-to-r from-coral/70 via-solar/60 to-lilac/70 px-5 py-2.5 text-sm font-semibold text-ink shadow-[0_10px_30px_-8px] shadow-coral/50 backdrop-blur-md transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_36px_-8px] hover:shadow-coral/70"
+                          : "group/cta mt-6 inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-5 py-2.5 text-sm font-semibold text-ink backdrop-blur-md transition-all hover:bg-white/60 hover:-translate-y-0.5"
                     }
                   >
                     {s.cta.label}
