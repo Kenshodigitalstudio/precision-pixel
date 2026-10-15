@@ -1,4 +1,5 @@
-import { useState, FormEvent, useMemo } from "react";
+import { useState, useMemo } from "react";
+import type React from "react";
 import { Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 
@@ -272,94 +273,131 @@ export function ExpertsTeam() {
   );
 }
 
-/* ---------------- SECTION 3 : Social media teaser ---------------- */
+/* ---------------- SECTION 3 : Social media ---------------- */
 
-const SOCIALS = [
-  { name: "Instagram", url: "https://cdn.simpleicons.org/instagram/E1306C" },
-  { name: "TikTok",    url: "https://cdn.simpleicons.org/tiktok/000000" },
-  { name: "Facebook",  url: "https://cdn.simpleicons.org/facebook/1877F2" },
-  { name: "LinkedIn",  url: "https://cdn.simpleicons.org/linkedin/0A66C2" },
-  { name: "Pinterest", url: "https://cdn.simpleicons.org/pinterest/E60023" },
-  { name: "Snapchat",  url: "https://cdn.simpleicons.org/snapchat/FFFC00" },
-  { name: "Google",    url: "https://cdn.simpleicons.org/google/4285F4" },
+const SM_EMAIL = "kenshodigitalstudio@gmail.com";
+const SM_SUBJECT = encodeURIComponent("Demande de devis – Gestion des réseaux sociaux");
+const SM_BODY = encodeURIComponent(
+  "Bonjour Kenshō Studio,\n\nJe souhaite un devis pour la gestion de mes réseaux sociaux.\n\nEntreprise :\nRéseaux concernés :\nObjectifs :\n\nMerci !",
+);
+
+type Bubble = { name: string; slug: string; bg: string; fg: string; size: number; top: string; left: string; dur: number; delay: number; dx: number; dy: number; mobile?: boolean };
+
+const BUBBLES: Bubble[] = [
+  { name: "Instagram", slug: "instagram", bg: "linear-gradient(135deg,#feda75,#fa7e1e 30%,#d62976 60%,#962fbf 85%,#4f5bd5)", fg: "ffffff", size: 96, top: "8%",  left: "14%", dur: 9,  delay: 0,   dx: 10, dy: 16, mobile: true },
+  { name: "TikTok",    slug: "tiktok",    bg: "#111111", fg: "ffffff", size: 80, top: "4%",  left: "58%", dur: 11, delay: 1.2, dx: -12, dy: 14, mobile: true },
+  { name: "Facebook",  slug: "facebook",  bg: "#1877F2", fg: "ffffff", size: 70, top: "38%", left: "78%", dur: 10, delay: 0.6, dx: 8,  dy: 18 },
+  { name: "LinkedIn",  slug: "linkedin",  bg: "#0A66C2", fg: "ffffff", size: 84, top: "42%", left: "36%", dur: 12, delay: 2,   dx: -10, dy: 12, mobile: true },
+  { name: "YouTube",   slug: "youtube",   bg: "#FF0000", fg: "ffffff", size: 74, top: "70%", left: "8%",  dur: 10.5, delay: 0.3, dx: 12, dy: 15, mobile: true },
+  { name: "Pinterest", slug: "pinterest", bg: "#E60023", fg: "ffffff", size: 60, top: "76%", left: "62%", dur: 9.5, delay: 1.6, dx: -8, dy: 13 },
+  { name: "X",         slug: "x",         bg: "#000000", fg: "ffffff", size: 56, top: "28%", left: "4%",  dur: 13, delay: 2.4, dx: 9,  dy: 11 },
+  { name: "Snapchat",  slug: "snapchat",  bg: "#FFFC00", fg: "000000", size: 66, top: "14%", left: "84%", dur: 11.5, delay: 0.9, dx: -11, dy: 16, mobile: true },
+];
+
+const DOTS = [
+  { size: 14, top: "60%", left: "30%", c: "#d62976", dur: 14, delay: 0 },
+  { size: 10, top: "22%", left: "44%", c: "#1877F2", dur: 12, delay: 1 },
+  { size: 18, top: "88%", left: "40%", c: "#FFFC00", dur: 15, delay: 2 },
+  { size: 8,  top: "52%", left: "92%", c: "#0A66C2", dur: 11, delay: 0.5 },
+  { size: 12, top: "2%",  left: "34%", c: "#FF0000", dur: 13, delay: 1.5 },
 ];
 
 export function SocialTeaser() {
-  const [email, setEmail] = useState("");
-  const [sent, setSent] = useState(false);
-
-  const onSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    if (!email) return;
-    console.log("social media inquiry:", email);
-    setSent(true);
-    setEmail("");
-    setTimeout(() => setSent(false), 4500);
-  };
-
   return (
-    <section className="relative px-6 py-16 sm:py-20">
-      <div className="mx-auto max-w-4xl text-center">
-        <h2 className="font-display text-[clamp(1.75rem,4vw,2.75rem)] font-extrabold leading-tight tracking-tight">
-          <span className="bg-gradient-to-r from-blue-500 via-sky-500 to-indigo-600 bg-clip-text text-transparent">
-            Besoin de gérer vos réseaux sociaux ?
+    <section id="reseaux-sociaux" className="relative px-6 py-20 sm:py-28">
+      <div className="mx-auto grid max-w-6xl items-center gap-12 md:grid-cols-2">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <span className="font-mono text-[11px] uppercase tracking-[0.25em] text-ink-soft">
+            Kenshō Studio · Social Media Management
           </span>
-        </h2>
-
-        {/* social bubble strip with real brand logos */}
-        <div className="mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
-          {SOCIALS.map((s, i) => (
-            <motion.div
-              key={s.name}
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.08, duration: 0.5, ease: "easeOut" }}
-              whileHover={{ scale: 1.15 }}
-              className="grid h-12 w-12 place-items-center rounded-full border border-white/60 bg-white/50 backdrop-blur-xl shadow-[0_8px_18px_-8px_rgba(0,0,0,0.2)] cursor-default"
-              title={s.name}
+          <h2 className="mt-4 font-display text-[clamp(2rem,4.5vw,3.25rem)] font-extrabold leading-[1.05] tracking-[-0.03em] text-ink">
+            Et si on faisait{" "}
+            <span className="relative inline-block">
+              <span className="relative z-10">rayonner</span>
+              <span aria-hidden className="absolute inset-x-0 bottom-1 -z-0 h-3 rounded-full bg-solar/50" />
+            </span>{" "}
+            votre marque sur les{" "}
+            <span className="bg-gradient-to-r from-[color:var(--electric)] via-[color:var(--lilac)] to-[color:var(--coral)] bg-clip-text text-transparent">
+              réseaux sociaux
+            </span>{" "}
+            ?
+          </h2>
+          <p className="mt-6 max-w-lg text-[15.5px] leading-relaxed text-ink-soft">
+            Nous accompagnons les marques et les entreprises dans leur stratégie social media :
+            création de contenu, gestion quotidienne, développement de leur communauté et
+            optimisation de leur présence en ligne. Vous vous concentrez sur votre activité,
+            nous faisons grandir votre visibilité.
+          </p>
+          <a
+            href={`mailto:${SM_EMAIL}?subject=${SM_SUBJECT}&body=${SM_BODY}`}
+            className="mt-8 inline-flex items-center gap-2 rounded-full bg-ink px-7 py-3.5 text-sm font-semibold text-background shadow-[0_12px_30px_-12px_rgba(0,0,0,0.5)] transition-all hover:-translate-y-0.5 hover:shadow-[0_18px_40px_-14px_rgba(0,0,0,0.55)]"
+          >
+            Demander un devis <span>→</span>
+          </a>
+          <div className="mt-4">
+            <a
+              href={`mailto:${SM_EMAIL}?subject=${SM_SUBJECT}`}
+              className="text-sm text-ink-soft underline-offset-4 transition hover:text-ink hover:underline"
             >
-              <img src={s.url} alt={s.name} width={22} height={22} loading="lazy" />
-            </motion.div>
+              Vous avez une question ? Écrivez-nous par e-mail →
+            </a>
+          </div>
+        </motion.div>
+
+        <div className="relative h-[340px] sm:h-[460px]" aria-hidden>
+          {DOTS.map((d, i) => (
+            <span
+              key={i}
+              className="sm-float absolute rounded-full opacity-40"
+              style={{ width: d.size, height: d.size, top: d.top, left: d.left, background: d.c, animationDuration: `${d.dur}s`, animationDelay: `${d.delay}s`, ["--dx" as string]: "6px", ["--dy" as string]: "10px" } as React.CSSProperties}
+            />
+          ))}
+          {BUBBLES.map((b) => (
+            <div
+              key={b.name}
+              className={`sm-float absolute ${b.mobile ? "" : "hidden sm:block"}`}
+              style={{ top: b.top, left: b.left, animationDuration: `${b.dur}s`, animationDelay: `-${b.delay}s`, ["--dx" as string]: `${b.dx}px`, ["--dy" as string]: `${b.dy}px` } as React.CSSProperties}
+            >
+              <div
+                title={b.name}
+                className="sm-bubble grid place-items-center rounded-full"
+                style={{ width: `calc(${b.size}px * var(--sm-scale))`, height: `calc(${b.size}px * var(--sm-scale))`, background: b.bg }}
+              >
+                <img
+                  src={`https://cdn.simpleicons.org/${b.slug}/${b.fg}`}
+                  alt={b.name}
+                  loading="lazy"
+                  style={{ width: "42%", height: "42%" }}
+                />
+              </div>
+            </div>
           ))}
         </div>
-
-        {/* email capture bubble */}
-        <motion.form
-          onSubmit={onSubmit}
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          className="mx-auto mt-12 w-full max-w-[500px] rounded-[2rem] border border-white/50 bg-white/20 p-6 sm:p-7 backdrop-blur-2xl shadow-[0_20px_60px_-20px_rgba(59,130,246,0.4)]"
-        >
-          <p className="text-sm font-medium text-ink">
-            Une demande spécifique ? Écrivez-nous.
-          </p>
-          <div className="mt-4 flex flex-col sm:flex-row gap-2">
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="votre@email.com"
-              className="flex-1 rounded-full border border-white/60 bg-white/30 px-5 py-2.5 text-sm text-ink placeholder:text-ink-soft/70 backdrop-blur-xl outline-none focus:border-blue-400/70 focus:bg-white/50 transition"
-            />
-            <button
-              type="submit"
-              className="group inline-flex items-center justify-center gap-1.5 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 px-6 py-2.5 text-sm font-semibold text-white shadow-[0_10px_24px_-10px_rgba(59,130,246,0.7)] transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-10px_rgba(99,102,241,0.8)]"
-            >
-              Envoyer
-              <span className="transition-transform group-hover:translate-x-0.5">→</span>
-            </button>
-          </div>
-          {sent && (
-            <p className="mt-4 text-sm font-medium text-emerald-600 animate-fade-in">
-              ✅ Message reçu, on revient vers vous rapidement !
-            </p>
-          )}
-        </motion.form>
       </div>
+
+      <style>{`
+        #reseaux-sociaux { --sm-scale: 0.75; }
+        @media (min-width: 640px) { #reseaux-sociaux { --sm-scale: 1; } }
+        @keyframes sm-drift {
+          0%   { transform: translate(0, 0); }
+          25%  { transform: translate(var(--dx), calc(var(--dy) * -1)); }
+          50%  { transform: translate(calc(var(--dx) * 0.4), var(--dy)); }
+          75%  { transform: translate(calc(var(--dx) * -1), calc(var(--dy) * -0.4)); }
+          100% { transform: translate(0, 0); }
+        }
+        .sm-float { animation: sm-drift ease-in-out infinite; will-change: transform; }
+        .sm-bubble {
+          box-shadow: inset 0 2px 6px rgba(255,255,255,0.35), 0 14px 30px -12px rgba(0,0,0,0.35);
+          transition: transform .4s cubic-bezier(.22,1,.36,1), box-shadow .4s;
+        }
+        .sm-bubble:hover { transform: scale(1.1) rotate(-6deg); box-shadow: inset 0 2px 6px rgba(255,255,255,0.35), 0 22px 40px -12px rgba(0,0,0,0.45); }
+        @media (prefers-reduced-motion: reduce) { .sm-float { animation: none; } }
+      `}</style>
     </section>
   );
 }
