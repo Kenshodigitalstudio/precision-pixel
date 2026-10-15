@@ -28,6 +28,7 @@ export const Route = createFileRoute("/reseaux-sociaux")({
 function ReseauxSociauxPage() {
   return (
     <main className="relative isolate overflow-hidden pt-24 sm:pt-28">
+      <Nav />
       {/* Background blobs */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-[10%] top-[8%] h-72 w-72 rounded-full bg-electric/20 blur-3xl" />
