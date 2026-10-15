@@ -27,35 +27,6 @@ const slides: (Slide & { service: ServiceKey })[] = [
     cta: { label: "Réserver & payer" },
     service: "audit_flash",
   },
-  {
-    tag: "Votre Entreprise",
-    title: "gestion mensuelle de votre compte",
-    desc: (
-      <>
-        Avec <strong>VOTRE ENTREPRISE</strong>, on fait totalement différent :
-        <br />
-        <br />
-        On ne vous dit pas juste quoi faire.
-        <br />
-        <span className="font-semibold">👉 On le fait POUR vous.</span>
-        <br />
-        <br />
-        ✔️ Création complète de vos campagnes Google Ads
-        <br />
-        ✔️ Optimisation continue pour maximiser vos résultats
-        <br />
-        ✔️ Suivi des performances et ajustements stratégiques
-        <br />
-        ✔️ Accompagnement réel, pas juste des conseils
-      </>
-    ),
-    gradient: "from-solar/70 via-amber-300/60 to-mint/60",
-    icon: "✦",
-    cta: { label: "Découvrir l'offre" },
-    href: "/services/google-ads",
-    premium: true,
-    service: "tracking_setup",
-  },
 ];
 
 
@@ -261,6 +232,18 @@ export function Hero() {
           >
             →
           </button>
+        </div>
+
+        {/* Lien vers la page Votre Entreprise */}
+        <div className="mt-10 flex justify-center">
+          <Link
+            to="/votre-entreprise"
+            className="group relative inline-flex items-center gap-3 rounded-full border border-amber-300/60 bg-gradient-to-r from-solar/80 via-amber-300/80 to-mint/70 px-7 py-3.5 text-base font-semibold text-ink shadow-[0_10px_30px_-8px_rgba(234,179,8,0.55)] backdrop-blur-md transition-all hover:-translate-y-0.5 hover:shadow-[0_14px_36px_-8px_rgba(234,179,8,0.7)]"
+          >
+            <span aria-hidden className="text-lg">✦</span>
+            Votre Entreprise — gestion mensuelle de votre compte
+            <span className="transition-transform group-hover:translate-x-0.5">→</span>
+          </Link>
         </div>
 
       </div>
