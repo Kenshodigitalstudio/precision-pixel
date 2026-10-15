@@ -1,5 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SocialTeaser } from "@/components/landing/AuditExperts";
+import { Nav } from "@/components/landing/Nav";
+import { Footer } from "@/components/landing/Footer";
 
 export const Route = createFileRoute("/reseaux-sociaux")({
   head: () => ({
