@@ -287,10 +287,9 @@ const BUBBLES: Bubble[] = [
   { name: "Instagram", slug: "instagram", bg: "linear-gradient(135deg,#feda75,#fa7e1e 30%,#d62976 60%,#962fbf 85%,#4f5bd5)", fg: "ffffff", size: 96, top: "8%",  left: "14%", dur: 9,  delay: 0,   dx: 10, dy: 16, mobile: true },
   { name: "TikTok",    slug: "tiktok",    bg: "#111111", fg: "ffffff", size: 80, top: "4%",  left: "58%", dur: 11, delay: 1.2, dx: -12, dy: 14, mobile: true },
   { name: "Facebook",  slug: "facebook",  bg: "#1877F2", fg: "ffffff", size: 70, top: "38%", left: "78%", dur: 10, delay: 0.6, dx: 8,  dy: 18 },
-  { name: "LinkedIn",  slug: "linkedin",  bg: "#0A66C2", fg: "ffffff", size: 84, top: "42%", left: "36%", dur: 12, delay: 2,   dx: -10, dy: 12, mobile: true },
+  { name: "LinkedIn",  slug: "linkedin",  bg: "#0A66C2", fg: "ffffff", size: 96, top: "28%", left: "4%",  dur: 12, delay: 2,   dx: 9,  dy: 11, mobile: true },
   { name: "YouTube",   slug: "youtube",   bg: "#FF0000", fg: "ffffff", size: 74, top: "70%", left: "8%",  dur: 10.5, delay: 0.3, dx: 12, dy: 15, mobile: true },
   { name: "Pinterest", slug: "pinterest", bg: "#E60023", fg: "ffffff", size: 60, top: "76%", left: "62%", dur: 9.5, delay: 1.6, dx: -8, dy: 13 },
-  { name: "X",         slug: "x",         bg: "#000000", fg: "ffffff", size: 56, top: "28%", left: "4%",  dur: 13, delay: 2.4, dx: 9,  dy: 11 },
   { name: "Snapchat",  slug: "snapchat",  bg: "#FFFC00", fg: "000000", size: 66, top: "14%", left: "84%", dur: 11.5, delay: 0.9, dx: -11, dy: 16, mobile: true },
 ];
 
