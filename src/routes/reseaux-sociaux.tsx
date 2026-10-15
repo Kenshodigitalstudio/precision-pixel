@@ -46,6 +46,7 @@ function ReseauxSociauxPage() {
           ← Retour à l'accueil
         </Link>
       </div>
+      <Footer />
     </main>
   );
 }
