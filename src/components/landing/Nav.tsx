@@ -37,6 +37,7 @@ export function Nav() {
 
         <ul className="hidden items-center gap-7 text-sm font-medium text-ink-soft md:flex">
           <li><Link to="/services/google-ads" className="hover:text-ink transition-colors">VOTRE ENTREPRISE</Link></li>
+          <li><Link to="/reseaux-sociaux" className="hover:text-ink transition-colors">Réseaux sociaux</Link></li>
           <li><Link to="/notre-equipe" className="hover:text-ink transition-colors">Notre équipe</Link></li>
         </ul>
         <Link
