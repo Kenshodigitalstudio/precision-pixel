@@ -1,6 +1,6 @@
 # Roadmap
 
-- [ ] Page dédiée « Votre Entreprise » (/votre-entreprise) + lien sur l'accueil après les 2 bulles principales (en cours)
-- [ ] Page dédiée « Réseaux sociaux » (section SocialTeaser d'AuditExperts.tsx) + lien sur l'accueil
-- [ ] Remplacer l'image sélectionnée dans AuditExperts.tsx (bulle réseaux sociaux) par le logo LinkedIn
+- [x] Page dédiée « Votre Entreprise » (/votre-entreprise) + lien sur l'accueil après les 2 bulles principales
+- [x] Page dédiée « Réseaux sociaux » (/reseaux-sociaux) + teaser avec lien sur l'accueil
+- [x] Logo LinkedIn corrigé (SVG intégré, le CDN ne le fournit plus)
 - [ ] MCP : en attente du choix utilisateur (public vs oauth)
