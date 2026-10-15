@@ -15,7 +15,9 @@ import { Route as ConfirmationRouteImport } from './routes/confirmation'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
 import { Route as NotreEquipeRouteImport } from './routes/notre-equipe'
 import { Route as PolitiqueConfidentialiteRouteImport } from './routes/politique-confidentialite'
+import { Route as ReseauxSociauxRouteImport } from './routes/reseaux-sociaux'
 import { Route as ReservationRouteImport } from './routes/reservation'
+import { Route as VotreEntrepriseRouteImport } from './routes/votre-entreprise'
 import { Route as CheckoutReturnRouteImport } from './routes/checkout.return'
 import { Route as ReservationConfirmationRouteImport } from './routes/reservation.confirmation'
 import { Route as ServicesGoogleAdsRouteImport } from './routes/services.google-ads'
@@ -52,9 +54,19 @@ const PolitiqueConfidentialiteRoute =
     path: '/politique-confidentialite',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ReseauxSociauxRoute = ReseauxSociauxRouteImport.update({
+  id: '/reseaux-sociaux',
+  path: '/reseaux-sociaux',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ReservationRoute = ReservationRouteImport.update({
   id: '/reservation',
   path: '/reservation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VotreEntrepriseRoute = VotreEntrepriseRouteImport.update({
+  id: '/votre-entreprise',
+  path: '/votre-entreprise',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckoutReturnRoute = CheckoutReturnRouteImport.update({
@@ -86,7 +98,9 @@ export interface FileRoutesByFullPath {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/notre-equipe': typeof NotreEquipeRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
+  '/reseaux-sociaux': typeof ReseauxSociauxRoute
   '/reservation': typeof ReservationRouteWithChildren
+  '/votre-entreprise': typeof VotreEntrepriseRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/reservation/confirmation': typeof ReservationConfirmationRoute
   '/services/google-ads': typeof ServicesGoogleAdsRoute
@@ -99,7 +113,9 @@ export interface FileRoutesByTo {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/notre-equipe': typeof NotreEquipeRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
+  '/reseaux-sociaux': typeof ReseauxSociauxRoute
   '/reservation': typeof ReservationRouteWithChildren
+  '/votre-entreprise': typeof VotreEntrepriseRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/reservation/confirmation': typeof ReservationConfirmationRoute
   '/services/google-ads': typeof ServicesGoogleAdsRoute
@@ -113,7 +129,9 @@ export interface FileRoutesById {
   '/mentions-legales': typeof MentionsLegalesRoute
   '/notre-equipe': typeof NotreEquipeRoute
   '/politique-confidentialite': typeof PolitiqueConfidentialiteRoute
+  '/reseaux-sociaux': typeof ReseauxSociauxRoute
   '/reservation': typeof ReservationRouteWithChildren
+  '/votre-entreprise': typeof VotreEntrepriseRoute
   '/checkout/return': typeof CheckoutReturnRoute
   '/reservation/confirmation': typeof ReservationConfirmationRoute
   '/services/google-ads': typeof ServicesGoogleAdsRoute
@@ -128,7 +146,9 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/notre-equipe'
     | '/politique-confidentialite'
+    | '/reseaux-sociaux'
     | '/reservation'
+    | '/votre-entreprise'
     | '/checkout/return'
     | '/reservation/confirmation'
     | '/services/google-ads'
@@ -141,7 +161,9 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/notre-equipe'
     | '/politique-confidentialite'
+    | '/reseaux-sociaux'
     | '/reservation'
+    | '/votre-entreprise'
     | '/checkout/return'
     | '/reservation/confirmation'
     | '/services/google-ads'
@@ -154,7 +176,9 @@ export interface FileRouteTypes {
     | '/mentions-legales'
     | '/notre-equipe'
     | '/politique-confidentialite'
+    | '/reseaux-sociaux'
     | '/reservation'
+    | '/votre-entreprise'
     | '/checkout/return'
     | '/reservation/confirmation'
     | '/services/google-ads'
@@ -168,7 +192,9 @@ export interface RootRouteChildren {
   MentionsLegalesRoute: typeof MentionsLegalesRoute
   NotreEquipeRoute: typeof NotreEquipeRoute
   PolitiqueConfidentialiteRoute: typeof PolitiqueConfidentialiteRoute
+  ReseauxSociauxRoute: typeof ReseauxSociauxRoute
   ReservationRoute: typeof ReservationRouteWithChildren
+  VotreEntrepriseRoute: typeof VotreEntrepriseRoute
   CheckoutReturnRoute: typeof CheckoutReturnRoute
   ServicesGoogleAdsRoute: typeof ServicesGoogleAdsRoute
   ApiPublicPaymentsWebhookRoute: typeof ApiPublicPaymentsWebhookRoute
@@ -218,11 +244,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PolitiqueConfidentialiteRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reseaux-sociaux': {
+      id: '/reseaux-sociaux'
+      path: '/reseaux-sociaux'
+      fullPath: '/reseaux-sociaux'
+      preLoaderRoute: typeof ReseauxSociauxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/reservation': {
       id: '/reservation'
       path: '/reservation'
       fullPath: '/reservation'
       preLoaderRoute: typeof ReservationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/votre-entreprise': {
+      id: '/votre-entreprise'
+      path: '/votre-entreprise'
+      fullPath: '/votre-entreprise'
+      preLoaderRoute: typeof VotreEntrepriseRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkout/return': {
@@ -275,7 +315,9 @@ const rootRouteChildren: RootRouteChildren = {
   MentionsLegalesRoute: MentionsLegalesRoute,
   NotreEquipeRoute: NotreEquipeRoute,
   PolitiqueConfidentialiteRoute: PolitiqueConfidentialiteRoute,
+  ReseauxSociauxRoute: ReseauxSociauxRoute,
   ReservationRoute: ReservationRouteWithChildren,
+  VotreEntrepriseRoute: VotreEntrepriseRoute,
   CheckoutReturnRoute: CheckoutReturnRoute,
   ServicesGoogleAdsRoute: ServicesGoogleAdsRoute,
   ApiPublicPaymentsWebhookRoute: ApiPublicPaymentsWebhookRoute,

@@ -287,10 +287,9 @@ const BUBBLES: Bubble[] = [
   { name: "Instagram", slug: "instagram", bg: "linear-gradient(135deg,#feda75,#fa7e1e 30%,#d62976 60%,#962fbf 85%,#4f5bd5)", fg: "ffffff", size: 96, top: "8%",  left: "14%", dur: 9,  delay: 0,   dx: 10, dy: 16, mobile: true },
   { name: "TikTok",    slug: "tiktok",    bg: "#111111", fg: "ffffff", size: 80, top: "4%",  left: "58%", dur: 11, delay: 1.2, dx: -12, dy: 14, mobile: true },
   { name: "Facebook",  slug: "facebook",  bg: "#1877F2", fg: "ffffff", size: 70, top: "38%", left: "78%", dur: 10, delay: 0.6, dx: 8,  dy: 18 },
-  { name: "LinkedIn",  slug: "linkedin",  bg: "#0A66C2", fg: "ffffff", size: 84, top: "42%", left: "36%", dur: 12, delay: 2,   dx: -10, dy: 12, mobile: true },
+  { name: "LinkedIn",  slug: "linkedin",  bg: "#0A66C2", fg: "ffffff", size: 96, top: "28%", left: "4%",  dur: 12, delay: 2,   dx: 9,  dy: 11, mobile: true },
   { name: "YouTube",   slug: "youtube",   bg: "#FF0000", fg: "ffffff", size: 74, top: "70%", left: "8%",  dur: 10.5, delay: 0.3, dx: 12, dy: 15, mobile: true },
   { name: "Pinterest", slug: "pinterest", bg: "#E60023", fg: "ffffff", size: 60, top: "76%", left: "62%", dur: 9.5, delay: 1.6, dx: -8, dy: 13 },
-  { name: "X",         slug: "x",         bg: "#000000", fg: "ffffff", size: 56, top: "28%", left: "4%",  dur: 13, delay: 2.4, dx: 9,  dy: 11 },
   { name: "Snapchat",  slug: "snapchat",  bg: "#FFFC00", fg: "000000", size: 66, top: "14%", left: "84%", dur: 11.5, delay: 0.9, dx: -11, dy: 16, mobile: true },
 ];
 
@@ -368,12 +367,18 @@ export function SocialTeaser() {
                 className="sm-bubble grid place-items-center rounded-full"
                 style={{ width: `calc(${b.size}px * var(--sm-scale))`, height: `calc(${b.size}px * var(--sm-scale))`, background: b.bg }}
               >
-                <img
-                  src={`https://cdn.simpleicons.org/${b.slug}/${b.fg}`}
-                  alt={b.name}
-                  loading="lazy"
-                  style={{ width: "42%", height: "42%" }}
-                />
+                {b.slug === "linkedin" ? (
+                  <svg viewBox="0 0 24 24" role="img" aria-label={b.name} style={{ width: "42%", height: "42%" }} fill={`#${b.fg}`}>
+                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                  </svg>
+                ) : (
+                  <img
+                    src={`https://cdn.simpleicons.org/${b.slug}/${b.fg}`}
+                    alt={b.name}
+                    loading="lazy"
+                    style={{ width: "42%", height: "42%" }}
+                  />
+                )}
               </div>
             </div>
           ))}
