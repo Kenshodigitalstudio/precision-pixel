@@ -30,7 +30,7 @@ const slides: (Slide & { service?: ServiceKey })[] = [
     service: "audit_flash",
   },
   {
-    tag: "VOTRE ENTREPRISE",
+    tag: "Gestion mensuelle",
     title: "Gestion mensuelle de votre compte Google Ads",
     desc: "On ne vous dit pas juste quoi faire. On le fait pour vous : création complète des campagnes, optimisation continue et suivi des performances.",
     gradient: "from-electric/70 via-lilac/60 to-coral/70",
