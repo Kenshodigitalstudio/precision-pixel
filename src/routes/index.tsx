@@ -31,7 +31,11 @@ export const Route = createFileRoute("/")({
           "Pilotage Google Ads & tracking server-side haut de gamme. Audit, GA4, GTM SS, attribution propre.",
       },
       { property: "og:type", content: "website" },
+      { property: "og:image", content: "https://kenshostudio.fr/__l5e/assets-v1/a74df7cc-f01c-488f-bdbb-260add122ef8/kensho-share-1200x630.png" },
+      { name: "twitter:image", content: "https://kenshostudio.fr/__l5e/assets-v1/a74df7cc-f01c-488f-bdbb-260add122ef8/kensho-share-1200x630.png" },
+      { name: "twitter:card", content: "summary_large_image" },
     ],
+
   }),
 });
 
