@@ -110,7 +110,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section id="top" className="relative isolate overflow-hidden pt-24 pb-12 sm:pt-28 sm:pb-16">
+    <section id="top" className="relative isolate overflow-hidden pt-32 pb-12 sm:pt-36 sm:pb-16">
       {/* Parallax background gradient */}
       <div
         aria-hidden

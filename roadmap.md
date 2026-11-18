@@ -6,4 +6,5 @@
 - [x] Lien « Réseaux sociaux » ajouté en haut de la page principale (menu) + menu/pied de page sur /reseaux-sociaux
 - [x] Carrousel Hero : 3 bulles (Audit Flash, VOTRE ENTREPRISE → /services/google-ads, Réseaux sociaux colorée → /reseaux-sociaux)
 - [x] Retirer le bouton doré « Votre Entreprise » sous le carrousel
+- [x] Bandeau Black Friday (Audit Flash 100 € au lieu de 150 €, jour du Black Friday) + animation de balayage lumineux sombre
 - [ ] MCP : en attente du choix utilisateur (public vs oauth)

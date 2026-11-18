@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
+import { BlackFridayBanner } from "@/components/landing/BlackFridayBanner";
 
 
 export function Nav() {
@@ -28,6 +29,7 @@ export function Nav() {
         className="absolute left-0 bottom-0 h-px bg-ink/40"
         style={{ width: `${progress}%`, transition: "width 120ms linear" }}
       />
+      <BlackFridayBanner />
       <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
         <Link to="/" className="flex items-center gap-2.5">
           <span className="font-display text-base font-light tracking-[-0.02em] text-ink">

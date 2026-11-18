@@ -353,7 +353,53 @@
   to   { transform: scaleY(1); }
 }
 
+/* ---------- Black Friday banner: dark light sweep ---------- */
+@keyframes bf-sweep {
+  0% {
+    transform: translateX(-140%) skewX(-14deg);
+    opacity: 0;
+  }
+  6% {
+    opacity: 1;
+  }
+  38% {
+    opacity: 1;
+  }
+  43%,
+  100% {
+    transform: translateX(360%) skewX(-14deg);
+    opacity: 0;
+  }
+}
+.bf-banner {
+  isolation: isolate;
+}
+.bf-banner::before {
+  content: "";
+  position: absolute;
+  top: -30%;
+  bottom: -30%;
+  left: 0;
+  width: 34%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    color-mix(in oklab, var(--ink) 5%, transparent) 26%,
+    color-mix(in oklab, var(--ink) 14%, transparent) 50%,
+    color-mix(in oklab, var(--ink) 5%, transparent) 74%,
+    transparent 100%
+  );
+  mix-blend-mode: multiply;
+  filter: blur(7px);
+  opacity: 0.85;
+  pointer-events: none;
+  z-index: 0;
+  will-change: transform;
+  animation: bf-sweep 7s cubic-bezier(0.45, 0, 0.25, 1) infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .bf-banner::before { animation: none !important; opacity: 0 !important; }
   .aurora-blob, .live-dot { animation: none !important; }
   .word-reveal > span { opacity: 1; animation: none; }
   .reveal, .reveal-mask { opacity: 1; transform: none; clip-path: none; transition: none; }
