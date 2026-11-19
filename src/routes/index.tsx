@@ -57,95 +57,6 @@ export const Route = createFileRoute("/")({
 const ease = [0.22, 1, 0.36, 1] as const;
 
 /* -------------------------------------------------------
-   LOGO KENSHŌ — ANIMATION COULEURS
-------------------------------------------------------- */
-
-function AnimatedKenshoLogo() {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 12 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.8, ease }}
-      className="mx-auto mb-8 flex w-fit flex-col items-center"
-    >
-      <span className="kensho-logo-text text-[42px] font-extrabold leading-none tracking-[-0.085em] sm:text-[52px]">
-        Kenshō
-      </span>
-      <span className="mt-2 text-[8px] font-semibold tracking-[0.38em] text-ink-soft">
-        DIGITAL STUDIO
-      </span>
-
-      <style>{`
-        .kensho-logo-text {
-          background: linear-gradient(
-            110deg,
-            #3985ff 0%,
-            #8c73ed 18%,
-            #f16b9a 38%,
-            #ff9b55 57%,
-            #e9c66e 72%,
-            #52c9a1 88%,
-            #3985ff 100%
-          );
-          background-size: 300% 100%;
-          background-clip: text;
-          -webkit-background-clip: text;
-          color: transparent;
-          animation: kensho-color-flow 8s ease-in-out infinite;
-        }
-
-        @keyframes kensho-color-flow {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .kensho-logo-text { animation: none; }
-        }
-      `}</style>
-    </motion.div>
-  );
-}
-
-/* -------------------------------------------------------
-   MOTS DYNAMIQUES DU HERO
-------------------------------------------------------- */
-
-const HERO_WORDS = [
-  { word: "levier", color: "from-sky-500 via-blue-500 to-cyan-400" },
-  { word: "accélérateur", color: "from-orange-400 via-rose-400 to-pink-500" },
-  { word: "atout", color: "from-pink-500 via-rose-400 to-orange-300" },
-  { word: "moteur", color: "from-emerald-400 via-teal-500 to-sky-500" },
-  { word: "avantage", color: "from-violet-500 via-pink-500 to-orange-400" },
-];
-
-function DynamicHeroWord() {
-  const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    const timer = window.setInterval(() => {
-      setIndex((current) => (current + 1) % HERO_WORDS.length);
-    }, 2800);
-
-    return () => window.clearInterval(timer);
-  }, []);
-
-  const current = HERO_WORDS[index];
-
-  return (
-    <motion.span
-      key={current.word}
-      initial={{ opacity: 0, y: 12, filter: "blur(5px)" }}
-      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      transition={{ duration: 0.55, ease }}
-      className={`inline-block bg-gradient-to-r ${current.color} bg-clip-text font-semibold text-transparent`}
-    >
-      {current.word}
-    </motion.span>
-  );
-}
-
-/* -------------------------------------------------------
    ANIMATION D'APPARITION
 ------------------------------------------------------- */
 
@@ -192,7 +103,6 @@ function AnimatedNumber({
 
     const duration = 1800;
     const start = performance.now();
-
     let frame = 0;
 
     const animate = (now: number) => {
@@ -207,7 +117,6 @@ function AnimatedNumber({
     };
 
     frame = requestAnimationFrame(animate);
-
     return () => cancelAnimationFrame(frame);
   }, [started, value]);
 
@@ -227,8 +136,6 @@ function AnimatedNumber({
         );
 
         observer.observe(element);
-
-        return () => observer.disconnect();
       }}
     >
       {prefix}
@@ -240,24 +147,9 @@ function AnimatedNumber({
 
 function Counters() {
   const items = [
-    {
-      value: 47,
-      prefix: "+",
-      suffix: "",
-      label: "Audits réalisés",
-    },
-    {
-      value: 230,
-      prefix: "+",
-      suffix: "%",
-      label: "ROI moyen constaté",
-    },
-    {
-      value: 30,
-      prefix: "",
-      suffix: " min",
-      label: "Chrono",
-    },
+    { value: 47, prefix: "+", suffix: "", label: "Audits réalisés" },
+    { value: 230, prefix: "+", suffix: "%", label: "ROI moyen constaté" },
+    { value: 30, prefix: "", suffix: " min", label: "Chrono" },
   ];
 
   return (
@@ -665,7 +557,7 @@ function Index() {
       {/* HERO */}
       <section
         id="top"
-        className="relative isolate overflow-hidden px-6 pb-12 pt-36 sm:pb-14 sm:pt-44"
+        className="relative isolate overflow-hidden px-6 pb-14 pt-36 sm:pb-16 sm:pt-44"
       >
         <div
           aria-hidden
@@ -685,26 +577,35 @@ function Index() {
         </div>
 
         <div className="mx-auto max-w-6xl text-center">
-          <AnimatedKenshoLogo />
+          {/* Le logo original est conservé dans Nav */}
 
           <motion.h1
-            initial={{ opacity: 0, y: 25 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, delay: 0.1, ease }}
-            className="mx-auto mt-8 max-w-5xl font-display text-[clamp(3.2rem,8.5vw,7rem)] font-light leading-[0.98] tracking-[-0.065em] text-ink"
+            transition={{ duration: 0.8, ease }}
+            className="mx-auto mt-8 max-w-4xl font-display text-[clamp(2.6rem,6vw,5.2rem)] font-light leading-[1.16] tracking-[-0.055em] text-ink"
           >
             Faites de votre
-            <span className="block font-semibold">
-              visibilité un <DynamicHeroWord />
+            <span className="mt-1 block font-semibold">
+              visibilité un{" "}
+              <span className="bg-gradient-to-r from-sky-500 to-blue-600 bg-clip-text text-transparent">
+                levier
+              </span>
             </span>
-            de croissance.
+            <span className="block">
+              de{" "}
+              <span className="bg-gradient-to-r from-emerald-400 to-green-600 bg-clip-text text-transparent">
+                croissance
+              </span>
+              .
+            </span>
           </motion.h1>
 
           <motion.p
-            initial={{ opacity: 0, y: 18 }}
+            initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.25, ease }}
-            className="mx-auto mt-7 max-w-[590px] text-[14px] leading-relaxed text-ink-soft sm:text-[16px] sm:leading-[1.8]"
+            transition={{ duration: 0.7, delay: 0.2, ease }}
+            className="mx-auto mt-6 max-w-[560px] text-[14px] leading-relaxed text-ink-soft sm:text-[16px] sm:leading-[1.8]"
           >
             Kenshō Studio accompagne les entreprises dans leur développement
             digital grâce à une stratégie d'acquisition et une présence en ligne
@@ -714,12 +615,12 @@ function Index() {
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.4, ease }}
-            className="mt-9 flex flex-col items-center justify-center gap-3 sm:flex-row"
+            transition={{ duration: 0.7, delay: 0.35, ease }}
+            className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row"
           >
             <a
               href="#expertises"
-              className="group inline-flex items-center gap-3 rounded-full bg-ink px-7 py-3.5 text-[13px] font-semibold text-white shadow-[0_15px_35px_-15px_rgba(20,25,40,0.55)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(20,25,40,0.6)]"
+              className="group inline-flex items-center gap-3 rounded-full bg-ink px-7 py-3.5 text-[13px] font-semibold text-white shadow-[0_15px_35px_-15px_rgba(20,25,40,0.55)] transition-all duration-300 hover:-translate-y-1"
             >
               Découvrir nos expertises
               <ArrowDown size={15} className="transition-transform duration-300 group-hover:translate-y-1" />
@@ -737,7 +638,7 @@ function Index() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="mt-14 flex items-center justify-center gap-4 text-[9px] uppercase tracking-[0.2em] text-ink-soft/70"
+            className="mt-12 flex items-center justify-center gap-4 text-[9px] uppercase tracking-[0.2em] text-ink-soft/70"
           >
             <span className="h-px w-8 bg-ink/20" />
             Une approche pensée pour votre croissance
@@ -746,7 +647,7 @@ function Index() {
         </div>
       </section>
 
-      {/* COUNTERS */}
+      {/* COMPTEURS */}
       <Counters />
 
       {/* SERVICES */}
@@ -825,7 +726,7 @@ function Index() {
         </div>
       </section>
 
-      {/* TEAM */}
+      {/* ÉQUIPE */}
       <section className="relative">
         <div className="mx-auto max-w-7xl px-6">
           <div className="h-px bg-gradient-to-r from-transparent via-ink/15 to-transparent" />
@@ -833,7 +734,7 @@ function Index() {
         <ExpertsTeam />
       </section>
 
-      {/* SPECIFIC REQUESTS */}
+      {/* CONTACT */}
       <section id="contact" className="relative overflow-hidden px-6 py-16 sm:py-24">
         <div
           aria-hidden
@@ -870,7 +771,10 @@ function Index() {
             className="group mt-8 inline-flex items-center gap-3 rounded-full bg-ink px-7 py-3.5 text-[13px] font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
           >
             Échanger avec Kenshō
-            <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
+            <ArrowUpRight
+              size={15}
+              className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+            />
           </a>
         </Reveal>
       </section>
