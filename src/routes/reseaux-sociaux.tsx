@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { Nav } from "@/components/landing/Nav";
 import { Footer } from "@/components/landing/Footer";
 import { ArrowUpRight, Check, Sparkles } from "lucide-react";
-import type { CSSProperties } from "react";
 
 export const Route = createFileRoute("/reseaux-sociaux")({
   head: () => ({
@@ -193,8 +192,6 @@ const platforms = [
   },
 ];
 
-const arcPositions = [48, 25, 10, 2, 10, 25, 48, 25, 10, 2];
-
 function BrandLogo({
   slug,
   name,
@@ -204,65 +201,59 @@ function BrandLogo({
   name: string;
   white?: boolean;
 }) {
+  const iconUrl =
+    slug === "googleads"
+      ? "https://cdn.simpleicons.org/googleads"
+      : `https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/${slug}.svg`;
+
   return (
     <img
-      src={`https://cdn.simpleicons.org/${slug}${white ? "/ffffff" : ""}`}
+      src={iconUrl}
       alt={`Logo ${name}`}
       loading="lazy"
-      className="h-11 w-11 object-contain sm:h-14 sm:w-14"
+      className="h-10 w-10 object-contain sm:h-12 sm:w-12"
+      style={{
+        filter: white ? "brightness(0) invert(1)" : "none",
+      }}
       onError={(event) => {
-        event.currentTarget.style.visibility = "hidden";
+        event.currentTarget.style.display = "none";
       }}
     />
   );
 }
 
+/* Défilement des logos dans de petites cartes vitrées */
 function LogoArc() {
   const repeatedPlatforms = [...platforms, ...platforms];
 
   return (
-    <div className="relative mx-auto mt-8 h-[155px] w-full max-w-5xl overflow-hidden sm:mt-12 sm:h-[190px]">
-      <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-background via-transparent to-background" />
+    <div className="relative mx-auto mt-2 h-[105px] w-full max-w-6xl overflow-hidden sm:h-[125px]">
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-background to-transparent sm:w-28" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-background to-transparent sm:w-28" />
 
       <motion.div
-        className="absolute left-0 top-0 flex w-max items-start gap-7 sm:gap-12"
+        className="absolute left-0 top-1/2 flex w-max -translate-y-1/2 items-center gap-4 sm:gap-6"
         animate={{ x: ["-50%", "0%"] }}
         transition={{
-          duration: 34,
+          duration: 32,
           ease: "linear",
           repeat: Infinity,
         }}
       >
-        {repeatedPlatforms.map((platform, index) => {
-          const position = index % platforms.length;
-
-          return (
-            <div
-              key={`${platform.slug}-${index}`}
-              className="flex w-[74px] flex-col items-center gap-3 sm:w-[90px]"
-              style={{
-                paddingTop: `${arcPositions[position]}px`,
-              }}
-            >
-              <div
-                className="flex size-[58px] items-center justify-center rounded-2xl border border-white/70 bg-white/60 shadow-lg backdrop-blur-xl transition-transform duration-300 hover:scale-110 sm:size-[68px]"
-                style={{
-                  boxShadow: `0 12px 35px -20px ${platform.color}90`,
-                }}
-              >
-                <BrandLogo slug={platform.slug} name={platform.name} />
-              </div>
-              <span className="whitespace-nowrap text-[9px] font-medium text-ink-soft sm:text-[10px]">
-                {platform.name}
-              </span>
-            </div>
-          );
-        })}
+        {repeatedPlatforms.map((platform, index) => (
+          <div
+            key={`${platform.slug}-${index}`}
+            className="flex h-[68px] w-[68px] items-center justify-center rounded-2xl border border-white/80 bg-white/55 shadow-[0_10px_30px_-15px_rgba(30,20,50,.25)] backdrop-blur-xl transition-transform duration-300 hover:-translate-y-2 hover:scale-105 sm:h-[82px] sm:w-[82px]"
+          >
+            <BrandLogo slug={platform.slug} name={platform.name} />
+          </div>
+        ))}
       </motion.div>
     </div>
   );
 }
 
+/* Cartes de présentation des plateformes */
 function PlatformPanel({
   platform,
   index,
@@ -418,32 +409,33 @@ function ReseauxSociauxPage() {
         <div className="absolute bottom-[10%] left-[25%] size-96 rounded-full bg-coral/10 blur-[110px]" />
       </div>
 
-      {/* Intro libre + accroche */}
-      <section className="relative z-10 px-5 pb-12 pt-12 text-center sm:pb-16 sm:pt-16">
+      {/* Haut de page : logos puis accroche */}
+      <section className="relative z-10 px-5 pb-12 pt-10 text-center sm:pb-16 sm:pt-14">
+        <LogoArc />
+
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="mx-auto max-w-5xl"
+          className="mx-auto mt-8 max-w-5xl"
         >
-          <span className="font-mono text-[10px] uppercase tracking-[.3em] text-ink-soft">
-            Kenshō Studio · Social Media & Acquisition
-          </span>
-
-          <h1 className="mt-5 font-display text-[clamp(2.5rem,6vw,5.2rem)] font-extrabold leading-[1.04] tracking-[-.045em] text-ink">
-            Chaque réseau a son audience.
+          <h1 className="font-display text-[clamp(2.5rem,6vw,5.2rem)] font-extrabold leading-[1.08] tracking-[-.045em] text-ink">
+            Chaque réseau a{" "}
+            <span className="bg-gradient-to-r from-electric via-lilac to-coral bg-clip-text text-transparent">
+              son audience.
+            </span>
+            <span className="block">
+              Ensemble,{" "}
+              <span className="bg-gradient-to-r from-electric via-lilac to-coral bg-clip-text text-transparent">
+                Kenshō
+              </span>{" "}
+              peut démultiplier votre visibilité.
+            </span>
           </h1>
-
-          <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-ink-soft sm:text-base">
-            Votre marque mérite une présence qui lui ressemble. Nous activons
-            les bonnes plateformes avec une stratégie pensée pour vos objectifs.
-          </p>
         </motion.div>
-
-        <LogoArc />
       </section>
 
-      {/* Plateformes */}
+      {/* Présentation des plateformes */}
       <div className="relative">
         {platforms.map((platform, index) => (
           <PlatformPanel
