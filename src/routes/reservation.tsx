@@ -1,11 +1,10 @@
+
 import { createFileRoute } from "@tanstack/react-router";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { z } from "zod";
 import { Sparkles } from "@/components/landing/Sparkles";
 import { Nav } from "@/components/landing/Nav";
 import { Footer } from "@/components/landing/Footer";
-import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
-import { useStripeCheckout } from "@/hooks/useStripeCheckout";
 
 const searchSchema = z.object({
   service: fallback(
@@ -55,19 +54,9 @@ const AUDIT_ITEMS = [
 function ReservationPage() {
   const { service } = Route.useSearch();
   const isTracking = service === "tracking_setup";
-  const priceId = isTracking ? "tracking_setup_onetime" : "audit_flash_onetime";
   const title = isTracking ? "Installation tracking & tags" : "Audit Google Ads";
   const price = isTracking ? "100 €" : "150 €";
   const duration = isTracking ? "Prestation dédiée" : "1 heure";
-
-  const { openCheckout, isOpen, checkoutElement } = useStripeCheckout();
-
-  function handleCheckout() {
-    openCheckout({
-      priceId,
-      returnUrl: `${window.location.origin}/reservation/confirmation?session_id={CHECKOUT_SESSION_ID}&service=${service}`,
-    });
-  }
 
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-paper text-ink">
@@ -78,10 +67,8 @@ function ReservationPage() {
       </div>
 
       <Sparkles variant="subtle" />
-      <PaymentTestModeBanner />
       <Nav />
 
-      {/* HERO */}
       <section className="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-36 sm:px-8 sm:pt-44 lg:grid-cols-[1.08fr_0.92fr]">
         <div className="max-w-2xl">
           <span className="inline-flex items-center gap-2 rounded-full border border-electric/25 bg-white/60 px-4 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-electric shadow-sm backdrop-blur-xl">
@@ -113,15 +100,11 @@ function ReservationPage() {
             </span>
           </div>
 
-          <a
-            href="#details"
-            className="mt-9 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-white shadow-[0_12px_30px_-14px_rgba(20,20,40,0.55)] transition hover:-translate-y-0.5"
-          >
+          <a href="#details" className="mt-9 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3.5 text-sm font-semibold text-white shadow-[0_12px_30px_-14px_rgba(20,20,40,0.55)] transition hover:-translate-y-0.5">
             Découvrir la prestation <span aria-hidden>↓</span>
           </a>
         </div>
 
-        {/* OFFER CARD */}
         <div className="relative mx-auto w-full max-w-[500px] lg:ml-auto">
           <div aria-hidden className="absolute -inset-3 rounded-[2.5rem] bg-gradient-to-br from-electric/25 via-lilac/15 to-solar/25 blur-2xl" />
           <div className="relative overflow-hidden rounded-[2rem] border border-white/80 bg-white/70 p-6 shadow-[0_28px_80px_-35px_rgba(35,55,110,0.3)] backdrop-blur-2xl sm:p-8">
@@ -157,33 +140,23 @@ function ReservationPage() {
                 </div>
               </div>
 
-              {!isOpen && (
-                <button
-                  type="button"
-                  onClick={handleCheckout}
-                  className="group relative mt-7 inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-ink px-7 py-4 text-sm font-semibold text-white shadow-[0_14px_34px_-12px_rgba(35,50,90,0.55)] transition hover:-translate-y-0.5"
-                >
-                  <span aria-hidden className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-                  <span className="relative">Procéder au paiement</span>
-                  <span className="relative">↗</span>
-                </button>
-              )}
-
-              {checkoutElement && (
-                <div className="mt-6 overflow-hidden rounded-2xl border border-white bg-white p-2">
-                  {checkoutElement}
-                </div>
-              )}
+              <button
+                type="button"
+                className="group relative mt-7 inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-ink px-7 py-4 text-sm font-semibold text-white shadow-[0_14px_34px_-12px_rgba(35,50,90,0.55)] transition hover:-translate-y-0.5"
+              >
+                <span aria-hidden className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
+                <span className="relative">Payer {price}</span>
+                <span className="relative">↗</span>
+              </button>
 
               <p className="mt-4 text-center text-[10px] leading-relaxed text-ink-soft">
-                Paiement sécurisé par Stripe · Aucune donnée bancaire stockée par Kenshō
+                Réservation et paiement prochainement disponibles.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* AUDIT DETAILS */}
       <section id="details" className="border-t border-ink/5 px-5 py-20 sm:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto max-w-3xl text-center">
@@ -260,7 +233,6 @@ function ReservationPage() {
         </section>
       )}
 
-      {/* PROCESS */}
       <section className="border-t border-ink/5 px-5 py-20 sm:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="text-center">
@@ -269,8 +241,8 @@ function ReservationPage() {
           </div>
           <div className="mt-12 grid gap-4 md:grid-cols-3">
             {[
-              { number: "01", title: "Réglez votre session", text: `Procédez au paiement sécurisé de ${price} sur cette page.` },
-              { number: "02", title: "Choisissez votre créneau", text: "Après le paiement, vous accédez au calendrier pour sélectionner votre rendez-vous." },
+              { number: "01", title: "Découvrez la prestation", text: "Prenez connaissance du contenu de votre audit et de ses objectifs." },
+              { number: "02", title: "Préparez votre compte", text: "Rassemblez les informations utiles sur vos campagnes et vos objectifs." },
               { number: "03", title: isTracking ? "Finalisez la prestation" : "Échangez pendant 1 heure", text: isTracking ? "Nous avançons sur la mise en place du suivi et les vérifications prévues." : "Retrouvez votre expert en visioconférence pour analyser votre compte et vos priorités." },
             ].map((step) => (
               <article key={step.number} className="rounded-[1.5rem] border border-white/80 bg-white/45 p-6 backdrop-blur-xl">
@@ -283,7 +255,6 @@ function ReservationPage() {
         </div>
       </section>
 
-      {/* FINAL CTA */}
       <section className="px-5 pb-24 pt-4 sm:px-8">
         <div className="relative mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-white/80 bg-gradient-to-br from-white/80 via-white/55 to-electric/10 p-8 text-center shadow-[0_25px_80px_-35px_rgba(35,65,140,0.25)] backdrop-blur-2xl sm:p-12">
           <div aria-hidden className="absolute -right-16 -top-20 h-64 w-64 rounded-full bg-electric/15 blur-3xl" />
@@ -292,10 +263,10 @@ function ReservationPage() {
             Prêt à prendre du recul sur vos campagnes ?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-ink-soft">
-            Réservez votre session et transformez vos questions en priorités claires.
+            Découvrez notre prestation et les bénéfices de votre audit.
           </p>
-          <button type="button" onClick={handleCheckout} className="mt-8 inline-flex items-center gap-3 rounded-full bg-ink px-8 py-4 text-sm font-semibold text-white shadow-[0_14px_35px_-12px_rgba(25,35,60,0.45)] transition hover:-translate-y-0.5">
-            Réserver mon {isTracking ? "installation tracking" : "Audit Google Ads"} · {price} <span>↗</span>
+          <button type="button" className="mt-8 inline-flex items-center gap-3 rounded-full bg-ink px-8 py-4 text-sm font-semibold text-white shadow-[0_14px_35px_-12px_rgba(25,35,60,0.45)] transition hover:-translate-y-0.5">
+            Payer {price} <span>↗</span>
           </button>
         </div>
       </section>
@@ -304,3 +275,4 @@ function ReservationPage() {
     </main>
   );
 }
+
