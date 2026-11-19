@@ -141,12 +141,7 @@ function GoogleAdsPage() {
           ======================================================== */}
       <section className="relative mx-auto max-w-6xl px-4 pt-32 pb-16 sm:px-6 sm:pt-40">
         <div className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 rounded-full border border-electric/30 bg-white/60 px-4 py-1.5 text-xs font-semibold text-electric backdrop-blur-xl shadow-sm">
-            <span className="h-1.5 w-1.5 rounded-full bg-electric animate-pulse" />
-            Accompagnement Mensuel Google Ads
-          </div>
-
-          <h1 className="mt-6 text-[clamp(2.2rem,5vw,3.75rem)] font-light leading-[1.08] tracking-[-0.03em]">
+          <h1 className="mt-0 text-[clamp(2.2rem,5vw,3.75rem)] font-light leading-[1.08] tracking-[-0.03em]">
             On gère votre Google Ads,
             <span className="block font-normal bg-gradient-to-r from-electric via-lilac to-coral bg-clip-text text-transparent">
               vous récoltez les résultats.
@@ -214,8 +209,8 @@ function GoogleAdsPage() {
                   {
                     day: "Mercredi",
                     events: [
-                      { start: 1, span: 1.35, time: "10:00 – 11:00", title: "Premier rendez-vous Kenshō", desc: "Échange stratégique autour de votre activité, vos objectifs et vos campagnes.", brand: true, booking: true },
-                      { start: 4.15, span: 0.9, time: "13:00 – 14:00", title: "Préparation & recommandations", desc: "Premières pistes de réflexion selon vos enjeux.", brand: true },
+                      { start: 1, span: 2.05, time: "10:00 – 11:00", title: "Premier rendez-vous Kenshō", desc: "Échange stratégique autour de votre activité, vos objectifs et vos campagnes.", brand: true, tone: "blue", booking: true },
+                      { start: 4.15, span: 1.0, time: "13:00 – 14:00", title: "Préparation & recommandations", desc: "Premières pistes de réflexion selon vos enjeux.", brand: false },
                     ],
                   },
                   {
@@ -235,8 +230,8 @@ function GoogleAdsPage() {
                   {
                     day: "Lundi",
                     events: [
-                      { start: 0.15, span: 1.65, time: "09:00 – 10:00", title: "Bilan hebdomadaire Kenshō Studio", desc: "Analyse des résultats, priorités et décisions de la semaine.", brand: true },
-                      { start: 6.15, span: 1.55, time: "15:00 – 16:00", title: "Rendez-vous visio Kenshō", desc: "Point d’avancement, échanges et prochaines étapes.", note: "Toutes les 2 semaines", brand: true },
+                      { start: 0.15, span: 1.85, time: "09:00 – 10:00", title: "Bilan hebdomadaire Kenshō Studio", desc: "Analyse des résultats, priorités et décisions de la semaine.", brand: true, tone: "yellow" },
+                      { start: 6.15, span: 1.85, time: "15:00 – 16:00", title: "Rendez-vous visio Kenshō", desc: "Point d’avancement, échanges et prochaines étapes.", note: "Toutes les 2 semaines", brand: true, tone: "green" },
                     ],
                   },
                   {
@@ -254,11 +249,15 @@ function GoogleAdsPage() {
                     {column.events.map((event, i) => (
                       <div
                         key={`${column.day}-${i}`}
-                        className={`absolute left-1 right-1 z-10 rounded-[17px] border p-2.5 shadow-[0_8px_22px_-16px_rgba(20,20,40,0.25)] transition duration-300 sm:left-2 sm:right-2 sm:p-3 ${
-                          event.brand
-                            ? "border-electric/30 bg-gradient-to-br from-white/95 via-white/90 to-electric/[0.09] shadow-[0_12px_28px_-18px_rgba(67,112,255,0.45)]"
-                            : "border-ink/[0.09] bg-white/85"
-                        } ${event.booking ? "group cursor-pointer text-left hover:-translate-y-1 hover:border-electric/55 hover:shadow-[0_18px_32px_-18px_rgba(67,112,255,0.5)]" : ""}`}
+                        className={`absolute left-1 right-1 z-10 overflow-hidden rounded-[17px] border p-2.5 shadow-[0_8px_22px_-16px_rgba(20,20,40,0.25)] transition duration-300 sm:left-2 sm:right-2 sm:p-3 ${
+                          event.tone === "blue"
+                            ? "border-electric/40 bg-gradient-to-br from-white via-[#f8faff] to-[#dce7ff] shadow-[0_14px_30px_-18px_rgba(67,112,255,0.55)]"
+                            : event.tone === "yellow"
+                              ? "border-[#e8d99c]/70 bg-gradient-to-br from-white via-[#fffdf4] to-[#fff0b9] shadow-[0_12px_26px_-18px_rgba(204,169,70,0.35)]"
+                              : event.tone === "green"
+                                ? "border-[#b9dfc9]/80 bg-gradient-to-br from-white via-[#f7fcf8] to-[#d9f1e1] shadow-[0_12px_26px_-18px_rgba(85,163,112,0.3)]"
+                                : "border-ink/[0.09] bg-white/90"
+                        } ${event.booking ? "group cursor-pointer text-left ring-1 ring-electric/10 hover:-translate-y-1 hover:border-electric/60 hover:shadow-[0_20px_36px_-18px_rgba(67,112,255,0.55)]" : ""}`}
                         style={{ top: `${event.start * 12.5}%`, height: `${event.span * 12.5}%`, minHeight: "76px" }}
                         onClick={event.booking ? handleOpenBooking : undefined}
                         role={event.booking ? "button" : undefined}
@@ -266,10 +265,10 @@ function GoogleAdsPage() {
                         onKeyDown={event.booking ? (e) => { if (e.key === "Enter" || e.key === " ") handleOpenBooking(); } : undefined}
                       >
                         <div className={`font-mono text-[9px] font-bold sm:text-[10px] ${event.brand ? "text-electric" : "text-ink-soft"}`}>{event.time}</div>
-                        <div className="mt-1 text-[10px] font-bold leading-snug text-ink sm:text-[11px]">{event.title}</div>
-                        <p className="mt-1 hidden text-[9px] leading-relaxed text-ink-soft sm:block">{event.desc}</p>
+                        <div className={`mt-1 font-bold leading-snug text-ink ${event.booking ? "text-[12px] sm:text-[13px]" : "text-[10px] sm:text-[11px]"}`}>{event.title}</div>
+                        <p className={`mt-1 text-[9px] leading-[1.45] text-ink-soft ${event.booking ? "line-clamp-3 text-[10px]" : "line-clamp-2"} `}>{event.desc}</p>
                         {event.note && <span className="mt-1 inline-block rounded-full bg-electric/8 px-1.5 py-0.5 text-[8px] font-semibold text-electric">{event.note}</span>}
-                        {event.booking && <div className="mt-2 inline-flex rounded-full bg-electric px-2 py-1 text-[8px] font-semibold text-white transition group-hover:bg-electric/90">Réserver mon échange ↗</div>}
+                        {event.booking && <div className="mt-2 inline-flex rounded-full bg-electric px-2.5 py-1.5 text-[9px] font-semibold text-white shadow-sm transition group-hover:bg-[#3f70f5]">Réserver mon échange gratuit ↗</div>}
                       </div>
                     ))}
                   </div>
