@@ -1,18 +1,17 @@
 
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import {
   ArrowDown,
   ArrowUpRight,
   BarChart3,
   Check,
   ChevronRight,
-  CircleDollarSign,
   Instagram,
   Linkedin,
   MessageCircle,
   MousePointer2,
-  Play,
   TrendingUp,
   Youtube,
   Bell,
@@ -57,6 +56,99 @@ export const Route = createFileRoute("/")({
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
+/* -------------------------------------------------------
+   LOGO KENSHŌ — ANIMATION COULEURS
+------------------------------------------------------- */
+
+function AnimatedKenshoLogo() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, ease }}
+      className="mx-auto mb-8 flex w-fit flex-col items-center"
+    >
+      <span className="kensho-logo-text text-[42px] font-extrabold leading-none tracking-[-0.085em] sm:text-[52px]">
+        Kenshō
+      </span>
+      <span className="mt-2 text-[8px] font-semibold tracking-[0.38em] text-ink-soft">
+        DIGITAL STUDIO
+      </span>
+
+      <style>{`
+        .kensho-logo-text {
+          background: linear-gradient(
+            110deg,
+            #3985ff 0%,
+            #8c73ed 18%,
+            #f16b9a 38%,
+            #ff9b55 57%,
+            #e9c66e 72%,
+            #52c9a1 88%,
+            #3985ff 100%
+          );
+          background-size: 300% 100%;
+          background-clip: text;
+          -webkit-background-clip: text;
+          color: transparent;
+          animation: kensho-color-flow 8s ease-in-out infinite;
+        }
+
+        @keyframes kensho-color-flow {
+          0%, 100% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .kensho-logo-text { animation: none; }
+        }
+      `}</style>
+    </motion.div>
+  );
+}
+
+/* -------------------------------------------------------
+   MOTS DYNAMIQUES DU HERO
+------------------------------------------------------- */
+
+const HERO_WORDS = [
+  { word: "levier", color: "from-sky-500 via-blue-500 to-cyan-400" },
+  { word: "accélérateur", color: "from-orange-400 via-rose-400 to-pink-500" },
+  { word: "atout", color: "from-pink-500 via-rose-400 to-orange-300" },
+  { word: "moteur", color: "from-emerald-400 via-teal-500 to-sky-500" },
+  { word: "avantage", color: "from-violet-500 via-pink-500 to-orange-400" },
+];
+
+function DynamicHeroWord() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setIndex((current) => (current + 1) % HERO_WORDS.length);
+    }, 2800);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const current = HERO_WORDS[index];
+
+  return (
+    <motion.span
+      key={current.word}
+      initial={{ opacity: 0, y: 12, filter: "blur(5px)" }}
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      transition={{ duration: 0.55, ease }}
+      className={`inline-block bg-gradient-to-r ${current.color} bg-clip-text font-semibold text-transparent`}
+    >
+      {current.word}
+    </motion.span>
+  );
+}
+
+/* -------------------------------------------------------
+   ANIMATION D'APPARITION
+------------------------------------------------------- */
+
 function Reveal({
   children,
   delay = 0,
@@ -76,6 +168,133 @@ function Reveal({
     >
       {children}
     </motion.div>
+  );
+}
+
+/* -------------------------------------------------------
+   COMPTEURS ANIMÉS
+------------------------------------------------------- */
+
+function AnimatedNumber({
+  value,
+  suffix = "",
+  prefix = "",
+}: {
+  value: number;
+  suffix?: string;
+  prefix?: string;
+}) {
+  const [count, setCount] = useState(0);
+  const [started, setStarted] = useState(false);
+
+  useEffect(() => {
+    if (!started) return;
+
+    const duration = 1800;
+    const start = performance.now();
+
+    let frame = 0;
+
+    const animate = (now: number) => {
+      const progress = Math.min((now - start) / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 4);
+
+      setCount(Math.round(value * eased));
+
+      if (progress < 1) {
+        frame = requestAnimationFrame(animate);
+      }
+    };
+
+    frame = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(frame);
+  }, [started, value]);
+
+  return (
+    <span
+      ref={(element) => {
+        if (!element || started) return;
+
+        const observer = new IntersectionObserver(
+          ([entry]) => {
+            if (entry.isIntersecting) {
+              setStarted(true);
+              observer.disconnect();
+            }
+          },
+          { threshold: 0.5 },
+        );
+
+        observer.observe(element);
+
+        return () => observer.disconnect();
+      }}
+    >
+      {prefix}
+      {count}
+      {suffix}
+    </span>
+  );
+}
+
+function Counters() {
+  const items = [
+    {
+      value: 47,
+      prefix: "+",
+      suffix: "",
+      label: "Audits réalisés",
+    },
+    {
+      value: 230,
+      prefix: "+",
+      suffix: "%",
+      label: "ROI moyen constaté",
+    },
+    {
+      value: 30,
+      prefix: "",
+      suffix: " min",
+      label: "Chrono",
+    },
+  ];
+
+  return (
+    <section className="relative z-10 px-5 pb-20 sm:px-6">
+      <Reveal className="mx-auto max-w-5xl">
+        <div className="relative overflow-hidden rounded-[24px] border border-white/75 bg-white/40 px-5 py-7 shadow-[0_20px_65px_-35px_rgba(30,35,60,0.3)] backdrop-blur-2xl sm:px-10 sm:py-8">
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-white/10" />
+
+          <div className="relative grid grid-cols-3 divide-x divide-ink/10">
+            {items.map((item, index) => (
+              <div
+                key={item.label}
+                className="flex flex-col items-center px-2 text-center sm:px-5"
+              >
+                <motion.p
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.15, duration: 0.6 }}
+                  className="font-display text-[clamp(1.8rem,5vw,3.2rem)] font-semibold tracking-[-0.06em] text-ink"
+                >
+                  <AnimatedNumber
+                    value={item.value}
+                    prefix={item.prefix}
+                    suffix={item.suffix}
+                  />
+                </motion.p>
+
+                <p className="mt-2 text-[9px] leading-tight text-ink-soft sm:text-[12px]">
+                  {item.label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Reveal>
+    </section>
   );
 }
 
@@ -115,36 +334,27 @@ function AuditVisual() {
             { label: "CPC moyen", value: "0,84 €", change: "−12,2%" },
             { label: "Budget", value: "2 450 €", change: "Optimisé" },
           ].map((item) => (
-            <div
-              key={item.label}
-              className="rounded-xl border border-white/70 bg-white/55 p-2"
-            >
+            <div key={item.label} className="rounded-xl border border-white/70 bg-white/55 p-2">
               <p className="text-[8px] text-ink-soft">{item.label}</p>
-              <p className="mt-1 text-[15px] font-semibold tracking-tight text-ink">
-                {item.value}
-              </p>
-              <p className="mt-1 text-[8px] font-medium text-emerald-700">
-                {item.change}
-              </p>
+              <p className="mt-1 text-[15px] font-semibold tracking-tight text-ink">{item.value}</p>
+              <p className="mt-1 text-[8px] font-medium text-emerald-700">{item.change}</p>
             </div>
           ))}
         </div>
 
-        <div className="flex items-end justify-between gap-1 px-1 pt-1">
-          {[32, 45, 38, 60, 48, 72, 55, 83, 68, 92, 74, 100].map(
-            (height, i) => (
-              <motion.div
-                key={i}
-                initial={{ height: 5 }}
-                whileInView={{ height: `${height}%` }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, delay: 0.15 + i * 0.045, ease }}
-                className="w-full rounded-t-sm bg-gradient-to-t from-electric/60 to-sky/40"
-                style={{ height: `${height}%`, minHeight: 8 }}
-              />
-            ),
-          )}
+        <div className="flex h-16 items-end justify-between gap-1 px-1 pt-1">
+          {[32, 45, 38, 60, 48, 72, 55, 83, 68, 92, 74, 100].map((height, i) => (
+            <motion.div
+              key={i}
+              initial={{ height: 5 }}
+              whileInView={{ height: `${height}%` }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.15 + i * 0.045, ease }}
+              className="w-full rounded-t-sm bg-gradient-to-t from-electric/60 to-sky/40"
+            />
+          ))}
         </div>
+
         <div className="mt-2 flex items-center justify-between text-[8px] text-ink-soft">
           <span>Évolution des performances</span>
           <span>12 derniers mois</span>
@@ -159,9 +369,7 @@ function AuditVisual() {
         <span className="grid size-7 place-items-center rounded-full bg-mint/30 text-emerald-700">
           <TrendingUp size={14} />
         </span>
-        <span className="text-[9px] font-semibold text-ink">
-          Opportunités détectées
-        </span>
+        <span className="text-[9px] font-semibold text-ink">Opportunités détectées</span>
       </motion.div>
     </div>
   );
@@ -187,9 +395,7 @@ function ManagementVisual() {
 
           <div className="px-2.5 pt-7">
             <div className="flex items-center justify-between">
-              <span className="text-[8px] font-bold tracking-tight text-ink">
-                Kenshō
-              </span>
+              <span className="text-[8px] font-bold tracking-tight text-ink">Kenshō</span>
               <Bell size={10} className="text-ink-soft" />
             </div>
 
@@ -205,34 +411,22 @@ function ManagementVisual() {
                 <div className="grid size-5 place-items-center rounded-md bg-electric/15">
                   <BarChart3 size={10} className="text-electric" />
                 </div>
-                <span className="text-[7px] font-semibold text-ink">
-                  Google Ads
-                </span>
+                <span className="text-[7px] font-semibold text-ink">Google Ads</span>
               </div>
               <div className="mt-2 flex items-end gap-1">
                 {[30, 48, 38, 65, 52, 80, 72].map((h, i) => (
-                  <div
-                    key={i}
-                    className="w-full rounded-t-sm bg-electric/65"
-                    style={{ height: h / 3 }}
-                  />
+                  <div key={i} className="w-full rounded-t-sm bg-electric/65" style={{ height: h / 3 }} />
                 ))}
               </div>
-              <p className="mt-1 text-[6px] text-ink-soft">
-                Performances actualisées
-              </p>
+              <p className="mt-1 text-[6px] text-ink-soft">Performances actualisées</p>
             </div>
 
             <div className="mt-2 rounded-lg border border-white bg-white/85 p-2 shadow-sm">
               <div className="flex items-center gap-1">
                 <CalendarDays size={9} className="text-electric" />
-                <span className="text-[7px] font-semibold text-ink">
-                  Prochain suivi
-                </span>
+                <span className="text-[7px] font-semibold text-ink">Prochain suivi</span>
               </div>
-              <p className="mt-1 text-[7px] text-ink-soft">
-                Votre point hebdomadaire
-              </p>
+              <p className="mt-1 text-[7px] text-ink-soft">Votre point hebdomadaire</p>
             </div>
           </div>
         </div>
@@ -247,9 +441,7 @@ function ManagementVisual() {
           <Check size={16} />
         </span>
         <div>
-          <p className="text-[9px] font-semibold text-ink">
-            Kenshō Studio
-          </p>
+          <p className="text-[9px] font-semibold text-ink">Kenshō Studio</p>
           <p className="mt-0.5 text-[8px] leading-tight text-ink-soft">
             Votre suivi hebdomadaire est disponible.
           </p>
@@ -262,9 +454,7 @@ function ManagementVisual() {
         className="absolute bottom-[17%] left-[1%] z-20 flex items-center gap-2 rounded-xl border border-white/80 bg-white/90 px-3 py-2 shadow-lg backdrop-blur-xl"
       >
         <span className="size-2 rounded-full bg-emerald-500" />
-        <span className="text-[8px] font-semibold text-ink">
-          Campagnes suivies
-        </span>
+        <span className="text-[8px] font-semibold text-ink">Campagnes suivies</span>
       </motion.div>
     </div>
   );
@@ -338,9 +528,7 @@ function SocialVisual() {
           <div className="mx-auto grid size-9 place-items-center rounded-xl bg-gradient-to-br from-electric/30 to-solar/30">
             <MousePointer2 size={19} className="text-ink" />
           </div>
-          <p className="mt-2 text-[9px] font-semibold text-ink">
-            Votre marque
-          </p>
+          <p className="mt-2 text-[9px] font-semibold text-ink">Votre marque</p>
         </div>
       </motion.div>
 
@@ -432,10 +620,7 @@ function ServiceCard({
         <div className="relative z-10 mt-auto border-t border-ink/10 pt-4">
           <ul className="space-y-2">
             {points.map((point) => (
-              <li
-                key={point}
-                className="flex items-center gap-2 text-[12px] text-ink-soft"
-              >
+              <li key={point} className="flex items-center gap-2 text-[12px] text-ink-soft">
                 <span className="grid size-4 shrink-0 place-items-center rounded-full bg-mint/30 text-emerald-800">
                   <Check size={10} />
                 </span>
@@ -467,7 +652,7 @@ function Index() {
     <main className="relative min-h-screen overflow-x-hidden bg-paper pb-0 text-ink">
       <Nav />
 
-      {/* Ambient background */}
+      {/* AMBIENT BACKGROUND */}
       <div
         aria-hidden
         className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
@@ -480,7 +665,7 @@ function Index() {
       {/* HERO */}
       <section
         id="top"
-        className="relative isolate overflow-hidden px-6 pb-16 pt-36 sm:pb-20 sm:pt-44"
+        className="relative isolate overflow-hidden px-6 pb-12 pt-36 sm:pb-14 sm:pt-44"
       >
         <div
           aria-hidden
@@ -500,17 +685,7 @@ function Index() {
         </div>
 
         <div className="mx-auto max-w-6xl text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease }}
-            className="inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/45 px-4 py-2 shadow-sm backdrop-blur-xl"
-          >
-            <span className="size-1.5 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
-            <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-ink-soft sm:text-[10px]">
-              Stratégie · Acquisition · Performance
-            </span>
-          </motion.div>
+          <AnimatedKenshoLogo />
 
           <motion.h1
             initial={{ opacity: 0, y: 25 }}
@@ -520,10 +695,7 @@ function Index() {
           >
             Faites de votre
             <span className="block font-semibold">
-              visibilité un{" "}
-              <span className="bg-gradient-to-r from-electric via-sky to-emerald-500 bg-clip-text font-semibold text-transparent">
-                levier
-              </span>
+              visibilité un <DynamicHeroWord />
             </span>
             de croissance.
           </motion.h1>
@@ -550,10 +722,7 @@ function Index() {
               className="group inline-flex items-center gap-3 rounded-full bg-ink px-7 py-3.5 text-[13px] font-semibold text-white shadow-[0_15px_35px_-15px_rgba(20,25,40,0.55)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_40px_-15px_rgba(20,25,40,0.6)]"
             >
               Découvrir nos expertises
-              <ArrowDown
-                size={15}
-                className="transition-transform duration-300 group-hover:translate-y-1"
-              />
+              <ArrowDown size={15} className="transition-transform duration-300 group-hover:translate-y-1" />
             </a>
             <a
               href="mailto:kenshodigitalstudio@gmail.com"
@@ -568,7 +737,7 @@ function Index() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="mt-16 flex items-center justify-center gap-4 text-[9px] uppercase tracking-[0.2em] text-ink-soft/70"
+            className="mt-14 flex items-center justify-center gap-4 text-[9px] uppercase tracking-[0.2em] text-ink-soft/70"
           >
             <span className="h-px w-8 bg-ink/20" />
             Une approche pensée pour votre croissance
@@ -576,6 +745,9 @@ function Index() {
           </motion.div>
         </div>
       </section>
+
+      {/* COUNTERS */}
+      <Counters />
 
       {/* SERVICES */}
       <section
@@ -653,7 +825,7 @@ function Index() {
         </div>
       </section>
 
-      {/* TEAM — EXISTING SECTION */}
+      {/* TEAM */}
       <section className="relative">
         <div className="mx-auto max-w-7xl px-6">
           <div className="h-px bg-gradient-to-r from-transparent via-ink/15 to-transparent" />
@@ -698,10 +870,7 @@ function Index() {
             className="group mt-8 inline-flex items-center gap-3 rounded-full bg-ink px-7 py-3.5 text-[13px] font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
           >
             Échanger avec Kenshō
-            <ArrowUpRight
-              size={15}
-              className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-            />
+            <ArrowUpRight size={15} className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1" />
           </a>
         </Reveal>
       </section>
