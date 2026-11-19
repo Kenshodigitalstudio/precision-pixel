@@ -213,11 +213,13 @@ function Counters() {
     <section className="relative mx-auto max-w-5xl px-5 pb-16 pt-2 sm:px-8 sm:pt-3">
       <Reveal>
         <div className="relative overflow-hidden rounded-3xl border border-white/70 bg-white/35 p-7 shadow-[0_20px_60px_-30px_rgba(20,30,60,0.18)] backdrop-blur-2xl sm:p-10">
+          {/* Reflet supérieur */}
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-br from-white/65 via-white/15 to-white/5"
           />
 
+          {/* Lumière diffuse */}
           <div
             aria-hidden="true"
             className="pointer-events-none absolute -right-20 -top-28 h-64 w-64 rounded-full bg-white/60 blur-3xl"
@@ -228,6 +230,7 @@ function Counters() {
             className="pointer-events-none absolute -bottom-24 -left-20 h-56 w-56 rounded-full bg-white/30 blur-3xl"
           />
 
+          {/* Contour intérieur */}
           <div
             aria-hidden="true"
             className="pointer-events-none absolute inset-[1px] rounded-[23px] border border-white/40"
@@ -366,15 +369,6 @@ function Index() {
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
             Kenshō Digital Studio
           </div>
-        </Reveal>
-
-        {/* LOGO KENSHŌ */}
-        <Reveal delay={0.05}>
-          <img
-            src="/kensho-logo.png"
-            alt="Kenshō Digital Studio"
-            className="mb-7 h-auto w-[210px] object-contain sm:mb-8 sm:w-[280px] md:w-[310px]"
-          />
         </Reveal>
 
         <Reveal delay={0.1}>
