@@ -1,548 +1,445 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useState, useRef } from "react";
 import { Nav } from "@/components/landing/Nav";
 import { Footer } from "@/components/landing/Footer";
-import { ExtraRequest } from "@/components/landing/ExtraRequest";
-import { ReportShowcase } from "@/components/landing/ReportShowcase";
-import { useReveal } from "@/hooks/use-reveal";
-import { useMagnetic } from "@/hooks/use-magnetic";
+import { Sparkles } from "@/components/landing/Sparkles";
 
+const CALENDLY_URL = "https://calendly.com/kenshodigitalstudio/30min";
 
 export const Route = createFileRoute("/services/google-ads")({
   component: GoogleAdsPage,
   head: () => ({
     meta: [
-      { title: "Google Ads de A à Z — Kenshō Digital Studio" },
+      { title: "Accompagnement Google Ads — Kenshō Digital Studio" },
       {
         name: "description",
         content:
-          "On gère votre Google Ads, vous récoltez les résultats. Découvrez notre service complet pour développer votre business.",
+          "Un accompagnement mensuel Google Ads continu pour optimiser vos campagnes et faire évoluer vos performances. Réservez votre premier rendez-vous gratuit d'une heure.",
       },
     ],
   }),
 });
 
-/* ---------- Icônes (style PDF, glass bubbly) ---------- */
-
-function GoogleAdsIcon({ className = "" }: { className?: string }) {
-  // logo Google Ads stylisé
-  return (
-    <svg viewBox="0 0 48 48" className={className} aria-hidden>
-      <path d="M19 6 L7 27 a4 4 0 0 0 7 4 L26 10 a4 4 0 0 0 -7 -4 Z" fill="#FBBC04" />
-      <path d="M29 6 L41 27 a4 4 0 0 1 -7 4 L22 10 a4 4 0 0 1 7 -4 Z" fill="#4285F4" />
-      <circle cx="13" cy="36" r="6" fill="#34A853" />
-    </svg>
-  );
-}
-
-function RocketIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 48 48" className={className} aria-hidden>
-      <defs>
-        <linearGradient id="rk-grad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#60a5fa" />
-          <stop offset="100%" stopColor="#a855f7" />
-        </linearGradient>
-      </defs>
-      <path d="M24 4 C32 10 36 18 36 28 L36 34 L12 34 L12 28 C12 18 16 10 24 4 Z" fill="url(#rk-grad)" />
-      <circle cx="24" cy="20" r="4" fill="white" />
-      <path d="M12 30 L6 36 L6 42 L14 38 Z" fill="#ff6f91" />
-      <path d="M36 30 L42 36 L42 42 L34 38 Z" fill="#ff6f91" />
-      <path d="M20 38 L24 46 L28 38 Z" fill="#FBBC04" />
-    </svg>
-  );
-}
-
-function GearsIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 48 48" className={className} aria-hidden>
-      <defs>
-        <linearGradient id="gr-grad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#ff6f91" />
-          <stop offset="100%" stopColor="#a855f7" />
-        </linearGradient>
-      </defs>
-      <path d="M30 18 l3 -1 l-1 -4 l-4 1 l-2 -3 l-4 2 l-2 -2 l-3 3 l-3 -1 l-1 4 l-3 1 l1 4 l-2 3 l3 3 l-1 3 l4 2 l1 3 l4 -1 l3 2 l3 -3 l3 1 l1 -4 l3 -1 l-1 -4 l2 -3 l-3 -3 z" fill="url(#gr-grad)" />
-      <circle cx="20" cy="22" r="5" fill="white" />
-      <circle cx="34" cy="34" r="8" fill="#FBBC04" />
-      <circle cx="34" cy="34" r="3" fill="white" />
-    </svg>
-  );
-}
-
-function PulseIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 48 48" className={className} aria-hidden>
-      <defs>
-        <linearGradient id="pl-grad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#a855f7" />
-          <stop offset="100%" stopColor="#60a5fa" />
-        </linearGradient>
-      </defs>
-      <circle cx="24" cy="24" r="20" fill="url(#pl-grad)" />
-      <circle cx="24" cy="24" r="13" fill="white" fillOpacity="0.2" />
-      <path d="M8 24 L16 24 L20 14 L26 34 L30 22 L34 28 L40 24" stroke="white" strokeWidth="2.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-      <circle cx="40" cy="24" r="3" fill="#FBBC04" />
-    </svg>
-  );
-}
-
-function SparkleDocIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 48 48" className={className} aria-hidden>
-      <defs>
-        <linearGradient id="sd-grad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0%" stopColor="#34d399" />
-          <stop offset="100%" stopColor="#60a5fa" />
-        </linearGradient>
-      </defs>
-      <path d="M10 6 h20 l10 10 v26 a2 2 0 0 1 -2 2 H10 a2 2 0 0 1 -2 -2 V8 a2 2 0 0 1 2 -2 Z" fill="url(#sd-grad)" />
-      <path d="M30 6 v10 h10" fill="white" fillOpacity="0.3" />
-      <circle cx="18" cy="28" r="2" fill="white" />
-      <circle cx="26" cy="28" r="2" fill="white" />
-      <circle cx="34" cy="28" r="2" fill="white" />
-      <rect x="14" y="34" width="20" height="2" rx="1" fill="white" fillOpacity="0.7" />
-      <path d="M36 10 l1 3 l3 1 l-3 1 l-1 3 l-1 -3 l-3 -1 l3 -1 z" fill="#FBBC04" />
-    </svg>
-  );
-}
-
-const PILLARS = [
+/* ---------- Données des 6 Piliers ---------- */
+const PILIERS = [
   {
-    Icon: RocketIcon,
-    title: "Création",
-    sub: "de campagnes performantes",
-    body: "Nous concevons vos campagnes Search, Display et Shopping de A à Z, avec une structure pensée pour maximiser votre Quality Score et minimiser vos coûts dès le lancement.",
+    num: "01",
+    title: "Suivi régulier des campagnes",
+    desc: "Surveillance des performances, identification des anomalies et suivi des principaux indicateurs clés au quotidien.",
+    icon: (
+      <svg className="w-6 h-6 text-sky" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+      </svg>
+    ),
   },
   {
-    Icon: GearsIcon,
-    title: "Gestion",
-    sub: "et optimisation continues",
-    body: "Optimisation hebdomadaire des enchères, des mots-clés et des annonces pour améliorer continuellement vos performances et votre ROAS.",
+    num: "02",
+    title: "Analyse des performances",
+    desc: "Étude approfondie des résultats, du taux de conversion, du coût par acquisition et détection des leviers de croissance.",
+    icon: (
+      <svg className="w-6 h-6 text-electric" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      </svg>
+    ),
   },
   {
-    Icon: PulseIcon,
-    title: "Suivi",
-    sub: "des performances en temps réel",
-    body: "Mise en place du tracking des conversions via Google Tag Manager. Vous savez exactement ce que chaque euro dépensé vous rapporte.",
+    num: "03",
+    title: "Optimisations continues",
+    desc: "Ajustement des campagnes, exclusion de mots-clés, affinage des audiences, stratégies d'enchères intelligentes et A/B testing.",
+    icon: (
+      <svg className="w-6 h-6 text-coral" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+      </svg>
+    ),
   },
   {
-    Icon: SparkleDocIcon,
-    title: "Rapports clairs",
-    sub: "et analyses régulières",
-    body: "Rapport mensuel personnalisé avec les métriques qui comptent vraiment : impressions, clics, conversions, coût/conv. et recommandations.",
+    num: "04",
+    title: "Reporting mensuel",
+    desc: "Un bilan mensuel clair, transparent et sans jargon pour comprendre exactement l'impact de chaque euro investi.",
+    icon: (
+      <svg className="w-6 h-6 text-mint" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+      </svg>
+    ),
+  },
+  {
+    num: "05",
+    title: "Assistance par e-mail",
+    desc: "Un canal direct avec votre expert Kenshō Studio. Réponses rapides et accompagnement réactif pendant les heures ouvrées.",
+    icon: (
+      <svg className="w-6 h-6 text-lilac" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+      </svg>
+    ),
+  },
+  {
+    num: "06",
+    title: "Deux rendez-vous de suivi par mois",
+    desc: "Deux échanges visio mensuels réguliers pour faire le point sur les résultats, débattre des priorités et décider des prochaines étapes.",
+    icon: (
+      <svg className="w-6 h-6 text-solar" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+      </svg>
+    ),
   },
 ];
 
-const STAT_BADGES = [
-  { label: "Conversions", value: "248", delta: "+35%" },
-  { label: "CTR moyen", value: "6,75 %", delta: "+18%" },
-  { label: "Coût / conv.", value: "12,45 €", delta: "-15%" },
+/* ---------- Données de la Timeline 3 Mois ---------- */
+const TIMELINE = [
+  {
+    mois: "Mois 1",
+    phase: "Analyser",
+    desc: "Comprendre l'existant, auditer les campagnes actuelles, identifier les fuites de budget et définir les priorités stratégiques.",
+    color: "from-sky/20 to-electric/20",
+    badge: "Diagnostic & Fondations",
+  },
+  {
+    mois: "Mois 2",
+    phase: "Optimiser",
+    desc: "Mettre en place les ajustements structurels, affiner les mots-clés rentables et améliorer progressivement le coût par acquisition.",
+    color: "from-electric/20 to-lilac/20",
+    badge: "Itération & Rentabilité",
+  },
+  {
+    mois: "Mois 3",
+    phase: "Développer",
+    desc: "Évaluer les performances consolidées, identifier les nouvelles opportunités de croissance et préparer le scaling de vos investissements.",
+    color: "from-coral/20 to-solar/20",
+    badge: "Accélération & Croissance",
+  },
 ];
 
 function GoogleAdsPage() {
-  const heroReveal = useReveal<HTMLDivElement>();
-  const pillarsReveal = useReveal<HTMLDivElement>();
-  const promiseReveal = useReveal<HTMLDivElement>();
-  
+  const [showCalendly, setShowCalendly] = useState(false);
+  const bookingRef = useRef<HTMLDivElement>(null);
+
+  const handleOpenBooking = () => {
+    setShowCalendly(true);
+    setTimeout(() => {
+      bookingRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 120);
+  };
 
   return (
-    <main className="relative min-h-screen overflow-x-hidden">
+    <div className="relative min-h-screen overflow-x-hidden bg-paper text-ink font-display">
+      {/* Halos d'ambiance Liquid Glass Kenshō */}
+      <div aria-hidden className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+        <div className="absolute -left-24 top-20 h-96 w-96 rounded-full bg-electric/15 blur-3xl" />
+        <div className="absolute right-0 top-1/3 h-[28rem] w-[28rem] rounded-full bg-solar/20 blur-3xl" />
+        <div className="absolute left-1/4 bottom-1/4 h-80 w-80 rounded-full bg-mint/15 blur-3xl" />
+      </div>
+
+      <Sparkles variant="subtle" />
       <Nav />
 
-      {/* Bulles flottantes décoratives (bubbly) */}
-      <Bubbles />
-
-      <section className="relative pt-28 pb-16 sm:pt-32">
-        <div ref={heroReveal} className="reveal relative mx-auto max-w-5xl px-6 text-center">
-          {/* New service chip */}
-          <div className="mx-auto inline-flex items-center gap-3 rounded-full border border-white/50 bg-white/40 px-5 py-2 backdrop-blur-xl shadow-[0_10px_30px_-12px_rgba(0,0,0,0.2)] animate-[bubble-pop_700ms_cubic-bezier(0.22,1.4,0.36,1)_both]">
-            <span className="grid h-7 w-7 place-items-center rounded-full bg-gradient-to-br from-coral via-solar to-lilac text-white shadow-inner">
-              ✦
-            </span>
-            <span className="font-mono text-[11px] font-bold uppercase tracking-[0.28em] text-[color:var(--coral)]">
-              Nouveau service
-            </span>
+      {/* ========================================================
+          HERO & CALENDRIER HEBDOMADAIRE INTERACTIF
+          ======================================================== */}
+      <section className="relative mx-auto max-w-6xl px-4 pt-32 pb-16 sm:px-6 sm:pt-40">
+        <div className="text-center max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 rounded-full border border-electric/30 bg-white/60 px-4 py-1.5 text-xs font-semibold text-electric backdrop-blur-xl shadow-sm">
+            <span className="h-1.5 w-1.5 rounded-full bg-electric animate-pulse" />
+            Accompagnement Mensuel Google Ads
           </div>
 
-          <p className="mt-8 font-display text-2xl sm:text-3xl font-light tracking-tight">
-            <span className="bg-gradient-to-r from-[color:var(--coral)] via-[color:var(--lilac)] to-[color:var(--electric)] bg-clip-text text-transparent">
-              Kenshō
-            </span>{" "}
-            <span className="text-ink-soft">Digital Studio</span>
-          </p>
-
-          {/* Headline */}
-          <h1 className="mt-6 font-display text-[clamp(2rem,5.5vw,4.25rem)] font-extrabold leading-[1.05] tracking-[-0.035em] text-ink">
-            On gère votre{" "}
-            <span className="bg-gradient-to-r from-[color:var(--electric)] via-[color:var(--lilac)] to-[color:var(--coral)] bg-clip-text text-transparent">
-              Google Ads
-            </span>
-            ,<br />
-            vous récoltez les{" "}
-            <span className="bg-gradient-to-r from-[color:var(--lilac)] via-[color:var(--sky)] to-[color:var(--electric-soft)] bg-clip-text text-transparent">
-              résultats.
+          <h1 className="mt-6 text-[clamp(2.2rem,5vw,3.75rem)] font-light leading-[1.08] tracking-[-0.03em]">
+            On gère votre Google Ads,
+            <span className="block font-normal bg-gradient-to-r from-electric via-lilac to-coral bg-clip-text text-transparent">
+              vous récoltez les résultats.
             </span>
           </h1>
 
-          <p className="mx-auto mt-5 max-w-2xl font-display text-lg sm:text-xl font-medium text-ink-soft">
-            Découvrez{" "}
-            <span className="font-extrabold bg-gradient-to-r from-[color:var(--electric)] via-[color:var(--lilac)] to-[color:var(--coral)] bg-clip-text text-transparent">
-              Gestion mensuelle. Service disponible debut 2027.
+          <p className="mx-auto mt-6 max-w-2xl text-[16px] leading-relaxed text-ink-soft">
+            Découvrez concrètement notre rythme de travail hebdomadaire. Cliquez sur le créneau du mercredi pour réserver votre premier échange gratuit d’une heure.
+          </p>
+        </div>
+
+        {/* --- LE CALENDRIER HEBDOMADAIRE --- */}
+        <div className="mt-14 rounded-3xl border border-white/60 bg-white/40 p-4 sm:p-8 shadow-[0_30px_80px_-20px_rgba(20,20,40,0.08)] backdrop-blur-2xl">
+          <div className="flex items-center justify-between pb-6 border-b border-ink/5 flex-wrap gap-4">
+            <div className="flex items-center gap-3">
+              <span className="flex h-3 w-3 rounded-full bg-emerald-500 animate-pulse" />
+              <span className="text-sm font-semibold tracking-wide text-ink">
+                Semaine type — Équipe Kenshō Studio
+              </span>
+            </div>
+            <span className="text-xs font-mono text-ink-soft bg-white/60 border border-white/80 rounded-full px-3 py-1">
+              Fuseau horaire : Paris (UTC+1)
             </span>
+          </div>
+
+          {/* Grille des jours (commençant le Mercredi selon cahier des charges) */}
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-5 gap-4">
+            
+            {/* 1. MERCREDI (Point d'entrée principal - Mis en avant) */}
+            <div className="md:col-span-2 relative rounded-2xl border-2 border-electric/40 bg-gradient-to-b from-white/90 to-electric/5 p-5 shadow-[0_15px_40px_-10px_rgba(40,80,240,0.15)] backdrop-blur-xl transition-all">
+              <div className="flex items-center justify-between">
+                <div>
+                  <span className="text-xs font-mono uppercase tracking-wider text-electric font-bold">
+                    Mercredi
+                  </span>
+                  <p className="text-sm font-semibold text-ink">Point d'entrée Kenshō</p>
+                </div>
+                <span className="rounded-full bg-electric/10 text-electric text-[11px] font-semibold px-2.5 py-1 border border-electric/20">
+                  ✦ 1h offerte
+                </span>
+              </div>
+
+              {/* Créneau cliquable */}
+              <button
+                onClick={handleOpenBooking}
+                type="button"
+                className="group mt-6 w-full text-left rounded-xl border border-electric/30 bg-white/80 p-4 shadow-sm hover:shadow-xl hover:border-electric transition-all duration-300 hover:scale-[1.02] cursor-pointer"
+              >
+                <div className="flex items-center justify-between text-xs font-mono text-electric font-semibold">
+                  <span>10:00 – 11:00</span>
+                  <span className="flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                    Réserver →
+                  </span>
+                </div>
+                <h2 className="mt-2 text-base font-bold text-ink group-hover:text-electric transition-colors">
+                  Premier rendez-vous Kenshō
+                </h2>
+                <p className="mt-1 text-xs text-ink-soft leading-relaxed">
+                  Échange gratuit d’1h pour faire connaissance, comprendre vos enjeux et auditer vos campagnes.
+                </p>
+                <div className="mt-4 flex items-center gap-2 pt-3 border-t border-ink/5 text-[11px] text-emerald-600 font-medium">
+                  <span className="h-2 w-2 rounded-full bg-emerald-500" />
+                  Créneaux disponibles cette semaine
+                </div>
+              </button>
+
+              <p className="mt-3 text-center text-[11px] text-ink-soft italic">
+                👆 Cliquez sur le créneau pour ouvrir le calendrier de réservation
+              </p>
+            </div>
+
+            {/* SÉPARATION DISCRÈTE & AUTRES JOURS */}
+            <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-3 gap-3 md:border-l md:border-ink/10 md:pl-4">
+              
+              {/* JEUDI */}
+              <div className="rounded-xl border border-white/60 bg-white/30 p-3.5 backdrop-blur-md">
+                <span className="text-xs font-mono text-ink-soft">Jeudi</span>
+                <p className="text-xs font-semibold text-ink">Optimisations</p>
+                <div className="mt-3 rounded-lg border border-ink/5 bg-white/40 p-2.5 text-xs">
+                  <span className="font-mono text-[10px] text-ink-soft">11:00 – 12:00</span>
+                  <p className="font-medium text-ink-soft mt-0.5">Rendez-vous XXX</p>
+                </div>
+                <div className="mt-2 rounded-lg border border-ink/5 bg-white/40 p-2.5 text-xs">
+                  <span className="font-mono text-[10px] text-ink-soft">14:30 – 15:30</span>
+                  <p className="font-medium text-ink-soft mt-0.5">Rendez-vous XXX</p>
+                </div>
+              </div>
+
+              {/* VENDREDI */}
+              <div className="rounded-xl border border-white/60 bg-white/30 p-3.5 backdrop-blur-md">
+                <span className="text-xs font-mono text-ink-soft">Vendredi</span>
+                <p className="text-xs font-semibold text-ink">Bilan & Reporting</p>
+                <div className="mt-3 rounded-lg border border-ink/5 bg-white/40 p-2.5 text-xs">
+                  <span className="font-mono text-[10px] text-ink-soft">10:00 – 11:30</span>
+                  <p className="font-medium text-ink-soft mt-0.5">Rendez-vous XXX</p>
+                </div>
+              </div>
+
+              {/* LUNDI (Avec les notifications prévues au cahier des charges) */}
+              <div className="rounded-xl border border-white/60 bg-white/30 p-3.5 backdrop-blur-md">
+                <span className="text-xs font-mono text-ink-soft">Lundi</span>
+                <p className="text-xs font-semibold text-ink">Organisation Kenshō</p>
+
+                {/* Notification Lundi 09:00 */}
+                <div className="mt-3 rounded-lg border border-electric/20 bg-electric/10 p-2.5 text-xs">
+                  <div className="flex items-center gap-1.5 text-[10px] font-mono text-electric font-semibold">
+                    <span>🔔 09:00</span>
+                  </div>
+                  <p className="font-semibold text-ink text-[11px] mt-0.5">
+                    Bilan hebdomadaire Kenshō Studio
+                  </p>
+                </div>
+
+                {/* Rendez-vous Visio 15:00 - 16:00 */}
+                <div className="mt-2 rounded-lg border border-ink/5 bg-white/40 p-2.5 text-xs">
+                  <span className="font-mono text-[10px] text-ink-soft">15:00 – 16:00</span>
+                  <p className="font-medium text-ink mt-0.5">Rendez-vous visio Kenshō</p>
+                  <span className="inline-block mt-1 text-[9px] font-mono text-ink-soft bg-ink/5 rounded px-1.5 py-0.5">
+                    Toutes les 2 semaines
+                  </span>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+
+        {/* --- SECTION CALENDLY INLINE EMBED (Apparition fluide au clic) --- */}
+        <div ref={bookingRef} className="mt-12 transition-all duration-500">
+          {showCalendly && (
+            <div className="rounded-3xl border-2 border-electric/30 bg-white/70 p-4 sm:p-8 shadow-[0_30px_90px_-20px_rgba(40,80,240,0.18)] backdrop-blur-2xl animate-in fade-in zoom-in-95 duration-500">
+              <div className="flex items-center justify-between pb-6 border-b border-ink/10 flex-wrap gap-4">
+                <div>
+                  <span className="font-mono text-xs text-electric uppercase tracking-wider font-bold">
+                    ✦ Réservation en ligne
+                  </span>
+                  <h2 className="text-xl sm:text-2xl font-bold text-ink mt-1">
+                    Choisissez votre créneau pour le premier échange gratuit
+                  </h2>
+                </div>
+                <button
+                  onClick={() => setShowCalendly(false)}
+                  className="text-xs text-ink-soft hover:text-ink underline cursor-pointer"
+                >
+                  Fermer le calendrier ✕
+                </button>
+              </div>
+
+              <div className="mt-6 overflow-hidden rounded-2xl border border-white/60 bg-white">
+                <iframe
+                  src={`${CALENDLY_URL}?hide_gdpr_banner=1&background_color=ffffff&text_color=1b1e2b&primary_color=2850f0`}
+                  title="Réserver mon premier rendez-vous Kenshō Studio"
+                  className="block h-[720px] w-full border-0"
+                  loading="lazy"
+                />
+              </div>
+
+              <p className="mt-4 text-center text-xs text-ink-soft">
+                Un lien Google Meet vous sera envoyé par e-mail immédiatement après votre confirmation.
+              </p>
+            </div>
+          )}
+        </div>
+      </section>
+
+      {/* ========================================================
+          SECTION 2 : UN ACCOMPAGNEMENT QUI VA PLUS LOIN (LES 6 PILIERS)
+          ======================================================== */}
+      <section className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 border-t border-ink/5">
+        <div className="text-center max-w-3xl mx-auto">
+          <span className="font-mono text-xs uppercase tracking-widest text-electric font-semibold">
+            Notre Méthode
+          </span>
+          <h2 className="mt-3 text-[clamp(1.8rem,4vw,2.75rem)] font-light leading-[1.12] tracking-[-0.02em]">
+            Un accompagnement continu pour{" "}
+            <span className="font-normal bg-gradient-to-r from-electric via-lilac to-coral bg-clip-text text-transparent">
+              faire évoluer vos performances.
+            </span>
+          </h2>
+          <p className="mt-5 text-[15px] leading-relaxed text-ink-soft">
+            Nous ne nous contentons pas de lancer vos campagnes. Nous les suivons, les analysons et les optimisons dans le temps pour améliorer progressivement vos résultats.
+          </p>
+        </div>
+
+        {/* Grille des 6 piliers */}
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {PILIERS.map((pilier) => (
+            <div
+              key={pilier.num}
+              className="group relative rounded-2xl border border-white/60 bg-white/40 p-6 shadow-[0_15px_35px_-10px_rgba(0,0,0,0.05)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:border-electric/40 hover:bg-white/70 hover:shadow-xl"
+            >
+              <div className="flex items-center justify-between">
+                <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-white/80 border border-white/80 shadow-sm group-hover:scale-110 transition-transform">
+                  {pilier.icon}
+                </span>
+                <span className="font-mono text-2xl font-light text-ink-soft/40 group-hover:text-electric transition-colors">
+                  {pilier.num}
+                </span>
+              </div>
+              <h3 className="mt-5 text-lg font-bold text-ink">
+                {pilier.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink-soft">
+                {pilier.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ========================================================
+          SECTION 3 : POURQUOI UN ACCOMPAGNEMENT SUR TROIS MOIS ?
+          ======================================================== */}
+      <section className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 border-t border-ink/5">
+        <div className="text-center max-w-3xl mx-auto">
+          <span className="font-mono text-xs uppercase tracking-widest text-coral font-semibold">
+            Vision Stratégique
+          </span>
+          <h2 className="mt-3 text-[clamp(1.8rem,4vw,2.75rem)] font-light leading-[1.12] tracking-[-0.02em]">
+            Trois mois pour construire une stratégie,{" "}
+            <span className="block font-normal text-ink">
+              pas seulement lancer des campagnes.
+            </span>
+          </h2>
+          <p className="mt-5 text-[15px] leading-relaxed text-ink-soft">
+            La publicité Google Ads nécessite du temps pour analyser les données, identifier les opportunités et ajuster les stratégies. Notre objectif n’est pas de multiplier les modifications, mais de prendre les bonnes décisions au bon moment.
+          </p>
+        </div>
+
+        {/* Timeline des 3 mois */}
+        <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+          {TIMELINE.map((step, idx) => (
+            <div
+              key={step.mois}
+              className={`relative rounded-2xl border border-white/60 bg-gradient-to-b ${step.color} p-6 sm:p-8 backdrop-blur-xl shadow-sm hover:shadow-lg transition-all`}
+            >
+              <div className="flex items-center justify-between">
+                <span className="rounded-full bg-white/80 border border-white px-3 py-1 font-mono text-xs font-bold text-ink shadow-xs">
+                  {step.mois}
+                </span>
+                <span className="text-xs font-mono uppercase tracking-wider text-ink-soft">
+                  Étape 0{idx + 1}
+                </span>
+              </div>
+
+              <h3 className="mt-6 text-2xl font-bold text-ink">
+                {step.phase}
+              </h3>
+              <span className="inline-block mt-1 text-xs font-semibold text-electric">
+                {step.badge}
+              </span>
+
+              <p className="mt-4 text-sm leading-relaxed text-ink-soft">
+                {step.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ========================================================
+          SECTION 4 : SECTION FINALE CALL TO ACTION
+          ======================================================== */}
+      <section className="relative mx-auto max-w-4xl px-4 py-24 sm:px-6 text-center">
+        <div className="rounded-3xl border border-white/70 bg-gradient-to-b from-white/80 to-white/40 p-8 sm:p-14 shadow-[0_30px_90px_-20px_rgba(20,20,40,0.12)] backdrop-blur-2xl">
+          <span className="font-mono text-xs uppercase tracking-widest text-electric font-semibold">
+            Premier Échange
+          </span>
+          <h2 className="mt-4 text-[clamp(2rem,4.5vw,3.25rem)] font-light leading-[1.1] tracking-[-0.03em]">
+            Parlons de vos objectifs Google Ads.
+          </h2>
+          <p className="mx-auto mt-5 max-w-xl text-[16px] leading-relaxed text-ink-soft">
+            Vous souhaitez améliorer vos campagnes, mieux comprendre vos performances ou structurer votre stratégie d’acquisition ? Échangeons pendant une heure pour découvrir votre activité, vos objectifs et vos besoins.
           </p>
 
-          {/* Stats badges — apparition striking puis disparition en boucle */}
-          <div className="mt-7 flex flex-wrap items-center justify-center gap-2.5">
-            {STAT_BADGES.map((b, i) => (
-              <span
-                key={b.label}
-                className="group inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/50 px-3.5 py-1.5 text-[12.5px] font-medium text-ink backdrop-blur-xl shadow-[0_8px_24px_-12px_rgba(0,0,0,0.25)] will-change-transform"
-                style={{
-                  animation: `striking-pop 4.5s cubic-bezier(0.22,1.5,0.36,1) ${i * 0.5}s infinite`,
-                }}
-              >
-                <span className="text-ink-soft">{b.label}</span>
-                <span className="font-display font-bold tabular-nums text-ink">{b.value}</span>
-                <span className={`text-[11px] font-semibold ${b.delta.startsWith("-") ? "text-emerald-600" : "text-emerald-600"}`}>
-                  {b.delta.startsWith("-") ? "↓" : "↑"} {b.delta.replace(/^[-+]/, "")}
-                </span>
-              </span>
-            ))}
-          </div>
-
-
-
-        </div>
-      </section>
-
-      {/* Pillars — glass bubbly + icônes PDF */}
-      <section className="relative pb-20">
-        <div ref={pillarsReveal} className="reveal mx-auto max-w-6xl px-6">
-          <div className="relative rounded-[2rem] border border-white/50 bg-white/35 p-6 sm:p-10 backdrop-blur-2xl shadow-[0_24px_70px_-30px_rgba(0,0,0,0.25)]">
-            <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden rounded-[inherit]">
-              <div className="absolute -left-12 top-0 h-48 w-48 rounded-full bg-coral/30 blur-3xl animate-[blob_9s_ease-in-out_infinite]" />
-              <div className="absolute right-0 bottom-0 h-56 w-56 rounded-full bg-lilac/30 blur-3xl animate-[blob_11s_ease-in-out_infinite]" style={{ animationDelay: "1.5s" }} />
-            </div>
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              {PILLARS.map((p, i) => (
-                <PillarCard key={p.title} p={p} i={i} />
-              ))}
-            </div>
+          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
+            <button
+              onClick={handleOpenBooking}
+              type="button"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full bg-ink px-8 py-4 text-sm font-semibold text-paper shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 cursor-pointer"
+            >
+              <span>Réserver mon premier rendez-vous</span>
+              <span>→</span>
+            </button>
+            <Link
+              to="/"
+              className="text-xs text-ink-soft hover:text-ink underline underline-offset-4"
+            >
+              ← Retour à l'accueil
+            </Link>
           </div>
         </div>
       </section>
-
-
-
-      {/* Exemples de rapports — section premium */}
-      <ReportShowcase />
-
-      {/* Promise bloc — icône cible glass bubbly */}
-      <section className="relative pb-24">
-
-        <div className="mx-auto max-w-4xl px-6">
-          <div
-            ref={promiseReveal}
-            className="reveal relative overflow-hidden rounded-[2rem] border border-white/50 bg-white/45 p-8 sm:p-10 backdrop-blur-2xl shadow-[0_24px_70px_-30px_rgba(0,0,0,0.25)]"
-          >
-            <div aria-hidden className="pointer-events-none absolute -right-10 -top-10 h-48 w-48 rounded-full bg-solar/40 blur-3xl animate-[blob_10s_ease-in-out_infinite]" />
-            <div className="flex flex-col sm:flex-row items-start gap-6">
-              {/* Bulle d'icône cible (PDF style) */}
-              <div className="relative flex-none">
-                <span aria-hidden className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-coral/40 via-pink-300/30 to-lilac/40 blur-xl" />
-                <span className="relative grid h-20 w-20 place-items-center rounded-3xl bg-white/70 ring-1 ring-white/70 shadow-[inset_0_-6px_0_0_rgba(0,0,0,0.04),0_20px_40px_-20px_rgba(0,0,0,0.25)] backdrop-blur-xl animate-[float-y_6s_ease-in-out_infinite]">
-                  <RocketIcon className="h-12 w-12" />
-                </span>
-              </div>
-              <div>
-                <h2 className="font-display text-2xl sm:text-3xl font-extrabold leading-tight tracking-tight">
-                  <span className="block bg-gradient-to-r from-[color:var(--electric)] to-[color:var(--lilac)] bg-clip-text text-transparent">Plus de visibilité.</span>
-                  <span className="block bg-gradient-to-r from-[color:var(--lilac)] to-[color:var(--coral)] bg-clip-text text-transparent">Plus de clics.</span>
-                  <span className="block bg-gradient-to-r from-[color:var(--coral)] to-[color:var(--solar)] bg-clip-text text-transparent">Plus de clients.</span>
-                </h2>
-                <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-ink-soft">
-                  Confiez-nous vos Google Ads et concentrez-vous sur ce que vous faites de mieux :{" "}
-                  <span className="font-semibold text-ink">votre business</span>. Nous transformons votre budget
-                  publicitaire en résultats concrets et mesurables.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-
-      {/* Besoin spécifique — même bloc que la landing principale */}
-      <ExtraRequest />
-
-      {/* Note : gestion des réseaux sociaux sur devis */}
-      <section className="relative pb-16">
-        <div className="mx-auto max-w-3xl px-6">
-          <div className="relative overflow-hidden rounded-[2rem] border border-white/50 bg-white/40 p-8 sm:p-10 text-center backdrop-blur-2xl shadow-[0_24px_70px_-30px_rgba(0,0,0,0.25)]">
-            <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-              <div className="absolute left-1/2 top-0 h-56 w-72 -translate-x-1/2 rounded-full bg-lilac/30 blur-3xl" />
-              <div className="absolute right-0 bottom-0 h-40 w-40 rounded-full bg-coral/30 blur-3xl" />
-            </div>
-            <span className="font-mono text-xs uppercase tracking-[0.25em] text-[color:var(--lilac)]">
-              Sur devis
-            </span>
-            <h3 className="mt-3 font-display text-[clamp(1.4rem,2.6vw,2rem)] font-semibold leading-tight tracking-[-0.02em] text-ink">
-              Gestion de vos réseaux sociaux
-            </h3>
-            <p className="mx-auto mt-4 max-w-xl text-[15px] leading-relaxed text-ink-soft">
-              Un service de <span className="font-semibold text-ink">gestion de réseaux sociaux</span>{" "}
-              (création de contenus, planification, community management) peut être
-              ajouté à votre accompagnement&nbsp;: contactez-nous pour un devis personnalisé.
-            </p>
-          </div>
-        </div>
-      </section>
-
-
-
 
       <Footer />
-
-      {/* Retour à l'accueil — tout en bas */}
-      <div className="flex justify-center pb-10">
-        <Link
-          to="/"
-          className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/30 px-5 py-2.5 text-sm font-medium text-ink-soft backdrop-blur-md transition hover:bg-white/50 hover:text-ink"
-        >
-          ← Retour à l'accueil
-        </Link>
-      </div>
-
-      {/* keyframes locaux */}
-      <style>{`
-        @keyframes bubble-pop {
-          0%   { opacity: 0; transform: translateY(8px) scale(0.85); }
-          60%  { opacity: 1; transform: translateY(-2px) scale(1.04); }
-          100% { opacity: 1; transform: translateY(0) scale(1); }
-        }
-        @keyframes striking-pop {
-          0%   { opacity: 0; transform: translateY(14px) scale(0.4) rotate(-6deg); filter: blur(6px); }
-          12%  { opacity: 1; transform: translateY(-4px) scale(1.18) rotate(2deg); filter: blur(0); box-shadow: 0 0 0 6px rgba(255,255,255,0.5), 0 18px 40px -12px rgba(255,77,109,0.5); }
-          22%  { transform: translateY(0) scale(1) rotate(0deg); }
-          70%  { opacity: 1; transform: translateY(0) scale(1); filter: blur(0); }
-          90%  { opacity: 0; transform: translateY(-10px) scale(0.92); filter: blur(3px); }
-          100% { opacity: 0; transform: translateY(-10px) scale(0.92); filter: blur(3px); }
-        }
-        @keyframes blob {
-          0%, 100% { transform: translate(0,0) scale(1); }
-          50%      { transform: translate(12px,-10px) scale(1.08); }
-        }
-        @keyframes float-y {
-          0%, 100% { transform: translateY(0); }
-          50%      { transform: translateY(-6px); }
-        }
-        @keyframes float-bubble {
-          0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0.7; }
-          50%  { transform: translateY(-22px) translateX(6px) scale(1.05); opacity: 1; }
-          100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.7; }
-        }
-
-        /* --- numéros cochés comme des tâches faites --- */
-        .tick-box {
-          border-color: color-mix(in oklab, var(--electric) 32%, transparent);
-          background: rgba(255, 255, 255, 0.75);
-        }
-        .is-visible .tick-box {
-          animation: tick-fill 480ms cubic-bezier(0.22, 1.4, 0.36, 1) var(--tick-delay, 0ms) both;
-        }
-        @keyframes tick-fill {
-          0% {
-            background: rgba(255, 255, 255, 0.75);
-            transform: scale(1);
-            box-shadow: none;
-          }
-          55% {
-            background: linear-gradient(135deg, var(--electric), var(--lilac) 55%, var(--coral));
-            transform: scale(1.32);
-            box-shadow: 0 0 0 8px color-mix(in oklab, var(--lilac) 22%, transparent);
-          }
-          100% {
-            background: linear-gradient(135deg, var(--electric), var(--lilac) 55%, var(--coral));
-            transform: scale(1);
-            box-shadow: 0 0 0 4px color-mix(in oklab, var(--lilac) 14%, transparent);
-          }
-        }
-        .tick-mark {
-          stroke-dasharray: 100;
-          stroke-dashoffset: 100;
-        }
-        .is-visible .tick-mark {
-          animation: tick-draw 360ms cubic-bezier(0.65, 0, 0.35, 1) var(--tick-mark-delay, 0ms) forwards;
-        }
-        @keyframes tick-draw {
-          to { stroke-dashoffset: 0; }
-        }
-        .strike-line {
-          stroke-dasharray: 100;
-          stroke-dashoffset: 100;
-        }
-        .is-visible .strike-line {
-          animation: strike-draw 520ms cubic-bezier(0.22, 1, 0.36, 1) var(--strike-delay, 0ms) forwards;
-        }
-        @keyframes strike-draw {
-          to { stroke-dashoffset: 0; }
-        }
-        .num-done {
-          transition:
-            opacity 600ms ease var(--num-fade-delay, 0ms),
-            filter 600ms ease var(--num-fade-delay, 0ms);
-        }
-        .is-visible .num-done {
-          opacity: 0.5;
-          filter: blur(0.2px);
-        }
-        @media (prefers-reduced-motion: reduce) {
-          .tick-box {
-            animation: none;
-            background: linear-gradient(135deg, var(--electric), var(--lilac) 55%, var(--coral));
-          }
-          .tick-mark,
-          .strike-line {
-            animation: none;
-            stroke-dashoffset: 0;
-          }
-          .num-done {
-            opacity: 0.6;
-          }
-        }
-      `}</style>
-    </main>
-  );
-}
-
-function PillarCard({ p, i }: { p: (typeof PILLARS)[number]; i: number }) {
-  const ref = useReveal<HTMLDivElement>();
-  const Icon = p.Icon;
-  const num = String(i + 1).padStart(2, "0");
-  return (
-    <div
-      ref={ref}
-      className="reveal group relative overflow-hidden rounded-2xl p-7 pt-12 transition-all duration-300 hover:-translate-y-[3px] hover:shadow-[0_28px_70px_-25px_rgba(0,0,0,0.22)]"
-      style={{
-        background: "rgba(255,255,255,0.6)",
-        border: "1px solid rgba(255,255,255,0.5)",
-        backdropFilter: "blur(20px)",
-        WebkitBackdropFilter: "blur(20px)",
-        boxShadow: "0 18px 50px -25px rgba(0,0,0,0.18)",
-        transitionDelay: `${i * 80}ms`,
-      }}
-    >
-      <span
-        aria-hidden
-        className="pointer-events-none absolute right-5 top-2 flex select-none items-center gap-3"
-        style={
-          {
-            "--tick-delay": `${140 + i * 420}ms`,
-            "--tick-mark-delay": `${340 + i * 420}ms`,
-            "--strike-delay": `${470 + i * 420}ms`,
-            "--num-fade-delay": `${780 + i * 420}ms`,
-          } as CSSProperties
-        }
-      >
-        <span className="tick-box grid h-6 w-6 flex-none place-items-center rounded-full border">
-          <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden>
-            <path
-              className="tick-mark"
-              d="M5 12.5 L10 17.5 L19 7"
-              fill="none"
-              stroke="white"
-              strokeWidth="3.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              pathLength={100}
-            />
-          </svg>
-        </span>
-        <span className="relative block">
-          <span className="num-done block font-display text-[64px] font-extrabold leading-none tracking-[-0.04em] text-ink/10">
-            {num}
-          </span>
-          <svg
-            viewBox="0 0 100 10"
-            preserveAspectRatio="none"
-            className="absolute inset-x-0 top-1/2 h-[9px] w-full -translate-y-1/2 overflow-visible"
-            aria-hidden
-          >
-            <defs>
-              <linearGradient id={`strike-${i}`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100" y2="0">
-                <stop offset="0%" style={{ stopColor: "var(--electric)" }} />
-                <stop offset="55%" style={{ stopColor: "var(--lilac)" }} />
-                <stop offset="100%" style={{ stopColor: "var(--coral)" }} />
-              </linearGradient>
-            </defs>
-            <path
-              className="strike-line"
-              d="M2 6 Q 50 3.4 98 5.4"
-              fill="none"
-              stroke={`url(#strike-${i})`}
-              strokeWidth="5"
-              strokeLinecap="round"
-              vectorEffect="non-scaling-stroke"
-              pathLength={100}
-            />
-          </svg>
-        </span>
-      </span>
-
-      <div className="relative flex flex-col items-start gap-4">
-        <span className="grid h-12 w-12 place-items-center rounded-full border border-black/10 bg-white/60 shadow-[inset_0_1px_2px_rgba(255,255,255,0.9)]">
-          <Icon className="h-7 w-7 drop-shadow-[0_3px_6px_rgba(0,0,0,0.18)]" />
-        </span>
-        <div>
-          <h3 className="font-display text-[clamp(1.5rem,2.6vw,2rem)] font-extrabold leading-[1.08] tracking-[-0.035em]">
-            <span className="bg-gradient-to-r from-[color:var(--electric)] via-[color:color-mix(in_oklch,var(--lilac)_55%,var(--ink))] to-[color:color-mix(in_oklch,var(--coral)_55%,var(--ink))] bg-clip-text text-transparent">
-              {p.title}
-            </span>
-          </h3>
-          <p className="mt-1.5 font-display text-base font-medium leading-snug tracking-[-0.01em] text-ink-soft sm:text-lg">
-            {p.sub}
-          </p>
-
-          <p className="mt-3 font-display text-[15px] leading-relaxed text-ink-soft">
-            {p.body}
-          </p>
-        </div>
-
-
-      </div>
-    </div>
-  );
-}
-
-
-function Bubbles() {
-  // bulles flottantes pleines page (bubbly)
-  const bubbles = [
-    { left: "6%",  top: "14%", size: 10, color: "from-coral/70 to-lilac/60",   delay: 0 },
-    { left: "12%", top: "32%", size: 6,  color: "from-lilac/70 to-electric/60", delay: 1.2 },
-    { left: "8%",  top: "62%", size: 14, color: "from-electric/60 to-sky/60",   delay: 2.4 },
-    { right: "10%", top: "20%", size: 8, color: "from-solar/70 to-coral/60",    delay: 0.6 },
-    { right: "16%", top: "48%", size: 12, color: "from-lilac/60 to-electric-soft/60", delay: 1.8 },
-    { right: "6%",  top: "72%", size: 7,  color: "from-mint/70 to-sky/60",      delay: 3 },
-    { left: "22%", top: "82%", size: 9,   color: "from-coral/60 to-solar/60",   delay: 2 },
-  ];
-  return (
-    <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
-      {bubbles.map((b, i) => (
-        <span
-          key={i}
-          className={`absolute rounded-full bg-gradient-to-br ${b.color} blur-[1px] shadow-[inset_0_-2px_4px_rgba(255,255,255,0.6)]`}
-          style={{
-            left: (b as any).left,
-            right: (b as any).right,
-            top: b.top,
-            width: b.size * 4,
-            height: b.size * 4,
-            animation: `float-bubble ${6 + (i % 4)}s ease-in-out ${b.delay}s infinite`,
-          }}
-        />
-      ))}
     </div>
   );
 }
