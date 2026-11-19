@@ -21,7 +21,7 @@ type ServiceKey = "audit_flash" | "tracking_setup";
 const slides: (Slide & { service?: ServiceKey })[] = [
   {
     tag: "Audit Flash",
-    title: "RDV 30 min — Audit Google Ads by illya ",
+    title: "RDV 30 min — Audit Google Ads ",
     desc: "Un appel Google Meet de 30 minutes pour passer votre compte au crible et repartir avec des actions concrètes.",
     price: "150 €",
     gradient: "from-sky/70 via-electric/60 to-electric-soft/70",
