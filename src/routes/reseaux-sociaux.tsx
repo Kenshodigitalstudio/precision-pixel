@@ -8,11 +8,11 @@ import { ArrowUpRight, Check, Sparkles } from "lucide-react";
 export const Route = createFileRoute("/reseaux-sociaux")({
   head: () => ({
     meta: [
-      { title: "Social Media & Acquisition — Kenshō Digital Studio" },
+      { title: "Réseaux sociaux — Kenshō Digital Studio" },
       {
         name: "description",
         content:
-          "Stratégie digitale, création de contenu et acquisition. Développez votre présence avec Kenshō Studio.",
+          "Développez votre présence sur les réseaux sociaux avec Kenshō Digital Studio.",
       },
     ],
   }),
@@ -192,29 +192,28 @@ const platforms = [
   },
 ];
 
+/* Logos officiels en couleurs de marque */
 function BrandLogo({
   slug,
   name,
-  white = false,
+  size = "normal",
 }: {
   slug: string;
   name: string;
-  white?: boolean;
+  size?: "normal" | "large";
 }) {
-  const iconUrl =
-    slug === "googleads"
-      ? "https://cdn.simpleicons.org/googleads"
-      : `https://cdn.jsdelivr.net/npm/simple-icons@v16/icons/${slug}.svg`;
+  const iconUrl = `https://cdn.simpleicons.org/${slug}`;
 
   return (
     <img
       src={iconUrl}
       alt={`Logo ${name}`}
       loading="lazy"
-      className="h-10 w-10 object-contain sm:h-12 sm:w-12"
-      style={{
-        filter: white ? "brightness(0) invert(1)" : "none",
-      }}
+      className={
+        size === "large"
+          ? "h-14 w-14 object-contain sm:h-16 sm:w-16"
+          : "h-9 w-9 object-contain sm:h-11 sm:w-11"
+      }
       onError={(event) => {
         event.currentTarget.style.display = "none";
       }}
@@ -222,12 +221,12 @@ function BrandLogo({
   );
 }
 
-/* Défilement des logos dans de petites cartes vitrées */
+/* Bandeau animé de logos */
 function LogoArc() {
   const repeatedPlatforms = [...platforms, ...platforms];
 
   return (
-    <div className="relative mx-auto mt-2 h-[105px] w-full max-w-6xl overflow-hidden sm:h-[125px]">
+    <div className="relative mx-auto h-[100px] w-full max-w-6xl overflow-hidden sm:h-[120px]">
       <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-background to-transparent sm:w-28" />
       <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-background to-transparent sm:w-28" />
 
@@ -243,7 +242,7 @@ function LogoArc() {
         {repeatedPlatforms.map((platform, index) => (
           <div
             key={`${platform.slug}-${index}`}
-            className="flex h-[68px] w-[68px] items-center justify-center rounded-2xl border border-white/80 bg-white/55 shadow-[0_10px_30px_-15px_rgba(30,20,50,.25)] backdrop-blur-xl transition-transform duration-300 hover:-translate-y-2 hover:scale-105 sm:h-[82px] sm:w-[82px]"
+            className="flex h-[66px] w-[66px] items-center justify-center rounded-2xl border border-white/80 bg-white/65 shadow-[0_10px_30px_-15px_rgba(30,20,50,.25)] backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1 hover:scale-105 sm:h-[78px] sm:w-[78px]"
           >
             <BrandLogo slug={platform.slug} name={platform.name} />
           </div>
@@ -253,7 +252,7 @@ function LogoArc() {
   );
 }
 
-/* Cartes de présentation des plateformes */
+/* Cartes des plateformes */
 function PlatformPanel({
   platform,
   index,
@@ -274,7 +273,7 @@ function PlatformPanel({
       >
         <div
           className="pointer-events-none absolute -right-32 -top-32 size-96 rounded-full blur-[110px]"
-          style={{ background: platform.color, opacity: 0.15 }}
+          style={{ background: platform.color, opacity: 0.13 }}
         />
 
         <div className={`relative z-10 ${reverse ? "lg:order-2" : ""}`}>
@@ -285,7 +284,7 @@ function PlatformPanel({
             </span>
           </div>
 
-          <div className="mb-7 flex size-16 items-center justify-center rounded-2xl border border-white/70 bg-white/60 shadow-lg backdrop-blur-xl">
+          <div className="mb-7 flex size-16 items-center justify-center rounded-2xl border border-white/80 bg-white/70 shadow-lg backdrop-blur-xl">
             <BrandLogo slug={platform.slug} name={platform.name} />
           </div>
 
@@ -333,7 +332,7 @@ function PlatformPanel({
         >
           <div
             className="absolute size-72 rounded-full blur-[85px]"
-            style={{ background: platform.color, opacity: 0.2 }}
+            style={{ background: platform.color, opacity: 0.18 }}
           />
 
           <motion.div
@@ -356,8 +355,12 @@ function PlatformPanel({
             <div className="absolute inset-3 rounded-[2.5rem] border border-white/35" />
             <div className="absolute left-[12%] top-[8%] h-24 w-36 rotate-[-25deg] rounded-full bg-white/30 blur-2xl" />
 
-            <div className="relative z-10 flex size-24 items-center justify-center rounded-[2rem] border border-white/50 bg-white/20 shadow-xl backdrop-blur-xl sm:size-28">
-              <BrandLogo slug={platform.slug} name={platform.name} white />
+            <div className="relative z-10 flex size-24 items-center justify-center rounded-[2rem] border border-white/70 bg-white/90 shadow-xl backdrop-blur-xl sm:size-28">
+              <BrandLogo
+                slug={platform.slug}
+                name={platform.name}
+                size="large"
+              />
             </div>
 
             <span className="relative z-10 mt-6 text-sm font-semibold tracking-wide text-white">
@@ -372,7 +375,7 @@ function PlatformPanel({
           <motion.div
             animate={{ y: [0, 12, 0], rotate: [0, 5, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute right-[2%] top-[12%] rounded-2xl border border-white/70 bg-white/50 p-4 shadow-xl backdrop-blur-2xl"
+            className="absolute right-[2%] top-[12%] rounded-2xl border border-white/70 bg-white/60 p-4 shadow-xl backdrop-blur-2xl"
           >
             <Sparkles size={19} style={{ color: platform.color }} />
           </motion.div>
@@ -380,7 +383,7 @@ function PlatformPanel({
           <motion.div
             animate={{ y: [0, -12, 0], x: [0, -5, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute bottom-[10%] left-[1%] rounded-2xl border border-white/70 bg-white/55 p-4 shadow-xl backdrop-blur-2xl"
+            className="absolute bottom-[10%] left-[1%] rounded-2xl border border-white/70 bg-white/65 p-4 shadow-xl backdrop-blur-2xl"
           >
             <span className="block text-[9px] uppercase tracking-widest text-ink-soft">
               Expertise Kenshō
@@ -397,42 +400,72 @@ function PlatformPanel({
 
 function ReseauxSociauxPage() {
   return (
-    <main className="relative isolate overflow-hidden pt-24 sm:pt-28">
+    <main className="relative isolate min-h-screen overflow-x-hidden pb-0">
       <Nav />
 
+      {/* Fond identique à l'ambiance du Hero de la page d'accueil */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 overflow-hidden"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[1100px] overflow-hidden"
       >
-        <div className="absolute left-[5%] top-[8%] size-96 rounded-full bg-electric/15 blur-[110px]" />
-        <div className="absolute right-[4%] top-[35%] size-[28rem] rounded-full bg-lilac/15 blur-[120px]" />
-        <div className="absolute bottom-[10%] left-[25%] size-96 rounded-full bg-coral/10 blur-[110px]" />
+        <div className="absolute left-[10%] top-[10%] h-72 w-72 rounded-full bg-electric/20 blur-3xl" />
+        <div className="absolute right-[8%] top-[30%] h-80 w-80 rounded-full bg-solar/25 blur-3xl" />
+        <div className="absolute left-[30%] bottom-[5%] h-72 w-72 rounded-full bg-mint/20 blur-3xl" />
       </div>
 
-      {/* Haut de page : logos puis accroche */}
-      <section className="relative z-10 px-5 pb-12 pt-10 text-center sm:pb-16 sm:pt-14">
-        <LogoArc />
+      {/* Haut de page */}
+      <section className="relative z-10 px-5 pb-10 pt-32 text-center sm:px-6 sm:pb-16 sm:pt-36">
+        <div className="mx-auto max-w-6xl">
+          <LogoArc />
 
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="mx-auto mt-8 max-w-5xl"
-        >
-          <h1 className="font-display text-[clamp(2.5rem,6vw,5.2rem)] font-extrabold leading-[1.08] tracking-[-.045em] text-ink">
-            Chaque réseau a{" "}
-            <span className="bg-gradient-to-r from-electric via-lilac to-coral bg-clip-text text-transparent">
-              son audience.
-            </span>
-            <span className="block">
-              Ensemble,{" "}
+          <motion.div
+            initial={{ opacity: 0, y: 25 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="mx-auto mt-5 max-w-5xl"
+          >
+            <h1 className="font-display text-[clamp(2.8rem,7vw,6rem)] font-light leading-[1.05] tracking-[-0.04em] text-ink">
+              Chaque réseau a{" "}
               <span className="bg-gradient-to-r from-electric via-lilac to-coral bg-clip-text text-transparent">
-                Kenshō
-              </span>{" "}
-              peut démultiplier votre visibilité.
+                son audience.
+              </span>
+              <span className="block">
+                <span className="bg-gradient-to-r from-electric via-lilac to-coral bg-clip-text text-transparent">
+                  Kenshō
+                </span>{" "}
+                peut démultiplier votre visibilité.
+              </span>
+            </h1>
+          </motion.div>
+
+          {/* Annonce de disponibilité */}
+          <motion.div
+            initial={{ opacity: 0, y: 25, scale: 0.97 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.9, delay: 0.25 }}
+            className="availability-glass relative mx-auto mt-10 flex max-w-2xl flex-col items-center justify-center gap-3 overflow-hidden rounded-[2rem] px-7 py-7 sm:flex-row sm:gap-5 sm:px-10 sm:py-8"
+          >
+            <div className="pointer-events-none absolute -left-16 -top-20 size-48 rounded-full bg-electric/20 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-20 -right-12 size-48 rounded-full bg-lilac/25 blur-3xl" />
+
+            <div className="relative grid size-12 shrink-0 place-items-center rounded-2xl border border-white/70 bg-white/60 shadow-lg backdrop-blur-xl">
+              <Sparkles className="text-ink" size={22} />
+            </div>
+
+            <div className="relative text-center sm:text-left">
+              <span className="block text-[10px] font-semibold uppercase tracking-[.25em] text-ink-soft">
+                Nouvelle offre Kenshō
+              </span>
+              <p className="mt-1 font-display text-xl font-bold tracking-tight text-ink sm:text-2xl">
+                Service disponible dès début 2027
+              </p>
+            </div>
+
+            <span className="relative rounded-full border border-white/70 bg-white/55 px-3 py-1.5 text-[9px] font-semibold uppercase tracking-widest text-ink-soft backdrop-blur-xl">
+              Bientôt disponible
             </span>
-          </h1>
-        </motion.div>
+          </motion.div>
+        </div>
       </section>
 
       {/* Présentation des plateformes */}
@@ -542,6 +575,20 @@ function ReseauxSociauxPage() {
 
         .social-brand-orb {
           border: 1px solid rgba(255,255,255,.75);
+        }
+
+        .availability-glass {
+          isolation: isolate;
+          border: 1px solid rgba(255,255,255,.8);
+          background:
+            radial-gradient(ellipse at 15% 0%, rgba(255,255,255,.9), transparent 55%),
+            linear-gradient(135deg, rgba(255,255,255,.68), rgba(255,255,255,.3) 60%, rgba(255,255,255,.5));
+          backdrop-filter: blur(28px) saturate(175%);
+          -webkit-backdrop-filter: blur(28px) saturate(175%);
+          box-shadow:
+            0 25px 65px -30px rgba(35,25,60,.25),
+            inset 0 2px 4px rgba(255,255,255,.95),
+            inset 0 -1px 3px rgba(90,70,120,.08);
         }
 
         .social-half-circle {
