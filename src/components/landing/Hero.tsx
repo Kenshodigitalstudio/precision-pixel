@@ -16,7 +16,7 @@ type Slide = {
   badge?: string;
 };
 
-type ServiceKey = "audit_flash" | "tracking_setup";
+type ServiceKey = "audite_flash" | "tracking_setup";
 
 const slides: (Slide & { service?: ServiceKey })[] = [
   {
