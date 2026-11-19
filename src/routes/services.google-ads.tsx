@@ -450,10 +450,7 @@ function GoogleAdsPage() {
         </div>
       </section>
 
-      <Footer />
+        <Footer />
     </div>
-
-
-
   );
 }
