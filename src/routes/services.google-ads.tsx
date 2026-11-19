@@ -201,7 +201,7 @@ function GoogleAdsPage() {
 
                 <div className="relative grid grid-rows-8">
                   {["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"].map((time) => (
-                    <div key={time} className="flex h-[66px] -translate-y-2 items-start justify-end pr-1 font-mono text-[9px] text-ink-soft/75">{time}</div>
+                    <div key={time} className="flex h-[72px] -translate-y-2 items-start justify-end pr-1 font-mono text-[9px] text-ink-soft/75">{time}</div>
                   ))}
                 </div>
 
@@ -209,36 +209,36 @@ function GoogleAdsPage() {
                   {
                     day: "Mercredi",
                     events: [
-                      { start: 1, span: 2.05, time: "10:00 – 11:00", title: "Premier rendez-vous Kenshō", desc: "Échange stratégique autour de votre activité, vos objectifs et vos campagnes.", brand: true, tone: "blue", booking: true },
-                      { start: 4.15, span: 1.0, time: "13:00 – 14:00", title: "Préparation & recommandations", desc: "Premières pistes de réflexion selon vos enjeux.", brand: false },
+                      { start: 1, span: 2.55, time: "10:00 – 11:30", title: "Premier rendez-vous Kenshō", desc: "Un échange pour faire le point sur votre activité, vos objectifs et vos attentes.", brand: true, tone: "blue", booking: true },
+                      { start: 4.2, span: 1.45, time: "13:00 – 14:30", title: "Temps de préparation", desc: "Préparation des prochains échanges et des priorités.", brand: false },
                     ],
                   },
                   {
                     day: "Jeudi",
                     events: [
-                      { start: 2.15, span: 1.05, time: "11:00 – 12:00", title: "Optimisations des campagnes", desc: "Ajustements, mots-clés et ciblages.", brand: false },
-                      { start: 5.15, span: 1.0, time: "14:00 – 15:00", title: "Analyse des annonces", desc: "Tests, qualité et axes d’amélioration.", brand: false },
+                      { start: 2.15, span: 1.55, time: "11:00 – 12:30", title: "Rendez-vous de suivi", desc: "Échange sur les sujets en cours et les prochaines étapes.", brand: false },
+                      { start: 5.15, span: 1.5, time: "14:00 – 15:30", title: "Point d’avancement", desc: "Revue des actions et partage des retours.", brand: false },
                     ],
                   },
                   {
                     day: "Vendredi",
                     events: [
-                      { start: 1.15, span: 1.45, time: "10:00 – 11:30", title: "Bilan & reporting", desc: "Synthèse des résultats et préparation des prochaines actions.", brand: false },
-                      { start: 5.15, span: 1.0, time: "14:00 – 15:00", title: "Contrôle des performances", desc: "Vérification des indicateurs et points de vigilance.", brand: false },
+                      { start: 1.15, span: 1.65, time: "10:00 – 11:30", title: "Rendez-vous de coordination", desc: "Échange sur l’avancement et les sujets de la semaine.", brand: false },
+                      { start: 5.15, span: 1.5, time: "14:00 – 15:30", title: "Réunion de suivi", desc: "Point régulier et prochaines étapes.", brand: false },
                     ],
                   },
                   {
                     day: "Lundi",
                     events: [
-                      { start: 0.15, span: 1.85, time: "09:00 – 10:00", title: "Bilan hebdomadaire Kenshō Studio", desc: "Analyse des résultats, priorités et décisions de la semaine.", brand: true, tone: "yellow" },
-                      { start: 6.15, span: 1.85, time: "15:00 – 16:00", title: "Rendez-vous visio Kenshō", desc: "Point d’avancement, échanges et prochaines étapes.", note: "Toutes les 2 semaines", brand: true, tone: "green" },
+                      { start: 0.15, span: 2.25, time: "09:00 – 10:00", title: "Bilan hebdomadaire Kenshō Studio", desc: "Analyse de la semaine, priorités et organisation des prochaines actions.", brand: true, tone: "yellow" },
+                      { start: 5.9, span: 2.15, time: "15:00 – 16:00", title: "Rendez-vous visio Kenshō", desc: "Un temps d’échange pour faire le point et décider des prochaines étapes.", note: "Toutes les 2 semaines", brand: true, tone: "green" },
                     ],
                   },
                   {
                     day: "Mardi",
                     events: [
-                      { start: 2.15, span: 1.15, time: "11:00 – 12:00", title: "Suivi & veille stratégique", desc: "Surveillance, opportunités et préparation des ajustements.", brand: false },
-                      { start: 5.15, span: 1.0, time: "14:00 – 15:00", title: "Ajustements & contrôle", desc: "Vérification des évolutions et actions prioritaires.", brand: false },
+                      { start: 2.15, span: 1.55, time: "11:00 – 12:30", title: "Rendez-vous de suivi", desc: "Échange sur les sujets en cours et les points à traiter.", brand: false },
+                      { start: 5.15, span: 1.5, time: "14:00 – 15:30", title: "Réunion de travail", desc: "Avancement des actions et prochaines étapes.", brand: false },
                     ],
                   },
                 ].map((column) => (
@@ -251,20 +251,28 @@ function GoogleAdsPage() {
                         key={`${column.day}-${i}`}
                         className={`absolute left-1 right-1 z-10 overflow-hidden rounded-[17px] border p-2.5 shadow-[0_8px_22px_-16px_rgba(20,20,40,0.25)] transition duration-300 sm:left-2 sm:right-2 sm:p-3 ${
                           event.tone === "blue"
-                            ? "border-electric/40 bg-gradient-to-br from-white via-[#f8faff] to-[#dce7ff] shadow-[0_14px_30px_-18px_rgba(67,112,255,0.55)]"
+                            ? "border-[#91adff] bg-gradient-to-br from-white via-[#eef3ff] to-[#c5d6ff] shadow-[0_16px_34px_-16px_rgba(67,112,255,0.55)]"
                             : event.tone === "yellow"
-                              ? "border-[#e8d99c]/70 bg-gradient-to-br from-white via-[#fffdf4] to-[#fff0b9] shadow-[0_12px_26px_-18px_rgba(204,169,70,0.35)]"
+                              ? "border-[#e7cf78] bg-gradient-to-br from-white via-[#fff8dc] to-[#ffe58a] shadow-[0_14px_30px_-16px_rgba(204,169,70,0.4)]"
                               : event.tone === "green"
-                                ? "border-[#b9dfc9]/80 bg-gradient-to-br from-white via-[#f7fcf8] to-[#d9f1e1] shadow-[0_12px_26px_-18px_rgba(85,163,112,0.3)]"
+                                ? "border-[#9bd2ae] bg-gradient-to-br from-white via-[#effaf2] to-[#bfe8cb] shadow-[0_14px_30px_-16px_rgba(85,163,112,0.38)]"
                                 : "border-ink/[0.09] bg-white/90"
                         } ${event.booking ? "group cursor-pointer text-left ring-1 ring-electric/10 hover:-translate-y-1 hover:border-electric/60 hover:shadow-[0_20px_36px_-18px_rgba(67,112,255,0.55)]" : ""}`}
-                        style={{ top: `${event.start * 12.5}%`, height: `${event.span * 12.5}%`, minHeight: "76px" }}
+                        style={{
+                          top: `${event.start * 12.5}%`,
+                          height: `${event.span * 12.5}%`,
+                          minHeight: event.booking ? "178px" : event.brand ? "150px" : "112px",
+                        }}
                         onClick={event.booking ? handleOpenBooking : undefined}
                         role={event.booking ? "button" : undefined}
                         tabIndex={event.booking ? 0 : undefined}
                         onKeyDown={event.booking ? (e) => { if (e.key === "Enter" || e.key === " ") handleOpenBooking(); } : undefined}
                       >
-                        <div className={`font-mono text-[9px] font-bold sm:text-[10px] ${event.brand ? "text-electric" : "text-ink-soft"}`}>{event.time}</div>
+                        <div className={`font-mono text-[9px] font-bold sm:text-[10px] ${
+                          event.tone === "blue" ? "text-[#4777f5]" :
+                          event.tone === "yellow" ? "text-[#a77b08]" :
+                          event.tone === "green" ? "text-[#318553]" : "text-ink-soft"
+                        }`}>{event.time}</div>
                         <div className={`mt-1 font-bold leading-snug text-ink ${event.booking ? "text-[12px] sm:text-[13px]" : "text-[10px] sm:text-[11px]"}`}>{event.title}</div>
                         <p className={`mt-1 text-[9px] leading-[1.45] text-ink-soft ${event.booking ? "line-clamp-3 text-[10px]" : "line-clamp-2"} `}>{event.desc}</p>
                         {event.note && <span className="mt-1 inline-block rounded-full bg-electric/8 px-1.5 py-0.5 text-[8px] font-semibold text-electric">{event.note}</span>}
@@ -444,5 +452,8 @@ function GoogleAdsPage() {
 
       <Footer />
     </div>
+  );
+}
+
   );
 }
