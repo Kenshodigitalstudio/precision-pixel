@@ -452,8 +452,7 @@ function GoogleAdsPage() {
 
       <Footer />
     </div>
-  );
-}
+
 
 
   );
