@@ -161,7 +161,7 @@ function GoogleAdsPage() {
         </div>
 
         {/* --- CALENDRIER HEBDOMADAIRE COMPACT --- */}
-        <div className="mx-auto mt-10 max-w-[1120px] overflow-hidden rounded-[26px] border border-white/80 bg-white/55 p-4 shadow-[0_24px_70px_-35px_rgba(20,20,40,0.22)] backdrop-blur-2xl sm:p-6 lg:p-7">
+        <div className="mx-auto mt-10 max-w-[1320px] overflow-hidden rounded-[26px] border border-white/80 bg-white/55 p-4 shadow-[0_24px_70px_-35px_rgba(20,20,40,0.22)] backdrop-blur-2xl sm:p-6 lg:p-7">
           <div className="mb-5 flex flex-wrap items-center justify-between gap-3 border-b border-ink/8 pb-4">
             <div>
               <p className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-electric">Organisation & méthode</p>
@@ -181,7 +181,7 @@ function GoogleAdsPage() {
           </div>
 
           <div className="overflow-x-auto pb-2">
-            <div className="min-w-[790px]">
+            <div className="min-w-[1120px]">
               <div className="grid grid-cols-[42px_repeat(5,minmax(0,1fr))] gap-x-2">
                 <div className="flex items-end pb-3 font-mono text-[9px] uppercase tracking-wider text-ink-soft/70">Heure</div>
 
@@ -201,7 +201,7 @@ function GoogleAdsPage() {
 
                 <div className="relative grid grid-rows-8">
                   {["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"].map((time) => (
-                    <div key={time} className="flex h-[72px] -translate-y-2 items-start justify-end pr-1 font-mono text-[9px] text-ink-soft/75">{time}</div>
+                    <div key={time} className="flex h-[80px] -translate-y-2 items-start justify-end pr-1 font-mono text-[9px] text-ink-soft/75">{time}</div>
                   ))}
                 </div>
 
@@ -242,14 +242,14 @@ function GoogleAdsPage() {
                     ],
                   },
                 ].map((column) => (
-                  <div key={column.day} className={`relative h-[528px] border-l border-t border-ink/[0.08] ${column.day === "Lundi" ? "border-x border-electric/25 bg-electric/[0.035]" : ""}`}>
+                  <div key={column.day} className={`relative h-[640px] border-l border-t border-ink/[0.08] ${column.day === "Lundi" ? "border-x border-electric/25 bg-electric/[0.035]" : ""}`}>
                     {Array.from({ length: 8 }).map((_, i) => (
                       <div key={i} className="pointer-events-none absolute inset-x-0 border-t border-ink/[0.07]" style={{ top: `${i * 12.5}%` }} />
                     ))}
                     {column.events.map((event, i) => (
                       <div
                         key={`${column.day}-${i}`}
-                        className={`absolute left-1 right-1 z-10 overflow-hidden rounded-[17px] border p-2.5 shadow-[0_8px_22px_-16px_rgba(20,20,40,0.25)] transition duration-300 sm:left-2 sm:right-2 sm:p-3 ${
+                        className={`absolute left-1 right-1 z-10 overflow-hidden rounded-[21px] border p-3 shadow-[0_10px_26px_-16px_rgba(20,20,40,0.25)] transition duration-300 sm:left-2 sm:right-2 sm:p-4 ${
                           event.tone === "blue"
                             ? "border-[#91adff] bg-gradient-to-br from-white via-[#eef3ff] to-[#c5d6ff] shadow-[0_16px_34px_-16px_rgba(67,112,255,0.55)]"
                             : event.tone === "yellow"
@@ -261,20 +261,20 @@ function GoogleAdsPage() {
                         style={{
                           top: `${event.start * 12.5}%`,
                           height: `${event.span * 12.5}%`,
-                          minHeight: event.booking ? "178px" : event.brand ? "150px" : "112px",
+                          minHeight: event.booking ? "220px" : event.brand ? "190px" : "150px",
                         }}
                         onClick={event.booking ? handleOpenBooking : undefined}
                         role={event.booking ? "button" : undefined}
                         tabIndex={event.booking ? 0 : undefined}
                         onKeyDown={event.booking ? (e) => { if (e.key === "Enter" || e.key === " ") handleOpenBooking(); } : undefined}
                       >
-                        <div className={`font-mono text-[9px] font-bold sm:text-[10px] ${
+                        <div className={`font-mono text-[10px] font-bold sm:text-[11px] ${
                           event.tone === "blue" ? "text-[#4777f5]" :
                           event.tone === "yellow" ? "text-[#a77b08]" :
                           event.tone === "green" ? "text-[#318553]" : "text-ink-soft"
                         }`}>{event.time}</div>
-                        <div className={`mt-1 font-bold leading-snug text-ink ${event.booking ? "text-[12px] sm:text-[13px]" : "text-[10px] sm:text-[11px]"}`}>{event.title}</div>
-                        <p className={`mt-1 text-[9px] leading-[1.45] text-ink-soft ${event.booking ? "line-clamp-3 text-[10px]" : "line-clamp-2"} `}>{event.desc}</p>
+                        <div className={`mt-1 font-bold leading-snug text-ink ${event.booking ? "text-[13px] sm:text-[15px]" : "text-[11px] sm:text-[13px]"}`}>{event.title}</div>
+                        <p className={`mt-1 text-[10px] leading-[1.5] text-ink-soft ${event.booking ? "line-clamp-4 text-[11px]" : "line-clamp-3 text-[11px]"} `}>{event.desc}</p>
                         {event.note && <span className="mt-1 inline-block rounded-full bg-electric/8 px-1.5 py-0.5 text-[8px] font-semibold text-electric">{event.note}</span>}
                         {event.booking && <div className="mt-2 inline-flex rounded-full bg-electric px-2.5 py-1.5 text-[9px] font-semibold text-white shadow-sm transition group-hover:bg-[#3f70f5]">Réserver mon échange gratuit ↗</div>}
                       </div>
@@ -454,6 +454,7 @@ function GoogleAdsPage() {
     </div>
   );
 }
+
 
   );
 }
