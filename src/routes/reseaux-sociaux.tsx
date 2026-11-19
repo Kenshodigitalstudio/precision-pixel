@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Nav } from "@/components/landing/Nav";
 import { Footer } from "@/components/landing/Footer";
 import { ArrowUpRight, Check, Sparkles } from "lucide-react";
+import type { CSSProperties } from "react";
 
 export const Route = createFileRoute("/reseaux-sociaux")({
   head: () => ({
@@ -28,9 +29,13 @@ const platforms = [
     category: "IMAGE & COMMUNAUTÉ",
     subtitle: "Votre marque mérite une image forte.",
     description:
-      "Construisez un univers visuel reconnaissable et transformez votre audience en une véritable communauté.",
-    points: ["Direction artistique", "Reels & Stories", "Carrousels créatifs", "Développement communautaire"],
-    formats: ["Reels", "Stories", "Posts", "Carrousels"],
+      "Nous construisons une identité visuelle reconnaissable et une présence éditoriale cohérente pour transformer votre audience en communauté.",
+    benefits: [
+      "Une direction artistique cohérente avec votre marque",
+      "Des Reels et Stories pensés pour capter l'attention",
+      "Des carrousels qui valorisent votre expertise",
+      "Une stratégie éditoriale pour fidéliser votre communauté",
+    ],
     stat: "L'image de marque",
   },
   {
@@ -41,9 +46,13 @@ const platforms = [
     category: "VIDÉO & CRÉATIVITÉ",
     subtitle: "Captez l'attention. Marquez les esprits.",
     description:
-      "Des formats courts, des concepts créatifs et une communication authentique pour faire découvrir votre marque.",
-    points: ["Concepts vidéo", "Création de formats courts", "Adaptation aux tendances", "Stratégie de visibilité"],
-    formats: ["TikTok", "Shorts", "UGC", "Vidéos"],
+      "Nous imaginons des contenus vidéo qui respectent les codes de TikTok, mettent votre marque en scène et développent votre visibilité.",
+    benefits: [
+      "Des concepts créatifs adaptés à votre activité",
+      "Des vidéos courtes pensées pour retenir l'attention",
+      "Une veille des tendances pertinente pour votre marque",
+      "Une stratégie de contenu orientée visibilité",
+    ],
     stat: "La découverte",
   },
   {
@@ -54,9 +63,13 @@ const platforms = [
     category: "COMMUNAUTÉ & VISIBILITÉ",
     subtitle: "Restez proche de votre audience.",
     description:
-      "Développez votre présence locale, animez votre communauté et entretenez une relation durable avec vos clients.",
-    points: ["Gestion de page", "Publications régulières", "Animation communautaire", "Communication locale"],
-    formats: ["Posts", "Stories", "Vidéos", "Communauté"],
+      "Nous entretenons une présence régulière et professionnelle pour renforcer votre proximité avec vos clients et votre communauté.",
+    benefits: [
+      "Une page professionnelle entretenue et valorisée",
+      "Des publications adaptées à votre audience",
+      "Une animation régulière de votre communauté",
+      "Une communication locale plus cohérente",
+    ],
     stat: "La proximité",
   },
   {
@@ -67,9 +80,13 @@ const platforms = [
     category: "B2B & EXPERTISE",
     subtitle: "Faites reconnaître votre expertise.",
     description:
-      "Positionnez votre entreprise comme une référence dans son secteur grâce à une communication professionnelle et cohérente.",
-    points: ["Stratégie éditoriale B2B", "Posts experts", "Personal branding", "Développement du réseau"],
-    formats: ["Posts", "Carrousels", "Actualités", "Expertise"],
+      "Nous développons votre présence professionnelle avec une ligne éditoriale claire, des contenus experts et une prise de parole qui inspire confiance.",
+    benefits: [
+      "Une stratégie éditoriale pensée pour le B2B",
+      "Des publications qui valorisent votre savoir-faire",
+      "Un positionnement professionnel plus affirmé",
+      "Une communication qui renforce votre crédibilité",
+    ],
     stat: "L'autorité",
   },
   {
@@ -80,9 +97,13 @@ const platforms = [
     category: "VIDÉO & CONTENU",
     subtitle: "Donnez de la profondeur à vos idées.",
     description:
-      "Développez une présence vidéo durable avec des contenus qui présentent votre savoir-faire et valorisent votre marque.",
-    points: ["Stratégie de chaîne", "Création de vidéos", "YouTube Shorts", "Miniatures & identité"],
-    formats: ["Vidéos", "Shorts", "Miniatures", "Chaîne"],
+      "Nous vous aidons à construire une présence vidéo durable pour présenter votre expertise, développer votre notoriété et créer du contenu à forte valeur.",
+    benefits: [
+      "Une stratégie de chaîne alignée avec vos objectifs",
+      "Des formats vidéo adaptés à votre audience",
+      "Des Shorts pour multiplier les points de contact",
+      "Une identité visuelle cohérente sur vos contenus",
+    ],
     stat: "Le contenu durable",
   },
   {
@@ -93,9 +114,13 @@ const platforms = [
     category: "INSPIRATION & TRAFIC",
     subtitle: "Transformez l'inspiration en visites.",
     description:
-      "Faites découvrir vos produits et vos idées grâce à des contenus visuels qui continuent d'attirer du trafic.",
-    points: ["Création d'épingles", "Optimisation visuelle", "Organisation des tableaux", "Trafic vers votre site"],
-    formats: ["Épingles", "Collections", "Visuels", "Guides"],
+      "Nous créons des contenus visuels qui valorisent vos produits et services, tout en travaillant leur potentiel de découverte et de trafic.",
+    benefits: [
+      "Des visuels conçus pour inspirer et attirer",
+      "Des épingles optimisées pour la découverte",
+      "Une organisation claire de vos tableaux",
+      "Une stratégie pour générer du trafic vers votre site",
+    ],
     stat: "La découverte",
   },
   {
@@ -106,9 +131,13 @@ const platforms = [
     category: "PROXIMITÉ & INSTANTANÉ",
     subtitle: "Communiquez autrement.",
     description:
-      "Misez sur des formats spontanés et immersifs pour toucher des audiences connectées et créer une relation directe.",
-    points: ["Contenus verticaux", "Stories créatives", "Formats publicitaires", "Communication spontanée"],
-    formats: ["Stories", "Snaps", "Vertical", "Ads"],
+      "Nous adaptons votre communication aux formats verticaux et spontanés de Snapchat pour toucher votre audience avec des contenus immersifs.",
+    benefits: [
+      "Des créations adaptées aux usages mobiles",
+      "Des Stories pensées pour votre cible",
+      "Des formats publicitaires créatifs",
+      "Une communication plus directe et spontanée",
+    ],
     stat: "L'instantané",
   },
   {
@@ -119,9 +148,13 @@ const platforms = [
     category: "ACTUALITÉ & CONVERSATION",
     subtitle: "Prenez part à la conversation.",
     description:
-      "Affirmez votre positionnement, partagez vos actualités et développez votre visibilité dans les conversations de votre secteur.",
-    points: ["Ligne éditoriale", "Publications régulières", "Veille sectorielle", "Engagement communautaire"],
-    formats: ["Posts", "Threads", "Actualités", "Conversations"],
+      "Nous structurons votre prise de parole pour développer votre visibilité, partager vos actualités et installer votre marque dans les conversations de votre secteur.",
+    benefits: [
+      "Une ligne éditoriale claire et identifiable",
+      "Des publications régulières et pertinentes",
+      "Une veille des sujets de votre secteur",
+      "Une présence active dans les conversations",
+    ],
     stat: "La conversation",
   },
   {
@@ -132,9 +165,13 @@ const platforms = [
     category: "ÉCHANGE & COMMUNAUTÉ",
     subtitle: "Donnez une voix à votre marque.",
     description:
-      "Développez une communication plus spontanée, humaine et conversationnelle pour créer des liens avec votre audience.",
-    points: ["Prise de parole", "Contenus conversationnels", "Animation de communauté", "Identité éditoriale"],
-    formats: ["Posts", "Conversations", "Communauté", "Actualités"],
+      "Nous développons une communication plus humaine et conversationnelle pour créer des échanges authentiques avec votre audience.",
+    benefits: [
+      "Une prise de parole naturelle et cohérente",
+      "Des contenus adaptés aux conversations",
+      "Une animation de communauté régulière",
+      "Une identité éditoriale reconnaissable",
+    ],
     stat: "L'authenticité",
   },
   {
@@ -145,26 +182,84 @@ const platforms = [
     category: "PUBLICITÉ & ACQUISITION",
     subtitle: "Soyez visible au bon moment.",
     description:
-      "Touchez les personnes qui recherchent déjà vos produits ou services grâce à des campagnes publicitaires pensées pour vos objectifs.",
-    points: ["Stratégie d'acquisition", "Google Search & Performance Max", "Optimisation des campagnes", "Suivi des conversions"],
-    formats: ["Search", "Performance Max", "Display", "YouTube Ads"],
+      "Nos experts pilotent vos campagnes publicitaires pour capter une demande qualifiée, générer des prospects et optimiser vos investissements.",
+    benefits: [
+      "Une stratégie d'acquisition adaptée à vos objectifs",
+      "Des campagnes Search et Performance Max structurées",
+      "Une optimisation continue des budgets et enchères",
+      "Un suivi des conversions et des performances",
+    ],
     stat: "L'acquisition",
   },
 ];
 
-function BrandLogo({ slug, name }: { slug: string; name: string }) {
-  const logoSlug = slug === "googleads" ? "googleads" : slug;
+const arcPositions = [48, 25, 10, 2, 10, 25, 48, 25, 10, 2];
 
+function BrandLogo({
+  slug,
+  name,
+  white = false,
+}: {
+  slug: string;
+  name: string;
+  white?: boolean;
+}) {
   return (
     <img
-      src={`https://cdn.simpleicons.org/${logoSlug}`}
+      src={`https://cdn.simpleicons.org/${slug}${white ? "/ffffff" : ""}`}
       alt={`Logo ${name}`}
       loading="lazy"
-      className="h-12 w-12 object-contain sm:h-14 sm:w-14"
+      className="h-11 w-11 object-contain sm:h-14 sm:w-14"
       onError={(event) => {
-        event.currentTarget.style.display = "none";
+        event.currentTarget.style.visibility = "hidden";
       }}
     />
+  );
+}
+
+function LogoArc() {
+  const repeatedPlatforms = [...platforms, ...platforms];
+
+  return (
+    <div className="relative mx-auto mt-8 h-[155px] w-full max-w-5xl overflow-hidden sm:mt-12 sm:h-[190px]">
+      <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-r from-background via-transparent to-background" />
+
+      <motion.div
+        className="absolute left-0 top-0 flex w-max items-start gap-7 sm:gap-12"
+        animate={{ x: ["-50%", "0%"] }}
+        transition={{
+          duration: 34,
+          ease: "linear",
+          repeat: Infinity,
+        }}
+      >
+        {repeatedPlatforms.map((platform, index) => {
+          const position = index % platforms.length;
+
+          return (
+            <div
+              key={`${platform.slug}-${index}`}
+              className="flex w-[74px] flex-col items-center gap-3 sm:w-[90px]"
+              style={{
+                paddingTop: `${arcPositions[position]}px`,
+              }}
+            >
+              <div
+                className="flex size-[58px] items-center justify-center rounded-2xl border border-white/70 bg-white/60 shadow-lg backdrop-blur-xl transition-transform duration-300 hover:scale-110 sm:size-[68px]"
+                style={{
+                  boxShadow: `0 12px 35px -20px ${platform.color}90`,
+                }}
+              >
+                <BrandLogo slug={platform.slug} name={platform.name} />
+              </div>
+              <span className="whitespace-nowrap text-[9px] font-medium text-ink-soft sm:text-[10px]">
+                {platform.name}
+              </span>
+            </div>
+          );
+        })}
+      </motion.div>
+    </div>
   );
 }
 
@@ -178,37 +273,28 @@ function PlatformPanel({
   const reverse = index % 2 === 1;
 
   return (
-    <section className="social-stage relative flex min-h-[720px] items-center px-5 py-20 sm:px-10">
+    <section className="social-stage relative flex min-h-[680px] items-center px-5 py-16 sm:px-10">
       <motion.article
-        initial={{ opacity: 0, x: reverse ? 130 : -130, scale: 0.94 }}
+        initial={{ opacity: 0, x: reverse ? 90 : -90, scale: 0.97 }}
         whileInView={{ opacity: 1, x: 0, scale: 1 }}
         viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.95, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
         className="social-panel relative mx-auto grid w-full max-w-6xl items-center gap-10 overflow-hidden rounded-[2.5rem] p-7 sm:p-12 lg:grid-cols-2 lg:p-16"
-        style={{
-          "--brand": platform.color,
-          "--brand-glow": `${platform.color}35`,
-        } as React.CSSProperties}
       >
         <div
           className="pointer-events-none absolute -right-32 -top-32 size-96 rounded-full blur-[110px]"
-          style={{ background: platform.color, opacity: 0.17 }}
+          style={{ background: platform.color, opacity: 0.15 }}
         />
 
         <div className={`relative z-10 ${reverse ? "lg:order-2" : ""}`}>
           <div className="mb-8 flex items-center gap-3">
-            <span className="text-xs font-semibold tracking-[.25em] text-ink-soft">
-              KENSHŌ / {String(index + 1).padStart(2, "0")}
-            </span>
-            <span className="h-px w-12 bg-ink/20" />
-            <span className="text-[9px] font-semibold tracking-[.18em] text-ink-soft">
+            <span className="h-px w-12 bg-ink/25" />
+            <span className="text-[10px] font-semibold tracking-[.2em] text-ink-soft">
               {platform.category}
             </span>
           </div>
 
-          <div
-            className="mb-7 flex size-16 items-center justify-center rounded-2xl border border-white/70 bg-white/50 shadow-lg backdrop-blur-xl"
-          >
+          <div className="mb-7 flex size-16 items-center justify-center rounded-2xl border border-white/70 bg-white/60 shadow-lg backdrop-blur-xl">
             <BrandLogo slug={platform.slug} name={platform.name} />
           </div>
 
@@ -228,56 +314,45 @@ function PlatformPanel({
           </p>
 
           <div className="mt-8 space-y-4">
-            {platform.points.map((point, i) => (
+            {platform.benefits.map((benefit, i) => (
               <motion.div
-                key={point}
+                key={benefit}
                 initial={{ opacity: 0, x: -12 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: 0.12 * i }}
-                className="flex items-center gap-3 text-sm text-ink"
+                transition={{ delay: 0.1 * i }}
+                className="flex items-start gap-3 text-sm leading-6 text-ink"
               >
                 <span
-                  className="grid size-5 shrink-0 place-items-center rounded-full text-white"
+                  className="mt-0.5 grid size-5 shrink-0 place-items-center rounded-full text-white"
                   style={{ background: platform.color }}
                 >
                   <Check size={12} strokeWidth={3} />
                 </span>
-                {point}
+                {benefit}
               </motion.div>
-            ))}
-          </div>
-
-          <div className="mt-9 flex flex-wrap gap-2">
-            {platform.formats.map((format) => (
-              <span
-                key={format}
-                className="rounded-full border border-white/70 bg-white/40 px-3 py-2 text-[10px] font-semibold text-ink-soft shadow-sm backdrop-blur-xl"
-              >
-                {format}
-              </span>
             ))}
           </div>
         </div>
 
         <div
-          className={`relative flex min-h-[330px] items-center justify-center lg:min-h-[450px] ${
+          className={`relative flex min-h-[330px] items-center justify-center lg:min-h-[430px] ${
             reverse ? "lg:order-1" : ""
           }`}
         >
           <div
             className="absolute size-72 rounded-full blur-[85px]"
-            style={{ background: platform.color, opacity: 0.23 }}
+            style={{ background: platform.color, opacity: 0.2 }}
           />
 
           <motion.div
             animate={{
-              y: [0, -17, 0],
-              rotate: [-3, 3, -3],
-              scale: [1, 1.025, 1],
+              y: [0, -14, 0],
+              rotate: [-2, 2, -2],
+              scale: [1, 1.02, 1],
             }}
             transition={{
-              duration: 8 + index * 0.4,
+              duration: 8 + index * 0.35,
               repeat: Infinity,
               ease: "easeInOut",
             }}
@@ -291,12 +366,7 @@ function PlatformPanel({
             <div className="absolute left-[12%] top-[8%] h-24 w-36 rotate-[-25deg] rounded-full bg-white/30 blur-2xl" />
 
             <div className="relative z-10 flex size-24 items-center justify-center rounded-[2rem] border border-white/50 bg-white/20 shadow-xl backdrop-blur-xl sm:size-28">
-              <img
-                src={`https://cdn.simpleicons.org/${platform.slug}/ffffff`}
-                alt=""
-                className="size-12 object-contain sm:size-14"
-                loading="lazy"
-              />
+              <BrandLogo slug={platform.slug} name={platform.name} white />
             </div>
 
             <span className="relative z-10 mt-6 text-sm font-semibold tracking-wide text-white">
@@ -311,7 +381,7 @@ function PlatformPanel({
           <motion.div
             animate={{ y: [0, 12, 0], rotate: [0, 5, 0] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute right-[2%] top-[12%] rounded-2xl border border-white/70 bg-white/40 p-4 shadow-xl backdrop-blur-2xl"
+            className="absolute right-[2%] top-[12%] rounded-2xl border border-white/70 bg-white/50 p-4 shadow-xl backdrop-blur-2xl"
           >
             <Sparkles size={19} style={{ color: platform.color }} />
           </motion.div>
@@ -319,13 +389,13 @@ function PlatformPanel({
           <motion.div
             animate={{ y: [0, -12, 0], x: [0, -5, 0] }}
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute bottom-[10%] left-[1%] rounded-2xl border border-white/70 bg-white/45 p-4 shadow-xl backdrop-blur-2xl"
+            className="absolute bottom-[10%] left-[1%] rounded-2xl border border-white/70 bg-white/55 p-4 shadow-xl backdrop-blur-2xl"
           >
             <span className="block text-[9px] uppercase tracking-widest text-ink-soft">
-              Votre présence
+              Expertise Kenshō
             </span>
             <span className="mt-1 block text-sm font-bold text-ink">
-              {platform.name}
+              {platform.stat}
             </span>
           </motion.div>
         </div>
@@ -348,29 +418,32 @@ function ReseauxSociauxPage() {
         <div className="absolute bottom-[10%] left-[25%] size-96 rounded-full bg-coral/10 blur-[110px]" />
       </div>
 
-      {/* Sticky title */}
-      <section className="social-intro sticky top-0 z-20 flex min-h-[245px] items-center justify-center px-5 py-10 text-center">
-        <div className="social-intro-glass absolute inset-x-4 bottom-3 top-3 -z-10 mx-auto max-w-5xl rounded-[2rem]" />
-
-        <div className="mx-auto max-w-4xl">
+      {/* Intro libre + accroche */}
+      <section className="relative z-10 px-5 pb-12 pt-12 text-center sm:pb-16 sm:pt-16">
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mx-auto max-w-5xl"
+        >
           <span className="font-mono text-[10px] uppercase tracking-[.3em] text-ink-soft">
-            Kenshō Studio / Digital Presence
+            Kenshō Studio · Social Media & Acquisition
           </span>
 
-          <h1 className="mt-4 font-display text-[clamp(2rem,5vw,4rem)] font-extrabold leading-[1.05] tracking-[-.04em] text-ink">
-            Faites rayonner votre marque
-            <span className="block bg-gradient-to-r from-[color:var(--electric)] via-[color:var(--lilac)] to-[color:var(--coral)] bg-clip-text text-transparent">
-              sur le digital.
-            </span>
+          <h1 className="mt-5 font-display text-[clamp(2.5rem,6vw,5.2rem)] font-extrabold leading-[1.04] tracking-[-.045em] text-ink">
+            Chaque réseau a son audience.
           </h1>
 
-          <p className="mx-auto mt-4 max-w-xl text-sm text-ink-soft">
-            Une stratégie. Plusieurs plateformes. Une présence cohérente.
+          <p className="mx-auto mt-5 max-w-2xl text-sm leading-7 text-ink-soft sm:text-base">
+            Votre marque mérite une présence qui lui ressemble. Nous activons
+            les bonnes plateformes avec une stratégie pensée pour vos objectifs.
           </p>
-        </div>
+        </motion.div>
+
+        <LogoArc />
       </section>
 
-      {/* Platform journey */}
+      {/* Plateformes */}
       <div className="relative">
         {platforms.map((platform, index) => (
           <PlatformPanel
@@ -381,8 +454,8 @@ function ReseauxSociauxPage() {
         ))}
       </div>
 
-      {/* Central half-circle */}
-      <section className="relative flex min-h-[700px] items-center justify-center overflow-hidden px-5 py-24">
+      {/* Message central */}
+      <section className="relative flex min-h-[650px] items-center justify-center overflow-hidden px-5 py-24">
         <div className="absolute left-1/2 top-1/2 size-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-gradient-to-br from-electric/20 via-lilac/20 to-coral/20 blur-[100px]" />
 
         <motion.div
@@ -390,17 +463,17 @@ function ReseauxSociauxPage() {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
-          className="social-half-circle relative flex min-h-[470px] w-full max-w-4xl flex-col items-center justify-center overflow-hidden rounded-t-[50%] rounded-b-[2.5rem] border border-white/70 px-7 pb-12 pt-24 text-center shadow-[0_30px_90px_-35px_rgba(40,30,70,.25)]"
+          className="social-half-circle relative flex min-h-[450px] w-full max-w-4xl flex-col items-center justify-center overflow-hidden rounded-t-[50%] rounded-b-[2.5rem] border border-white/70 px-7 pb-12 pt-24 text-center shadow-[0_30px_90px_-35px_rgba(40,30,70,.25)]"
         >
           <div className="absolute inset-0 -z-10 bg-gradient-to-br from-white/65 via-white/20 to-white/45 backdrop-blur-2xl" />
 
           <span className="text-[10px] font-semibold uppercase tracking-[.3em] text-ink-soft">
-            One ecosystem / Multiple audiences
+            One ecosystem · Multiple audiences
           </span>
 
           <h2 className="mt-6 max-w-2xl font-display text-3xl font-extrabold leading-tight tracking-tight text-ink sm:text-5xl">
             Chaque réseau a son audience.
-            <span className="mt-3 block bg-gradient-to-r from-[color:var(--electric)] via-[color:var(--lilac)] to-[color:var(--coral)] bg-clip-text text-transparent">
+            <span className="mt-3 block bg-gradient-to-r from-electric via-lilac to-coral bg-clip-text text-transparent">
               Ensemble, ils démultiplient votre visibilité.
             </span>
           </h2>
@@ -412,7 +485,7 @@ function ReseauxSociauxPage() {
         </motion.div>
       </section>
 
-      {/* Email CTA */}
+      {/* Contact par e-mail uniquement */}
       <section className="relative px-5 pb-28 pt-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -422,7 +495,7 @@ function ReseauxSociauxPage() {
           className="mx-auto max-w-5xl overflow-hidden rounded-[2.5rem] border border-white/70 bg-white/35 px-7 py-16 text-center shadow-[0_25px_80px_-35px_rgba(40,30,70,.25)] backdrop-blur-2xl sm:px-16"
         >
           <span className="font-mono text-[10px] uppercase tracking-[.3em] text-ink-soft">
-            Your next move
+            Votre prochain projet
           </span>
 
           <h2 className="mt-5 font-display text-4xl font-extrabold tracking-tight text-ink sm:text-5xl">
@@ -451,18 +524,6 @@ function ReseauxSociauxPage() {
       <Footer />
 
       <style>{`
-        .social-intro {
-          isolation: isolate;
-        }
-
-        .social-intro-glass {
-          border: 1px solid rgba(255,255,255,.7);
-          background: rgba(255,255,255,.48);
-          backdrop-filter: blur(22px) saturate(160%);
-          -webkit-backdrop-filter: blur(22px) saturate(160%);
-          box-shadow: 0 12px 40px -25px rgba(30,25,50,.2), inset 0 1px 2px rgba(255,255,255,.8);
-        }
-
         .social-panel {
           isolation: isolate;
           border: 1px solid rgba(255,255,255,.75);
@@ -503,14 +564,14 @@ function ReseauxSociauxPage() {
             padding-top: 3rem;
             padding-bottom: 3rem;
           }
-          .social-intro {
-            min-height: 215px;
-          }
         }
 
         @media (prefers-reduced-motion: reduce) {
-          .social-brand-orb {
-            animation: none !important;
+          *, *::before, *::after {
+            scroll-behavior: auto !important;
+            animation-duration: .01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: .01ms !important;
           }
         }
       `}</style>
