@@ -9,10 +9,8 @@ import {
   Check,
   ChevronRight,
   Instagram,
-  Linkedin,
   MessageCircle,
   TrendingUp,
-  Youtube,
 } from "lucide-react";
 
 import { Toaster } from "@/components/ui/sonner";
@@ -46,13 +44,7 @@ export const Route = createFileRoute("/")({
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const HERO_WORDS = [
-  { word: "visibilité", color: "from-[#E9B6A7] to-[#C5A4EA]" },
-  { word: "notoriété", color: "from-[#D9A8D8] to-[#AFA0E8]" },
-  { word: "potentiel", color: "from-[#8BCFB4] to-[#75BFA9]" },
-  { word: "business", color: "from-[#E7B3A7] to-[#C994C9]" },
-  { word: "marketing", color: "from-[#9ABCEB] to-[#B5A5E5]" },
-];
+/* ANIMATIONS */
 
 function Reveal({
   children,
@@ -75,6 +67,16 @@ function Reveal({
     </motion.div>
   );
 }
+
+/* HERO TITLE */
+
+const HERO_WORDS = [
+  { word: "visibilité", color: "from-[#E9B6A7] to-[#C5A4EA]" },
+  { word: "notoriété", color: "from-[#D9A8D8] to-[#AFA0E8]" },
+  { word: "potentiel", color: "from-[#8BCFB4] to-[#75BFA9]" },
+  { word: "business", color: "from-[#E7B3A7] to-[#C994C9]" },
+  { word: "marketing", color: "from-[#9ABCEB] to-[#B5A5E5]" },
+];
 
 function DynamicHeadline() {
   const [index, setIndex] = useState(0);
@@ -111,6 +113,8 @@ function DynamicHeadline() {
   );
 }
 
+/* COUNTERS */
+
 function Counters() {
   const stats = [
     { value: "+47", label: "Audits réalisés" },
@@ -137,6 +141,8 @@ function Counters() {
     </section>
   );
 }
+
+/* SERVICES */
 
 const services = [
   {
@@ -238,7 +244,7 @@ function ServicesPanel() {
                         SERVICE {service.number}
                       </span>
                       <span
-                        className={`grid size-10 place-items-center rounded-xl ${service.accent}/40 text-ink`}
+                        className={`grid size-10 place-items-center rounded-xl ${service.accent} text-ink`}
                       >
                         <Icon size={19} strokeWidth={1.5} />
                       </span>
@@ -290,6 +296,8 @@ function ServicesPanel() {
   );
 }
 
+/* HOMEPAGE */
+
 function Index() {
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-paper pb-0 text-ink">
@@ -304,6 +312,7 @@ function Index() {
         <div className="absolute bottom-0 left-1/3 size-80 rounded-full bg-mint/15 blur-3xl" />
       </div>
 
+      {/* HERO */}
       <section
         id="top"
         className="relative isolate px-6 pb-12 pt-32 sm:pb-14 sm:pt-36"
@@ -383,6 +392,7 @@ function Index() {
       <Counters />
       <ServicesPanel />
 
+      {/* CONTACT */}
       <section id="contact" className="relative overflow-hidden px-6 py-12 sm:py-16">
         <Reveal className="relative mx-auto max-w-5xl overflow-hidden rounded-[28px] border border-white/75 bg-white/40 px-6 py-10 text-center shadow-[0_25px_70px_-40px_rgba(30,35,60,.3)] backdrop-blur-2xl sm:px-12 sm:py-14">
           <div className="mx-auto grid size-11 place-items-center rounded-2xl border border-white bg-white/65 shadow-sm">
