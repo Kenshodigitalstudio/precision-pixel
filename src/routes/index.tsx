@@ -82,8 +82,7 @@ function Reveal({
 }
 
 /* -------------------------------------------------------
-   LOGO ORIGINAL — VERSION TYPOGRAPHIQUE
-   Même nom et identité, placé au-dessus du titre
+   LOGO TYPOGRAPHIQUE
 ------------------------------------------------------- */
 
 function OriginalBrand() {
@@ -105,45 +104,15 @@ function OriginalBrand() {
 }
 
 /* -------------------------------------------------------
-   ACCROCHES MARKETING DYNAMIQUES
+   TITRE DYNAMIQUE — UN SEUL MOT CHANGE
 ------------------------------------------------------- */
 
-const HERO_MESSAGES = [
-  {
-    first: "Faites grandir",
-    second: "votre",
-    word: "impact",
-    last: "digital.",
-    color: "from-pink-500 to-rose-400",
-  },
-  {
-    first: "Donnez une nouvelle",
-    second: "dimension à",
-    word: "votre marque",
-    last: ".",
-    color: "from-amber-400 to-orange-500",
-  },
-  {
-    first: "Transformez votre",
-    second: "visibilité en",
-    word: "succès",
-    last: ".",
-    color: "from-emerald-400 to-green-600",
-  },
-  {
-    first: "Faites de votre",
-    second: "présence un",
-    word: "atout",
-    last: "durable.",
-    color: "from-sky-400 to-blue-600",
-  },
-  {
-    first: "Passez à la",
-    second: "vitesse",
-    word: "supérieure",
-    last: ".",
-    color: "from-orange-400 to-pink-500",
-  },
+const HERO_WORDS = [
+  { word: "visibilité", color: "text-yellow-500" },
+  { word: "notoriété", color: "text-pink-500" },
+  { word: "potentiel", color: "text-emerald-500" },
+  { word: "business", color: "text-red-500" },
+  { word: "marketing", color: "text-blue-500" },
 ];
 
 function DynamicHeadline() {
@@ -151,37 +120,35 @@ function DynamicHeadline() {
 
   useEffect(() => {
     const timer = window.setInterval(() => {
-      setIndex((current) => (current + 1) % HERO_MESSAGES.length);
-    }, 3500);
+      setIndex((current) => (current + 1) % HERO_WORDS.length);
+    }, 1000);
 
     return () => window.clearInterval(timer);
   }, []);
 
-  const message = HERO_MESSAGES[index];
+  const currentWord = HERO_WORDS[index];
 
   return (
-    <div className="mx-auto flex min-h-[160px] max-w-4xl flex-col items-center justify-center sm:min-h-[185px]">
-      <AnimatePresence mode="wait">
-        <motion.h1
-          key={index}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.45 }}
-          className="font-display text-[clamp(2.25rem,5.5vw,4.7rem)] font-light leading-[1.22] tracking-[-0.055em] text-ink"
-        >
-          <span className="block">{message.first}</span>
-          <span className="block">
-            {message.second}{" "}
-            <span
-              className={`inline-block bg-gradient-to-r ${message.color} bg-clip-text font-semibold text-transparent`}
+    <div className="mx-auto max-w-5xl px-2">
+      <h1 className="font-display text-[clamp(2.2rem,5.5vw,4.7rem)] font-light leading-[1.18] tracking-[-0.055em] text-ink">
+        Faites de votre{" "}
+        <span className="relative inline-block whitespace-nowrap">
+          <AnimatePresence mode="wait">
+            <motion.span
+              key={currentWord.word}
+              initial={{ opacity: 0, y: 10, filter: "blur(5px)" }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: -10, filter: "blur(5px)" }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className={`inline-block font-semibold ${currentWord.color}`}
             >
-              {message.word}
-            </span>
-            {message.last}
-          </span>
-        </motion.h1>
-      </AnimatePresence>
+              {currentWord.word}
+            </motion.span>
+          </AnimatePresence>
+        </span>{" "}
+        un accélérateur
+        <span className="block">de croissance.</span>
+      </h1>
     </div>
   );
 }
@@ -249,6 +216,10 @@ function AnimatedNumber({
   );
 }
 
+/* -------------------------------------------------------
+   COMPTEURS + LIGNE VERTE DE PROGRESSION
+------------------------------------------------------- */
+
 function Counters() {
   const items = [
     { value: 47, prefix: "+", suffix: "", label: "Audits réalisés" },
@@ -261,6 +232,20 @@ function Counters() {
       <Reveal className="mx-auto max-w-5xl">
         <div className="relative overflow-hidden rounded-[24px] border border-white/75 bg-white/40 px-5 py-7 shadow-[0_20px_65px_-35px_rgba(30,35,60,0.3)] backdrop-blur-2xl sm:px-10 sm:py-8">
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/30 via-transparent to-white/10" />
+
+          {/* Ligne verte discrète qui monte */}
+          <motion.div
+            aria-hidden="true"
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true, amount: 0.5 }}
+            transition={{
+              duration: 1.8,
+              ease: [0.22, 1, 0.36, 1],
+              delay: 0.2,
+            }}
+            className="absolute bottom-[22%] left-[12px] top-[22%] z-10 w-[2px] origin-bottom rounded-full bg-emerald-500/60 sm:left-[20px]"
+          />
 
           <div className="relative grid grid-cols-3 divide-x divide-ink/10">
             {items.map((item, index) => (
@@ -281,6 +266,7 @@ function Counters() {
                     suffix={item.suffix}
                   />
                 </motion.p>
+
                 <p className="mt-2 text-[9px] leading-tight text-ink-soft sm:text-[12px]">
                   {item.label}
                 </p>
