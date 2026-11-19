@@ -8,12 +8,10 @@ import {
   BarChart3,
   Check,
   ChevronRight,
-  CircleDollarSign,
   Instagram,
   Linkedin,
   MessageCircle,
   MousePointer2,
-  Play,
   TrendingUp,
   Youtube,
   Bell,
@@ -22,7 +20,6 @@ import {
 
 import { Toaster } from "@/components/ui/sonner";
 import { Nav } from "@/components/landing/Nav";
-import { ExpertsTeam } from "@/components/landing/AuditExperts";
 import { Faq } from "@/components/landing/Faq";
 import { Footer } from "@/components/landing/Footer";
 
@@ -620,27 +617,6 @@ function Index() {
 
         <div className="mx-auto max-w-6xl text-center">
           <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, ease }}
-            className="inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/45 px-4 py-2 shadow-sm backdrop-blur-xl"
-          >
-            <span className="size-1.5 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)]" />
-            <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-ink-soft sm:text-[10px]">
-              Stratégie · Acquisition · Performance
-            </span>
-          </motion.div>
-
-          <motion.img
-            src="/kensho-logo.png"
-            alt="Kenshō Digital Studio"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.08, ease }}
-            className="mx-auto mb-2 h-auto w-[210px] object-contain sm:w-[260px] md:w-[290px]"
-          />
-
-          <motion.div
             initial={{ opacity: 0, y: 25 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.85, delay: 0.1, ease }}
@@ -723,7 +699,7 @@ function Index() {
             </p>
           </Reveal>
 
-          <div className="grid gap-5 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5">
             <ServiceCard
               number="01"
               eyebrow="Analyse & recommandations"
@@ -773,14 +749,6 @@ function Index() {
             />
           </div>
         </div>
-      </section>
-
-      {/* TEAM — EXISTING SECTION */}
-      <section className="relative">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="h-px bg-gradient-to-r from-transparent via-ink/15 to-transparent" />
-        </div>
-        <ExpertsTeam />
       </section>
 
       {/* SPECIFIC REQUESTS */}
