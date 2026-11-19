@@ -227,8 +227,8 @@ function LogoArc() {
 
   return (
     <div className="relative mx-auto h-[90px] w-full max-w-6xl overflow-hidden sm:h-[105px]">
-      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-14 bg-gradient-to-r from-background to-transparent sm:w-24" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-14 bg-gradient-to-l from-background to-transparent sm:w-24" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-14 bg-gradient-to-r from-paper to-transparent sm:w-24" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-14 bg-gradient-to-l from-paper to-transparent sm:w-24" />
 
       <motion.div
         className="absolute left-0 top-1/2 flex w-max -translate-y-1/2 items-center gap-3 sm:gap-5"
@@ -400,18 +400,18 @@ function PlatformPanel({
 
 function ReseauxSociauxPage() {
   return (
-    <main className="relative isolate min-h-screen overflow-x-hidden">
-      <Nav />
-
-      {/* Fond et couleurs du Hero de la page d'accueil */}
+    <main className="relative min-h-screen overflow-x-hidden bg-paper text-ink">
+      {/* Fond identique à /reservation */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[1100px] overflow-hidden"
+        className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
       >
-        <div className="absolute left-[10%] top-[10%] size-72 rounded-full bg-electric/20 blur-3xl" />
-        <div className="absolute right-[8%] top-[30%] size-80 rounded-full bg-solar/25 blur-3xl" />
-        <div className="absolute left-[30%] bottom-[5%] size-72 rounded-full bg-mint/20 blur-3xl" />
+        <div className="absolute -left-24 top-24 h-96 w-96 rounded-full bg-electric/15 blur-3xl" />
+        <div className="absolute -right-24 top-[35%] h-96 w-96 rounded-full bg-solar/20 blur-3xl" />
+        <div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-mint/15 blur-3xl" />
       </div>
+
+      <Nav />
 
       {/* Intro */}
       <section className="relative z-10 px-5 pb-8 pt-32 text-center sm:px-6 sm:pb-12 sm:pt-36">
