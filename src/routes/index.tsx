@@ -30,12 +30,31 @@ export const Route = createFileRoute("/")({
   }),
 });
 
+/* ========================================================
+   TITRE ANIMÉ
+   ======================================================== */
+
 const HERO_WORDS = [
-  { word: "visibilité", color: "from-yellow-300 via-amber-400 to-yellow-500" },
-  { word: "notoriété", color: "from-pink-400 via-rose-500 to-fuchsia-500" },
-  { word: "potentiel", color: "from-emerald-300 via-green-500 to-teal-500" },
-  { word: "business", color: "from-red-400 via-rose-500 to-red-600" },
-  { word: "marketing", color: "from-sky-400 via-blue-500 to-indigo-600" },
+  {
+    word: "visibilité",
+    color: "from-yellow-300 via-amber-400 to-yellow-500",
+  },
+  {
+    word: "notoriété",
+    color: "from-pink-400 via-rose-500 to-fuchsia-500",
+  },
+  {
+    word: "potentiel",
+    color: "from-emerald-300 via-green-500 to-teal-500",
+  },
+  {
+    word: "business",
+    color: "from-red-400 via-rose-500 to-red-600",
+  },
+  {
+    word: "marketing",
+    color: "from-sky-400 via-blue-500 to-indigo-600",
+  },
 ];
 
 function DynamicHeadline() {
@@ -53,20 +72,32 @@ function DynamicHeadline() {
 
   return (
     <div className="mx-auto max-w-5xl px-2">
-      <h1 className="font-display text-[clamp(2.2rem,5.5vw,4.7rem)] font-light leading-[1.18] tracking-[-0.055em] text-ink">
+      <h1 className="overflow-visible font-display text-[clamp(2.2rem,5.5vw,4.7rem)] font-light leading-[1.35] tracking-[-0.055em] text-ink">
         Faites de votre{" "}
-        <span className="inline-grid min-w-[5.8ch] align-baseline text-left">
+        <span className="inline-grid min-w-[5.8ch] overflow-visible align-baseline text-left">
           <AnimatePresence mode="wait">
             <motion.span
               key={currentWord.word}
-              initial={{ opacity: 0, y: 12, filter: "blur(8px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -10, filter: "blur(8px)" }}
+              initial={{
+                opacity: 0,
+                y: 12,
+                filter: "blur(8px)",
+              }}
+              animate={{
+                opacity: 1,
+                y: 0,
+                filter: "blur(0px)",
+              }}
+              exit={{
+                opacity: 0,
+                y: -10,
+                filter: "blur(8px)",
+              }}
               transition={{
                 duration: 0.85,
                 ease: [0.22, 1, 0.36, 1],
               }}
-              className={`col-start-1 row-start-1 inline-block w-fit bg-gradient-to-r ${currentWord.color} bg-clip-text font-semibold text-transparent`}
+              className={`col-start-1 row-start-1 inline-block w-fit overflow-visible bg-gradient-to-r ${currentWord.color} bg-clip-text px-[0.04em] pb-[0.12em] font-semibold leading-[1.3] text-transparent`}
             >
               {currentWord.word}
             </motion.span>
@@ -78,6 +109,10 @@ function DynamicHeadline() {
     </div>
   );
 }
+
+/* ========================================================
+   ANIMATIONS AU DÉFILEMENT
+   ======================================================== */
 
 function Reveal({
   children,
@@ -93,7 +128,11 @@ function Reveal({
       initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.75, delay, ease: [0.22, 1, 0.36, 1] }}
+      transition={{
+        duration: 0.75,
+        delay,
+        ease: [0.22, 1, 0.36, 1],
+      }}
       className={className}
     >
       {children}
@@ -150,52 +189,78 @@ function AnimatedNumber({
 
 function Counters() {
   const stats = [
-    { value: 47, suffix: "", prefix: "+", label: "Audits réalisés" },
-    { value: 230, suffix: "%", prefix: "+", label: "ROI moyen constaté" },
-    { value: 30, suffix: " min", prefix: "", label: "Audit Flash" },
+    {
+      value: 47,
+      suffix: "",
+      prefix: "+",
+      label: "Audits réalisés",
+    },
+    {
+      value: 230,
+      suffix: "%",
+      prefix: "+",
+      label: "ROI moyen constaté",
+    },
+    {
+      value: 30,
+      suffix: " min",
+      prefix: "",
+      label: "Audit Flash",
+    },
   ];
 
   return (
-    <section className="relative mx-auto max-w-6xl px-6 py-16">
+    <section className="relative mx-auto max-w-5xl px-5 pb-16 pt-2 sm:px-8 sm:pt-3">
       <Reveal>
-        <div className="relative grid grid-cols-1 gap-10 sm:grid-cols-3">
-          <motion.div
+        <div className="relative overflow-hidden rounded-3xl border border-white/70 bg-white/35 p-7 shadow-[0_20px_60px_-30px_rgba(20,30,60,0.18)] backdrop-blur-2xl sm:p-10">
+          <div
             aria-hidden="true"
-            initial={{ scaleY: 0 }}
-            whileInView={{ scaleY: 1 }}
-            viewport={{ once: true }}
-            transition={{
-              duration: 2,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-            className="absolute bottom-[15%] left-0 top-[15%] hidden w-[2px] origin-bottom bg-gradient-to-t from-emerald-400/10 via-emerald-400 to-emerald-400/10 sm:block"
+            className="pointer-events-none absolute inset-0 rounded-3xl bg-gradient-to-br from-white/65 via-white/15 to-white/5"
           />
 
-          {stats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{
-                duration: 0.8,
-                delay: index * 0.18,
-              }}
-              className="text-center"
-            >
-              <div className="font-display text-5xl font-light tracking-tight text-ink sm:text-6xl">
-                <AnimatedNumber
-                  value={stat.value}
-                  suffix={stat.suffix}
-                  prefix={stat.prefix}
-                />
-              </div>
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-20 -top-28 h-64 w-64 rounded-full bg-white/60 blur-3xl"
+          />
 
-              <p className="mt-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-ink-soft">
-                {stat.label}
-              </p>
-            </motion.div>
-          ))}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -bottom-24 -left-20 h-56 w-56 rounded-full bg-white/30 blur-3xl"
+          />
+
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-[1px] rounded-[23px] border border-white/40"
+          />
+
+          <div className="relative grid grid-cols-1 gap-9 sm:grid-cols-3 sm:gap-6">
+            {stats.map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.8,
+                  delay: index * 0.18,
+                  ease: [0.22, 1, 0.36, 1],
+                }}
+                className="text-center"
+              >
+                <div className="font-display text-5xl font-light tracking-tight text-ink sm:text-6xl">
+                  <AnimatedNumber
+                    value={stat.value}
+                    suffix={stat.suffix}
+                    prefix={stat.prefix}
+                  />
+                </div>
+
+                <p className="mt-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-ink-soft">
+                  {stat.label}
+                </p>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </Reveal>
     </section>
@@ -203,7 +268,7 @@ function Counters() {
 }
 
 /* ========================================================
-   CARTES SERVICES
+   SERVICES
    ======================================================== */
 
 const SERVICES = [
@@ -295,12 +360,21 @@ function Index() {
       <Nav />
 
       {/* HERO */}
-      <section className="relative mx-auto flex min-h-[650px] max-w-7xl flex-col items-center justify-center px-5 pb-20 pt-32 text-center sm:pt-40">
+      <section className="relative mx-auto flex min-h-[570px] max-w-7xl flex-col items-center justify-center px-5 pb-8 pt-28 text-center sm:pt-32">
         <Reveal>
           <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-ink/10 bg-white/60 px-4 py-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-ink-soft">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
             Kenshō Digital Studio
           </div>
+        </Reveal>
+
+        {/* LOGO KENSHŌ */}
+        <Reveal delay={0.05}>
+          <img
+            src="/kensho-logo.png"
+            alt="Kenshō Digital Studio"
+            className="mb-7 h-auto w-[210px] object-contain sm:mb-8 sm:w-[280px] md:w-[310px]"
+          />
         </Reveal>
 
         <Reveal delay={0.1}>
@@ -361,10 +435,12 @@ function Index() {
           <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-electric">
             Nos expertises
           </span>
+
           <h2 className="mt-4 text-3xl font-light tracking-tight sm:text-4xl">
             Le bon levier.
             <span className="font-semibold"> Au bon moment.</span>
           </h2>
+
           <p className="mt-5 text-sm leading-relaxed text-ink-soft">
             Une approche centrée sur l'essentiel : comprendre vos enjeux,
             construire une stratégie pertinente et mesurer ce qui compte.
@@ -389,14 +465,17 @@ function Index() {
             <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-electric">
               La vision de l'essentiel
             </span>
+
             <h2 className="mt-5 text-3xl font-light leading-tight tracking-tight sm:text-4xl">
               Le marketing digital ne devrait pas être un brouillard technique.
             </h2>
+
             <p className="mt-6 text-sm leading-relaxed text-ink-soft">
               Notre rôle ? Apporter le Kenshō, l'illumination à votre
               structure. Nous aidons les entrepreneurs à comprendre leurs
               performances et à prendre les bonnes décisions.
             </p>
+
             <p className="mt-4 text-sm leading-relaxed text-ink-soft">
               Pas de gestion de compte à rallonge, juste de l'expertise,
               de la stratégie et une implémentation technique précise.
@@ -429,8 +508,12 @@ function Index() {
                         <TrendingUp className="h-4 w-4" />
                       )}
                     </span>
-                    <h3 className="font-semibold text-ink">{item.title}</h3>
+
+                    <h3 className="font-semibold text-ink">
+                      {item.title}
+                    </h3>
                   </div>
+
                   <p className="mt-4 text-sm leading-relaxed text-ink-soft">
                     {item.description}
                   </p>
@@ -447,6 +530,7 @@ function Index() {
           <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-electric">
             Notre engagement
           </span>
+
           <h2 className="mt-4 text-3xl font-light tracking-tight sm:text-4xl">
             Ce qu'on vous garantit,
             <span className="font-semibold"> dès le premier appel.</span>
@@ -476,10 +560,15 @@ function Index() {
                 <span className="font-mono text-sm text-electric">
                   {item.number}
                 </span>
-                <h3 className="mt-5 text-lg font-semibold">{item.title}</h3>
+
+                <h3 className="mt-5 text-lg font-semibold">
+                  {item.title}
+                </h3>
+
                 <p className="mt-4 text-sm leading-relaxed text-ink-soft">
                   {item.text}
                 </p>
+
                 <div className="mt-6 flex items-center gap-2 text-xs text-emerald-600">
                   <Check className="h-4 w-4" />
                   <span>Notre engagement Kenshō</span>
@@ -497,6 +586,7 @@ function Index() {
             <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-coral">
               Les risques
             </span>
+
             <h2 className="mt-4 text-3xl font-light tracking-tight sm:text-4xl">
               Ce qu'un compte sans expertise vous coûte vraiment.
             </h2>
@@ -506,9 +596,11 @@ function Index() {
             <Reveal>
               <div className="rounded-2xl border border-ink/10 bg-white/70 p-7">
                 <span className="font-mono text-sm text-coral">01</span>
+
                 <h3 className="mt-4 text-xl font-semibold">
                   Dépenses de budget inutiles
                 </h3>
+
                 <p className="mt-3 text-sm leading-relaxed text-ink-soft">
                   Sans expertise, le budget peut partir dans des mots-clés
                   non rentables, des audiences mal ciblées et des enchères
@@ -521,9 +613,11 @@ function Index() {
             <Reveal delay={0.12}>
               <div className="rounded-2xl border border-ink/10 bg-white/70 p-7">
                 <span className="font-mono text-sm text-coral">02</span>
+
                 <h3 className="mt-4 text-xl font-semibold">
                   Mauvaise utilisation des données
                 </h3>
+
                 <p className="mt-3 text-sm leading-relaxed text-ink-soft">
                   Un tracking approximatif entraîne des décisions basées sur
                   des chiffres erronés : conversions doublées, événements
@@ -543,12 +637,15 @@ function Index() {
               aria-hidden="true"
               className="pointer-events-none absolute -right-20 -top-28 h-72 w-72 rounded-full bg-electric/[0.06] blur-3xl"
             />
+
             <span className="text-[10px] font-semibold uppercase tracking-[0.25em] text-electric">
               Premier échange
             </span>
+
             <h2 className="mx-auto mt-5 max-w-2xl text-3xl font-light leading-tight tracking-tight sm:text-4xl">
               Et si on faisait le point sur votre stratégie ?
             </h2>
+
             <p className="mx-auto mt-5 max-w-xl text-sm leading-relaxed text-ink-soft">
               Parlons de votre activité, de vos objectifs et des leviers
               qui pourraient améliorer vos performances.
@@ -562,6 +659,7 @@ function Index() {
                 Réserver mon premier échange
                 <ArrowUpRight className="h-4 w-4" />
               </Link>
+
               <Link
                 to="/services/google-ads"
                 className="text-sm font-medium text-ink-soft transition-colors hover:text-electric"
