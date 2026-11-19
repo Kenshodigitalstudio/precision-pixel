@@ -1,6 +1,6 @@
 
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
 import {
   ArrowDown,
@@ -20,7 +20,6 @@ import {
 
 import { Toaster } from "@/components/ui/sonner";
 import { Nav } from "@/components/landing/Nav";
-import { ExpertsTeam } from "@/components/landing/AuditExperts";
 import { Faq } from "@/components/landing/Faq";
 import { Footer } from "@/components/landing/Footer";
 
@@ -79,6 +78,111 @@ function Reveal({
     >
       {children}
     </motion.div>
+  );
+}
+
+/* -------------------------------------------------------
+   LOGO ORIGINAL — VERSION TYPOGRAPHIQUE
+   Même nom et identité, placé au-dessus du titre
+------------------------------------------------------- */
+
+function OriginalBrand() {
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
+      className="mb-8 flex flex-col items-center"
+    >
+      <span className="font-display text-[29px] font-extrabold leading-none tracking-[-0.075em] text-ink sm:text-[35px]">
+        Kenshō
+      </span>
+      <span className="mt-2 text-[8px] font-semibold tracking-[0.36em] text-ink-soft">
+        DIGITAL STUDIO
+      </span>
+    </motion.div>
+  );
+}
+
+/* -------------------------------------------------------
+   ACCROCHES MARKETING DYNAMIQUES
+------------------------------------------------------- */
+
+const HERO_MESSAGES = [
+  {
+    first: "Faites grandir",
+    second: "votre",
+    word: "impact",
+    last: "digital.",
+    color: "from-pink-500 to-rose-400",
+  },
+  {
+    first: "Donnez une nouvelle",
+    second: "dimension à",
+    word: "votre marque",
+    last: ".",
+    color: "from-amber-400 to-orange-500",
+  },
+  {
+    first: "Transformez votre",
+    second: "visibilité en",
+    word: "succès",
+    last: ".",
+    color: "from-emerald-400 to-green-600",
+  },
+  {
+    first: "Faites de votre",
+    second: "présence un",
+    word: "atout",
+    last: "durable.",
+    color: "from-sky-400 to-blue-600",
+  },
+  {
+    first: "Passez à la",
+    second: "vitesse",
+    word: "supérieure",
+    last: ".",
+    color: "from-orange-400 to-pink-500",
+  },
+];
+
+function DynamicHeadline() {
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setIndex((current) => (current + 1) % HERO_MESSAGES.length);
+    }, 3500);
+
+    return () => window.clearInterval(timer);
+  }, []);
+
+  const message = HERO_MESSAGES[index];
+
+  return (
+    <div className="mx-auto flex min-h-[160px] max-w-4xl flex-col items-center justify-center sm:min-h-[185px]">
+      <AnimatePresence mode="wait">
+        <motion.h1
+          key={index}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.45 }}
+          className="font-display text-[clamp(2.25rem,5.5vw,4.7rem)] font-light leading-[1.22] tracking-[-0.055em] text-ink"
+        >
+          <span className="block">{message.first}</span>
+          <span className="block">
+            {message.second}{" "}
+            <span
+              className={`inline-block bg-gradient-to-r ${message.color} bg-clip-text font-semibold text-transparent`}
+            >
+              {message.word}
+            </span>
+            {message.last}
+          </span>
+        </motion.h1>
+      </AnimatePresence>
+    </div>
   );
 }
 
@@ -177,7 +281,6 @@ function Counters() {
                     suffix={item.suffix}
                   />
                 </motion.p>
-
                 <p className="mt-2 text-[9px] leading-tight text-ink-soft sm:text-[12px]">
                   {item.label}
                 </p>
@@ -284,20 +387,17 @@ function ManagementVisual() {
       >
         <div className="relative h-full overflow-hidden rounded-[18px] bg-gradient-to-b from-[#f7f9fc] to-[#e9eef5]">
           <div className="absolute left-1/2 top-1.5 h-3 w-10 -translate-x-1/2 rounded-full bg-[#171a20]" />
-
           <div className="px-2.5 pt-7">
             <div className="flex items-center justify-between">
               <span className="text-[8px] font-bold tracking-tight text-ink">Kenshō</span>
               <Bell size={10} className="text-ink-soft" />
             </div>
-
             <p className="mt-5 text-[7px] text-ink-soft">Bonjour !</p>
             <p className="text-[10px] font-semibold leading-tight text-ink">
               Votre activité
               <br />
               en un coup d'œil.
             </p>
-
             <div className="mt-3 rounded-lg border border-white bg-white/85 p-2 shadow-sm">
               <div className="flex items-center gap-1.5">
                 <div className="grid size-5 place-items-center rounded-md bg-electric/15">
@@ -312,7 +412,6 @@ function ManagementVisual() {
               </div>
               <p className="mt-1 text-[6px] text-ink-soft">Performances actualisées</p>
             </div>
-
             <div className="mt-2 rounded-lg border border-white bg-white/85 p-2 shadow-sm">
               <div className="flex items-center gap-1">
                 <CalendarDays size={9} className="text-electric" />
@@ -544,7 +643,7 @@ function Index() {
     <main className="relative min-h-screen overflow-x-hidden bg-paper pb-0 text-ink">
       <Nav />
 
-      {/* AMBIENT BACKGROUND */}
+      {/* FOND ANIMÉ */}
       <div
         aria-hidden
         className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
@@ -577,35 +676,15 @@ function Index() {
         </div>
 
         <div className="mx-auto max-w-6xl text-center">
-          {/* Le logo original est conservé dans Nav */}
+          <OriginalBrand />
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease }}
-            className="mx-auto mt-8 max-w-4xl font-display text-[clamp(2.6rem,6vw,5.2rem)] font-light leading-[1.16] tracking-[-0.055em] text-ink"
-          >
-            Faites de votre
-            <span className="mt-1 block font-semibold">
-              visibilité un{" "}
-              <span className="bg-gradient-to-r from-sky-500 to-blue-600 bg-clip-text text-transparent">
-                levier
-              </span>
-            </span>
-            <span className="block">
-              de{" "}
-              <span className="bg-gradient-to-r from-emerald-400 to-green-600 bg-clip-text text-transparent">
-                croissance
-              </span>
-              .
-            </span>
-          </motion.h1>
+          <DynamicHeadline />
 
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.2, ease }}
-            className="mx-auto mt-6 max-w-[560px] text-[14px] leading-relaxed text-ink-soft sm:text-[16px] sm:leading-[1.8]"
+            className="mx-auto mt-5 max-w-[560px] text-[14px] leading-relaxed text-ink-soft sm:text-[16px] sm:leading-[1.8]"
           >
             Kenshō Studio accompagne les entreprises dans leur développement
             digital grâce à une stratégie d'acquisition et une présence en ligne
@@ -724,14 +803,6 @@ function Index() {
             />
           </div>
         </div>
-      </section>
-
-      {/* ÉQUIPE */}
-      <section className="relative">
-        <div className="mx-auto max-w-7xl px-6">
-          <div className="h-px bg-gradient-to-r from-transparent via-ink/15 to-transparent" />
-        </div>
-        <ExpertsTeam />
       </section>
 
       {/* CONTACT */}
