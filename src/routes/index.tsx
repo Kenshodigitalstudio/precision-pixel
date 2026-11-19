@@ -44,7 +44,7 @@ function DynamicHeadline() {
   useEffect(() => {
     const timer = window.setInterval(() => {
       setIndex((current) => (current + 1) % HERO_WORDS.length);
-    }, 1000);
+    }, 2800);
 
     return () => window.clearInterval(timer);
   }, []);
@@ -59,11 +59,11 @@ function DynamicHeadline() {
           <AnimatePresence mode="wait">
             <motion.span
               key={currentWord.word}
-              initial={{ opacity: 0, y: 12, filter: "blur(10px)" }}
+              initial={{ opacity: 0, y: 12, filter: "blur(8px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               exit={{ opacity: 0, y: -10, filter: "blur(8px)" }}
               transition={{
-                duration: 0.65,
+                duration: 0.85,
                 ease: [0.22, 1, 0.36, 1],
               }}
               className={`col-start-1 row-start-1 inline-block w-fit bg-gradient-to-r ${currentWord.color} bg-clip-text font-semibold text-transparent`}
@@ -101,22 +101,29 @@ function Reveal({
   );
 }
 
+/* ========================================================
+   INDICATEURS ANIMÉS
+   ======================================================== */
+
 function AnimatedNumber({
   value,
   suffix = "",
+  prefix = "+",
 }: {
   value: number;
   suffix?: string;
+  prefix?: string;
 }) {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
     let frame = 0;
-    const duration = 1800;
     let start: number | null = null;
+    const duration = 2200;
 
     const animate = (timestamp: number) => {
       if (start === null) start = timestamp;
+
       const progress = Math.min((timestamp - start) / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 4);
 
@@ -128,51 +135,76 @@ function AnimatedNumber({
     };
 
     frame = window.requestAnimationFrame(animate);
+
     return () => window.cancelAnimationFrame(frame);
   }, [value]);
 
   return (
-    <span>
+    <>
+      {prefix}
       {count}
       {suffix}
-    </span>
+    </>
   );
 }
 
 function Counters() {
   const stats = [
-    { value: 47, suffix: "", label: "Audits réalisés" },
-    { value: 230, suffix: "%", label: "ROI moyen constaté" },
+    { value: 47, suffix: "", prefix: "+", label: "Audits réalisés" },
+    { value: 230, suffix: "%", prefix: "+", label: "ROI moyen constaté" },
+    { value: 30, suffix: " min", prefix: "", label: "Audit Flash" },
   ];
 
   return (
-    <section className="relative mx-auto max-w-5xl px-6 py-14">
+    <section className="relative mx-auto max-w-6xl px-6 py-16">
       <Reveal>
-        <div className="relative grid grid-cols-1 gap-10 sm:grid-cols-2">
+        <div className="relative grid grid-cols-1 gap-10 sm:grid-cols-3">
           <motion.div
             aria-hidden="true"
             initial={{ scaleY: 0 }}
             whileInView={{ scaleY: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 1.8, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute bottom-[12%] left-0 top-[12%] hidden w-[2px] origin-bottom bg-gradient-to-t from-emerald-400/20 via-emerald-400 to-emerald-400/20 sm:block"
+            transition={{
+              duration: 2,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="absolute bottom-[15%] left-0 top-[15%] hidden w-[2px] origin-bottom bg-gradient-to-t from-emerald-400/10 via-emerald-400 to-emerald-400/10 sm:block"
           />
 
-          {stats.map((stat) => (
-            <div key={stat.label} className="text-center">
+          {stats.map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{
+                duration: 0.8,
+                delay: index * 0.18,
+              }}
+              className="text-center"
+            >
               <div className="font-display text-5xl font-light tracking-tight text-ink sm:text-6xl">
-                <AnimatedNumber value={stat.value} suffix={stat.suffix} />
+                <AnimatedNumber
+                  value={stat.value}
+                  suffix={stat.suffix}
+                  prefix={stat.prefix}
+                />
               </div>
-              <p className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-ink-soft">
+
+              <p className="mt-3 text-[10px] font-semibold uppercase tracking-[0.2em] text-ink-soft">
                 {stat.label}
               </p>
-            </div>
+            </motion.div>
           ))}
         </div>
       </Reveal>
     </section>
   );
 }
+
+/* ========================================================
+   CARTES SERVICES
+   ======================================================== */
 
 const SERVICES = [
   {
@@ -221,7 +253,7 @@ function ServiceCard({
         className="group relative flex h-full flex-col rounded-2xl border border-ink/10 bg-white/50 p-7 transition-all duration-500 hover:-translate-y-2 hover:border-electric/30 hover:bg-white hover:shadow-[0_25px_60px_-25px_rgba(20,30,60,0.16)]"
       >
         <div className="flex items-center justify-between">
-          <span className={`${service.color}`}>{service.icon}</span>
+          <span className={service.color}>{service.icon}</span>
           <span className="font-mono text-sm text-ink-soft/40">
             {service.number}
           </span>
@@ -243,6 +275,10 @@ function ServiceCard({
     </Reveal>
   );
 }
+
+/* ========================================================
+   PAGE D'ACCUEIL
+   ======================================================== */
 
 function Index() {
   return (
@@ -301,7 +337,11 @@ function Index() {
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
           <motion.div
             animate={{ y: [0, 7, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
             className="text-ink-soft/40"
           >
             <span className="text-[10px] uppercase tracking-[0.25em]">
@@ -312,6 +352,7 @@ function Index() {
         </div>
       </section>
 
+      {/* INDICATEURS */}
       <Counters />
 
       {/* SERVICES */}
