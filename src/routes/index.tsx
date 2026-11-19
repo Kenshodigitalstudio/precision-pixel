@@ -510,10 +510,10 @@ function ServiceCard({
   delay: number;
 }) {
   return (
-    <Reveal delay={delay} className="h-full">
+    <Reveal delay={delay} className="h-full w-full">
       <Link
         to={href}
-        className="service-card group relative flex h-full flex-col overflow-hidden rounded-[30px] border border-white/70 bg-white/35 p-5 shadow-[0_18px_55px_-35px_rgba(30,35,60,0.3)] backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-white hover:bg-white/55 hover:shadow-[0_28px_65px_-30px_rgba(30,35,60,0.35)] sm:p-7"
+        className="service-card group relative flex h-full w-full flex-col overflow-hidden rounded-[30px] border border-white/70 bg-white/35 p-5 shadow-[0_18px_55px_-35px_rgba(30,35,60,0.3)] backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:border-white hover:bg-white/55 hover:shadow-[0_28px_65px_-30px_rgba(30,35,60,0.35)] sm:p-7"
       >
         <div
           aria-hidden
@@ -699,7 +699,7 @@ function Index() {
             </p>
           </Reveal>
 
-          <div className="grid grid-cols-1 gap-5">
+          <div className="flex w-full flex-col gap-6">
             <ServiceCard
               number="01"
               eyebrow="Analyse & recommandations"
