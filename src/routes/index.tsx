@@ -9,8 +9,14 @@ import {
   Check,
   ChevronRight,
   Instagram,
+  Linkedin,
   MessageCircle,
   TrendingUp,
+  Youtube,
+  MousePointer2,
+  Bell,
+  CalendarDays,
+  Facebook,
 } from "lucide-react";
 
 import { Toaster } from "@/components/ui/sonner";
@@ -68,7 +74,7 @@ function Reveal({
   );
 }
 
-/* HERO TITLE */
+/* HERO */
 
 const HERO_WORDS = [
   { word: "visibilité", color: "from-[#E9B6A7] to-[#C5A4EA]" },
@@ -113,25 +119,24 @@ function DynamicHeadline() {
   );
 }
 
-/* COUNTERS */
+/* INDICATORS */
 
 function Counters() {
   const stats = [
     { value: "+47", label: "Audits réalisés" },
     { value: "+230%", label: "ROI moyen constaté" },
-    { value: "30 min", label: "Audit Flash" },
   ];
 
   return (
     <section className="mx-auto max-w-5xl px-5 pb-10 sm:px-8">
       <Reveal>
-        <div className="grid grid-cols-3 divide-x divide-ink/10 rounded-2xl border border-white/80 bg-white/40 px-3 py-5 shadow-[0_15px_45px_-35px_rgba(30,30,50,.25)] backdrop-blur-xl sm:py-7">
+        <div className="grid grid-cols-2 divide-x divide-ink/10 rounded-2xl border border-white/80 bg-white/40 px-3 py-5 shadow-[0_15px_45px_-35px_rgba(30,30,50,.25)] backdrop-blur-xl sm:py-7">
           {stats.map((stat) => (
             <div key={stat.label} className="px-2 text-center">
-              <p className="font-display text-2xl font-light tracking-tight text-ink sm:text-4xl">
+              <p className="font-display text-3xl font-light tracking-tight text-ink sm:text-4xl">
                 {stat.value}
               </p>
-              <p className="mt-2 text-[8px] font-semibold uppercase tracking-[0.13em] text-ink-soft sm:text-[10px]">
+              <p className="mt-2 text-[9px] font-semibold uppercase tracking-[0.13em] text-ink-soft sm:text-[10px]">
                 {stat.label}
               </p>
             </div>
@@ -142,7 +147,273 @@ function Counters() {
   );
 }
 
-/* SERVICES */
+/* SERVICE VISUAL 01 — GOOGLE ADS AUDIT */
+
+function AuditVisual() {
+  return (
+    <div className="relative mx-auto h-[178px] w-full max-w-[310px] overflow-hidden rounded-2xl border border-white/80 bg-white/65 p-3 shadow-[0_15px_40px_-25px_rgba(50,45,80,.3)] backdrop-blur-xl transition-transform duration-500 group-hover:-translate-y-1">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <div className="grid size-7 place-items-center rounded-lg bg-[#F4E8DB]">
+            <BarChart3 size={15} className="text-[#8A6C55]" />
+          </div>
+          <div>
+            <p className="text-[9px] font-semibold text-ink">Performance</p>
+            <p className="text-[8px] text-ink-soft">Vue d'ensemble</p>
+          </div>
+        </div>
+        <span className="rounded-full bg-[#DDF1E7] px-2 py-1 text-[8px] font-medium text-[#397A5A]">
+          Analyse
+        </span>
+      </div>
+
+      <div className="mt-3 grid grid-cols-3 gap-2">
+        {[
+          { label: "CPC moyen", value: "1,24 €", color: "text-[#9C82D3]" },
+          { label: "Conversions", value: "128", color: "text-[#56A989]" },
+          { label: "Budget", value: "82 %", color: "text-[#D39A80]" },
+        ].map((item) => (
+          <div
+            key={item.label}
+            className="rounded-lg border border-ink/5 bg-white/80 p-2"
+          >
+            <p className="text-[7px] text-ink-soft">{item.label}</p>
+            <p className={`mt-1 text-[12px] font-semibold ${item.color}`}>
+              {item.value}
+            </p>
+          </div>
+        ))}
+      </div>
+
+      <div className="mt-3 rounded-lg border border-ink/5 bg-white/75 p-2">
+        <div className="mb-2 flex items-center justify-between">
+          <span className="text-[8px] font-medium text-ink">
+            Évolution des performances
+          </span>
+          <TrendingUp size={12} className="text-[#62AD91]" />
+        </div>
+        <svg viewBox="0 0 280 48" className="h-10 w-full" fill="none">
+          <path
+            d="M0 39 C20 34 25 40 45 29 S76 32 94 22 S122 30 143 17 S177 23 194 12 S229 19 246 7 S266 10 280 3"
+            stroke="#A98BD9"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <path
+            d="M0 39 C20 34 25 40 45 29 S76 32 94 22 S122 30 143 17 S177 23 194 12 S229 19 246 7 S266 10 280 3 V48 H0Z"
+            fill="url(#audit-fill)"
+            opacity=".35"
+          />
+          <defs>
+            <linearGradient id="audit-fill" x1="140" y1="0" x2="140" y2="48">
+              <stop stopColor="#BDA6E8" />
+              <stop offset="1" stopColor="#BDA6E8" stopOpacity="0" />
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <motion.div
+        animate={{ y: [0, -3, 0] }}
+        transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -right-1 bottom-3 flex items-center gap-1.5 rounded-lg border border-white bg-white/95 px-2 py-1.5 shadow-lg"
+      >
+        <Check size={10} className="text-[#56A989]" />
+        <span className="text-[8px] font-medium text-ink">
+          Analyse terminée
+        </span>
+      </motion.div>
+    </div>
+  );
+}
+
+/* SERVICE VISUAL 02 — MONTHLY MANAGEMENT */
+
+function PhoneVisual() {
+  return (
+    <div className="relative mx-auto flex h-[178px] w-full max-w-[310px] items-center justify-center overflow-hidden">
+      <motion.div
+        animate={{ y: [0, -5, 0], rotate: [-2, 0, -2] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        className="relative h-[168px] w-[105px] rounded-[22px] border-[3px] border-[#38343E] bg-[#25232B] p-[5px] shadow-[0_18px_35px_-15px_rgba(30,25,45,.45)]"
+      >
+        <div className="relative h-full overflow-hidden rounded-[16px] bg-[#F7F3EE] px-2 pt-5">
+          <div className="absolute left-1/2 top-1.5 h-1 w-7 -translate-x-1/2 rounded-full bg-[#38343E]" />
+
+          <div className="flex items-center gap-1.5">
+            <div className="grid size-5 place-items-center rounded-md bg-[#D9CCF2]">
+              <span className="text-[9px] font-bold text-[#68548F]">K</span>
+            </div>
+            <div>
+              <p className="text-[7px] font-bold text-ink">Kenshō Studio</p>
+              <p className="text-[6px] text-ink-soft">Votre espace</p>
+            </div>
+          </div>
+
+          <div className="mt-4">
+            <p className="text-[7px] text-ink-soft">Bonjour !</p>
+            <p className="mt-0.5 text-[9px] font-semibold text-ink">
+              Votre suivi
+            </p>
+          </div>
+
+          <div className="mt-2 rounded-lg border border-white bg-white p-2 shadow-sm">
+            <div className="flex items-center justify-between">
+              <span className="text-[6px] text-ink-soft">Performances</span>
+              <TrendingUp size={9} className="text-[#62AD91]" />
+            </div>
+            <p className="mt-1 text-[13px] font-semibold text-ink">+24,8 %</p>
+            <div className="mt-1 flex h-5 items-end gap-[3px]">
+              {[8, 12, 10, 16, 13, 19, 17, 22].map((height, i) => (
+                <motion.span
+                  key={i}
+                  animate={{ height: [height, height + 3, height] }}
+                  transition={{
+                    duration: 2.5,
+                    delay: i * 0.08,
+                    repeat: Infinity,
+                  }}
+                  className="w-full rounded-t-sm bg-gradient-to-t from-[#A9C7E8] to-[#C9B7E9]"
+                  style={{ height }}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="mt-2 rounded-lg bg-[#E6F1EA] p-2">
+            <p className="text-[6px] font-medium text-[#42765C]">
+              Prochaine optimisation
+            </p>
+            <p className="mt-1 text-[7px] text-[#42765C]">
+              Bilan disponible
+            </p>
+          </div>
+        </div>
+      </motion.div>
+
+      <motion.div
+        animate={{ x: [0, 4, 0], y: [0, -4, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute right-0 top-5 flex max-w-[145px] items-center gap-2 rounded-xl border border-white bg-white/90 p-2 shadow-[0_12px_30px_-12px_rgba(50,45,80,.3)] backdrop-blur-xl"
+      >
+        <span className="grid size-7 shrink-0 place-items-center rounded-lg bg-[#DDF1E7]">
+          <Bell size={13} className="text-[#4D9B77]" />
+        </span>
+        <div>
+          <p className="text-[7px] font-semibold text-ink">Kenshō Studio</p>
+          <p className="mt-0.5 text-[7px] leading-tight text-ink-soft">
+            Votre suivi hebdomadaire est disponible.
+          </p>
+        </div>
+      </motion.div>
+
+      <motion.div
+        animate={{ x: [0, -4, 0], y: [0, 4, 0] }}
+        transition={{ duration: 4.5, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-5 left-0 flex items-center gap-2 rounded-xl border border-white bg-white/90 p-2 shadow-[0_12px_30px_-12px_rgba(50,45,80,.3)] backdrop-blur-xl"
+      >
+        <span className="grid size-7 shrink-0 place-items-center rounded-lg bg-[#E9DFF8]">
+          <CalendarDays size={13} className="text-[#8067B5]" />
+        </span>
+        <div>
+          <p className="text-[7px] font-semibold text-ink">Bilan mensuel</p>
+          <p className="mt-0.5 text-[7px] text-ink-soft">Prêt à consulter</p>
+        </div>
+      </motion.div>
+    </div>
+  );
+}
+
+/* SERVICE VISUAL 03 — SOCIAL MEDIA */
+
+function SocialVisual() {
+  const platforms = [
+    {
+      name: "Instagram",
+      icon: Instagram,
+      position: "left-[12%] top-[20%]",
+      color: "bg-[#F5DDE5] text-[#B85B83]",
+      delay: 0,
+    },
+    {
+      name: "LinkedIn",
+      icon: Linkedin,
+      position: "right-[12%] top-[15%]",
+      color: "bg-[#DCE8F6] text-[#4476A9]",
+      delay: 0.5,
+    },
+    {
+      name: "YouTube",
+      icon: Youtube,
+      position: "left-[19%] bottom-[15%]",
+      color: "bg-[#F5DFDC] text-[#BB625B]",
+      delay: 1,
+    },
+    {
+      name: "Facebook",
+      icon: Facebook,
+      position: "right-[18%] bottom-[12%]",
+      color: "bg-[#DDE7F7] text-[#547DB7]",
+      delay: 1.5,
+    },
+  ];
+
+  return (
+    <div className="relative mx-auto flex h-[178px] w-full max-w-[310px] items-center justify-center overflow-hidden">
+      <div className="absolute size-32 rounded-full border border-dashed border-ink/10" />
+      <div className="absolute size-24 rounded-full border border-ink/10" />
+      <div className="absolute size-16 rounded-full bg-gradient-to-br from-[#F6D8D0]/80 via-[#DCCCF4]/70 to-[#C6E6E0]/80 blur-[1px]" />
+
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 35, repeat: Infinity, ease: "linear" }}
+        className="absolute size-32 rounded-full border border-dashed border-[#B9A6DE]/40"
+      />
+
+      <div className="relative z-10 grid size-14 place-items-center rounded-2xl border border-white bg-white/80 shadow-[0_10px_30px_-12px_rgba(50,45,80,.3)] backdrop-blur-xl">
+        <span className="font-display text-[23px] font-semibold tracking-tight text-ink">
+          K.
+        </span>
+      </div>
+
+      {platforms.map((platform) => {
+        const Icon = platform.icon;
+
+        return (
+          <motion.div
+            key={platform.name}
+            animate={{
+              y: [0, -7, 0, 5, 0],
+              rotate: [0, 3, 0, -3, 0],
+            }}
+            transition={{
+              duration: 5,
+              delay: platform.delay,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className={`absolute ${platform.position} z-20 grid size-11 place-items-center rounded-[14px] border border-white/90 ${platform.color} shadow-[0_10px_25px_-12px_rgba(50,45,80,.3)] backdrop-blur-xl`}
+          >
+            <Icon size={19} strokeWidth={1.7} />
+          </motion.div>
+        );
+      })}
+
+      <motion.span
+        animate={{ scale: [1, 1.25, 1], opacity: [0.4, 0.9, 0.4] }}
+        transition={{ duration: 3, repeat: Infinity }}
+        className="absolute left-[48%] top-[8%] size-2 rounded-full bg-[#B8A4E8]"
+      />
+      <motion.span
+        animate={{ scale: [1, 1.3, 1], opacity: [0.4, 0.9, 0.4] }}
+        transition={{ duration: 3.5, repeat: Infinity, delay: 1 }}
+        className="absolute bottom-[12%] right-[43%] size-2 rounded-full bg-[#E5B9A8]"
+      />
+    </div>
+  );
+}
+
+/* SERVICE CARD */
 
 const services = [
   {
@@ -150,45 +421,51 @@ const services = [
     eyebrow: "Analyse & recommandations",
     title: "Audit Google Ads",
     description:
-      "Identifiez les points de friction et les opportunités pour améliorer vos campagnes.",
+      "Une analyse approfondie de votre compte pour identifier les points à améliorer et les opportunités de croissance.",
     href: "/reservation",
-    points: [
-      "Analyse complète du compte",
-      "Étude des performances",
-      "Recommandations concrètes",
-    ],
     icon: BarChart3,
+    visual: AuditVisual,
     accent: "bg-[#C6B4ED]",
+    points: [
+      "Analyse de la structure du compte",
+      "Étude des CPC et conversions",
+      "Recommandations d'optimisation",
+    ],
+    action: "Réserver mon audit",
   },
   {
     number: "02",
     eyebrow: "Pilotage & optimisation",
     title: "Gestion mensuelle Google Ads",
     description:
-      "Confiez le pilotage de vos campagnes à un expert et concentrez-vous sur votre activité.",
+      "Un accompagnement régulier pour suivre, analyser et optimiser vos campagnes dans la durée.",
     href: "/services/google-ads",
-    points: [
-      "Optimisation continue",
-      "Suivi des campagnes",
-      "Reporting régulier",
-    ],
     icon: TrendingUp,
+    visual: PhoneVisual,
     accent: "bg-[#A8D9C4]",
+    points: [
+      "Suivi hebdomadaire des campagnes",
+      "Deux rendez-vous de suivi par mois",
+      "Optimisations et reporting",
+    ],
+    action: "Découvrir l'accompagnement",
   },
   {
     number: "03",
     eyebrow: "Visibilité & communauté",
     title: "Gestion des réseaux sociaux",
     description:
-      "Développez une présence cohérente et faites rayonner votre marque.",
+      "Une présence digitale cohérente pour faire rayonner votre marque sur les plateformes adaptées à votre audience.",
     href: "/reseaux-sociaux",
-    points: [
-      "Stratégie social media",
-      "Présence multi-plateforme",
-      "Développement de visibilité",
-    ],
     icon: Instagram,
+    visual: SocialVisual,
     accent: "bg-[#E8BDB3]",
+    points: [
+      "Stratégie adaptée aux plateformes",
+      "Développement de votre visibilité",
+      "Présence cohérente de votre marque",
+    ],
+    action: "Découvrir l'offre",
   },
 ];
 
@@ -212,7 +489,7 @@ function ServicesPanel() {
         </Reveal>
 
         <Reveal>
-          <div className="relative overflow-hidden rounded-[28px] border border-white/80 bg-white/40 p-4 shadow-[0_25px_70px_-45px_rgba(30,35,60,.3)] backdrop-blur-2xl sm:p-7">
+          <div className="relative overflow-hidden rounded-[28px] border border-white/85 bg-white/35 p-4 shadow-[0_25px_70px_-45px_rgba(30,35,60,.3)] backdrop-blur-2xl sm:p-7">
             <div
               aria-hidden
               className="pointer-events-none absolute -right-20 -top-24 size-64 rounded-full bg-[#D8C9F2]/30 blur-[80px]"
@@ -224,49 +501,53 @@ function ServicesPanel() {
 
             <div className="relative grid grid-cols-1 divide-y divide-ink/10 md:grid-cols-3 md:divide-x md:divide-y-0">
               {services.map((service, index) => {
-                const Icon = service.icon;
+                const Visual = service.visual;
 
                 return (
-                  <motion.div
+                  <motion.article
                     key={service.number}
-                    initial={{ opacity: 0, y: 12 }}
+                    initial={{ opacity: 0, y: 14 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{
-                      duration: 0.55,
-                      delay: index * 0.1,
+                      duration: 0.6,
+                      delay: index * 0.12,
                       ease,
                     }}
-                    className="flex flex-col px-3 py-6 first:pt-3 last:pb-3 md:px-6 md:py-3"
+                    className="group flex min-w-0 flex-col px-3 py-6 first:pt-3 last:pb-3 md:px-5 md:py-3"
                   >
                     <div className="flex items-center justify-between">
                       <span className="font-mono text-[10px] tracking-[0.18em] text-ink-soft">
                         SERVICE {service.number}
                       </span>
                       <span
-                        className={`grid size-10 place-items-center rounded-xl ${service.accent} text-ink`}
+                        className={`grid size-9 place-items-center rounded-xl ${service.accent} text-ink`}
                       >
-                        <Icon size={19} strokeWidth={1.5} />
+                        <service.icon size={17} strokeWidth={1.5} />
                       </span>
                     </div>
 
-                    <p className="mt-7 text-[9px] font-semibold uppercase tracking-[0.16em] text-ink-soft">
+                    <div className="mt-4 rounded-2xl bg-gradient-to-br from-white/65 to-white/20 px-2">
+                      <Visual />
+                    </div>
+
+                    <p className="mt-5 text-[9px] font-semibold uppercase tracking-[0.15em] text-ink-soft">
                       {service.eyebrow}
                     </p>
 
-                    <h3 className="mt-2 min-h-[58px] font-display text-[21px] font-semibold leading-[1.12] tracking-[-0.045em] text-ink">
+                    <h3 className="mt-2 min-h-[52px] font-display text-[20px] font-semibold leading-[1.15] tracking-[-0.045em] text-ink">
                       {service.title}
                     </h3>
 
-                    <p className="mt-3 min-h-[66px] text-[12px] leading-[1.7] text-ink-soft">
+                    <p className="mt-3 min-h-[76px] text-[12px] leading-[1.7] text-ink-soft">
                       {service.description}
                     </p>
 
-                    <ul className="mt-5 space-y-3">
+                    <ul className="mt-4 space-y-2.5">
                       {service.points.map((point) => (
                         <li
                           key={point}
-                          className="flex items-start gap-2 text-[11px] text-ink-soft"
+                          className="flex items-start gap-2 text-[10px] leading-relaxed text-ink-soft"
                         >
                           <span className="mt-0.5 grid size-4 shrink-0 place-items-center rounded-full bg-[#A8D9C4]/35 text-emerald-800">
                             <Check size={10} />
@@ -278,20 +559,58 @@ function ServicesPanel() {
 
                     <Link
                       to={service.href}
-                      className="group mt-7 inline-flex items-center justify-between border-t border-ink/10 pt-4 text-[11px] font-semibold text-ink"
+                      className="group/link mt-6 inline-flex items-center justify-between border-t border-ink/10 pt-4 text-[10px] font-semibold text-ink"
                     >
-                      Découvrir le service
-                      <span className="grid size-8 place-items-center rounded-full bg-ink text-white transition-transform duration-300 group-hover:translate-x-1">
+                      {service.action}
+                      <span className="grid size-8 place-items-center rounded-full bg-ink text-white transition-transform duration-300 group-hover/link:translate-x-1">
                         <ChevronRight size={15} />
                       </span>
                     </Link>
-                  </motion.div>
+                  </motion.article>
                 );
               })}
             </div>
           </div>
         </Reveal>
       </div>
+    </section>
+  );
+}
+
+/* CONTACT */
+
+function ContactSection() {
+  return (
+    <section id="contact" className="relative overflow-hidden px-6 py-12 sm:py-16">
+      <Reveal className="relative mx-auto max-w-5xl overflow-hidden rounded-[28px] border border-white/75 bg-white/40 px-6 py-10 text-center shadow-[0_25px_70px_-40px_rgba(30,35,60,.3)] backdrop-blur-2xl sm:px-12 sm:py-14">
+        <div className="mx-auto grid size-11 place-items-center rounded-2xl border border-white bg-white/65 shadow-sm">
+          <MessageCircle size={20} className="text-ink" />
+        </div>
+
+        <span className="mt-5 block font-mono text-[10px] uppercase tracking-[0.2em] text-ink-soft">
+          Un projet particulier ?
+        </span>
+
+        <h2 className="mx-auto mt-3 max-w-3xl font-display text-[clamp(2rem,4.5vw,3.4rem)] font-semibold leading-[1.04] tracking-[-0.05em] text-ink">
+          Votre projet ne rentre
+          <span className="block font-light text-ink-soft">
+            dans aucune case ?
+          </span>
+        </h2>
+
+        <p className="mx-auto mt-4 max-w-xl text-[13px] leading-relaxed text-ink-soft">
+          Présentez-nous votre besoin : nous étudierons ensemble la meilleure
+          façon de vous accompagner.
+        </p>
+
+        <a
+          href="mailto:kenshodigitalstudio@gmail.com?subject=Parlons%20de%20mon%20projet"
+          className="group mt-7 inline-flex items-center gap-3 rounded-full bg-ink px-6 py-3 text-[12px] font-semibold text-white shadow-lg transition-all hover:-translate-y-1"
+        >
+          Échanger avec Kenshō
+          <ArrowUpRight size={14} />
+        </a>
+      </Reveal>
     </section>
   );
 }
@@ -312,7 +631,6 @@ function Index() {
         <div className="absolute bottom-0 left-1/3 size-80 rounded-full bg-mint/15 blur-3xl" />
       </div>
 
-      {/* HERO */}
       <section
         id="top"
         className="relative isolate px-6 pb-12 pt-32 sm:pb-14 sm:pt-36"
@@ -391,39 +709,7 @@ function Index() {
 
       <Counters />
       <ServicesPanel />
-
-      {/* CONTACT */}
-      <section id="contact" className="relative overflow-hidden px-6 py-12 sm:py-16">
-        <Reveal className="relative mx-auto max-w-5xl overflow-hidden rounded-[28px] border border-white/75 bg-white/40 px-6 py-10 text-center shadow-[0_25px_70px_-40px_rgba(30,35,60,.3)] backdrop-blur-2xl sm:px-12 sm:py-14">
-          <div className="mx-auto grid size-11 place-items-center rounded-2xl border border-white bg-white/65 shadow-sm">
-            <MessageCircle size={20} className="text-ink" />
-          </div>
-
-          <span className="mt-5 block font-mono text-[10px] uppercase tracking-[0.2em] text-ink-soft">
-            Un projet particulier ?
-          </span>
-
-          <h2 className="mx-auto mt-3 max-w-3xl font-display text-[clamp(2rem,4.5vw,3.4rem)] font-semibold leading-[1.04] tracking-[-0.05em] text-ink">
-            Votre projet ne rentre
-            <span className="block font-light text-ink-soft">
-              dans aucune case ?
-            </span>
-          </h2>
-
-          <p className="mx-auto mt-4 max-w-xl text-[13px] leading-relaxed text-ink-soft">
-            Présentez-nous votre besoin : nous étudierons ensemble la meilleure
-            façon de vous accompagner.
-          </p>
-
-          <a
-            href="mailto:kenshodigitalstudio@gmail.com?subject=Parlons%20de%20mon%20projet"
-            className="group mt-7 inline-flex items-center gap-3 rounded-full bg-ink px-6 py-3 text-[12px] font-semibold text-white shadow-lg transition-all hover:-translate-y-1"
-          >
-            Échanger avec Kenshō
-            <ArrowUpRight size={14} />
-          </a>
-        </Reveal>
-      </section>
+      <ContactSection />
 
       <div className="mx-auto max-w-7xl px-6">
         <div className="h-px bg-gradient-to-r from-transparent via-ink/15 to-transparent" />
