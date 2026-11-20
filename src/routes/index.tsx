@@ -513,6 +513,13 @@ const services = [
 ];
 
 function ServicesPanel() {
+  const industryImages = [
+    "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=900&q=80",
+    "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=80",
+    "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=900&q=80",
+    "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=900&q=80",
+  ];
+
   return (
     <section id="expertises" className="px-5 pb-20 pt-8 sm:px-8 sm:pb-24">
       <div className="mx-auto max-w-6xl">
@@ -596,25 +603,57 @@ function ServicesPanel() {
           })}
         </div>
 
-        {/* LIEN VERS LES CAS PRATIQUES */}
+        {/* BANDEAU IMMERSIF — CAS PRATIQUES */}
         <Reveal>
           <Link
             to="/cas-pratiques"
-            className="group mx-auto mt-10 flex w-fit flex-col items-center gap-2 rounded-2xl border border-white/80 bg-white/45 px-8 py-5 text-center shadow-[0_15px_40px_-25px_rgba(25,25,50,0.18)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/70 hover:shadow-lg"
+            className="group relative mt-12 block w-full overflow-hidden rounded-[30px] border border-white/80 shadow-[0_25px_70px_-35px_rgba(35,30,55,.3)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_35px_85px_-35px_rgba(35,30,55,.35)] sm:rounded-[36px]"
           >
-            <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-soft">
-              Découvrez notre approche
-            </span>
-            <span className="flex items-center gap-2 font-display text-lg font-medium text-ink">
-              Cas pratiques & simulations
-              <ArrowUpRight
-                size={17}
-                className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
-              />
-            </span>
-            <span className="text-xs text-ink-soft">
-              Découvrez comment nous construisons vos stratégies Google Ads.
-            </span>
+            {/* Images sectorielles floutées */}
+            <div
+              aria-hidden="true"
+              className="absolute inset-0 grid grid-cols-4"
+            >
+              {industryImages.map((image, index) => (
+                <div key={index} className="relative overflow-hidden">
+                  <img
+                    src={image}
+                    alt=""
+                    loading="lazy"
+                    className="h-full w-full scale-110 object-cover blur-[5px] transition-transform duration-1000 group-hover:scale-125"
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Voile de verre */}
+            <div className="absolute inset-0 bg-[#F5F1EC]/65 backdrop-blur-[9px] transition-colors duration-500 group-hover:bg-[#F5F1EC]/55" />
+            <div className="absolute inset-0 bg-gradient-to-r from-white/40 via-white/15 to-white/40" />
+
+            {/* Contenu */}
+            <div className="relative z-10 flex min-h-[260px] flex-col items-center justify-center px-6 py-12 text-center sm:min-h-[310px] sm:px-12">
+              <span className="inline-flex items-center gap-2 rounded-full border border-white/90 bg-white/65 px-4 py-2 text-[9px] font-bold uppercase tracking-[.2em] text-ink shadow-sm backdrop-blur-xl">
+                <BarChart3 size={13} className="text-[#579B78]" />
+                Stratégie · Analyse · Performance
+              </span>
+
+              <h3 className="mt-6 max-w-3xl font-display text-[clamp(2rem,5vw,3.8rem)] font-medium leading-[1.05] tracking-[-.055em] text-ink">
+                Découvrez la stratégie
+                <span className="block bg-gradient-to-r from-[#DCAFA5] via-[#AD8BD7] to-[#579F7B] bg-clip-text font-semibold italic text-transparent">
+                  derrière la performance.
+                </span>
+              </h3>
+
+              <p className="mt-4 max-w-xl text-xs leading-relaxed text-ink-soft sm:text-sm">
+                Quatre secteurs d'activité, quatre approches concrètes pour
+                comprendre comment Google Ads peut accompagner votre croissance.
+              </p>
+
+              <span className="mt-7 inline-flex items-center gap-3 rounded-full bg-ink px-7 py-3.5 text-xs font-semibold text-white shadow-xl transition-all duration-300 group-hover:gap-5">
+                Explorer les cas pratiques
+                <ArrowUpRight size={15} />
+              </span>
+            </div>
           </Link>
         </Reveal>
       </div>
@@ -671,7 +710,6 @@ function ContactSection() {
 export default function Index() {
   return (
     <main className="relative isolate min-h-screen w-full overflow-x-clip bg-paper text-ink">
-      {/* Fond beige uniforme */}
       <div
         aria-hidden="true"
         className="pointer-events-none fixed inset-0 -z-10 bg-paper"
