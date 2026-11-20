@@ -1,3 +1,4 @@
+
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { Nav } from "@/components/landing/Nav";
@@ -136,9 +137,7 @@ function GoogleAdsPage() {
       <Sparkles variant="subtle" />
       <Nav />
 
-      {/* ========================================================
-          HERO & CALENDRIER HEBDOMADAIRE INTERACTIF
-          ======================================================== */}
+      {/* HERO & CALENDRIER HEBDOMADAIRE */}
       <section className="relative mx-auto max-w-6xl px-4 pt-32 pb-16 sm:px-6 sm:pt-40">
         <div className="text-center max-w-3xl mx-auto">
           <h1 className="mt-0 text-[clamp(2.2rem,5vw,3.75rem)] font-light leading-[1.08] tracking-[-0.03em]">
@@ -160,7 +159,7 @@ function GoogleAdsPage() {
           </div>
         </div>
 
-        {/* --- CALENDRIER HEBDOMADAIRE COMPACT --- */}
+        {/* CALENDRIER HEBDOMADAIRE COMPACT */}
         <div className="mx-auto mt-10 max-w-[1320px] overflow-hidden rounded-[26px] border border-white/80 bg-white/55 p-4 shadow-[0_24px_70px_-35px_rgba(20,20,40,0.22)] backdrop-blur-2xl sm:p-6 lg:p-7">
           <div className="mb-5 flex flex-wrap items-center justify-between gap-3 border-b border-ink/8 pb-4">
             <div>
@@ -185,23 +184,31 @@ function GoogleAdsPage() {
               <div className="grid grid-cols-[42px_repeat(5,minmax(0,1fr))] gap-x-2">
                 <div className="flex items-end pb-3 font-mono text-[9px] uppercase tracking-wider text-ink-soft/70">Heure</div>
 
-                {[
-                  { day: "Mercredi", subtitle: "Premier échange", tag: "1H OFFERTE", featured: true },
-                  { day: "Jeudi", subtitle: "Optimisations", tag: "", featured: false },
-                  { day: "Vendredi", subtitle: "Bilan & reporting", tag: "", featured: false },
-                  { day: "Lundi", subtitle: "Pilotage hebdomadaire", tag: "JOUR CLÉ", featured: true },
-                  { day: "Mardi", subtitle: "Suivi & ajustements", tag: "", featured: false },
-                ].map((day) => (
-                  <div key={day.day} className={`min-h-[62px] rounded-t-2xl px-2 pb-3 pt-1 sm:px-3 ${day.day === "Lundi" ? "border-x border-t border-electric/25 bg-electric/[0.055]" : ""}`}>
-                    <div className={`font-mono text-[10px] font-bold uppercase tracking-[0.16em] ${day.featured ? "text-electric" : "text-ink/75"}`}>{day.day}</div>
-                    <div className={`mt-1 text-[11px] font-semibold leading-tight sm:text-xs ${day.day === "Lundi" ? "text-electric" : "text-ink"}`}>{day.subtitle}</div>
-                    {day.tag && <span className="mt-2 inline-flex rounded-full bg-electric/10 px-2 py-1 text-[8px] font-bold tracking-wide text-electric">{day.tag}</span>}
+                {/* Jours : uniquement les noms, sans sous-titres ni badges */}
+                {["Mercredi", "Jeudi", "Vendredi", "Lundi", "Mardi"].map((day) => (
+                  <div
+                    key={day}
+                    className={`min-h-[62px] rounded-t-2xl px-2 pb-3 pt-1 sm:px-3 ${
+                      day === "Lundi"
+                        ? "border-x border-t border-electric/25 bg-electric/[0.055]"
+                        : ""
+                    }`}
+                  >
+                    <div className={`font-mono text-[10px] font-bold uppercase tracking-[0.16em] ${
+                      day === "Mercredi" || day === "Lundi"
+                        ? "text-electric"
+                        : "text-ink/75"
+                    }`}>
+                      {day}
+                    </div>
                   </div>
                 ))}
 
                 <div className="relative grid grid-rows-8">
                   {["09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00"].map((time) => (
-                    <div key={time} className="flex h-[80px] -translate-y-2 items-start justify-end pr-1 font-mono text-[9px] text-ink-soft/75">{time}</div>
+                    <div key={time} className="flex h-[80px] -translate-y-2 items-start justify-end pr-1 font-mono text-[9px] text-ink-soft/75">
+                      {time}
+                    </div>
                   ))}
                 </div>
 
@@ -209,43 +216,117 @@ function GoogleAdsPage() {
                   {
                     day: "Mercredi",
                     events: [
-                      { start: 1, span: 2.55, time: "10:00 – 11:30", title: "Premier rendez-vous Kenshō", desc: "Un échange pour faire le point sur votre activité, vos objectifs et vos attentes.", brand: true, tone: "blue", booking: true },
-                      { start: 4.2, span: 1.45, time: "13:00 – 14:30", title: "Temps de préparation", desc: "Préparation des prochains échanges et des priorités.", brand: false },
+                      {
+                        start: 1,
+                        span: 2.55,
+                        time: "10:00 – 11:30",
+                        title: "Premier rendez-vous Kenshō",
+                        desc: "Un échange pour faire le point sur votre activité, vos objectifs et vos attentes.",
+                        tone: "blue",
+                        booking: true,
+                      },
+                      {
+                        start: 4.2,
+                        span: 1.45,
+                        time: "13:00 – 14:30",
+                        title: "Rendez-vous",
+                        tone: "neutral",
+                      },
                     ],
                   },
                   {
                     day: "Jeudi",
                     events: [
-                      { start: 2.15, span: 1.55, time: "11:00 – 12:30", title: "Rendez-vous de suivi", desc: "Échange sur les sujets en cours et les prochaines étapes.", brand: false },
-                      { start: 5.15, span: 1.5, time: "14:00 – 15:30", title: "Point d’avancement", desc: "Revue des actions et partage des retours.", brand: false },
+                      {
+                        start: 2.15,
+                        span: 1.55,
+                        time: "11:00 – 12:30",
+                        title: "Rendez-vous",
+                        tone: "neutral",
+                      },
+                      {
+                        start: 5.15,
+                        span: 1.5,
+                        time: "14:00 – 15:30",
+                        title: "Rendez-vous",
+                        tone: "neutral",
+                      },
                     ],
                   },
                   {
                     day: "Vendredi",
                     events: [
-                      { start: 1.15, span: 1.65, time: "10:00 – 11:30", title: "Rendez-vous de coordination", desc: "Échange sur l’avancement et les sujets de la semaine.", brand: false },
-                      { start: 5.15, span: 1.5, time: "14:00 – 15:30", title: "Réunion de suivi", desc: "Point régulier et prochaines étapes.", brand: false },
+                      {
+                        start: 1.15,
+                        span: 1.65,
+                        time: "10:00 – 11:30",
+                        title: "Rendez-vous",
+                        tone: "neutral",
+                      },
+                      {
+                        start: 5.15,
+                        span: 1.5,
+                        time: "14:00 – 15:30",
+                        title: "Rendez-vous",
+                        tone: "neutral",
+                      },
                     ],
                   },
                   {
                     day: "Lundi",
                     events: [
-                      { start: 0.15, span: 2.25, time: "09:00 – 10:00", title: "Bilan hebdomadaire Kenshō Studio", desc: "Analyse de la semaine, priorités et organisation des prochaines actions.", brand: true, tone: "yellow" },
-                      { start: 5.9, span: 2.15, time: "15:00 – 16:00", title: "Rendez-vous visio Kenshō", desc: "Un temps d’échange pour faire le point et décider des prochaines étapes.", note: "Toutes les 2 semaines", brand: true, tone: "green" },
+                      {
+                        start: 0.15,
+                        span: 2.25,
+                        time: "09:00 – 10:00",
+                        title: "Rendez-vous",
+                        tone: "yellow",
+                      },
+                      {
+                        start: 5.9,
+                        span: 2.15,
+                        time: "15:00 – 16:00",
+                        title: "Rendez-vous",
+                        tone: "green",
+                      },
                     ],
                   },
                   {
                     day: "Mardi",
                     events: [
-                      { start: 2.15, span: 1.55, time: "11:00 – 12:30", title: "Rendez-vous de suivi", desc: "Échange sur les sujets en cours et les points à traiter.", brand: false },
-                      { start: 5.15, span: 1.5, time: "14:00 – 15:30", title: "Réunion de travail", desc: "Avancement des actions et prochaines étapes.", brand: false },
+                      {
+                        start: 2.15,
+                        span: 1.55,
+                        time: "11:00 – 12:30",
+                        title: "Rendez-vous",
+                        tone: "neutral",
+                      },
+                      {
+                        start: 5.15,
+                        span: 1.5,
+                        time: "14:00 – 15:30",
+                        title: "Rendez-vous",
+                        tone: "neutral",
+                      },
                     ],
                   },
                 ].map((column) => (
-                  <div key={column.day} className={`relative h-[640px] border-l border-t border-ink/[0.08] ${column.day === "Lundi" ? "border-x border-electric/25 bg-electric/[0.035]" : ""}`}>
+                  <div
+                    key={column.day}
+                    className={`relative h-[640px] border-l border-t border-ink/[0.08] ${
+                      column.day === "Lundi"
+                        ? "border-x border-electric/25 bg-electric/[0.035]"
+                        : ""
+                    }`}
+                  >
                     {Array.from({ length: 8 }).map((_, i) => (
-                      <div key={i} className="pointer-events-none absolute inset-x-0 border-t border-ink/[0.07]" style={{ top: `${i * 12.5}%` }} />
+                      <div
+                        key={i}
+                        className="pointer-events-none absolute inset-x-0 border-t border-ink/[0.07]"
+                        style={{ top: `${i * 12.5}%` }}
+                      />
                     ))}
+
                     {column.events.map((event, i) => (
                       <div
                         key={`${column.day}-${i}`}
@@ -257,31 +338,65 @@ function GoogleAdsPage() {
                               : event.tone === "green"
                                 ? "border-[#9bd2ae] bg-gradient-to-br from-white via-[#effaf2] to-[#bfe8cb] shadow-[0_14px_30px_-16px_rgba(85,163,112,0.38)]"
                                 : "border-ink/[0.09] bg-white/90"
-                        } ${event.booking ? "group cursor-pointer text-left ring-1 ring-electric/10 hover:-translate-y-1 hover:border-electric/60 hover:shadow-[0_20px_36px_-18px_rgba(67,112,255,0.55)]" : ""}`}
+                        } ${
+                          event.booking
+                            ? "group cursor-pointer text-left ring-1 ring-electric/10 hover:-translate-y-1 hover:border-electric/60 hover:shadow-[0_20px_36px_-18px_rgba(67,112,255,0.55)]"
+                            : ""
+                        }`}
                         style={{
                           top: `${event.start * 12.5}%`,
                           height: `${event.span * 12.5}%`,
-                          minHeight: event.booking ? "220px" : event.brand ? "190px" : "150px",
+                          minHeight: event.booking ? "220px" : "150px",
                         }}
                         onClick={event.booking ? handleOpenBooking : undefined}
                         role={event.booking ? "button" : undefined}
                         tabIndex={event.booking ? 0 : undefined}
-                        onKeyDown={event.booking ? (e) => { if (e.key === "Enter" || e.key === " ") handleOpenBooking(); } : undefined}
+                        onKeyDown={
+                          event.booking
+                            ? (e) => {
+                                if (e.key === "Enter" || e.key === " ") {
+                                  handleOpenBooking();
+                                }
+                              }
+                            : undefined
+                        }
                       >
                         <div className={`font-mono text-[10px] font-bold sm:text-[11px] ${
-                          event.tone === "blue" ? "text-[#4777f5]" :
-                          event.tone === "yellow" ? "text-[#a77b08]" :
-                          event.tone === "green" ? "text-[#318553]" : "text-ink-soft"
-                        }`}>{event.time}</div>
-                        <div className={`mt-1 font-bold leading-snug text-ink ${event.booking ? "text-[13px] sm:text-[15px]" : "text-[11px] sm:text-[13px]"}`}>{event.title}</div>
-                        <p className={`mt-1 text-[10px] leading-[1.5] text-ink-soft ${event.booking ? "line-clamp-4 text-[11px]" : "line-clamp-3 text-[11px]"} `}>{event.desc}</p>
-                        {event.note && <span className="mt-1 inline-block rounded-full bg-electric/8 px-1.5 py-0.5 text-[8px] font-semibold text-electric">{event.note}</span>}
-                        {event.booking && <div className="mt-2 inline-flex rounded-full bg-electric px-2.5 py-1.5 text-[9px] font-semibold text-white shadow-sm transition group-hover:bg-[#3f70f5]">Réserver mon échange gratuit ↗</div>}
+                          event.tone === "blue"
+                            ? "text-[#4777f5]"
+                            : event.tone === "yellow"
+                              ? "text-[#a77b08]"
+                              : event.tone === "green"
+                                ? "text-[#318553]"
+                                : "text-ink-soft"
+                        }`}>
+                          {event.time}
+                        </div>
+
+                        <div className={`mt-1 font-bold leading-snug text-ink ${
+                          event.booking
+                            ? "text-[13px] sm:text-[15px]"
+                            : "text-[11px] sm:text-[13px]"
+                        }`}>
+                          {event.title}
+                        </div>
+
+                        {event.booking && (
+                          <>
+                            <p className="mt-1 line-clamp-4 text-[11px] leading-[1.5] text-ink-soft">
+                              {event.desc}
+                            </p>
+                            <div className="mt-2 inline-flex rounded-full bg-electric px-2.5 py-1.5 text-[9px] font-semibold text-white shadow-sm transition group-hover:bg-[#3f70f5]">
+                              Réserver mon échange gratuit ↗
+                            </div>
+                          </>
+                        )}
                       </div>
                     ))}
                   </div>
                 ))}
               </div>
+
               <div className="mt-3 flex items-center justify-between border-t border-ink/8 pt-3 text-[9px] text-ink-soft">
                 <span>Planning hebdomadaire indicatif · Les créneaux peuvent varier selon les besoins.</span>
                 <span className="font-semibold text-electric">Créneau Kenshō cliquable : mercredi</span>
@@ -290,23 +405,38 @@ function GoogleAdsPage() {
           </div>
         </div>
 
-        {/* --- PANNEAU DE RÉSERVATION FLOTTANT --- */}
+        {/* PANNEAU DE RÉSERVATION FLOTTANT */}
         {showCalendly && (
           <div
             className="fixed inset-0 z-[100] flex justify-end bg-ink/20 backdrop-blur-[3px]"
             role="dialog"
             aria-modal="true"
             aria-label="Réserver votre premier échange Kenshō"
-            onMouseDown={(e) => { if (e.target === e.currentTarget) setShowCalendly(false); }}
+            onMouseDown={(e) => {
+              if (e.target === e.currentTarget) setShowCalendly(false);
+            }}
           >
             <div className="relative flex h-full w-full max-w-[620px] flex-col border-l border-white/70 bg-[#fffdf8]/95 p-4 shadow-[-24px_0_80px_-30px_rgba(20,20,40,0.3)] backdrop-blur-2xl sm:p-6">
               <div className="flex items-start justify-between gap-4 border-b border-ink/10 pb-4">
                 <div>
-                  <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-electric">Premier échange · Offert</span>
-                  <h2 className="mt-1 text-xl font-semibold tracking-tight text-ink">Réservez votre heure avec Kenshō</h2>
-                  <p className="mt-1 text-xs text-ink-soft">Choisissez le créneau qui vous convient.</p>
+                  <span className="font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-electric">
+                    Premier échange · Offert
+                  </span>
+                  <h2 className="mt-1 text-xl font-semibold tracking-tight text-ink">
+                    Réservez votre heure avec Kenshō
+                  </h2>
+                  <p className="mt-1 text-xs text-ink-soft">
+                    Choisissez le créneau qui vous convient.
+                  </p>
                 </div>
-                <button type="button" onClick={() => setShowCalendly(false)} aria-label="Fermer" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-ink/10 bg-white/80 text-lg text-ink-soft transition hover:border-electric/30 hover:text-electric">×</button>
+                <button
+                  type="button"
+                  onClick={() => setShowCalendly(false)}
+                  aria-label="Fermer"
+                  className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-ink/10 bg-white/80 text-lg text-ink-soft transition hover:border-electric/30 hover:text-electric"
+                >
+                  ×
+                </button>
               </div>
               <div className="mt-4 min-h-0 flex-1 overflow-hidden rounded-2xl border border-white bg-white">
                 <iframe
@@ -321,9 +451,7 @@ function GoogleAdsPage() {
         )}
       </section>
 
-      {/* ========================================================
-          SECTION 2 : UN ACCOMPAGNEMENT QUI VA PLUS LOIN (LES 6 PILIERS)
-          ======================================================== */}
+      {/* SECTION 2 : LES 6 PILIERS */}
       <section className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 border-t border-ink/5">
         <div className="text-center max-w-3xl mx-auto">
           <span className="font-mono text-xs uppercase tracking-widest text-electric font-semibold">
@@ -340,7 +468,6 @@ function GoogleAdsPage() {
           </p>
         </div>
 
-        {/* Grille des 6 piliers */}
         <div className="mt-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {PILIERS.map((pilier) => (
             <div
@@ -366,9 +493,7 @@ function GoogleAdsPage() {
         </div>
       </section>
 
-      {/* ========================================================
-          SECTION 3 : POURQUOI UN ACCOMPAGNEMENT SUR TROIS MOIS ?
-          ======================================================== */}
+      {/* SECTION 3 : ACCOMPAGNEMENT SUR TROIS MOIS */}
       <section id="accompagnement-3-mois" className="relative mx-auto max-w-6xl px-4 py-20 sm:px-6 border-t border-ink/5">
         <div className="text-center max-w-3xl mx-auto">
           <span className="font-mono text-xs uppercase tracking-widest text-coral font-semibold">
@@ -385,7 +510,6 @@ function GoogleAdsPage() {
           </p>
         </div>
 
-        {/* Timeline des 3 mois */}
         <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6 relative">
           {TIMELINE.map((step, idx) => (
             <div
@@ -416,9 +540,7 @@ function GoogleAdsPage() {
         </div>
       </section>
 
-      {/* ========================================================
-          SECTION 4 : SECTION FINALE CALL TO ACTION
-          ======================================================== */}
+      {/* SECTION 4 : CALL TO ACTION */}
       <section className="relative mx-auto max-w-4xl px-4 py-24 sm:px-6 text-center">
         <div className="rounded-3xl border border-white/70 bg-gradient-to-b from-white/80 to-white/40 p-8 sm:p-14 shadow-[0_30px_90px_-20px_rgba(20,20,40,0.12)] backdrop-blur-2xl">
           <span className="font-mono text-xs uppercase tracking-widest text-electric font-semibold">
@@ -450,7 +572,7 @@ function GoogleAdsPage() {
         </div>
       </section>
 
-        <Footer />
+      <Footer />
     </div>
   );
 }
