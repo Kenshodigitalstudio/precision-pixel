@@ -1,459 +1,631 @@
 
 import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "framer-motion";
-import {
-  ArrowDown,
-  ArrowUpRight,
-  CalendarDays,
-  Target,
-  Image as ImageIcon,
-  CalendarCheck,
-  ChartNoAxesCombined,
-  Sparkles,
-  Instagram,
-  Linkedin,
-  Facebook,
-  Youtube,
-} from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import { Nav } from "@/components/landing/Nav";
 import { Footer } from "@/components/landing/Footer";
+import { ArrowUpRight, Check, Sparkles } from "lucide-react";
 
 export const Route = createFileRoute("/reseaux-sociaux")({
   head: () => ({
     meta: [
-      { title: "Gestion des réseaux sociaux | Kenshō Studio" },
+      { title: "Réseaux sociaux — Kenshō Digital Studio" },
       {
         name: "description",
         content:
-          "Une gestion premium de vos réseaux sociaux : stratégie, création de contenu, planification et optimisation. Lancement début 2027.",
+          "Développez votre présence sur les réseaux sociaux avec Kenshō Digital Studio.",
       },
     ],
   }),
   component: ReseauxSociauxPage,
 });
 
-const ease = [0.22, 1, 0.36, 1] as const;
-
 const platforms = [
-  { name: "Instagram", icon: Instagram },
-  { name: "TikTok", label: "♪" },
-  { name: "Facebook", icon: Facebook },
-  { name: "LinkedIn", icon: Linkedin },
-  { name: "YouTube", icon: Youtube },
-  { name: "Pinterest", label: "P" },
-  { name: "Snapchat", label: "●" },
-  { name: "Threads", label: "@" },
-  { name: "X", label: "𝕏" },
+  {
+    name: "Instagram",
+    slug: "instagram",
+    color: "#D62976",
+    gradient: "linear-gradient(135deg,#feda75,#fa7e1e,#d62976,#962fbf)",
+    category: "IMAGE & COMMUNAUTÉ",
+    subtitle: "Votre marque mérite une image forte.",
+    description:
+      "Nous construisons une identité visuelle reconnaissable et une présence éditoriale cohérente pour transformer votre audience en communauté.",
+    benefits: [
+      "Une direction artistique cohérente avec votre marque",
+      "Des Reels et Stories pensés pour capter l'attention",
+      "Des carrousels qui valorisent votre expertise",
+      "Une stratégie éditoriale pour fidéliser votre communauté",
+    ],
+    stat: "L'image de marque",
+  },
+  {
+    name: "TikTok",
+    slug: "tiktok",
+    color: "#111111",
+    gradient: "linear-gradient(135deg,#25F4EE,#111111 50%,#FE2C55)",
+    category: "VIDÉO & CRÉATIVITÉ",
+    subtitle: "Captez l'attention. Marquez les esprits.",
+    description:
+      "Nous imaginons des contenus vidéo qui respectent les codes de TikTok, mettent votre marque en scène et développent votre visibilité.",
+    benefits: [
+      "Des concepts créatifs adaptés à votre activité",
+      "Des vidéos courtes pensées pour retenir l'attention",
+      "Une veille des tendances pertinente pour votre marque",
+      "Une stratégie de contenu orientée visibilité",
+    ],
+    stat: "La découverte",
+  },
+  {
+    name: "Facebook",
+    slug: "facebook",
+    color: "#1877F2",
+    gradient: "linear-gradient(135deg,#1877F2,#54A3FF)",
+    category: "COMMUNAUTÉ & VISIBILITÉ",
+    subtitle: "Restez proche de votre audience.",
+    description:
+      "Nous entretenons une présence régulière et professionnelle pour renforcer votre proximité avec vos clients et votre communauté.",
+    benefits: [
+      "Une page professionnelle entretenue et valorisée",
+      "Des publications adaptées à votre audience",
+      "Une animation régulière de votre communauté",
+      "Une communication locale plus cohérente",
+    ],
+    stat: "La proximité",
+  },
+  {
+    name: "LinkedIn",
+    slug: "linkedin",
+    color: "#0A66C2",
+    gradient: "linear-gradient(135deg,#0A66C2,#56B4F9)",
+    category: "B2B & EXPERTISE",
+    subtitle: "Faites reconnaître votre expertise.",
+    description:
+      "Nous développons votre présence professionnelle avec une ligne éditoriale claire, des contenus experts et une prise de parole qui inspire confiance.",
+    benefits: [
+      "Une stratégie éditoriale pensée pour le B2B",
+      "Des publications qui valorisent votre savoir-faire",
+      "Un positionnement professionnel plus affirmé",
+      "Une communication qui renforce votre crédibilité",
+    ],
+    stat: "L'autorité",
+  },
+  {
+    name: "YouTube",
+    slug: "youtube",
+    color: "#FF0033",
+    gradient: "linear-gradient(135deg,#FF0033,#FF6868)",
+    category: "VIDÉO & CONTENU",
+    subtitle: "Donnez de la profondeur à vos idées.",
+    description:
+      "Nous vous aidons à construire une présence vidéo durable pour présenter votre expertise, développer votre notoriété et créer du contenu à forte valeur.",
+    benefits: [
+      "Une stratégie de chaîne alignée avec vos objectifs",
+      "Des formats vidéo adaptés à votre audience",
+      "Des Shorts pour multiplier les points de contact",
+      "Une identité visuelle cohérente sur vos contenus",
+    ],
+    stat: "Le contenu durable",
+  },
+  {
+    name: "Pinterest",
+    slug: "pinterest",
+    color: "#BD081C",
+    gradient: "linear-gradient(135deg,#BD081C,#F04D62)",
+    category: "INSPIRATION & TRAFIC",
+    subtitle: "Transformez l'inspiration en visites.",
+    description:
+      "Nous créons des contenus visuels qui valorisent vos produits et services, tout en travaillant leur potentiel de découverte et de trafic.",
+    benefits: [
+      "Des visuels conçus pour inspirer et attirer",
+      "Des épingles optimisées pour la découverte",
+      "Une organisation claire de vos tableaux",
+      "Une stratégie pour générer du trafic vers votre site",
+    ],
+    stat: "La découverte",
+  },
+  {
+    name: "Snapchat",
+    slug: "snapchat",
+    color: "#D6C900",
+    gradient: "linear-gradient(135deg,#FFFC00,#E8D900)",
+    category: "PROXIMITÉ & INSTANTANÉ",
+    subtitle: "Communiquez autrement.",
+    description:
+      "Nous adaptons votre communication aux formats verticaux et spontanés de Snapchat pour toucher votre audience avec des contenus immersifs.",
+    benefits: [
+      "Des créations adaptées aux usages mobiles",
+      "Des Stories pensées pour votre cible",
+      "Des formats publicitaires créatifs",
+      "Une communication plus directe et spontanée",
+    ],
+    stat: "L'instantané",
+  },
+  {
+    name: "X",
+    slug: "x",
+    color: "#111111",
+    gradient: "linear-gradient(135deg,#111111,#454545)",
+    category: "ACTUALITÉ & CONVERSATION",
+    subtitle: "Prenez part à la conversation.",
+    description:
+      "Nous structurons votre prise de parole pour développer votre visibilité, partager vos actualités et installer votre marque dans les conversations de votre secteur.",
+    benefits: [
+      "Une ligne éditoriale claire et identifiable",
+      "Des publications régulières et pertinentes",
+      "Une veille des sujets de votre secteur",
+      "Une présence active dans les conversations",
+    ],
+    stat: "La conversation",
+  },
+  {
+    name: "Threads",
+    slug: "threads",
+    color: "#333333",
+    gradient: "linear-gradient(135deg,#111111,#666666)",
+    category: "ÉCHANGE & COMMUNAUTÉ",
+    subtitle: "Donnez une voix à votre marque.",
+    description:
+      "Nous développons une communication plus humaine et conversationnelle pour créer des échanges authentiques avec votre audience.",
+    benefits: [
+      "Une prise de parole naturelle et cohérente",
+      "Des contenus adaptés aux conversations",
+      "Une animation de communauté régulière",
+      "Une identité éditoriale reconnaissable",
+    ],
+    stat: "L'authenticité",
+  },
+  {
+    name: "Google Ads",
+    slug: "googleads",
+    color: "#4285F4",
+    gradient: "linear-gradient(135deg,#4285F4,#34A853 38%,#FBBC05 70%,#EA4335)",
+    category: "PUBLICITÉ & ACQUISITION",
+    subtitle: "Soyez visible au bon moment.",
+    description:
+      "Nos experts pilotent vos campagnes publicitaires pour capter une demande qualifiée, générer des prospects et optimiser vos investissements.",
+    benefits: [
+      "Une stratégie d'acquisition adaptée à vos objectifs",
+      "Des campagnes Search et Performance Max structurées",
+      "Une optimisation continue des budgets et enchères",
+      "Un suivi des conversions et des performances",
+    ],
+    stat: "L'acquisition",
+  },
 ];
 
-const services = [
-  {
-    number: "01",
-    title: "Stratégie sur-mesure",
-    description:
-      "Une ligne éditoriale claire, alignée avec votre image de marque, votre audience et vos objectifs.",
-    details:
-      "Positionnement, analyse de votre audience, choix des plateformes et stratégie éditoriale.",
-    icon: Target,
-    accent: "#6598D2",
-  },
-  {
-    number: "02",
-    title: "Création de contenu",
-    description:
-      "Des visuels et vidéos premium, créatifs et impactants, adaptés à chaque plateforme.",
-    details:
-      "Publications, carrousels, Reels, formats courts et direction créative.",
-    icon: ImageIcon,
-    accent: "#9A8BD2",
-  },
-  {
-    number: "03",
-    title: "Planification & diffusion",
-    description:
-      "Un calendrier éditorial organisé pour construire une présence régulière et cohérente.",
-    details:
-      "Organisation des contenus, calendrier de publication et planification.",
-    icon: CalendarCheck,
-    accent: "#68A98E",
-  },
-  {
-    number: "04",
-    title: "Suivi & optimisation",
-    description:
-      "Une analyse des performances et des ajustements continus pour faire progresser votre présence.",
-    details:
-      "Analyse des interactions, suivi des indicateurs et recommandations.",
-    icon: ChartNoAxesCombined,
-    accent: "#C18DB6",
-  },
-];
-
-function Reveal({
-  children,
-  delay = 0,
-  className = "",
+function BrandLogo({
+  slug,
+  name,
+  className = "h-8 w-8",
 }: {
-  children: React.ReactNode;
-  delay?: number;
+  slug: string;
+  name: string;
   className?: string;
 }) {
+  if (slug === "linkedin") {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        aria-label={`Logo ${name}`}
+        role="img"
+        className={`${className} shrink-0`}
+        fill="#0A66C2"
+      >
+        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.35V9h3.414v1.561h.049c.476-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+      </svg>
+    );
+  }
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 22 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.15 }}
-      transition={{ duration: 0.7, delay, ease }}
-      className={className}
-    >
-      {children}
-    </motion.div>
+    <img
+      src={`https://cdn.simpleicons.org/${slug}`}
+      alt={`Logo ${name}`}
+      loading="lazy"
+      className={`${className} shrink-0 object-contain`}
+      onError={(event) => {
+        event.currentTarget.style.display = "none";
+      }}
+    />
   );
 }
 
-function Background() {
+function LogoArc() {
+  const repeatedPlatforms = [...platforms, ...platforms];
+
   return (
-    <div
-      aria-hidden="true"
-      className="pointer-events-none fixed inset-0 -z-10 overflow-hidden bg-[#F8FAFD]"
-    >
-      <div className="absolute -left-[25%] -top-[15%] size-[750px] rounded-full bg-white blur-[120px]" />
-      <div className="absolute -right-[25%] top-[5%] size-[850px] rounded-full bg-[#D6E8FF]/75 blur-[140px]" />
-      <div className="absolute left-[25%] top-[45%] size-[650px] rounded-full bg-[#E7F0FF]/65 blur-[130px]" />
-      <div className="absolute -bottom-[25%] right-[5%] size-[700px] rounded-full bg-[#E5EAFE]/65 blur-[130px]" />
+    <div className="relative mx-auto h-[90px] w-full max-w-6xl overflow-hidden sm:h-[105px]">
+      <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-14 bg-gradient-to-r from-paper to-transparent sm:w-24" />
+      <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-14 bg-gradient-to-l from-paper to-transparent sm:w-24" />
+
+      <motion.div
+        className="absolute left-0 top-1/2 flex w-max -translate-y-1/2 items-center gap-3 sm:gap-5"
+        animate={{ x: ["-50%", "0%"] }}
+        transition={{
+          duration: 34,
+          ease: "linear",
+          repeat: Infinity,
+        }}
+      >
+        {repeatedPlatforms.map((platform, index) => (
+          <div
+            key={`${platform.slug}-${index}`}
+            className="flex h-[58px] w-[58px] items-center justify-center rounded-xl border border-white/80 bg-white/65 shadow-[0_8px_24px_-14px_rgba(30,20,50,.25)] backdrop-blur-xl transition-transform duration-300 hover:-translate-y-1 hover:scale-105 sm:h-[68px] sm:w-[68px]"
+          >
+            <BrandLogo slug={platform.slug} name={platform.name} />
+          </div>
+        ))}
+      </motion.div>
     </div>
   );
 }
 
-/* HERO */
+function PlatformCards() {
+  const [activePlatform, setActivePlatform] = useState<string | null>(null);
 
-function Hero() {
   return (
-    <section className="relative overflow-hidden px-5 pb-12 pt-32 sm:px-8 sm:pt-36">
-      <div className="pointer-events-none absolute left-1/2 top-[20%] h-[450px] w-[850px] -translate-x-1/2 rounded-full bg-[#D8E9FF]/55 blur-[120px]" />
-
-      <div className="relative mx-auto max-w-6xl">
-        <div className="text-center">
-          <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/90 bg-white/65 px-4 py-2.5 text-[9px] font-semibold uppercase tracking-[.18em] text-[#526681] shadow-[0_10px_35px_-20px_rgba(35,65,110,.35)] backdrop-blur-xl sm:text-[10px]">
-              <Sparkles size={14} className="text-[#6598D2]" />
-              Gestion des réseaux sociaux
-              <span className="text-[#9BBDE5]">·</span>
-              Service premium
-            </span>
-          </Reveal>
-
-          <Reveal delay={0.08}>
-            <h1 className="mx-auto mt-7 max-w-5xl font-display text-[clamp(2.8rem,6vw,5.5rem)] font-light leading-[1.02] tracking-[-.065em] text-[#20283A]">
-              Votre marque mérite
-              <span className="block">
-                d'être{" "}
-                <span className="bg-gradient-to-r from-[#80A9DA] via-[#4C85C8] to-[#83B9D8] bg-clip-text font-semibold italic text-transparent">
-                  remarquée.
-                </span>
-              </span>
-            </h1>
-          </Reveal>
-
-          <Reveal delay={0.15}>
-            <p className="mx-auto mt-6 max-w-2xl text-sm leading-[1.85] text-[#68778D] sm:text-base">
-              Une présence sociale premium, pensée pour renforcer votre image,
-              engager votre audience et soutenir vos objectifs business.
-            </p>
-          </Reveal>
-
-          <Reveal delay={0.22}>
-            <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-              <a
-                href="#expertises"
-                className="group inline-flex items-center gap-3 rounded-full bg-[#20283A] px-7 py-3.5 text-xs font-semibold text-white shadow-[0_15px_35px_-15px_rgba(25,40,65,.5)] transition-all duration-300 hover:-translate-y-1 hover:shadow-xl"
-              >
-                Découvrir notre approche
-                <ArrowUpRight
-                  size={15}
-                  className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
-                />
-              </a>
-
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/90 bg-white/70 px-6 py-3.5 text-xs font-semibold text-[#455873] shadow-sm backdrop-blur-xl">
-                <CalendarDays size={15} className="text-[#6399D2]" />
-                Lancement début 2027
-              </span>
-            </div>
-          </Reveal>
-        </div>
-
-        {/* VISUEL CENTRAL PHOTORÉALISTE */}
-        <Reveal delay={0.12} className="relative mx-auto mt-8 max-w-6xl sm:mt-12">
-          <div className="pointer-events-none absolute inset-[8%] rounded-full bg-[#A9D0FA]/40 blur-[100px]" />
-
-          <div className="relative overflow-hidden rounded-[28px] sm:rounded-[38px]">
-            <img
-              src="/reseaux-sociaux-hero.png"
-              alt="Une main tient un smartphone présentant une interface de réseaux sociaux, entouré d'éléments de stratégie et de planification"
-              className="relative z-10 block h-auto w-full object-contain"
-              fetchPriority="high"
-            />
-          </div>
-        </Reveal>
-
-        <Reveal delay={0.2}>
-          <div className="mt-5 flex flex-col items-center gap-2 text-center">
-            <span className="text-[9px] font-semibold uppercase tracking-[.2em] text-[#8493A8]">
-              Une présence pensée dans sa globalité
-            </span>
-            <ArrowDown size={15} className="animate-bounce text-[#82A9D4]" />
-          </div>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-/* PLATEFORMES */
-
-function Platforms() {
-  return (
-    <section className="px-5 py-14 sm:px-8 sm:py-16">
-      <div className="mx-auto max-w-6xl border-y border-[#A8BDD7]/30 py-9">
-        <Reveal>
-          <p className="mb-7 text-center text-[9px] font-semibold uppercase tracking-[.2em] text-[#8795A8]">
-            Une stratégie adaptée aux plateformes qui comptent
-          </p>
-        </Reveal>
-
-        <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-6 sm:gap-x-11">
-          {platforms.map((platform, index) => {
-            const Icon = "icon" in platform ? platform.icon : null;
-
-            return (
-              <motion.div
-                key={platform.name}
-                initial={{ opacity: 0, y: 12 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.045, duration: 0.5 }}
-                whileHover={{ y: -3 }}
-                className="flex items-center gap-2 text-[#5D6B80] transition-colors hover:text-[#397EBE]"
-                title={platform.name}
-              >
-                {Icon ? (
-                  <Icon size={19} strokeWidth={1.7} />
-                ) : (
-                  <span className="w-5 text-center text-xl font-semibold">
-                    {platform.label}
-                  </span>
-                )}
-                <span className="text-[10px] font-medium sm:text-[11px]">
-                  {platform.name}
-                </span>
-              </motion.div>
-            );
-          })}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* EXPERTISES */
-
-function Expertise() {
-  return (
-    <section
-      id="expertises"
-      className="relative overflow-hidden px-5 py-20 sm:px-8 sm:py-28"
-    >
-      <div className="pointer-events-none absolute -left-40 top-20 size-[450px] rounded-full bg-[#E6EDFF]/60 blur-[110px]" />
-      <div className="pointer-events-none absolute -right-40 bottom-0 size-[450px] rounded-full bg-[#D7E9FC]/65 blur-[110px]" />
-
-      <div className="relative mx-auto max-w-6xl">
-        <Reveal className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/90 bg-white/65 px-4 py-2 text-[9px] font-semibold uppercase tracking-[.18em] text-[#627D9F] shadow-sm backdrop-blur-xl">
-            <Sparkles size={13} className="text-[#679CD1]" />
-            Notre approche
+    <section className="relative mx-auto max-w-[1400px] px-4 pb-20 pt-10 sm:px-6">
+      <div className="mx-auto mb-8 max-w-2xl text-center">
+        <span className="font-mono text-[10px] font-semibold uppercase tracking-[.22em] text-electric">
+          Nos expertises
+        </span>
+        <h2 className="mt-3 text-2xl font-light tracking-tight text-ink sm:text-3xl">
+          Un réseau. Une stratégie.{" "}
+          <span className="bg-gradient-to-r from-electric via-lilac to-coral bg-clip-text text-transparent">
+            Votre identité.
           </span>
-
-          <h2 className="mt-6 font-display text-[clamp(2.3rem,4.5vw,4rem)] font-light leading-[1.08] tracking-[-.055em] text-[#20283A]">
-            Une gestion complète et stratégique
-            <span className="mt-1 block bg-gradient-to-r from-[#83AADB] via-[#548BCB] to-[#83B9D8] bg-clip-text font-semibold italic text-transparent">
-              de vos réseaux sociaux.
-            </span>
-          </h2>
-
-          <p className="mx-auto mt-5 max-w-xl text-sm leading-[1.85] text-[#77849A]">
-            Bien plus que des publications : une approche globale pour
-            construire une présence digitale cohérente, reconnaissable et
-            durable.
-          </p>
-        </Reveal>
-
-        <div className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {services.map((service, index) => {
-            const Icon = service.icon;
-
-            return (
-              <Reveal key={service.number} delay={index * 0.07}>
-                <article className="group relative h-full overflow-hidden rounded-[25px] border border-white/90 bg-white/55 p-6 shadow-[0_20px_55px_-35px_rgba(35,65,110,.3)] backdrop-blur-2xl transition-all duration-300 hover:-translate-y-1.5 hover:bg-white/85 hover:shadow-[0_25px_60px_-30px_rgba(35,65,110,.35)]">
-                  <div
-                    className="pointer-events-none absolute -right-12 -top-12 size-36 rounded-full opacity-20 blur-3xl transition-opacity group-hover:opacity-40"
-                    style={{ background: service.accent }}
-                  />
-
-                  <div className="relative flex items-center justify-between">
-                    <div
-                      className="grid size-12 place-items-center rounded-2xl border border-white bg-white/80 shadow-sm"
-                      style={{ color: service.accent }}
-                    >
-                      <Icon size={21} strokeWidth={1.8} />
-                    </div>
-                    <span className="font-mono text-[10px] text-[#9BA7B7]">
-                      {service.number}
-                    </span>
-                  </div>
-
-                  <h3 className="relative mt-6 font-display text-lg font-semibold tracking-tight text-[#29364A]">
-                    {service.title}
-                  </h3>
-
-                  <p className="relative mt-3 text-xs leading-[1.8] text-[#758197]">
-                    {service.description}
-                  </p>
-
-                  <div className="relative mt-5 border-t border-[#A8B8CE]/25 pt-4">
-                    <p className="text-[10px] leading-[1.75] text-[#8591A3]">
-                      {service.details}
-                    </p>
-                  </div>
-                </article>
-              </Reveal>
-            );
-          })}
-        </div>
+        </h2>
+        <p className="mt-3 text-sm text-ink-soft">
+          Survolez une plateforme pour découvrir notre approche.
+        </p>
       </div>
-    </section>
-  );
-}
 
-/* POSITIONNEMENT */
+      <div className="platform-strip flex min-h-[300px] items-stretch gap-2 overflow-x-auto pb-3 md:overflow-visible">
+        {platforms.map((platform, index) => {
+          const isActive = activePlatform === platform.slug;
 
-function Positioning() {
-  return (
-    <section className="px-5 py-12 sm:px-8 sm:py-20">
-      <Reveal>
-        <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[32px] border border-white/90 bg-white/55 px-7 py-12 shadow-[0_25px_70px_-40px_rgba(35,65,110,.3)] backdrop-blur-2xl sm:px-14 sm:py-16">
-          <div className="pointer-events-none absolute -right-20 -top-28 size-80 rounded-full bg-[#C8E1FC]/55 blur-[100px]" />
-
-          <div className="relative grid gap-10 md:grid-cols-[1fr_.85fr] md:items-center">
-            <div>
-              <span className="text-[9px] font-semibold uppercase tracking-[.2em] text-[#6792C1]">
-                L'expérience Kenshō
-              </span>
-
-              <h2 className="mt-5 max-w-xl font-display text-3xl font-light leading-[1.15] tracking-[-.05em] text-[#20283A] sm:text-4xl">
-                Votre communication mérite une vraie direction.
-              </h2>
-
-              <p className="mt-5 max-w-lg text-sm leading-[1.9] text-[#758197]">
-                Chaque contenu doit avoir une intention. Chaque plateforme
-                doit servir un objectif. Nous construisons une présence qui
-                respecte votre identité et donne de la cohérence à votre
-                communication.
-              </p>
-            </div>
-
-            <div className="space-y-3">
-              {[
-                "Une identité de marque respectée",
-                "Une stratégie adaptée à votre audience",
-                "Des contenus pensés pour chaque plateforme",
-                "Une vision globale de votre communication",
-              ].map((item) => (
-                <div
-                  key={item}
-                  className="flex items-center gap-3 rounded-2xl border border-white/90 bg-white/65 px-4 py-3.5 shadow-sm"
-                >
-                  <span className="grid size-7 shrink-0 place-items-center rounded-full bg-[#E4F0FF] text-[#548CCB]">
-                    <span className="text-xs font-semibold">✓</span>
-                  </span>
-                  <span className="text-xs font-medium text-[#46536A]">
-                    {item}
-                  </span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </Reveal>
-    </section>
-  );
-}
-
-/* LANCEMENT */
-
-function Launch() {
-  return (
-    <section
-      id="lancement"
-      className="px-5 pb-24 pt-20 sm:px-8 sm:pb-32"
-    >
-      <Reveal>
-        <div className="relative mx-auto max-w-6xl overflow-hidden rounded-[34px] border border-white/90 bg-gradient-to-br from-white/90 via-[#EFF6FF]/90 to-[#DCEBFC]/85 px-7 py-14 shadow-[0_30px_90px_-45px_rgba(40,80,135,.35)] sm:px-16 sm:py-20">
-          <div className="pointer-events-none absolute -right-24 -top-32 size-[420px] rounded-full bg-white/90 blur-[90px]" />
-          <div className="pointer-events-none absolute -bottom-32 -left-20 size-[400px] rounded-full bg-[#AFCFF2]/45 blur-[100px]" />
-
-          <div className="relative mx-auto max-w-3xl text-center">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white bg-white/80 px-4 py-2 text-[9px] font-semibold uppercase tracking-[.18em] text-[#5F7EA4] shadow-sm">
-              <CalendarDays size={13} />
-              Lancement début 2027
-            </span>
-
-            <h2 className="mt-7 font-display text-3xl font-light leading-[1.1] tracking-[-.055em] text-[#20283A] sm:text-5xl">
-              Votre prochaine présence digitale commence ici.
-            </h2>
-
-            <p className="mx-auto mt-5 max-w-xl text-sm leading-[1.9] text-[#718097]">
-              Notre service premium de gestion des réseaux sociaux sera
-              disponible début 2027. Vous pouvez dès maintenant nous présenter
-              votre projet et manifester votre intérêt pour son lancement.
-            </p>
-
-            <a
-              href={`mailto:kenshodigitalstudio@gmail.com?subject=${encodeURIComponent("Intérêt — Gestion des réseaux sociaux Kenshō Studio")}&body=${encodeURIComponent("Bonjour Kenshō Studio,\n\nJe souhaite manifester mon intérêt pour votre service premium de gestion des réseaux sociaux prévu début 2027.\n\nEntreprise :\nSite internet :\nPlateformes concernées :\nObjectifs :\n\nMerci !")}`}
-              className="group mt-8 inline-flex items-center gap-3 rounded-full bg-[#20283A] px-7 py-4 text-xs font-semibold text-white shadow-[0_15px_35px_-15px_rgba(25,40,65,.5)] transition-all hover:-translate-y-1 hover:shadow-xl"
+          return (
+            <motion.article
+              key={platform.slug}
+              layout
+              onMouseEnter={() => setActivePlatform(platform.slug)}
+              onMouseLeave={() => setActivePlatform(null)}
+              onFocus={() => setActivePlatform(platform.slug)}
+              onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget)) {
+                  setActivePlatform(null);
+                }
+              }}
+              onClick={() =>
+                setActivePlatform(isActive ? null : platform.slug)
+              }
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{
+                duration: 0.35,
+                delay: index * 0.035,
+                layout: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
+              }}
+              className={`platform-card relative flex min-w-[112px] cursor-pointer flex-col overflow-hidden rounded-2xl border border-white/80 p-3 outline-none backdrop-blur-2xl transition-colors duration-300 md:min-w-0 ${
+                isActive
+                  ? "platform-card-active"
+                  : "bg-white/55 hover:bg-white/80"
+              }`}
+              style={{
+                flex: isActive ? "4 1 0%" : "1 1 0%",
+                borderColor: isActive ? `${platform.color}55` : undefined,
+                boxShadow: isActive
+                  ? `0 18px 45px -25px ${platform.color}55, inset 0 1px 2px rgba(255,255,255,.9)`
+                  : "0 8px 24px -18px rgba(30,20,50,.2)",
+              }}
+              tabIndex={0}
+              role="button"
+              aria-expanded={isActive}
             >
-              Manifester mon intérêt
-              <ArrowUpRight
-                size={15}
-                className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
-              />
-            </a>
+              <div className="relative z-10 flex h-full min-h-[270px] flex-col">
+                <div
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/80 bg-white/80 shadow-sm"
+                  style={{ boxShadow: `0 5px 16px -10px ${platform.color}` }}
+                >
+                  <BrandLogo
+                    slug={platform.slug}
+                    name={platform.name}
+                    className="h-6 w-6"
+                  />
+                </div>
 
-            <p className="mt-4 text-[10px] text-[#8492A7]">
-              Service non disponible avant son lancement début 2027.
-            </p>
-          </div>
-        </div>
-      </Reveal>
+                <div className="mt-4">
+                  <span className="block text-[8px] font-semibold uppercase tracking-[.13em] text-ink-soft">
+                    {platform.category}
+                  </span>
+                  <h3 className="mt-2 text-sm font-semibold text-ink">
+                    {platform.name}
+                  </h3>
+                </div>
+
+                <AnimatePresence initial={false}>
+                  {isActive && (
+                    <motion.div
+                      key="details"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.22 }}
+                      className="mt-4 flex flex-1 flex-col"
+                    >
+                      <p
+                        className="text-xs font-semibold leading-snug"
+                        style={{ color: platform.color }}
+                      >
+                        {platform.subtitle}
+                      </p>
+
+                      <p className="mt-2 text-[11px] leading-relaxed text-ink-soft">
+                        {platform.description}
+                      </p>
+
+                      <div className="mt-3 space-y-2">
+                        {platform.benefits.map((benefit) => (
+                          <div
+                            key={benefit}
+                            className="flex items-start gap-2 text-[10px] leading-snug text-ink-soft"
+                          >
+                            <span
+                              className="mt-0.5 flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full text-white"
+                              style={{ background: platform.color }}
+                            >
+                              <Check size={9} strokeWidth={3} />
+                            </span>
+                            {benefit}
+                          </div>
+                        ))}
+                      </div>
+
+                      <span className="mt-auto pt-4 text-[9px] font-semibold uppercase tracking-wider text-ink-soft">
+                        {platform.stat}
+                      </span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {!isActive && (
+                  <div className="mt-auto pt-5">
+                    <span className="block text-[8px] font-medium uppercase tracking-wider text-ink-soft/70">
+                      Découvrir
+                    </span>
+                    <span
+                      className="mt-1 block h-1 w-6 rounded-full"
+                      style={{ background: platform.color }}
+                    />
+                  </div>
+                )}
+              </div>
+
+              <div
+                className="pointer-events-none absolute -bottom-12 -right-12 h-28 w-28 rounded-full opacity-10 blur-2xl transition-opacity duration-300"
+                style={{
+                  background: platform.color,
+                  opacity: isActive ? 0.22 : 0.08,
+                }}
+              />
+            </motion.article>
+          );
+        })}
+      </div>
+
+      <p className="mt-3 text-center text-[10px] text-ink-soft/70 md:hidden">
+        Faites défiler les cartes horizontalement et touchez une plateforme pour afficher ses informations.
+      </p>
     </section>
   );
 }
-
-/* PAGE */
 
 function ReseauxSociauxPage() {
   return (
-    <main className="relative min-h-screen overflow-x-clip bg-[#F8FAFD] text-[#20283A]">
-      <Background />
+    <main className="relative min-h-screen overflow-x-hidden bg-paper text-ink">
+      <div
+        aria-hidden
+        className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
+      >
+        <div className="absolute -left-24 top-24 h-96 w-96 rounded-full bg-electric/15 blur-3xl" />
+        <div className="absolute -right-24 top-[35%] h-96 w-96 rounded-full bg-solar/20 blur-3xl" />
+        <div className="absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-mint/15 blur-3xl" />
+      </div>
+
       <Nav />
 
-      <Hero />
-      <Platforms />
-      <Expertise />
-      <Positioning />
-      <Launch />
+      {/* Introduction */}
+      <section className="relative z-10 px-5 pb-8 pt-32 text-center sm:px-6 sm:pb-12 sm:pt-36">
+        <div className="mx-auto max-w-6xl">
+          <LogoArc />
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+            className="mx-auto mt-5 max-w-5xl"
+          >
+            <h1 className="font-display text-[clamp(2.2rem,5.5vw,4.5rem)] font-light leading-[1.08] tracking-[-0.04em] text-ink">
+              Chaque réseau a{" "}
+              <span className="bg-gradient-to-r from-electric via-lilac to-coral bg-clip-text text-transparent">
+                son audience.
+              </span>
+              <span className="block">
+                <span className="bg-gradient-to-r from-electric via-lilac to-coral bg-clip-text text-transparent">
+                  Kenshō
+                </span>{" "}
+                peut démultiplier votre visibilité.
+              </span>
+            </h1>
+          </motion.div>
+
+          {/* Disponibilité */}
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="availability-glass relative mx-auto mt-8 flex max-w-xl flex-col items-center justify-center gap-3 overflow-hidden rounded-3xl px-6 py-5 sm:flex-row sm:gap-5 sm:px-8"
+          >
+            <div className="pointer-events-none absolute -left-16 -top-20 size-40 rounded-full bg-electric/20 blur-3xl" />
+            <div className="pointer-events-none absolute -bottom-20 -right-12 size-40 rounded-full bg-mint/25 blur-3xl" />
+
+            <div className="relative grid size-10 shrink-0 place-items-center rounded-xl border border-white/70 bg-white/60 shadow-md backdrop-blur-xl">
+              <Sparkles className="text-ink" size={19} />
+            </div>
+
+            <div className="relative text-center sm:text-left">
+              <span className="block text-[10px] font-medium uppercase tracking-[.2em] text-ink-soft">
+                Nouvelle offre Kenshō
+              </span>
+              <p className="mt-1 font-display text-lg font-medium tracking-tight text-ink sm:text-xl">
+                Service disponible dès début 2027
+              </p>
+            </div>
+
+            <span className="relative rounded-full border border-white/70 bg-white/55 px-3 py-1.5 text-[9px] font-medium uppercase tracking-wider text-ink-soft backdrop-blur-xl">
+              Bientôt disponible
+            </span>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Cartes interactives */}
+      <PlatformCards />
+
+      {/* Message central */}
+      <section className="relative flex min-h-[540px] items-center justify-center overflow-hidden px-5 py-20">
+        <div className="absolute left-1/2 top-1/2 size-[420px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-electric/15 blur-[100px]" />
+
+        <motion.div
+          initial={{ opacity: 0, y: 35, scale: 0.97 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          className="social-half-circle relative flex min-h-[390px] w-full max-w-4xl flex-col items-center justify-center overflow-hidden rounded-t-[50%] rounded-b-[2rem] border border-white/70 px-7 pb-10 pt-20 text-center shadow-[0_25px_70px_-35px_rgba(40,30,70,.2)]"
+        >
+          <div className="absolute inset-0 -z-10 bg-white/40 backdrop-blur-2xl" />
+
+          <span className="text-[10px] font-medium uppercase tracking-[.25em] text-ink-soft">
+            One ecosystem · Multiple audiences
+          </span>
+
+          <h2 className="mt-5 max-w-2xl font-display text-2xl font-light leading-tight tracking-tight text-ink sm:text-4xl">
+            Chaque réseau a son audience.
+            <span className="mt-2 block bg-gradient-to-r from-electric via-lilac to-coral bg-clip-text text-transparent">
+              Ensemble, ils démultiplient votre visibilité.
+            </span>
+          </h2>
+
+          <p className="mt-4 max-w-lg text-[13px] leading-7 text-ink-soft sm:text-sm">
+            Votre présence digitale ne doit rien au hasard. Nous construisons
+            une stratégie cohérente, adaptée à votre marque et à vos objectifs.
+          </p>
+        </motion.div>
+      </section>
+
+      {/* Contact */}
+      <section className="relative px-5 pb-24 pt-6">
+        <motion.div
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-white/70 bg-white/35 px-7 py-12 text-center shadow-[0_20px_65px_-35px_rgba(40,30,70,.2)] backdrop-blur-2xl sm:px-12"
+        >
+          <span className="font-mono text-[10px] uppercase tracking-[.25em] text-ink-soft">
+            Votre prochain projet
+          </span>
+
+          <h2 className="mt-4 font-display text-3xl font-light tracking-tight text-ink sm:text-4xl">
+            Votre marque mérite plus de visibilité.
+          </h2>
+
+          <p className="mx-auto mt-4 max-w-xl text-[13px] leading-7 text-ink-soft sm:text-sm">
+            Présentez-nous votre entreprise, vos objectifs et les plateformes
+            qui vous intéressent. Nous étudierons vos besoins pour construire
+            une proposition personnalisée.
+          </p>
+
+          <a
+            href={`mailto:kenshodigitalstudio@gmail.com?subject=${encodeURIComponent("Projet digital — Kenshō Studio")}&body=${encodeURIComponent("Bonjour Kenshō Studio,\n\nJe souhaite échanger au sujet de ma présence digitale.\n\nEntreprise :\nSite internet :\nPlateformes concernées :\nObjectifs :\n\nMerci !")}`}
+            className="mt-7 inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-sm font-medium text-background shadow-lg transition-all duration-300 hover:-translate-y-0.5 hover:shadow-xl"
+          >
+            Parlons de votre projet <ArrowUpRight size={16} />
+          </a>
+
+          <p className="mt-3 text-[10px] text-ink-soft">
+            Échange gratuit · Proposition personnalisée · Par e-mail
+          </p>
+        </motion.div>
+      </section>
 
       <Footer />
+
+      <style>{`
+        .availability-glass {
+          isolation: isolate;
+          border: 1px solid rgba(255,255,255,.8);
+          background:
+            radial-gradient(ellipse at 15% 0%, rgba(255,255,255,.9), transparent 55%),
+            linear-gradient(135deg, rgba(255,255,255,.68), rgba(255,255,255,.3) 60%, rgba(255,255,255,.5));
+          backdrop-filter: blur(24px) saturate(160%);
+          -webkit-backdrop-filter: blur(24px) saturate(160%);
+          box-shadow:
+            0 20px 55px -30px rgba(35,25,60,.2),
+            inset 0 2px 4px rgba(255,255,255,.9),
+            inset 0 -1px 3px rgba(90,70,120,.06);
+        }
+
+        .platform-card {
+          isolation: isolate;
+          min-height: 270px;
+          transition:
+            flex .4s cubic-bezier(.22,1,.36,1),
+            background .3s ease,
+            border-color .3s ease,
+            box-shadow .3s ease;
+        }
+
+        .platform-card-active {
+          background:
+            radial-gradient(ellipse at 15% 0%, rgba(255,255,255,.95), transparent 65%),
+            linear-gradient(145deg, rgba(255,255,255,.9), rgba(255,255,255,.65));
+        }
+
+        .platform-strip {
+          scrollbar-width: thin;
+          scrollbar-color: rgba(86,133,255,.25) transparent;
+        }
+
+        .social-half-circle {
+          isolation: isolate;
+          border-top-left-radius: 50% 48%;
+          border-top-right-radius: 50% 48%;
+        }
+
+        @media (max-width: 767px) {
+          .platform-strip {
+            min-height: 300px;
+          }
+
+          .platform-card {
+            flex: 0 0 145px !important;
+          }
+
+          .platform-card-active {
+            flex-basis: 260px !important;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          *, *::before, *::after {
+            scroll-behavior: auto !important;
+            animation-duration: .01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: .01ms !important;
+          }
+        }
+      `}</style>
     </main>
   );
 }
