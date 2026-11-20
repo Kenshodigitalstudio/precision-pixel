@@ -71,11 +71,6 @@ function ReservationPage() {
 
       <section className="mx-auto grid max-w-7xl items-center gap-12 px-5 pb-20 pt-36 sm:px-8 sm:pt-44 lg:grid-cols-[1.08fr_0.92fr]">
         <div className="max-w-2xl">
-          <span className="inline-flex items-center gap-2 rounded-full border border-electric/25 bg-white/60 px-4 py-2 font-mono text-[10px] font-bold uppercase tracking-[0.18em] text-electric shadow-sm backdrop-blur-xl">
-            <span className="h-1.5 w-1.5 rounded-full bg-electric shadow-[0_0_10px_rgba(75,125,255,0.8)]" />
-            Kenshō Digital Studio · {isTracking ? "Tracking" : "Audit Google Ads"}
-          </span>
-
           <h1 className="mt-7 text-[clamp(2.6rem,5.5vw,5rem)] font-light leading-[1.02] tracking-[-0.05em]">
             {isTracking ? "Un suivi fiable pour" : "Votre compte Google Ads mérite"}
             <span className="mt-2 block bg-gradient-to-r from-electric via-lilac to-coral bg-clip-text pb-2 font-normal text-transparent">
@@ -275,4 +270,3 @@ function ReservationPage() {
     </main>
   );
 }
-
