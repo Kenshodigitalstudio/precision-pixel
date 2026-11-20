@@ -49,8 +49,6 @@ function WhatsAppButton() {
           height="29"
           className="kensho-whatsapp-icon"
         />
-
-        <span className="kensho-whatsapp-status" />
       </span>
 
       <style>{`
@@ -188,19 +186,6 @@ function WhatsAppButton() {
           height: 29px;
           object-fit: contain;
           transition: transform .4s cubic-bezier(.2,.8,.2,1);
-        }
-
-        .kensho-whatsapp-status {
-          position: absolute;
-          top: 3px;
-          right: 3px;
-          z-index: 3;
-          width: 11px;
-          height: 11px;
-          border-radius: 50%;
-          border: 2px solid white;
-          background: #25D366;
-          box-shadow: 0 1px 5px rgba(37,211,102,.3);
         }
 
         .kensho-whatsapp:hover .kensho-whatsapp-label,
@@ -356,7 +341,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       { rel: "apple-touch-icon", href: "/apple-touch-icon.png" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
-      { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
+      { rel: "preconnect", href: "https://fonts.gstatic.com" },
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Caveat:wght@500;700&family=JetBrains+Mono:wght@400;500&display=swap",
