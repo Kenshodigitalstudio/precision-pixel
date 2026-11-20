@@ -116,28 +116,74 @@ function DynamicHeadline() {
   );
 }
 
-/* INDICATORS */
+/* COMPTEURS AVEC ANIMATION D'AUGMENTATION PROGRESSIVE */
+
+function AnimatedStat({
+  target,
+  prefix = "+",
+  suffix = "",
+  duration = 2.4,
+}: {
+  target: number;
+  prefix?: string;
+  suffix?: string;
+  duration?: number;
+}) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let startTimestamp: number | null = null;
+    let frameId: number;
+
+    const step = (timestamp: number) => {
+      if (!startTimestamp) startTimestamp = timestamp;
+      const progress = Math.min((timestamp - startTimestamp) / (duration * 1000), 1);
+      // Courbe cubique pour un ralentissement naturel à la fin
+      const easeVal = 1 - Math.pow(1 - progress, 3);
+      setCount(Math.round(easeVal * target));
+
+      if (progress < 1) {
+        frameId = requestAnimationFrame(step);
+      }
+    };
+
+    frameId = requestAnimationFrame(step);
+    return () => cancelAnimationFrame(frameId);
+  }, [target, duration]);
+
+  return (
+    <span>
+      {prefix}
+      {count}
+      {suffix}
+    </span>
+  );
+}
 
 function Counters() {
-  const stats = [
-    { value: "+47", label: "Audits réalisés" },
-    { value: "+230%", label: "ROI moyen constaté" },
-  ];
-
   return (
     <section className="mx-auto max-w-5xl px-5 pb-10 sm:px-8">
       <Reveal>
         <div className="grid grid-cols-2 divide-x divide-ink/10 rounded-2xl border border-white/80 bg-white/40 px-3 py-5 shadow-[0_15px_45px_-35px_rgba(30,30,50,.25)] backdrop-blur-xl sm:py-7">
-          {stats.map((stat) => (
-            <div key={stat.label} className="px-2 text-center">
-              <p className="font-display text-3xl font-light tracking-tight text-ink sm:text-4xl">
-                {stat.value}
-              </p>
-              <p className="mt-2 text-[9px] font-semibold uppercase tracking-[0.13em] text-ink-soft sm:text-[10px]">
-                {stat.label}
-              </p>
-            </div>
-          ))}
+          <div className="px-2 text-center">
+            <p className="flex items-center justify-center gap-1.5 font-display text-3xl font-light tracking-tight text-ink sm:text-4xl">
+              <AnimatedStat target={63} prefix="+" duration={2.2} />
+              <TrendingUp size={18} className="text-[#56A989] transition-transform duration-500 hover:scale-110" />
+            </p>
+            <p className="mt-2 text-[9px] font-semibold uppercase tracking-[0.13em] text-ink-soft sm:text-[10px]">
+              Audits réalisés
+            </p>
+          </div>
+
+          <div className="px-2 text-center">
+            <p className="flex items-center justify-center gap-1.5 font-display text-3xl font-light tracking-tight text-ink sm:text-4xl">
+              <AnimatedStat target={230} prefix="+" suffix="%" duration={2.6} />
+              <TrendingUp size={18} className="text-[#56A989] transition-transform duration-500 hover:scale-110" />
+            </p>
+            <p className="mt-2 text-[9px] font-semibold uppercase tracking-[0.13em] text-ink-soft sm:text-[10px]">
+              ROI moyen constaté
+            </p>
+          </div>
         </div>
       </Reveal>
     </section>
@@ -321,7 +367,7 @@ function PhoneVisual() {
   );
 }
 
-/* SERVICE VISUAL 03 — SOCIAL MEDIA (AVEC COULEURS OFFICIELLES) */
+/* SERVICE VISUAL 03 — SOCIAL MEDIA (COULEURS OFFICIELLES) */
 
 function SocialVisual() {
   const platforms = [
@@ -329,7 +375,6 @@ function SocialVisual() {
       name: "Instagram",
       icon: Instagram,
       position: "left-[10%] top-[18%]",
-      // Dégradé officiel Instagram avec icône blanche et lueur
       style:
         "bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white shadow-[0_10px_25px_-8px_rgba(220,39,67,0.65)]",
       delay: 0,
@@ -338,7 +383,6 @@ function SocialVisual() {
       name: "LinkedIn",
       icon: Linkedin,
       position: "right-[10%] top-[14%]",
-      // Bleu officiel LinkedIn #0A66C2
       style:
         "bg-[#0A66C2] text-white shadow-[0_10px_25px_-8px_rgba(10,102,194,0.65)]",
       delay: 0.5,
@@ -347,7 +391,6 @@ function SocialVisual() {
       name: "YouTube",
       icon: Youtube,
       position: "left-[16%] bottom-[14%]",
-      // Rouge officiel YouTube #FF0000
       style:
         "bg-[#FF0000] text-white shadow-[0_10px_25px_-8px_rgba(255,0,0,0.65)]",
       delay: 1,
@@ -356,7 +399,6 @@ function SocialVisual() {
       name: "Facebook",
       icon: Facebook,
       position: "right-[15%] bottom-[12%]",
-      // Bleu officiel Facebook #1877F2
       style:
         "bg-[#1877F2] text-white shadow-[0_10px_25px_-8px_rgba(24,119,242,0.65)]",
       delay: 1.5,
@@ -607,7 +649,7 @@ function ContactSection() {
 
 export default function Index() {
   return (
-    <main className="relative min-h-screen bg-sand text-ink">
+    <main className="relative min-h-screen bg-paper text-ink">
       <Nav />
 
       {/* Halos lumineux d'ambiance */}
