@@ -1,6 +1,7 @@
 
 import { createFileRoute } from "@tanstack/react-router";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState } from "react";
 import { Nav } from "@/components/landing/Nav";
 import { Footer } from "@/components/landing/Footer";
 import { ArrowUpRight, Check, Sparkles } from "lucide-react";
@@ -192,29 +193,22 @@ const platforms = [
   },
 ];
 
-/* Logos des plateformes */
 function BrandLogo({
   slug,
   name,
-  size = "normal",
+  className = "h-8 w-8",
 }: {
   slug: string;
   name: string;
-  size?: "normal" | "large";
+  className?: string;
 }) {
-  const dimensions =
-    size === "large"
-      ? "h-12 w-12 sm:h-14 sm:w-14"
-      : "h-8 w-8 sm:h-10 sm:w-10";
-
-  /* Logo LinkedIn intégré directement en SVG */
   if (slug === "linkedin") {
     return (
       <svg
         viewBox="0 0 24 24"
         aria-label={`Logo ${name}`}
         role="img"
-        className={`${dimensions} shrink-0`}
+        className={`${className} shrink-0`}
         fill="#0A66C2"
       >
         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.35V9h3.414v1.561h.049c.476-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 1 1 0-4.124 2.062 2.062 0 0 1 0 4.124zM7.119 20.452H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
@@ -227,7 +221,7 @@ function BrandLogo({
       src={`https://cdn.simpleicons.org/${slug}`}
       alt={`Logo ${name}`}
       loading="lazy"
-      className={`${dimensions} object-contain`}
+      className={`${className} shrink-0 object-contain`}
       onError={(event) => {
         event.currentTarget.style.display = "none";
       }}
@@ -235,7 +229,6 @@ function BrandLogo({
   );
 }
 
-/* Défilement horizontal des logos */
 function LogoArc() {
   const repeatedPlatforms = [...platforms, ...platforms];
 
@@ -266,148 +259,163 @@ function LogoArc() {
   );
 }
 
-/* Cartes des plateformes */
-function PlatformPanel({
-  platform,
-  index,
-}: {
-  platform: (typeof platforms)[number];
-  index: number;
-}) {
-  const reverse = index % 2 === 1;
+function PlatformCards() {
+  const [activePlatform, setActivePlatform] = useState<string | null>(null);
 
   return (
-    <section className="social-stage relative flex min-h-[590px] items-center px-5 py-12 sm:px-8 sm:py-14">
-      <motion.article
-        initial={{ opacity: 0, x: reverse ? 65 : -65, scale: 0.98 }}
-        whileInView={{ opacity: 1, x: 0, scale: 1 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className="social-panel relative mx-auto grid w-full max-w-6xl items-center gap-8 overflow-hidden rounded-[2rem] p-6 sm:gap-10 sm:p-10 lg:grid-cols-2 lg:p-12"
-      >
-        <div
-          className="pointer-events-none absolute -right-32 -top-32 size-80 rounded-full blur-[110px]"
-          style={{ background: platform.color, opacity: 0.1 }}
-        />
+    <section className="relative mx-auto max-w-[1400px] px-4 pb-20 pt-10 sm:px-6">
+      <div className="mx-auto mb-8 max-w-2xl text-center">
+        <span className="font-mono text-[10px] font-semibold uppercase tracking-[.22em] text-electric">
+          Nos expertises
+        </span>
+        <h2 className="mt-3 text-2xl font-light tracking-tight text-ink sm:text-3xl">
+          Un réseau. Une stratégie.{" "}
+          <span className="bg-gradient-to-r from-electric via-lilac to-coral bg-clip-text text-transparent">
+            Votre identité.
+          </span>
+        </h2>
+        <p className="mt-3 text-sm text-ink-soft">
+          Survolez une plateforme pour découvrir notre approche.
+        </p>
+      </div>
 
-        <div className={`relative z-10 ${reverse ? "lg:order-2" : ""}`}>
-          <div className="mb-6 flex items-center gap-3">
-            <span className="h-px w-10 bg-ink/25" />
-            <span className="text-[10px] font-semibold tracking-[.18em] text-ink-soft">
-              {platform.category}
-            </span>
-          </div>
+      <div className="platform-strip flex min-h-[300px] items-stretch gap-2 overflow-x-auto pb-3 md:overflow-visible">
+        {platforms.map((platform, index) => {
+          const isActive = activePlatform === platform.slug;
 
-          <div className="mb-5 flex size-12 items-center justify-center rounded-xl border border-white/80 bg-white/70 shadow-md backdrop-blur-xl">
-            <BrandLogo slug={platform.slug} name={platform.name} />
-          </div>
-
-          <h2 className="font-display text-3xl font-light tracking-tight text-ink sm:text-4xl">
-            {platform.name}
-          </h2>
-
-          <h3
-            className="mt-3 max-w-lg text-base font-medium leading-snug sm:text-lg"
-            style={{ color: platform.color }}
-          >
-            {platform.subtitle}
-          </h3>
-
-          <p className="mt-4 max-w-xl text-[13px] leading-7 text-ink-soft sm:text-sm">
-            {platform.description}
-          </p>
-
-          <div className="mt-6 space-y-3">
-            {platform.benefits.map((benefit, i) => (
-              <motion.div
-                key={benefit}
-                initial={{ opacity: 0, x: -10 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.08 * i }}
-                className="flex items-start gap-3 text-[13px] leading-6 text-ink-soft"
-              >
-                <span
-                  className="mt-0.5 grid size-[18px] shrink-0 place-items-center rounded-full text-white"
-                  style={{ background: platform.color }}
+          return (
+            <motion.article
+              key={platform.slug}
+              layout
+              onMouseEnter={() => setActivePlatform(platform.slug)}
+              onMouseLeave={() => setActivePlatform(null)}
+              onFocus={() => setActivePlatform(platform.slug)}
+              onBlur={(event) => {
+                if (!event.currentTarget.contains(event.relatedTarget)) {
+                  setActivePlatform(null);
+                }
+              }}
+              onClick={() =>
+                setActivePlatform(isActive ? null : platform.slug)
+              }
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{
+                duration: 0.35,
+                delay: index * 0.035,
+                layout: { duration: 0.35, ease: [0.22, 1, 0.36, 1] },
+              }}
+              className={`platform-card relative flex min-w-[112px] cursor-pointer flex-col overflow-hidden rounded-2xl border border-white/80 p-3 outline-none backdrop-blur-2xl transition-colors duration-300 md:min-w-0 ${
+                isActive
+                  ? "platform-card-active"
+                  : "bg-white/55 hover:bg-white/80"
+              }`}
+              style={{
+                flex: isActive ? "4 1 0%" : "1 1 0%",
+                borderColor: isActive ? `${platform.color}55` : undefined,
+                boxShadow: isActive
+                  ? `0 18px 45px -25px ${platform.color}55, inset 0 1px 2px rgba(255,255,255,.9)`
+                  : "0 8px 24px -18px rgba(30,20,50,.2)",
+              }}
+              tabIndex={0}
+              role="button"
+              aria-expanded={isActive}
+            >
+              <div className="relative z-10 flex h-full min-h-[270px] flex-col">
+                <div
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/80 bg-white/80 shadow-sm"
+                  style={{ boxShadow: `0 5px 16px -10px ${platform.color}` }}
                 >
-                  <Check size={11} strokeWidth={3} />
-                </span>
-                {benefit}
-              </motion.div>
-            ))}
-          </div>
-        </div>
+                  <BrandLogo
+                    slug={platform.slug}
+                    name={platform.name}
+                    className="h-6 w-6"
+                  />
+                </div>
 
-        <div
-          className={`relative flex min-h-[280px] items-center justify-center lg:min-h-[360px] ${
-            reverse ? "lg:order-1" : ""
-          }`}
-        >
-          <div
-            className="absolute size-64 rounded-full blur-[85px]"
-            style={{ background: platform.color, opacity: 0.15 }}
-          />
+                <div className="mt-4">
+                  <span className="block text-[8px] font-semibold uppercase tracking-[.13em] text-ink-soft">
+                    {platform.category}
+                  </span>
+                  <h3 className="mt-2 text-sm font-semibold text-ink">
+                    {platform.name}
+                  </h3>
+                </div>
 
-          <motion.div
-            animate={{
-              y: [0, -12, 0],
-              rotate: [-1.5, 1.5, -1.5],
-              scale: [1, 1.015, 1],
-            }}
-            transition={{
-              duration: 8 + index * 0.35,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="social-brand-orb relative flex size-56 flex-col items-center justify-center rounded-[2.5rem] sm:size-72"
-            style={{
-              background: platform.gradient,
-              boxShadow: `0 30px 75px -25px ${platform.color}55, inset 0 3px 15px rgba(255,255,255,.55), inset 0 -18px 35px rgba(0,0,0,.12)`,
-            }}
-          >
-            <div className="absolute inset-3 rounded-[2rem] border border-white/35" />
-            <div className="absolute left-[12%] top-[8%] h-20 w-32 rotate-[-25deg] rounded-full bg-white/25 blur-2xl" />
+                <AnimatePresence initial={false}>
+                  {isActive && (
+                    <motion.div
+                      key="details"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 8 }}
+                      transition={{ duration: 0.22 }}
+                      className="mt-4 flex flex-1 flex-col"
+                    >
+                      <p
+                        className="text-xs font-semibold leading-snug"
+                        style={{ color: platform.color }}
+                      >
+                        {platform.subtitle}
+                      </p>
 
-            <div className="relative z-10 flex size-20 items-center justify-center rounded-2xl border border-white/80 bg-white/90 shadow-xl backdrop-blur-xl sm:size-24">
-              <BrandLogo
-                slug={platform.slug}
-                name={platform.name}
-                size="large"
+                      <p className="mt-2 text-[11px] leading-relaxed text-ink-soft">
+                        {platform.description}
+                      </p>
+
+                      <div className="mt-3 space-y-2">
+                        {platform.benefits.map((benefit) => (
+                          <div
+                            key={benefit}
+                            className="flex items-start gap-2 text-[10px] leading-snug text-ink-soft"
+                          >
+                            <span
+                              className="mt-0.5 flex h-3.5 w-3.5 shrink-0 items-center justify-center rounded-full text-white"
+                              style={{ background: platform.color }}
+                            >
+                              <Check size={9} strokeWidth={3} />
+                            </span>
+                            {benefit}
+                          </div>
+                        ))}
+                      </div>
+
+                      <span className="mt-auto pt-4 text-[9px] font-semibold uppercase tracking-wider text-ink-soft">
+                        {platform.stat}
+                      </span>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {!isActive && (
+                  <div className="mt-auto pt-5">
+                    <span className="block text-[8px] font-medium uppercase tracking-wider text-ink-soft/70">
+                      Découvrir
+                    </span>
+                    <span
+                      className="mt-1 block h-1 w-6 rounded-full"
+                      style={{ background: platform.color }}
+                    />
+                  </div>
+                )}
+              </div>
+
+              <div
+                className="pointer-events-none absolute -bottom-12 -right-12 h-28 w-28 rounded-full opacity-10 blur-2xl transition-opacity duration-300"
+                style={{
+                  background: platform.color,
+                  opacity: isActive ? 0.22 : 0.08,
+                }}
               />
-            </div>
+            </motion.article>
+          );
+        })}
+      </div>
 
-            <span className="relative z-10 mt-5 text-sm font-semibold tracking-wide text-white">
-              {platform.name}
-            </span>
-
-            <span className="relative z-10 mt-1 text-[9px] uppercase tracking-[.25em] text-white/80">
-              {platform.stat}
-            </span>
-          </motion.div>
-
-          <motion.div
-            animate={{ y: [0, 10, 0], rotate: [0, 4, 0] }}
-            transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute right-[3%] top-[12%] rounded-xl border border-white/70 bg-white/60 p-3 shadow-lg backdrop-blur-2xl"
-          >
-            <Sparkles size={17} style={{ color: platform.color }} />
-          </motion.div>
-
-          <motion.div
-            animate={{ y: [0, -9, 0], x: [0, -4, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-            className="absolute bottom-[10%] left-[2%] rounded-xl border border-white/70 bg-white/65 p-3 shadow-lg backdrop-blur-2xl"
-          >
-            <span className="block text-[9px] uppercase tracking-widest text-ink-soft">
-              Expertise Kenshō
-            </span>
-            <span className="mt-1 block text-xs font-semibold text-ink">
-              {platform.stat}
-            </span>
-          </motion.div>
-        </div>
-      </motion.article>
+      <p className="mt-3 text-center text-[10px] text-ink-soft/70 md:hidden">
+        Faites défiler les cartes horizontalement et touchez une plateforme pour afficher ses informations.
+      </p>
     </section>
   );
 }
@@ -415,7 +423,6 @@ function PlatformPanel({
 function ReseauxSociauxPage() {
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-paper text-ink">
-      {/* Fond identique à /reservation */}
       <div
         aria-hidden
         className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
@@ -427,7 +434,7 @@ function ReseauxSociauxPage() {
 
       <Nav />
 
-      {/* Intro */}
+      {/* Introduction */}
       <section className="relative z-10 px-5 pb-8 pt-32 text-center sm:px-6 sm:pb-12 sm:pt-36">
         <div className="mx-auto max-w-6xl">
           <LogoArc />
@@ -452,7 +459,7 @@ function ReseauxSociauxPage() {
             </h1>
           </motion.div>
 
-          {/* Disponibilité 2027 */}
+          {/* Disponibilité */}
           <motion.div
             initial={{ opacity: 0, y: 20, scale: 0.98 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
@@ -482,16 +489,8 @@ function ReseauxSociauxPage() {
         </div>
       </section>
 
-      {/* Plateformes */}
-      <div className="relative">
-        {platforms.map((platform, index) => (
-          <PlatformPanel
-            key={platform.slug}
-            platform={platform}
-            index={index}
-          />
-        ))}
-      </div>
+      {/* Cartes interactives */}
+      <PlatformCards />
 
       {/* Message central */}
       <section className="relative flex min-h-[540px] items-center justify-center overflow-hidden px-5 py-20">
@@ -524,7 +523,7 @@ function ReseauxSociauxPage() {
         </motion.div>
       </section>
 
-      {/* Contact par e-mail */}
+      {/* Contact */}
       <section className="relative px-5 pb-24 pt-6">
         <motion.div
           initial={{ opacity: 0, y: 25 }}
@@ -563,34 +562,6 @@ function ReseauxSociauxPage() {
       <Footer />
 
       <style>{`
-        .social-panel {
-          isolation: isolate;
-          border: 1px solid rgba(255,255,255,.72);
-          background:
-            radial-gradient(ellipse at 15% 0%, rgba(255,255,255,.88), transparent 45%),
-            linear-gradient(135deg, rgba(255,255,255,.65), rgba(255,255,255,.28) 55%, rgba(255,255,255,.42));
-          backdrop-filter: blur(22px) saturate(150%);
-          -webkit-backdrop-filter: blur(22px) saturate(150%);
-          box-shadow:
-            0 24px 65px -38px rgba(35,25,60,.22),
-            inset 0 2px 4px rgba(255,255,255,.85),
-            inset 0 -2px 5px rgba(90,70,120,.05);
-        }
-
-        .social-panel::after {
-          content: "";
-          position: absolute;
-          inset: 1px;
-          border-radius: inherit;
-          pointer-events: none;
-          border: 1px solid rgba(255,255,255,.35);
-          mask-image: linear-gradient(140deg,#000,transparent 75%);
-        }
-
-        .social-brand-orb {
-          border: 1px solid rgba(255,255,255,.7);
-        }
-
         .availability-glass {
           isolation: isolate;
           border: 1px solid rgba(255,255,255,.8);
@@ -605,17 +576,44 @@ function ReseauxSociauxPage() {
             inset 0 -1px 3px rgba(90,70,120,.06);
         }
 
+        .platform-card {
+          isolation: isolate;
+          min-height: 270px;
+          transition:
+            flex .4s cubic-bezier(.22,1,.36,1),
+            background .3s ease,
+            border-color .3s ease,
+            box-shadow .3s ease;
+        }
+
+        .platform-card-active {
+          background:
+            radial-gradient(ellipse at 15% 0%, rgba(255,255,255,.95), transparent 65%),
+            linear-gradient(145deg, rgba(255,255,255,.9), rgba(255,255,255,.65));
+        }
+
+        .platform-strip {
+          scrollbar-width: thin;
+          scrollbar-color: rgba(86,133,255,.25) transparent;
+        }
+
         .social-half-circle {
           isolation: isolate;
           border-top-left-radius: 50% 48%;
           border-top-right-radius: 50% 48%;
         }
 
-        @media (max-width: 640px) {
-          .social-stage {
-            min-height: auto;
-            padding-top: 2.5rem;
-            padding-bottom: 2.5rem;
+        @media (max-width: 767px) {
+          .platform-strip {
+            min-height: 300px;
+          }
+
+          .platform-card {
+            flex: 0 0 145px !important;
+          }
+
+          .platform-card-active {
+            flex-basis: 260px !important;
           }
         }
 
