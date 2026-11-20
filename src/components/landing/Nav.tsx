@@ -1,7 +1,6 @@
 
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
-import { BlackFridayBanner } from "@/components/landing/BlackFridayBanner";
 
 export function Nav() {
   const [progress, setProgress] = useState(0);
@@ -20,8 +19,6 @@ export function Nav() {
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      <BlackFridayBanner />
-
       <nav
         aria-label="Navigation principale"
         className="mx-auto flex max-w-7xl items-center justify-center px-4 py-5 sm:px-6"
