@@ -14,7 +14,6 @@ import {
   Bell,
   CalendarDays,
   Facebook,
-  Sparkles as SparklesIcon,
 } from "lucide-react";
 
 import { Toaster } from "@/components/ui/sonner";
@@ -322,36 +321,44 @@ function PhoneVisual() {
   );
 }
 
-/* SERVICE VISUAL 03 — SOCIAL MEDIA */
+/* SERVICE VISUAL 03 — SOCIAL MEDIA (AVEC COULEURS OFFICIELLES) */
 
 function SocialVisual() {
   const platforms = [
     {
       name: "Instagram",
       icon: Instagram,
-      position: "left-[12%] top-[20%]",
-      color: "bg-[#F5DDE5] text-[#B85B83]",
+      position: "left-[10%] top-[18%]",
+      // Dégradé officiel Instagram avec icône blanche et lueur
+      style:
+        "bg-gradient-to-tr from-[#f09433] via-[#dc2743] to-[#bc1888] text-white shadow-[0_10px_25px_-8px_rgba(220,39,67,0.65)]",
       delay: 0,
     },
     {
       name: "LinkedIn",
       icon: Linkedin,
-      position: "right-[12%] top-[15%]",
-      color: "bg-[#DCE8F6] text-[#4476A9]",
+      position: "right-[10%] top-[14%]",
+      // Bleu officiel LinkedIn #0A66C2
+      style:
+        "bg-[#0A66C2] text-white shadow-[0_10px_25px_-8px_rgba(10,102,194,0.65)]",
       delay: 0.5,
     },
     {
       name: "YouTube",
       icon: Youtube,
-      position: "left-[19%] bottom-[15%]",
-      color: "bg-[#F5DFDC] text-[#BB625B]",
+      position: "left-[16%] bottom-[14%]",
+      // Rouge officiel YouTube #FF0000
+      style:
+        "bg-[#FF0000] text-white shadow-[0_10px_25px_-8px_rgba(255,0,0,0.65)]",
       delay: 1,
     },
     {
       name: "Facebook",
       icon: Facebook,
-      position: "right-[18%] bottom-[12%]",
-      color: "bg-[#DDE7F7] text-[#547DB7]",
+      position: "right-[15%] bottom-[12%]",
+      // Bleu officiel Facebook #1877F2
+      style:
+        "bg-[#1877F2] text-white shadow-[0_10px_25px_-8px_rgba(24,119,242,0.65)]",
       delay: 1.5,
     },
   ];
@@ -368,7 +375,7 @@ function SocialVisual() {
         className="absolute size-32 rounded-full border border-dashed border-[#B9A6DE]/40"
       />
 
-      <div className="relative z-10 grid size-14 place-items-center rounded-2xl border border-white bg-white/80 shadow-[0_10px_30px_-12px_rgba(50,45,80,.3)] backdrop-blur-xl">
+      <div className="relative z-10 grid size-14 place-items-center rounded-2xl border border-white bg-white/85 shadow-[0_10px_30px_-12px_rgba(50,45,80,.25)] backdrop-blur-xl">
         <span className="font-display text-[23px] font-semibold tracking-tight text-ink">
           K.
         </span>
@@ -390,9 +397,9 @@ function SocialVisual() {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className={`absolute ${platform.position} z-20 grid size-11 place-items-center rounded-[14px] border border-white/90 ${platform.color} shadow-[0_10px_25px_-12px_rgba(50,45,80,.3)] backdrop-blur-xl`}
+            className={`absolute ${platform.position} z-20 grid size-11 place-items-center rounded-[14px] border border-white/60 ${platform.style} backdrop-blur-xl`}
           >
-            <Icon size={19} strokeWidth={1.7} />
+            <Icon size={20} strokeWidth={2} />
           </motion.div>
         );
       })}
@@ -411,18 +418,15 @@ function SocialVisual() {
   );
 }
 
-/* OFFRES (3 CARTES GLASSMORPHISM) */
+/* OFFRES (3 CARTES GLASSMORPHISM SANS EN-TÊTE HAUT) */
 
 const services = [
   {
-    tag: "Analyse & Audit",
     title: "Audit Google Ads",
     description:
       "Une analyse approfondie de votre compte pour identifier les points de fuite, réduire les coûts et révéler vos leviers de rentabilité.",
     href: "/reservation",
-    icon: BarChart3,
     visual: AuditVisual,
-    accent: "bg-[#C6B4ED]",
     glow: "from-[#C6B4ED]/15 to-transparent",
     points: [
       "Analyse de la structure du compte",
@@ -432,14 +436,11 @@ const services = [
     action: "Réserver mon audit",
   },
   {
-    tag: "Pilotage Mensuel",
     title: "Gestion mensuelle Google Ads",
     description:
       "Un accompagnement continu pour suivre, analyser et optimiser vos campagnes au quotidien et faire grimper vos résultats.",
     href: "/services/google-ads",
-    icon: TrendingUp,
     visual: PhoneVisual,
-    accent: "bg-[#A8D9C4]",
     glow: "from-[#A8D9C4]/15 to-transparent",
     points: [
       "Suivi hebdomadaire des campagnes",
@@ -449,14 +450,11 @@ const services = [
     action: "Découvrir l'accompagnement",
   },
   {
-    tag: "Visibilité & Marque",
     title: "Gestion des réseaux sociaux",
     description:
       "Une présence digitale stratégique et impactante pour faire rayonner votre marque sur les plateformes adaptées à votre audience.",
     href: "/reseaux-sociaux",
-    icon: Instagram,
     visual: SocialVisual,
-    accent: "bg-[#E8BDB3]",
     glow: "from-[#E8BDB3]/15 to-transparent",
     points: [
       "Stratégie sur-mesure par plateforme",
@@ -510,20 +508,8 @@ function ServicesPanel() {
                   className={`pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b ${service.glow} opacity-60 transition-opacity duration-300 group-hover:opacity-100`}
                 />
 
-                {/* En-tête : Tag de l'offre + Icône */}
-                <div className="relative z-10 flex items-center justify-between">
-                  <span className="rounded-full border border-white/80 bg-white/70 px-3 py-1 font-mono text-[10px] font-semibold tracking-wider text-ink shadow-xs backdrop-blur-md">
-                    {service.tag}
-                  </span>
-                  <span
-                    className={`grid size-9 place-items-center rounded-xl ${service.accent} text-ink shadow-sm transition-transform duration-300 group-hover:scale-105`}
-                  >
-                    <service.icon size={17} strokeWidth={1.75} />
-                  </span>
-                </div>
-
-                {/* Visuel interactif */}
-                <div className="relative z-10 mt-5 rounded-2xl border border-white/60 bg-gradient-to-br from-white/80 to-white/40 p-2 shadow-inner backdrop-blur-md">
+                {/* Visuel interactif en tête de carte */}
+                <div className="relative z-10 rounded-2xl border border-white/60 bg-gradient-to-br from-white/80 to-white/40 p-2 shadow-inner backdrop-blur-md">
                   <Visual />
                 </div>
 
@@ -578,66 +564,55 @@ function ServicesPanel() {
 function ContactSection() {
   return (
     <section id="contact" className="relative overflow-hidden px-6 py-12 sm:py-16">
-      <Reveal className="relative mx-auto max-w-5xl overflow-hidden rounded-[28px] border border-white/75 bg-white/40 px-6 py-10 text-center shadow-[0_25px_70px_-40px_rgba(30,35,60,.3)] backdrop-blur-2xl sm:px-12 sm:py-14">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -left-20 -top-20 size-72 rounded-full bg-lilac/25 blur-[90px]"
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -bottom-20 -right-20 size-72 rounded-full bg-coral/25 blur-[90px]"
-        />
+      <div className="mx-auto max-w-4xl">
+        <div className="relative overflow-hidden rounded-[32px] border border-white/80 bg-gradient-to-br from-white/70 via-white/40 to-white/20 p-8 shadow-[0_25px_60px_-25px_rgba(25,25,50,0.12)] backdrop-blur-2xl sm:p-12">
+          <div className="pointer-events-none absolute -right-20 -top-20 size-64 rounded-full bg-lilac/20 blur-3xl" />
+          <div className="pointer-events-none absolute -bottom-20 -left-20 size-64 rounded-full bg-coral/20 blur-3xl" />
 
-        <div className="relative z-10">
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-soft">
-            Contact
-          </span>
-          <h2 className="mx-auto mt-2 max-w-xl font-display text-3xl font-light tracking-[-0.04em] text-ink sm:text-4xl">
-            Un projet digital en tête ?{" "}
-            <span className="text-ink-soft">Parlons-en.</span>
-          </h2>
-          <p className="mx-auto mt-3 max-w-md text-[13px] leading-relaxed text-ink-soft">
-            Échangeons sur vos enjeux d'acquisition, votre présence sur les réseaux et les opportunités pour votre marque.
-          </p>
+          <div className="relative z-10 flex flex-col items-center text-center">
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-soft">
+              Contact & Échange
+            </span>
+            <h2 className="mt-3 font-display text-3xl font-light tracking-[-0.04em] text-ink sm:text-4xl">
+              Prêt à accélérer votre croissance ?
+            </h2>
+            <p className="mt-3 max-w-md text-[13px] leading-relaxed text-ink-soft sm:text-[14px]">
+              Discutons de vos objectifs et voyons ensemble comment nos expertises peuvent booster vos résultats.
+            </p>
 
-          <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <Link
-              to="/reservation"
-              className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-[12px] font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5"
-            >
-              Réserver un premier échange
-              <ChevronRight
-                size={14}
-                className="transition-transform group-hover:translate-x-1"
-              />
-            </Link>
-            <a
-              href="mailto:kenshodigitalstudio@gmail.com"
-              className="inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/60 px-6 py-3 text-[12px] font-semibold text-ink shadow-sm backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:bg-white/80"
-            >
-              Écrire directement par e-mail
-              <ArrowUpRight size={14} />
-            </a>
+            <div className="mt-8 flex flex-col items-center gap-3 sm:flex-row">
+              <Link
+                to="/reservation"
+                className="group inline-flex items-center gap-3 rounded-full bg-ink px-7 py-3.5 text-[12px] font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-1"
+              >
+                Réserver un appel découverte
+                <ArrowUpRight size={14} className="transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </Link>
+
+              <a
+                href="mailto:kenshodigitalstudio@gmail.com"
+                className="inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/60 px-6 py-3.5 text-[12px] font-semibold text-ink shadow-sm backdrop-blur-xl transition-all hover:-translate-y-1 hover:bg-white/85"
+              >
+                kenshodigitalstudio@gmail.com
+              </a>
+            </div>
           </div>
         </div>
-      </Reveal>
+      </div>
     </section>
   );
 }
 
-/* HOMEPAGE */
+/* PAGE D'ACCUEIL PRINCIPALE */
 
-function Index() {
+export default function Index() {
   return (
-    <main className="relative min-h-screen overflow-x-hidden bg-paper pb-0 text-ink">
+    <main className="relative min-h-screen bg-sand text-ink">
       <Nav />
 
-      {/* Halos d'ambiance */}
-      <div
-        aria-hidden
-        className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
-      >
-        <div className="absolute -left-24 top-24 size-96 rounded-full bg-electric/10 blur-3xl" />
+      {/* Halos lumineux d'ambiance */}
+      <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+        <div className="absolute -left-20 top-20 size-96 rounded-full bg-coral/15 blur-3xl" />
         <div className="absolute -right-24 top-[35%] size-96 rounded-full bg-lilac/20 blur-3xl" />
         <div className="absolute bottom-0 left-1/3 size-80 rounded-full bg-mint/15 blur-3xl" />
       </div>
@@ -660,27 +635,22 @@ function Index() {
         </div>
 
         <div className="mx-auto max-w-6xl text-center">
-          {/* LOGO KENSHO STUDIO AU-DESSUS DU TITRE */}
+          {/* LOGO KENSHO STUDIO SEUL AU-DESSUS DU TITRE (SANS BULLE NI TEXTE) */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, ease }}
-            className="inline-flex items-center gap-2.5 rounded-full border border-white/85 bg-white/60 py-1.5 pl-2 pr-4 shadow-[0_8px_25px_-10px_rgba(25,25,50,0.1)] backdrop-blur-xl"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease }}
+            className="flex justify-center"
           >
             <img
-              src="/favicon.png"
-              alt="Logo Kenshō Studio"
-              className="size-6 rounded-full object-contain shadow-xs"
+              src="https://kenshostudio.fr/__l5e/assets-v1/1bccf095-7eb8-4dbb-bcb7-dd694703e5e6/kensho-logo.png"
+              alt="Kenshō Digital Studio"
+              className="h-16 w-auto object-contain sm:h-20 md:h-24 select-none"
+              loading="eager"
             />
-            <span className="font-display text-xs font-semibold tracking-wide text-ink">
-              Kenshō Studio
-            </span>
-            <span className="text-ink-soft/40">•</span>
-            <span className="text-[10px] font-mono uppercase tracking-wider text-electric font-medium">
-              Performance & Croissance
-            </span>
           </motion.div>
 
+          {/* Titre dynamique */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
