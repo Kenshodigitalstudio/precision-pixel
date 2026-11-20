@@ -1,3 +1,4 @@
+
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -137,8 +138,10 @@ function AnimatedStat({
 
     const step = (timestamp: number) => {
       if (!startTimestamp) startTimestamp = timestamp;
-      const progress = Math.min((timestamp - startTimestamp) / (duration * 1000), 1);
-      // Courbe cubique pour un ralentissement naturel à la fin
+      const progress = Math.min(
+        (timestamp - startTimestamp) / (duration * 1000),
+        1
+      );
       const easeVal = 1 - Math.pow(1 - progress, 3);
       setCount(Math.round(easeVal * target));
 
@@ -544,18 +547,15 @@ function ServicesPanel() {
                 }}
                 className="group relative flex flex-col overflow-hidden rounded-[26px] border border-white/80 bg-gradient-to-b from-white/70 via-white/45 to-white/30 p-6 shadow-[0_20px_50px_-25px_rgba(25,25,50,0.12)] backdrop-blur-2xl transition-all duration-300 hover:-translate-y-1.5 hover:border-white hover:bg-white/75 hover:shadow-[0_30px_70px_-20px_rgba(25,25,50,0.18)]"
               >
-                {/* Lueur interne Liquid Glass */}
                 <div
                   aria-hidden
                   className={`pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b ${service.glow} opacity-60 transition-opacity duration-300 group-hover:opacity-100`}
                 />
 
-                {/* Visuel interactif en tête de carte */}
                 <div className="relative z-10 rounded-2xl border border-white/60 bg-gradient-to-br from-white/80 to-white/40 p-2 shadow-inner backdrop-blur-md">
                   <Visual />
                 </div>
 
-                {/* Titre & Description */}
                 <div className="relative z-10 mt-5 flex-1">
                   <h3 className="font-display text-[20px] font-semibold leading-[1.2] tracking-[-0.035em] text-ink">
                     {service.title}
@@ -564,7 +564,6 @@ function ServicesPanel() {
                     {service.description}
                   </p>
 
-                  {/* Liste des points */}
                   <ul className="mt-5 space-y-2.5 border-t border-ink/5 pt-4">
                     {service.points.map((point) => (
                       <li
@@ -580,7 +579,6 @@ function ServicesPanel() {
                   </ul>
                 </div>
 
-                {/* Bouton CTA vers la page */}
                 <div className="relative z-10 mt-6 border-t border-ink/10 pt-4">
                   <Link
                     to={service.href}
@@ -649,7 +647,7 @@ function ContactSection() {
 
 export default function Index() {
   return (
-    <main className="relative min-h-screen bg-paper text-ink">
+    <main className="relative min-h-screen overflow-x-clip bg-paper text-ink">
       <Nav />
 
       {/* Halos lumineux d'ambiance */}
@@ -677,7 +675,6 @@ export default function Index() {
         </div>
 
         <div className="mx-auto max-w-6xl text-center">
-          {/* LOGO KENSHO STUDIO SEUL AU-DESSUS DU TITRE (SANS BULLE NI TEXTE) */}
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}
@@ -687,12 +684,11 @@ export default function Index() {
             <img
               src="https://kenshostudio.fr/__l5e/assets-v1/1bccf095-7eb8-4dbb-bcb7-dd694703e5e6/kensho-logo.png"
               alt="Kenshō Digital Studio"
-              className="h-16 w-auto object-contain sm:h-20 md:h-24 select-none"
+              className="h-16 w-auto select-none object-contain sm:h-20 md:h-24"
               loading="eager"
             />
           </motion.div>
 
-          {/* Titre dynamique */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
