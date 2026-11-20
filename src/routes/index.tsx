@@ -1,4 +1,3 @@
-
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "framer-motion";
 import { useEffect, useState } from "react";
@@ -10,13 +9,12 @@ import {
   ChevronRight,
   Instagram,
   Linkedin,
-  MessageCircle,
   TrendingUp,
   Youtube,
-  MousePointer2,
   Bell,
   CalendarDays,
   Facebook,
+  Sparkles as SparklesIcon,
 } from "lucide-react";
 
 import { Toaster } from "@/components/ui/sonner";
@@ -98,7 +96,7 @@ function DynamicHeadline() {
   const currentWord = HERO_WORDS[index];
 
   return (
-    <h1 className="mx-auto mt-7 max-w-4xl font-display text-[clamp(2.4rem,5.5vw,5rem)] font-light leading-[1.13] tracking-[-0.065em] text-ink">
+    <h1 className="mx-auto mt-6 max-w-4xl font-display text-[clamp(2.4rem,5.5vw,4.8rem)] font-light leading-[1.12] tracking-[-0.055em] text-ink">
       Faites de votre{" "}
       <span className="inline-grid min-w-[6.2ch] align-baseline text-left">
         <AnimatePresence mode="wait">
@@ -151,7 +149,7 @@ function Counters() {
 
 function AuditVisual() {
   return (
-    <div className="relative mx-auto h-[178px] w-full max-w-[310px] overflow-hidden rounded-2xl border border-white/80 bg-white/65 p-3 shadow-[0_15px_40px_-25px_rgba(50,45,80,.3)] backdrop-blur-xl transition-transform duration-500 group-hover:-translate-y-1">
+    <div className="relative mx-auto h-[175px] w-full max-w-[310px] overflow-hidden rounded-2xl border border-white/80 bg-white/60 p-3 shadow-[0_15px_40px_-25px_rgba(50,45,80,.2)] backdrop-blur-xl transition-transform duration-500 group-hover:-translate-y-1">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="grid size-7 place-items-center rounded-lg bg-[#F4E8DB]">
@@ -162,7 +160,7 @@ function AuditVisual() {
             <p className="text-[8px] text-ink-soft">Vue d'ensemble</p>
           </div>
         </div>
-        <span className="rounded-full bg-[#DDF1E7] px-2 py-1 text-[8px] font-medium text-[#397A5A]">
+        <span className="rounded-full bg-[#DDF1E7] px-2 py-0.5 text-[8px] font-medium text-[#397A5A]">
           Analyse
         </span>
       </div>
@@ -231,11 +229,11 @@ function AuditVisual() {
 
 function PhoneVisual() {
   return (
-    <div className="relative mx-auto flex h-[178px] w-full max-w-[310px] items-center justify-center overflow-hidden">
+    <div className="relative mx-auto flex h-[175px] w-full max-w-[310px] items-center justify-center overflow-hidden">
       <motion.div
         animate={{ y: [0, -5, 0], rotate: [-2, 0, -2] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        className="relative h-[168px] w-[105px] rounded-[22px] border-[3px] border-[#38343E] bg-[#25232B] p-[5px] shadow-[0_18px_35px_-15px_rgba(30,25,45,.45)]"
+        className="relative h-[165px] w-[105px] rounded-[22px] border-[3px] border-[#38343E] bg-[#25232B] p-[5px] shadow-[0_18px_35px_-15px_rgba(30,25,45,.45)]"
       >
         <div className="relative h-full overflow-hidden rounded-[16px] bg-[#F7F3EE] px-2 pt-5">
           <div className="absolute left-1/2 top-1.5 h-1 w-7 -translate-x-1/2 rounded-full bg-[#38343E]" />
@@ -359,7 +357,7 @@ function SocialVisual() {
   ];
 
   return (
-    <div className="relative mx-auto flex h-[178px] w-full max-w-[310px] items-center justify-center overflow-hidden">
+    <div className="relative mx-auto flex h-[175px] w-full max-w-[310px] items-center justify-center overflow-hidden">
       <div className="absolute size-32 rounded-full border border-dashed border-ink/10" />
       <div className="absolute size-24 rounded-full border border-ink/10" />
       <div className="absolute size-16 rounded-full bg-gradient-to-br from-[#F6D8D0]/80 via-[#DCCCF4]/70 to-[#C6E6E0]/80 blur-[1px]" />
@@ -413,19 +411,19 @@ function SocialVisual() {
   );
 }
 
-/* SERVICE CARD */
+/* OFFRES (3 CARTES GLASSMORPHISM) */
 
 const services = [
   {
-    number: "01",
-    eyebrow: "Analyse & recommandations",
+    tag: "Analyse & Audit",
     title: "Audit Google Ads",
     description:
-      "Une analyse approfondie de votre compte pour identifier les points à améliorer et les opportunités de croissance.",
+      "Une analyse approfondie de votre compte pour identifier les points de fuite, réduire les coûts et révéler vos leviers de rentabilité.",
     href: "/reservation",
     icon: BarChart3,
     visual: AuditVisual,
     accent: "bg-[#C6B4ED]",
+    glow: "from-[#C6B4ED]/15 to-transparent",
     points: [
       "Analyse de la structure du compte",
       "Étude des CPC et conversions",
@@ -434,36 +432,36 @@ const services = [
     action: "Réserver mon audit",
   },
   {
-    number: "02",
-    eyebrow: "Pilotage & optimisation",
+    tag: "Pilotage Mensuel",
     title: "Gestion mensuelle Google Ads",
     description:
-      "Un accompagnement régulier pour suivre, analyser et optimiser vos campagnes dans la durée.",
+      "Un accompagnement continu pour suivre, analyser et optimiser vos campagnes au quotidien et faire grimper vos résultats.",
     href: "/services/google-ads",
     icon: TrendingUp,
     visual: PhoneVisual,
     accent: "bg-[#A8D9C4]",
+    glow: "from-[#A8D9C4]/15 to-transparent",
     points: [
       "Suivi hebdomadaire des campagnes",
       "Deux rendez-vous de suivi par mois",
-      "Optimisations et reporting",
+      "Optimisations continues & reporting",
     ],
     action: "Découvrir l'accompagnement",
   },
   {
-    number: "03",
-    eyebrow: "Visibilité & communauté",
+    tag: "Visibilité & Marque",
     title: "Gestion des réseaux sociaux",
     description:
-      "Une présence digitale cohérente pour faire rayonner votre marque sur les plateformes adaptées à votre audience.",
+      "Une présence digitale stratégique et impactante pour faire rayonner votre marque sur les plateformes adaptées à votre audience.",
     href: "/reseaux-sociaux",
     icon: Instagram,
     visual: SocialVisual,
     accent: "bg-[#E8BDB3]",
+    glow: "from-[#E8BDB3]/15 to-transparent",
     points: [
-      "Stratégie adaptée aux plateformes",
-      "Développement de votre visibilité",
-      "Présence cohérente de votre marque",
+      "Stratégie sur-mesure par plateforme",
+      "Création de contenu engageant",
+      "Développement de communauté engagée",
     ],
     action: "Découvrir l'offre",
   },
@@ -473,7 +471,7 @@ function ServicesPanel() {
   return (
     <section id="expertises" className="px-5 pb-20 pt-8 sm:px-8 sm:pb-24">
       <div className="mx-auto max-w-6xl">
-        <Reveal className="mb-7 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
+        <Reveal className="mb-10 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
           <div>
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-soft">
               Nos expertises
@@ -484,94 +482,92 @@ function ServicesPanel() {
             </h2>
           </div>
           <p className="max-w-xs text-[13px] leading-relaxed text-ink-soft">
-            Des solutions adaptées à vos ambitions et à votre développement.
+            Des solutions sur-mesure adaptées à vos ambitions et pensées pour votre développement.
           </p>
         </Reveal>
 
-        <Reveal>
-          <div className="relative overflow-hidden rounded-[28px] border border-white/85 bg-white/35 p-4 shadow-[0_25px_70px_-45px_rgba(30,35,60,.3)] backdrop-blur-2xl sm:p-7">
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -right-20 -top-24 size-64 rounded-full bg-[#D8C9F2]/30 blur-[80px]"
-            />
-            <div
-              aria-hidden
-              className="pointer-events-none absolute -bottom-24 left-1/4 size-64 rounded-full bg-[#F2D4C4]/25 blur-[80px]"
-            />
+        {/* Grille des 3 Cartes Liquid Glass */}
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+          {services.map((service, index) => {
+            const Visual = service.visual;
 
-            <div className="relative grid grid-cols-1 divide-y divide-ink/10 md:grid-cols-3 md:divide-x md:divide-y-0">
-              {services.map((service, index) => {
-                const Visual = service.visual;
+            return (
+              <motion.article
+                key={service.title}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{
+                  duration: 0.65,
+                  delay: index * 0.12,
+                  ease,
+                }}
+                className="group relative flex flex-col overflow-hidden rounded-[26px] border border-white/80 bg-gradient-to-b from-white/70 via-white/45 to-white/30 p-6 shadow-[0_20px_50px_-25px_rgba(25,25,50,0.12)] backdrop-blur-2xl transition-all duration-300 hover:-translate-y-1.5 hover:border-white hover:bg-white/75 hover:shadow-[0_30px_70px_-20px_rgba(25,25,50,0.18)]"
+              >
+                {/* Lueur interne Liquid Glass */}
+                <div
+                  aria-hidden
+                  className={`pointer-events-none absolute inset-x-0 top-0 h-32 bg-gradient-to-b ${service.glow} opacity-60 transition-opacity duration-300 group-hover:opacity-100`}
+                />
 
-                return (
-                  <motion.article
-                    key={service.number}
-                    initial={{ opacity: 0, y: 14 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{
-                      duration: 0.6,
-                      delay: index * 0.12,
-                      ease,
-                    }}
-                    className="group flex min-w-0 flex-col px-3 py-6 first:pt-3 last:pb-3 md:px-5 md:py-3"
+                {/* En-tête : Tag de l'offre + Icône */}
+                <div className="relative z-10 flex items-center justify-between">
+                  <span className="rounded-full border border-white/80 bg-white/70 px-3 py-1 font-mono text-[10px] font-semibold tracking-wider text-ink shadow-xs backdrop-blur-md">
+                    {service.tag}
+                  </span>
+                  <span
+                    className={`grid size-9 place-items-center rounded-xl ${service.accent} text-ink shadow-sm transition-transform duration-300 group-hover:scale-105`}
                   >
-                    <div className="flex items-center justify-between">
-                      <span className="font-mono text-[10px] tracking-[0.18em] text-ink-soft">
-                        SERVICE {service.number}
-                      </span>
-                      <span
-                        className={`grid size-9 place-items-center rounded-xl ${service.accent} text-ink`}
+                    <service.icon size={17} strokeWidth={1.75} />
+                  </span>
+                </div>
+
+                {/* Visuel interactif */}
+                <div className="relative z-10 mt-5 rounded-2xl border border-white/60 bg-gradient-to-br from-white/80 to-white/40 p-2 shadow-inner backdrop-blur-md">
+                  <Visual />
+                </div>
+
+                {/* Titre & Description */}
+                <div className="relative z-10 mt-5 flex-1">
+                  <h3 className="font-display text-[20px] font-semibold leading-[1.2] tracking-[-0.035em] text-ink">
+                    {service.title}
+                  </h3>
+                  <p className="mt-2.5 text-[12.5px] leading-[1.65] text-ink-soft">
+                    {service.description}
+                  </p>
+
+                  {/* Liste des points */}
+                  <ul className="mt-5 space-y-2.5 border-t border-ink/5 pt-4">
+                    {service.points.map((point) => (
+                      <li
+                        key={point}
+                        className="flex items-start gap-2 text-[11px] leading-relaxed text-ink-soft"
                       >
-                        <service.icon size={17} strokeWidth={1.5} />
-                      </span>
-                    </div>
+                        <span className="mt-0.5 grid size-4 shrink-0 place-items-center rounded-full bg-[#A8D9C4]/40 text-emerald-800">
+                          <Check size={10} />
+                        </span>
+                        <span>{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
 
-                    <div className="mt-4 rounded-2xl bg-gradient-to-br from-white/65 to-white/20 px-2">
-                      <Visual />
-                    </div>
-
-                    <p className="mt-5 text-[9px] font-semibold uppercase tracking-[0.15em] text-ink-soft">
-                      {service.eyebrow}
-                    </p>
-
-                    <h3 className="mt-2 min-h-[52px] font-display text-[20px] font-semibold leading-[1.15] tracking-[-0.045em] text-ink">
-                      {service.title}
-                    </h3>
-
-                    <p className="mt-3 min-h-[76px] text-[12px] leading-[1.7] text-ink-soft">
-                      {service.description}
-                    </p>
-
-                    <ul className="mt-4 space-y-2.5">
-                      {service.points.map((point) => (
-                        <li
-                          key={point}
-                          className="flex items-start gap-2 text-[10px] leading-relaxed text-ink-soft"
-                        >
-                          <span className="mt-0.5 grid size-4 shrink-0 place-items-center rounded-full bg-[#A8D9C4]/35 text-emerald-800">
-                            <Check size={10} />
-                          </span>
-                          {point}
-                        </li>
-                      ))}
-                    </ul>
-
-                    <Link
-                      to={service.href}
-                      className="group/link mt-6 inline-flex items-center justify-between border-t border-ink/10 pt-4 text-[10px] font-semibold text-ink"
-                    >
-                      {service.action}
-                      <span className="grid size-8 place-items-center rounded-full bg-ink text-white transition-transform duration-300 group-hover/link:translate-x-1">
-                        <ChevronRight size={15} />
-                      </span>
-                    </Link>
-                  </motion.article>
-                );
-              })}
-            </div>
-          </div>
-        </Reveal>
+                {/* Bouton CTA vers la page */}
+                <div className="relative z-10 mt-6 border-t border-ink/10 pt-4">
+                  <Link
+                    to={service.href}
+                    className="group/link flex items-center justify-between text-[11px] font-semibold text-ink"
+                  >
+                    <span>{service.action}</span>
+                    <span className="grid size-8 place-items-center rounded-full bg-ink text-white transition-transform duration-300 group-hover/link:translate-x-1">
+                      <ChevronRight size={15} />
+                    </span>
+                  </Link>
+                </div>
+              </motion.article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
@@ -583,33 +579,47 @@ function ContactSection() {
   return (
     <section id="contact" className="relative overflow-hidden px-6 py-12 sm:py-16">
       <Reveal className="relative mx-auto max-w-5xl overflow-hidden rounded-[28px] border border-white/75 bg-white/40 px-6 py-10 text-center shadow-[0_25px_70px_-40px_rgba(30,35,60,.3)] backdrop-blur-2xl sm:px-12 sm:py-14">
-        <div className="mx-auto grid size-11 place-items-center rounded-2xl border border-white bg-white/65 shadow-sm">
-          <MessageCircle size={20} className="text-ink" />
-        </div>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -left-20 -top-20 size-72 rounded-full bg-lilac/25 blur-[90px]"
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -bottom-20 -right-20 size-72 rounded-full bg-coral/25 blur-[90px]"
+        />
 
-        <span className="mt-5 block font-mono text-[10px] uppercase tracking-[0.2em] text-ink-soft">
-          Un projet particulier ?
-        </span>
-
-        <h2 className="mx-auto mt-3 max-w-3xl font-display text-[clamp(2rem,4.5vw,3.4rem)] font-semibold leading-[1.04] tracking-[-0.05em] text-ink">
-          Votre projet ne rentre
-          <span className="block font-light text-ink-soft">
-            dans aucune case ?
+        <div className="relative z-10">
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-ink-soft">
+            Contact
           </span>
-        </h2>
+          <h2 className="mx-auto mt-2 max-w-xl font-display text-3xl font-light tracking-[-0.04em] text-ink sm:text-4xl">
+            Un projet digital en tête ?{" "}
+            <span className="text-ink-soft">Parlons-en.</span>
+          </h2>
+          <p className="mx-auto mt-3 max-w-md text-[13px] leading-relaxed text-ink-soft">
+            Échangeons sur vos enjeux d'acquisition, votre présence sur les réseaux et les opportunités pour votre marque.
+          </p>
 
-        <p className="mx-auto mt-4 max-w-xl text-[13px] leading-relaxed text-ink-soft">
-          Présentez-nous votre besoin : nous étudierons ensemble la meilleure
-          façon de vous accompagner.
-        </p>
-
-        <a
-          href="mailto:kenshodigitalstudio@gmail.com?subject=Parlons%20de%20mon%20projet"
-          className="group mt-7 inline-flex items-center gap-3 rounded-full bg-ink px-6 py-3 text-[12px] font-semibold text-white shadow-lg transition-all hover:-translate-y-1"
-        >
-          Échanger avec Kenshō
-          <ArrowUpRight size={14} />
-        </a>
+          <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Link
+              to="/reservation"
+              className="group inline-flex items-center gap-2 rounded-full bg-ink px-6 py-3 text-[12px] font-semibold text-white shadow-lg transition-all duration-300 hover:-translate-y-0.5"
+            >
+              Réserver un premier échange
+              <ChevronRight
+                size={14}
+                className="transition-transform group-hover:translate-x-1"
+              />
+            </Link>
+            <a
+              href="mailto:kenshodigitalstudio@gmail.com"
+              className="inline-flex items-center gap-2 rounded-full border border-white/80 bg-white/60 px-6 py-3 text-[12px] font-semibold text-ink shadow-sm backdrop-blur-xl transition-all hover:-translate-y-0.5 hover:bg-white/80"
+            >
+              Écrire directement par e-mail
+              <ArrowUpRight size={14} />
+            </a>
+          </div>
+        </div>
       </Reveal>
     </section>
   );
@@ -622,6 +632,7 @@ function Index() {
     <main className="relative min-h-screen overflow-x-hidden bg-paper pb-0 text-ink">
       <Nav />
 
+      {/* Halos d'ambiance */}
       <div
         aria-hidden
         className="pointer-events-none fixed inset-0 -z-10 overflow-hidden"
@@ -649,10 +660,31 @@ function Index() {
         </div>
 
         <div className="mx-auto max-w-6xl text-center">
+          {/* LOGO KENSHO STUDIO AU-DESSUS DU TITRE */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, ease }}
+            className="inline-flex items-center gap-2.5 rounded-full border border-white/85 bg-white/60 py-1.5 pl-2 pr-4 shadow-[0_8px_25px_-10px_rgba(25,25,50,0.1)] backdrop-blur-xl"
+          >
+            <img
+              src="/favicon.png"
+              alt="Logo Kenshō Studio"
+              className="size-6 rounded-full object-contain shadow-xs"
+            />
+            <span className="font-display text-xs font-semibold tracking-wide text-ink">
+              Kenshō Studio
+            </span>
+            <span className="text-ink-soft/40">•</span>
+            <span className="text-[10px] font-mono uppercase tracking-wider text-electric font-medium">
+              Performance & Croissance
+            </span>
+          </motion.div>
+
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.65, ease }}
+            transition={{ duration: 0.65, delay: 0.08, ease }}
           >
             <DynamicHeadline />
           </motion.div>
@@ -660,7 +692,7 @@ function Index() {
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.15, ease }}
+            transition={{ duration: 0.6, delay: 0.18, ease }}
             className="mx-auto mt-5 max-w-[540px] text-[13px] leading-relaxed text-ink-soft sm:text-[15px]"
           >
             Kenshō Studio accompagne les entreprises dans leur développement
@@ -671,7 +703,7 @@ function Index() {
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.25, ease }}
+            transition={{ duration: 0.6, delay: 0.28, ease }}
             className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row"
           >
             <a
