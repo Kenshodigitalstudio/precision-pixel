@@ -40,27 +40,15 @@ function WhatsAppButton() {
         <span className="kensho-whatsapp-glass" />
         <span className="kensho-whatsapp-shine" />
 
-        {/* Icône WhatsApp corrigée */}
-        <svg
-          viewBox="0 0 24 24"
+        {/* Logo WhatsApp officiel */}
+        <img
+          src="https://cdn.simpleicons.org/whatsapp/238c58"
+          alt=""
+          aria-hidden="true"
           width="29"
           height="29"
-          fill="none"
-          aria-hidden="true"
           className="kensho-whatsapp-icon"
-        >
-          <path
-            d="M20.1 11.7a8.1 8.1 0 0 1-12 7.1L3 20l1.3-4.8A8.1 8.1 0 1 1 20.1 11.7Z"
-            stroke="currentColor"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M9 8.5c.2-.4.4-.4.7-.4h.4c.2 0 .3.1.4.4l.7 1.7c.1.2 0 .4-.1.6l-.5.6c-.2.2-.2.3-.1.5.5.9 1.2 1.6 2.1 2.1.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.6-.1l1.6.8c.2.1.3.2.3.4 0 .3-.2 1.1-.7 1.5-.5.4-1.1.6-1.7.5-1-.1-2.3-.7-3.7-1.9-1.1-1-1.9-2.3-2.1-3.3-.2-.9.2-1.7.9-2.5Z"
-            fill="currentColor"
-          />
-        </svg>
+        />
 
         <span className="kensho-whatsapp-status" />
       </span>
@@ -195,6 +183,10 @@ function WhatsAppButton() {
         .kensho-whatsapp-icon {
           position: relative;
           z-index: 2;
+          display: block;
+          width: 29px;
+          height: 29px;
+          object-fit: contain;
           transition: transform .4s cubic-bezier(.2,.8,.2,1);
         }
 
