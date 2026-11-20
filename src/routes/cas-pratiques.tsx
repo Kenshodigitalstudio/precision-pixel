@@ -336,7 +336,9 @@ function CaseCard({
                   Projection indicative
                 </span>
               </div>
-              <span className="text-[9px] text-ink-soft">Données fictives</span>
+              <span className="text-[9px] text-ink-soft">
+                Données fictives
+              </span>
             </div>
           </div>
 
@@ -376,15 +378,138 @@ function CasPratiques() {
       <Nav />
 
       {/* HERO */}
-      <section className="px-5 pb-16 pt-32 text-center sm:px-8 sm:pt-40">
+      <section className="relative isolate overflow-hidden px-5 pb-16 pt-32 text-center sm:px-8 sm:pt-40">
+        {/* Graphique de performance en filigrane */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 mx-auto h-[560px] max-w-[1200px] overflow-hidden"
+        >
+          <svg
+            viewBox="0 0 1200 560"
+            preserveAspectRatio="xMidYMid meet"
+            className="absolute inset-0 h-full w-full opacity-50 blur-[1.5px]"
+          >
+            <defs>
+              <linearGradient
+                id="heroChartLine"
+                x1="0"
+                y1="0"
+                x2="1"
+                y2="0"
+              >
+                <stop offset="0%" stopColor="#E7A99B" stopOpacity="0" />
+                <stop offset="28%" stopColor="#DCAFA5" stopOpacity=".45" />
+                <stop offset="58%" stopColor="#AD8BD7" stopOpacity=".72" />
+                <stop offset="100%" stopColor="#79BDA2" stopOpacity=".08" />
+              </linearGradient>
+
+              <linearGradient
+                id="heroChartArea"
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="1"
+              >
+                <stop offset="0%" stopColor="#AD8BD7" stopOpacity=".16" />
+                <stop offset="100%" stopColor="#AD8BD7" stopOpacity="0" />
+              </linearGradient>
+
+              <filter id="heroChartGlow">
+                <feGaussianBlur stdDeviation="9" />
+              </filter>
+
+              <mask id="heroChartFade">
+                <linearGradient
+                  id="heroFadeMask"
+                  x1="0"
+                  y1="0"
+                  x2="0"
+                  y2="1"
+                >
+                  <stop offset="0%" stopColor="white" stopOpacity=".05" />
+                  <stop offset="35%" stopColor="white" stopOpacity=".8" />
+                  <stop offset="75%" stopColor="white" stopOpacity=".65" />
+                  <stop offset="100%" stopColor="white" stopOpacity="0" />
+                </linearGradient>
+                <rect width="1200" height="560" fill="url(#heroFadeMask)" />
+              </mask>
+            </defs>
+
+            <g mask="url(#heroChartFade)">
+              {[110, 190, 270, 350, 430].map((y) => (
+                <line
+                  key={y}
+                  x1="60"
+                  y1={y}
+                  x2="1140"
+                  y2={y}
+                  stroke="#8D8298"
+                  strokeOpacity=".13"
+                  strokeDasharray="3 10"
+                />
+              ))}
+
+              <path
+                d="M40 405 C145 390 165 345 260 365 S390 315 470 330 S590 255 675 285 S800 220 875 240 S1015 135 1160 105"
+                fill="none"
+                stroke="#AD8BD7"
+                strokeWidth="18"
+                strokeLinecap="round"
+                filter="url(#heroChartGlow)"
+                opacity=".24"
+              />
+
+              <path
+                d="M40 405 C145 390 165 345 260 365 S390 315 470 330 S590 255 675 285 S800 220 875 240 S1015 135 1160 105 L1160 500 L40 500 Z"
+                fill="url(#heroChartArea)"
+              />
+
+              <motion.path
+                d="M40 405 C145 390 165 345 260 365 S390 315 470 330 S590 255 675 285 S800 220 875 240 S1015 135 1160 105"
+                fill="none"
+                stroke="url(#heroChartLine)"
+                strokeWidth="3"
+                strokeLinecap="round"
+                strokeDasharray="1500"
+                initial={{ strokeDashoffset: 1500, opacity: 0 }}
+                animate={{ strokeDashoffset: 0, opacity: 1 }}
+                transition={{
+                  duration: 2.2,
+                  delay: 0.35,
+                  ease,
+                }}
+              />
+
+              {[
+                [260, 365],
+                [470, 330],
+                [675, 285],
+                [875, 240],
+                [1160, 105],
+              ].map(([cx, cy], i) => (
+                <circle
+                  key={i}
+                  cx={cx}
+                  cy={cy}
+                  r="5"
+                  fill={i % 2 === 0 ? "#DCAFA5" : "#AD8BD7"}
+                  opacity=".38"
+                />
+              ))}
+            </g>
+          </svg>
+
+          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-paper" />
+          <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-t from-transparent to-paper/80" />
+        </div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.75, ease }}
-          className="mx-auto max-w-5xl"
+          className="relative mx-auto max-w-5xl"
         >
-          <span className="inline-flex items-center gap-2 rounded-full border border-lilac/30 bg-lilac/15 px-4 py-2 text-[10px] font-bold uppercase tracking-[.16em] text-ink">
-            <Sparkles size={13} />
+          <span className="inline-flex items-center rounded-full border border-lilac/30 bg-white/55 px-4 py-2 text-[10px] font-bold uppercase tracking-[.16em] text-ink shadow-[0_8px_30px_-18px_rgba(50,35,70,.25)] backdrop-blur-xl">
             Cas pratiques & simulations
           </span>
 
