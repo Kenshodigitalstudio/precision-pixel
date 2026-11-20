@@ -7,6 +7,7 @@ import {
   Building2,
   ShoppingBag,
   Store,
+  UtensilsCrossed,
   Target,
   Clock3,
   LineChart,
@@ -38,6 +39,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 const cases = [
   {
     number: "01",
+    slug: "immobilier",
     category: "Immobilier",
     title: "Générer des prospects qualifiés.",
     description:
@@ -65,6 +67,7 @@ const cases = [
   },
   {
     number: "02",
+    slug: "e-commerce",
     category: "E-commerce",
     title: "Transformer les clics en ventes.",
     description:
@@ -92,6 +95,7 @@ const cases = [
   },
   {
     number: "03",
+    slug: "entreprise-locale",
     category: "Entreprise locale",
     title: "Attirer davantage de clients.",
     description:
@@ -115,6 +119,34 @@ const cases = [
       "Mots-clés prioritaires",
       "Optimisation des annonces",
       "Analyse des appels entrants",
+    ],
+  },
+  {
+    number: "04",
+    slug: "restauration",
+    category: "Restauration",
+    title: "Remplir davantage de tables.",
+    description:
+      "Développer la visibilité d'un restaurant, attirer de nouveaux clients et générer davantage de réservations grâce à des campagnes Google Ads ciblées sur sa zone de chalandise.",
+    image:
+      "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1400&q=85",
+    imageAlt: "Restaurant élégant avec une table dressée",
+    icon: UtensilsCrossed,
+    color: "#8CCBB2",
+    pale: "#E8F5EF",
+    dark: "#4F9C7C",
+    metrics: [
+      { value: "+55 %", label: "Réservations" },
+      { value: "−30 %", label: "Coût par contact" },
+      { value: "+42 %", label: "Visites web" },
+    ],
+    chart: [16, 22, 25, 34, 39, 45, 53, 59, 64, 73, 82, 93],
+    chartLabel: "Évolution des réservations",
+    strategy: [
+      "Ciblage géographique local",
+      "Campagnes sur les recherches restaurant",
+      "Mise en avant des spécialités",
+      "Suivi des appels et réservations",
     ],
   },
 ];
@@ -197,11 +229,12 @@ function CaseCard({
 
   return (
     <motion.article
+      id={item.slug}
       initial={{ opacity: 0, y: 35 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.1 }}
       transition={{ duration: 0.75, delay: index * 0.08, ease }}
-      className="group overflow-hidden rounded-[30px] border border-white/80 bg-white/60 shadow-[0_25px_70px_-42px_rgba(30,25,45,.25)] backdrop-blur-xl"
+      className="group scroll-mt-28 overflow-hidden rounded-[30px] border border-white/80 bg-white/60 shadow-[0_25px_70px_-42px_rgba(30,25,45,.25)] backdrop-blur-xl"
     >
       {/* IMAGE + IDENTITÉ DU SECTEUR */}
       <div className="relative h-[230px] overflow-hidden sm:h-[290px]">
@@ -361,6 +394,13 @@ function CaseCard({
 }
 
 function CasPratiques() {
+  const industries = [
+    { label: "Immobilier", href: "#immobilier" },
+    { label: "E-commerce", href: "#e-commerce" },
+    { label: "Entreprise locale", href: "#entreprise-locale" },
+    { label: "Restauration", href: "#restauration" },
+  ];
+
   return (
     <main className="relative min-h-screen overflow-x-clip bg-paper text-ink">
       <div
@@ -378,16 +418,16 @@ function CasPratiques() {
       <Nav />
 
       {/* HERO */}
-      <section className="relative isolate overflow-hidden px-5 pb-16 pt-32 text-center sm:px-8 sm:pt-40">
-        {/* Graphique de performance en filigrane */}
+      <section className="relative isolate overflow-hidden px-5 pb-24 pt-36 text-center sm:px-8 sm:pt-44">
+        {/* GRAPHIQUE EN FILIGRANE */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-0 -z-10 mx-auto h-[560px] max-w-[1200px] overflow-hidden"
+          className="pointer-events-none absolute inset-x-0 top-0 -z-10 mx-auto h-[620px] max-w-[1300px] overflow-hidden"
         >
           <svg
             viewBox="0 0 1200 560"
             preserveAspectRatio="xMidYMid meet"
-            className="absolute inset-0 h-full w-full opacity-50 blur-[1.5px]"
+            className="absolute inset-0 h-full w-full opacity-55 blur-[1.5px]"
           >
             <defs>
               <linearGradient
@@ -397,10 +437,10 @@ function CasPratiques() {
                 x2="1"
                 y2="0"
               >
-                <stop offset="0%" stopColor="#E7A99B" stopOpacity="0" />
-                <stop offset="28%" stopColor="#DCAFA5" stopOpacity=".45" />
-                <stop offset="58%" stopColor="#AD8BD7" stopOpacity=".72" />
-                <stop offset="100%" stopColor="#79BDA2" stopOpacity=".08" />
+                <stop offset="0%" stopColor="#A9D9BD" stopOpacity="0" />
+                <stop offset="35%" stopColor="#79BDA2" stopOpacity=".55" />
+                <stop offset="70%" stopColor="#43A878" stopOpacity=".8" />
+                <stop offset="100%" stopColor="#B5E8CB" stopOpacity=".1" />
               </linearGradient>
 
               <linearGradient
@@ -410,12 +450,12 @@ function CasPratiques() {
                 x2="0"
                 y2="1"
               >
-                <stop offset="0%" stopColor="#AD8BD7" stopOpacity=".16" />
-                <stop offset="100%" stopColor="#AD8BD7" stopOpacity="0" />
+                <stop offset="0%" stopColor="#79BDA2" stopOpacity=".2" />
+                <stop offset="100%" stopColor="#79BDA2" stopOpacity="0" />
               </linearGradient>
 
               <filter id="heroChartGlow">
-                <feGaussianBlur stdDeviation="9" />
+                <feGaussianBlur stdDeviation="10" />
               </filter>
 
               <mask id="heroChartFade">
@@ -443,8 +483,8 @@ function CasPratiques() {
                   y1={y}
                   x2="1140"
                   y2={y}
-                  stroke="#8D8298"
-                  strokeOpacity=".13"
+                  stroke="#79BDA2"
+                  strokeOpacity=".15"
                   strokeDasharray="3 10"
                 />
               ))}
@@ -452,11 +492,11 @@ function CasPratiques() {
               <path
                 d="M40 405 C145 390 165 345 260 365 S390 315 470 330 S590 255 675 285 S800 220 875 240 S1015 135 1160 105"
                 fill="none"
-                stroke="#AD8BD7"
-                strokeWidth="18"
+                stroke="#58AD83"
+                strokeWidth="20"
                 strokeLinecap="round"
                 filter="url(#heroChartGlow)"
-                opacity=".24"
+                opacity=".3"
               />
 
               <path
@@ -474,8 +514,8 @@ function CasPratiques() {
                 initial={{ strokeDashoffset: 1500, opacity: 0 }}
                 animate={{ strokeDashoffset: 0, opacity: 1 }}
                 transition={{
-                  duration: 2.2,
-                  delay: 0.35,
+                  duration: 2.4,
+                  delay: 0.3,
                   ease,
                 }}
               />
@@ -492,71 +532,62 @@ function CasPratiques() {
                   cx={cx}
                   cy={cy}
                   r="5"
-                  fill={i % 2 === 0 ? "#DCAFA5" : "#AD8BD7"}
-                  opacity=".38"
+                  fill="#79BDA2"
+                  opacity=".5"
                 />
               ))}
             </g>
           </svg>
 
-          <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-b from-transparent to-paper" />
-          <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-t from-transparent to-paper/80" />
+          <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-b from-transparent to-paper" />
+          <div className="absolute inset-x-0 top-0 h-36 bg-gradient-to-t from-transparent to-paper/80" />
         </div>
 
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 28 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.75, ease }}
-          className="relative mx-auto max-w-5xl"
+          transition={{ duration: 1, ease }}
+          className="relative mx-auto max-w-6xl"
         >
-          <span className="inline-flex items-center rounded-full border border-lilac/30 bg-white/55 px-4 py-2 text-[10px] font-bold uppercase tracking-[.16em] text-ink shadow-[0_8px_30px_-18px_rgba(50,35,70,.25)] backdrop-blur-xl">
+          <span className="inline-flex items-center rounded-full border border-white/70 bg-white/45 px-5 py-2.5 text-[10px] font-bold uppercase tracking-[.2em] text-ink shadow-[0_8px_30px_-18px_rgba(50,35,70,.2)] backdrop-blur-xl">
             Cas pratiques & simulations
           </span>
 
-          <h1 className="mt-7 font-display text-[clamp(2.8rem,6vw,5.5rem)] font-light leading-[1.04] tracking-[-.06em]">
-            La stratégie derrière
-            <span className="block bg-gradient-to-r from-[#DCAFA5] via-[#AD8BD7] to-[#79BDA2] bg-clip-text font-semibold italic text-transparent">
+          <h1 className="mt-9 font-display text-[clamp(3.4rem,8vw,7.8rem)] font-medium leading-[.94] tracking-[-.075em]">
+            <span className="block text-ink">La stratégie</span>
+            <span className="block text-ink">derrière</span>
+            <span
+              className="mt-2 block bg-gradient-to-b from-[#F0FFF5] via-[#A9E8C2] via-35% to-[#369A68] bg-clip-text font-semibold italic text-transparent"
+              style={{
+                WebkitTextStroke: "1px rgba(255,255,255,0.65)",
+                filter: "drop-shadow(0 8px 18px rgba(65,155,105,0.18))",
+              }}
+            >
               la performance.
             </span>
           </h1>
 
-          <p className="mx-auto mt-6 max-w-2xl text-sm leading-relaxed text-ink-soft sm:text-base">
-            Trois secteurs d'activité. Trois stratégies différentes.
-            Découvrez comment une approche Google Ads structurée peut
-            accompagner le développement d'une entreprise.
-          </p>
+          {/* ACCÈS DIRECT AUX SECTEURS */}
+          <div className="mx-auto mt-12 flex max-w-4xl flex-wrap justify-center gap-3">
+            {industries.map((industry, index) => (
+              <motion.a
+                key={industry.href}
+                href={industry.href}
+                whileHover={{ y: -4, scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: 0.35 + index * 0.1,
+                  duration: 0.5,
+                }}
+                className="rounded-full border border-white/80 bg-white/55 px-6 py-3 text-xs font-semibold text-ink shadow-[0_8px_30px_-16px_rgba(40,35,55,.25)] backdrop-blur-xl transition-colors hover:border-[#79BDA2]/60 hover:bg-[#E8F5EF]/80"
+              >
+                {industry.label}
+              </motion.a>
+            ))}
+          </div>
         </motion.div>
-
-        {/* ENGAGEMENTS */}
-        <div className="mx-auto mt-14 grid max-w-5xl grid-cols-2 gap-3 sm:grid-cols-4 sm:gap-0 sm:divide-x sm:divide-ink/10">
-          {[
-            { icon: Target, title: "Stratégie", description: "sur-mesure" },
-            { icon: BarChart3, title: "Suivi", description: "& optimisation" },
-            { icon: LineChart, title: "Performance", description: "mesurable" },
-            { icon: Clock3, title: "Accompagnement", description: "3 mois minimum" },
-          ].map((item, index) => (
-            <motion.div
-              key={item.title}
-              initial={{ opacity: 0, y: 15 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.08, duration: 0.5 }}
-              className="flex min-h-[105px] flex-col items-center justify-center rounded-2xl border border-white/80 bg-white/40 px-3 py-4 backdrop-blur-xl sm:rounded-none sm:border-0 sm:bg-transparent"
-            >
-              <item.icon
-                size={22}
-                strokeWidth={1.5}
-                className={index === 3 ? "text-[#9B75C9]" : "text-ink"}
-              />
-              <span className="mt-2 text-xs font-semibold text-ink">
-                {item.title}
-              </span>
-              <span className="mt-1 text-[10px] text-ink-soft">
-                {item.description}
-              </span>
-            </motion.div>
-          ))}
-        </div>
       </section>
 
       {/* CAS PRATIQUES */}
