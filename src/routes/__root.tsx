@@ -1,3 +1,4 @@
+
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
@@ -12,7 +13,7 @@ import {
 import appCss from "../styles.css?url";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
 
-/* BULLE FLOTTANTE WHATSAPP OFFICIELLE */
+/* BOUTON WHATSAPP KENSHŌ STUDIO */
 function WhatsAppButton() {
   const phone = "34697637307";
   const message = encodeURIComponent(
@@ -21,36 +22,252 @@ function WhatsAppButton() {
   const whatsappUrl = `https://wa.me/${phone}?text=${message}`;
 
   return (
-    <aside aria-label="Contact WhatsApp" className="contents">
-      <a
-        href={whatsappUrl}
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Discuter avec Kenshō Studio sur WhatsApp"
-        className="group fixed bottom-6 right-6 z-50 flex items-center gap-2.5 rounded-full bg-[#25D366] p-3 text-white shadow-[0_12px_32px_-6px_rgba(37,211,102,0.65)] ring-1 ring-white/30 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:shadow-[0_18px_40px_-6px_rgba(37,211,102,0.85)] active:scale-95 sm:px-4 sm:py-3"
-      >
-        {/* Icône officielle WhatsApp */}
+    <a
+      href={whatsappUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Parlons de votre projet sur WhatsApp"
+      className="kensho-whatsapp group fixed bottom-6 right-6 z-50"
+    >
+      {/* Halo pastel */}
+      <span className="kensho-whatsapp-halo" />
+
+      {/* Capsule de texte */}
+      <span className="kensho-whatsapp-label">
+        <span className="kensho-whatsapp-label-dot" />
+        Parlons de votre projet
+      </span>
+
+      {/* Bouton circulaire */}
+      <span className="kensho-whatsapp-circle">
+        <span className="kensho-whatsapp-glass" />
+        <span className="kensho-whatsapp-shine" />
+
+        {/* Icône WhatsApp */}
         <svg
           viewBox="0 0 24 24"
-          width="26"
-          height="26"
+          width="27"
+          height="27"
           fill="currentColor"
-          className="shrink-0 transition-transform duration-300 group-hover:rotate-6"
+          aria-hidden="true"
+          className="kensho-whatsapp-icon"
         >
           <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m-3.54 4.09c-.19 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.08.15.2 2.09 3.19 5.07 4.47.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.42.25-.69.25-1.29.17-1.42-.08-.13-.27-.2-.56-.35-.29-.15-1.72-.85-1.99-.95-.27-.1-.46-.15-.65.15-.19.3-.74.94-.91 1.13-.17.2-.34.22-.63.08-.29-.15-1.23-.45-2.34-1.44-.86-.77-1.45-1.72-1.62-2.01-.17-.3-.02-.46.13-.61.13-.13.3-.34.44-.51.15-.17.2-.3.3-.49.1-.2.05-.37-.02-.52-.08-.15-.65-1.57-.89-2.15-.24-.56-.48-.48-.66-.49l-.56-.01Z" />
         </svg>
 
-        <span className="hidden font-display text-xs font-semibold tracking-wide sm:inline-block">
-          WhatsApp
-        </span>
+        {/* Petit indicateur discret */}
+        <span className="kensho-whatsapp-status" />
+      </span>
 
-        {/* Petit point indicateur en ligne */}
-        <span className="absolute -top-1 -right-1 flex size-3.5">
-          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-          <span className="relative inline-flex size-3.5 rounded-full border-2 border-white bg-emerald-500" />
-        </span>
-      </a>
-    </aside>
+      <style>{`
+        .kensho-whatsapp {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          gap: 11px;
+          text-decoration: none;
+          isolation: isolate;
+          outline: none;
+          -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Halo pastel diffus */
+        .kensho-whatsapp-halo {
+          position: absolute;
+          inset: -13px;
+          z-index: -1;
+          border-radius: 999px;
+          background: linear-gradient(
+            110deg,
+            rgba(255, 190, 210, .30),
+            rgba(193, 177, 255, .36),
+            rgba(160, 215, 255, .32)
+          );
+          filter: blur(19px);
+          opacity: .55;
+          transition: opacity .4s ease, transform .4s ease;
+          pointer-events: none;
+        }
+
+        /* Capsule qui apparaît au survol */
+        .kensho-whatsapp-label {
+          display: inline-flex;
+          align-items: center;
+          gap: 9px;
+          white-space: nowrap;
+          padding: 12px 17px;
+          border: 1px solid rgba(255,255,255,.85);
+          border-radius: 999px;
+          background: rgba(255,255,255,.68);
+          color: #302b3d;
+          font-size: 12px;
+          font-weight: 600;
+          letter-spacing: -.015em;
+          box-shadow:
+            0 8px 28px rgba(45, 35, 75, .09),
+            0 1px 2px rgba(255,255,255,.9) inset;
+          backdrop-filter: blur(20px) saturate(160%);
+          -webkit-backdrop-filter: blur(20px) saturate(160%);
+          opacity: 0;
+          transform: translateX(9px);
+          pointer-events: none;
+          transition:
+            opacity .35s ease,
+            transform .35s cubic-bezier(.2,.8,.2,1);
+        }
+
+        .kensho-whatsapp-label-dot {
+          width: 7px;
+          height: 7px;
+          flex-shrink: 0;
+          border-radius: 50%;
+          background: #25D366;
+          box-shadow: 0 0 9px rgba(37,211,102,.4);
+        }
+
+        /* Cercle principal */
+        .kensho-whatsapp-circle {
+          position: relative;
+          isolation: isolate;
+          overflow: hidden;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 59px;
+          height: 59px;
+          flex-shrink: 0;
+          border-radius: 50%;
+          border: 1px solid rgba(255,255,255,.9);
+          background: rgba(255,255,255,.38);
+          color: #238c58;
+          box-shadow:
+            0 13px 34px rgba(43, 34, 70, .13),
+            0 4px 12px rgba(255,255,255,.75) inset,
+            0 -2px 6px rgba(100,80,140,.07) inset;
+          backdrop-filter: blur(20px) saturate(180%);
+          -webkit-backdrop-filter: blur(20px) saturate(180%);
+          transition:
+            transform .4s cubic-bezier(.2,.8,.2,1),
+            box-shadow .4s ease,
+            border-color .4s ease;
+        }
+
+        .kensho-whatsapp-glass {
+          position: absolute;
+          inset: 0;
+          z-index: -1;
+          border-radius: inherit;
+          background:
+            radial-gradient(
+              circle at 28% 15%,
+              rgba(255,255,255,.98),
+              transparent 55%
+            ),
+            linear-gradient(
+              145deg,
+              rgba(255,255,255,.45),
+              rgba(226,216,255,.18) 55%,
+              rgba(191,224,255,.25)
+            );
+        }
+
+        .kensho-whatsapp-shine {
+          position: absolute;
+          top: -100%;
+          left: -65%;
+          width: 45%;
+          height: 300%;
+          background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.8),
+            transparent
+          );
+          transform: rotate(28deg);
+          filter: blur(4px);
+          pointer-events: none;
+          transition: transform .8s ease;
+        }
+
+        .kensho-whatsapp-icon {
+          position: relative;
+          z-index: 2;
+          transition: transform .4s cubic-bezier(.2,.8,.2,1);
+        }
+
+        .kensho-whatsapp-status {
+          position: absolute;
+          top: 3px;
+          right: 3px;
+          z-index: 3;
+          width: 11px;
+          height: 11px;
+          border-radius: 50%;
+          border: 2px solid white;
+          background: #25D366;
+          box-shadow: 0 1px 5px rgba(37,211,102,.3);
+        }
+
+        /* Interactions */
+        .kensho-whatsapp:hover .kensho-whatsapp-label,
+        .kensho-whatsapp:focus-visible .kensho-whatsapp-label {
+          opacity: 1;
+          transform: translateX(0);
+        }
+
+        .kensho-whatsapp:hover .kensho-whatsapp-circle {
+          transform: translateY(-3px) scale(1.04);
+          border-color: rgba(255,255,255,1);
+          box-shadow:
+            0 18px 42px rgba(43, 34, 70, .17),
+            0 5px 15px rgba(255,255,255,.85) inset;
+        }
+
+        .kensho-whatsapp:hover .kensho-whatsapp-icon {
+          transform: scale(1.08);
+        }
+
+        .kensho-whatsapp:hover .kensho-whatsapp-shine {
+          transform: translateX(350%) rotate(28deg);
+        }
+
+        .kensho-whatsapp:hover .kensho-whatsapp-halo {
+          opacity: .9;
+          transform: scale(1.08);
+        }
+
+        .kensho-whatsapp:focus-visible .kensho-whatsapp-circle {
+          outline: 3px solid rgba(140,110,220,.6);
+          outline-offset: 4px;
+        }
+
+        @media (hover: none) {
+          .kensho-whatsapp-label {
+            display: none;
+          }
+        }
+
+        @media (max-width: 520px) {
+          .kensho-whatsapp {
+            bottom: 19px;
+            right: 19px;
+          }
+
+          .kensho-whatsapp-circle {
+            width: 55px;
+            height: 55px;
+          }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+          .kensho-whatsapp *,
+          .kensho-whatsapp {
+            transition: none !important;
+            animation: none !important;
+          }
+        }
+      `}</style>
+    </a>
   );
 }
 
