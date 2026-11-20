@@ -595,6 +595,28 @@ function ServicesPanel() {
             );
           })}
         </div>
+
+        {/* LIEN VERS LES CAS PRATIQUES */}
+        <Reveal>
+          <Link
+            to="/cas-pratiques"
+            className="group mx-auto mt-10 flex w-fit flex-col items-center gap-2 rounded-2xl border border-white/80 bg-white/45 px-8 py-5 text-center shadow-[0_15px_40px_-25px_rgba(25,25,50,0.18)] backdrop-blur-xl transition-all duration-300 hover:-translate-y-1 hover:bg-white/70 hover:shadow-lg"
+          >
+            <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-ink-soft">
+              Découvrez notre approche
+            </span>
+            <span className="flex items-center gap-2 font-display text-lg font-medium text-ink">
+              Cas pratiques & simulations
+              <ArrowUpRight
+                size={17}
+                className="transition-transform group-hover:translate-x-1 group-hover:-translate-y-1"
+              />
+            </span>
+            <span className="text-xs text-ink-soft">
+              Découvrez comment nous construisons vos stratégies Google Ads.
+            </span>
+          </Link>
+        </Reveal>
       </div>
     </section>
   );
