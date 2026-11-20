@@ -117,7 +117,7 @@ function DynamicHeadline() {
   );
 }
 
-/* COMPTEURS AVEC ANIMATION D'AUGMENTATION PROGRESSIVE */
+/* COMPTEURS */
 
 function AnimatedStat({
   target,
@@ -138,10 +138,12 @@ function AnimatedStat({
 
     const step = (timestamp: number) => {
       if (!startTimestamp) startTimestamp = timestamp;
+
       const progress = Math.min(
         (timestamp - startTimestamp) / (duration * 1000),
         1
       );
+
       const easeVal = 1 - Math.pow(1 - progress, 3);
       setCount(Math.round(easeVal * target));
 
@@ -370,7 +372,7 @@ function PhoneVisual() {
   );
 }
 
-/* SERVICE VISUAL 03 — SOCIAL MEDIA (COULEURS OFFICIELLES) */
+/* SERVICE VISUAL 03 — SOCIAL MEDIA */
 
 function SocialVisual() {
   const platforms = [
@@ -463,7 +465,7 @@ function SocialVisual() {
   );
 }
 
-/* OFFRES (3 CARTES GLASSMORPHISM SANS EN-TÊTE HAUT) */
+/* OFFRES */
 
 const services = [
   {
@@ -529,7 +531,6 @@ function ServicesPanel() {
           </p>
         </Reveal>
 
-        {/* Grille des 3 Cartes Liquid Glass */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {services.map((service, index) => {
             const Visual = service.visual;
@@ -647,7 +648,13 @@ function ContactSection() {
 
 export default function Index() {
   return (
-    <main className="relative min-h-screen overflow-x-clip bg-paper text-ink">
+    <main className="relative isolate min-h-screen w-full overflow-x-clip bg-paper text-ink">
+      {/* Fond beige uniforme */}
+      <div
+        aria-hidden="true"
+        className="pointer-events-none fixed inset-0 -z-10 bg-paper"
+      />
+
       <Nav />
 
       {/* Halos lumineux d'ambiance */}
