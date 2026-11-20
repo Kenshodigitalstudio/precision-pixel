@@ -29,33 +29,39 @@ function WhatsAppButton() {
       aria-label="Parlons de votre projet sur WhatsApp"
       className="kensho-whatsapp group fixed bottom-6 right-6 z-50"
     >
-      {/* Halo pastel */}
       <span className="kensho-whatsapp-halo" />
 
-      {/* Capsule de texte */}
       <span className="kensho-whatsapp-label">
         <span className="kensho-whatsapp-label-dot" />
         Parlons de votre projet
       </span>
 
-      {/* Bouton circulaire */}
       <span className="kensho-whatsapp-circle">
         <span className="kensho-whatsapp-glass" />
         <span className="kensho-whatsapp-shine" />
 
-        {/* Icône WhatsApp */}
+        {/* Icône WhatsApp corrigée */}
         <svg
           viewBox="0 0 24 24"
-          width="27"
-          height="27"
-          fill="currentColor"
+          width="29"
+          height="29"
+          fill="none"
           aria-hidden="true"
           className="kensho-whatsapp-icon"
         >
-          <path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.816 9.816 0 0 0 12.04 2m.01 1.67c2.2 0 4.26.86 5.82 2.42a8.225 8.225 0 0 1 2.41 5.83c0 4.54-3.7 8.24-8.24 8.24-1.48 0-2.93-.4-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.196 8.196 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24m-3.54 4.09c-.19 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48 0 1.46 1.06 2.88 1.21 3.08.15.2 2.09 3.19 5.07 4.47.71.31 1.26.49 1.69.63.71.23 1.36.2 1.87.12.57-.08 1.76-.72 2.01-1.42.25-.69.25-1.29.17-1.42-.08-.13-.27-.2-.56-.35-.29-.15-1.72-.85-1.99-.95-.27-.1-.46-.15-.65.15-.19.3-.74.94-.91 1.13-.17.2-.34.22-.63.08-.29-.15-1.23-.45-2.34-1.44-.86-.77-1.45-1.72-1.62-2.01-.17-.3-.02-.46.13-.61.13-.13.3-.34.44-.51.15-.17.2-.3.3-.49.1-.2.05-.37-.02-.52-.08-.15-.65-1.57-.89-2.15-.24-.56-.48-.48-.66-.49l-.56-.01Z" />
+          <path
+            d="M20.1 11.7a8.1 8.1 0 0 1-12 7.1L3 20l1.3-4.8A8.1 8.1 0 1 1 20.1 11.7Z"
+            stroke="currentColor"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M9 8.5c.2-.4.4-.4.7-.4h.4c.2 0 .3.1.4.4l.7 1.7c.1.2 0 .4-.1.6l-.5.6c-.2.2-.2.3-.1.5.5.9 1.2 1.6 2.1 2.1.2.1.4.1.5-.1l.7-.8c.2-.2.3-.2.6-.1l1.6.8c.2.1.3.2.3.4 0 .3-.2 1.1-.7 1.5-.5.4-1.1.6-1.7.5-1-.1-2.3-.7-3.7-1.9-1.1-1-1.9-2.3-2.1-3.3-.2-.9.2-1.7.9-2.5Z"
+            fill="currentColor"
+          />
         </svg>
 
-        {/* Petit indicateur discret */}
         <span className="kensho-whatsapp-status" />
       </span>
 
@@ -71,7 +77,6 @@ function WhatsAppButton() {
           -webkit-tap-highlight-color: transparent;
         }
 
-        /* Halo pastel diffus */
         .kensho-whatsapp-halo {
           position: absolute;
           inset: -13px;
@@ -89,7 +94,6 @@ function WhatsAppButton() {
           pointer-events: none;
         }
 
-        /* Capsule qui apparaît au survol */
         .kensho-whatsapp-label {
           display: inline-flex;
           align-items: center;
@@ -125,7 +129,6 @@ function WhatsAppButton() {
           box-shadow: 0 0 9px rgba(37,211,102,.4);
         }
 
-        /* Cercle principal */
         .kensho-whatsapp-circle {
           position: relative;
           isolation: isolate;
@@ -208,7 +211,6 @@ function WhatsAppButton() {
           box-shadow: 0 1px 5px rgba(37,211,102,.3);
         }
 
-        /* Interactions */
         .kensho-whatsapp:hover .kensho-whatsapp-label,
         .kensho-whatsapp:focus-visible .kensho-whatsapp-label {
           opacity: 1;
