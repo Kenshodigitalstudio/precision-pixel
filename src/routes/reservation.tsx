@@ -1,10 +1,12 @@
 
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Outlet, useMatches } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { zodValidator, fallback } from "@tanstack/zod-adapter";
 import { z } from "zod";
 import { Sparkles } from "@/components/landing/Sparkles";
 import { Nav } from "@/components/landing/Nav";
 import { Footer } from "@/components/landing/Footer";
+import { useStripeCheckout } from "@/hooks/useStripeCheckout";
 
 const searchSchema = z.object({
   service: fallback(
@@ -52,11 +54,24 @@ const AUDIT_ITEMS = [
 ];
 
 function ReservationPage() {
+  const matches = useMatches();
+  const isLeaf = matches[matches.length - 1]?.routeId === "/reservation";
   const { service } = Route.useSearch();
   const isTracking = service === "tracking_setup";
   const title = isTracking ? "Installation tracking & tags" : "Audit Google Ads";
   const price = isTracking ? "100 €" : "150 €";
   const duration = isTracking ? "Prestation dédiée" : "1 heure";
+  const priceId = isTracking ? "tracking_setup_onetime" : "audit_flash_onetime";
+
+  const { openCheckout, closeCheckout, isOpen, checkoutElement } = useStripeCheckout();
+
+  const startPayment = () =>
+    openCheckout({
+      priceId,
+      returnUrl: `${window.location.origin}/reservation/confirmation?session_id={CHECKOUT_SESSION_ID}&service=${service}`,
+    });
+
+  if (!isLeaf) return <Outlet />;
 
   return (
     <main className="relative min-h-screen overflow-x-hidden bg-paper text-ink">
@@ -137,6 +152,7 @@ function ReservationPage() {
 
               <button
                 type="button"
+                onClick={startPayment}
                 className="group relative mt-7 inline-flex w-full items-center justify-center gap-3 overflow-hidden rounded-full bg-ink px-7 py-4 text-sm font-semibold text-white shadow-[0_14px_34px_-12px_rgba(35,50,90,0.55)] transition hover:-translate-y-0.5"
               >
                 <span aria-hidden className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
@@ -145,7 +161,7 @@ function ReservationPage() {
               </button>
 
               <p className="mt-4 text-center text-[10px] leading-relaxed text-ink-soft">
-                Réservation et paiement prochainement disponibles.
+                Paiement sécurisé en ligne · Sans abonnement
               </p>
             </div>
           </div>
@@ -260,13 +276,92 @@ function ReservationPage() {
           <p className="mx-auto mt-4 max-w-xl text-sm leading-relaxed text-ink-soft">
             Découvrez notre prestation et les bénéfices de votre audit.
           </p>
-          <button type="button" className="mt-8 inline-flex items-center gap-3 rounded-full bg-ink px-8 py-4 text-sm font-semibold text-white shadow-[0_14px_35px_-12px_rgba(25,35,60,0.45)] transition hover:-translate-y-0.5">
+          <button
+            type="button"
+            onClick={startPayment}
+            className="mt-8 inline-flex items-center gap-3 rounded-full bg-ink px-8 py-4 text-sm font-semibold text-white shadow-[0_14px_35px_-12px_rgba(25,35,60,0.45)] transition hover:-translate-y-0.5"
+          >
             Payer {price} <span>↗</span>
           </button>
         </div>
       </section>
 
       <Footer />
+
+      <CheckoutModal
+        open={isOpen}
+        onClose={closeCheckout}
+        title={title}
+        price={price}
+      >
+        {checkoutElement}
+      </CheckoutModal>
     </main>
+  );
+}
+
+function CheckoutModal({
+  open,
+  onClose,
+  title,
+  price,
+  children,
+}: {
+  open: boolean;
+  onClose: () => void;
+  title: string;
+  price: string;
+  children: React.ReactNode;
+}) {
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") onClose();
+    };
+    document.addEventListener("keydown", onKey);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return (
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-label={`Paiement — ${title}`}
+      onClick={onClose}
+      className="fixed inset-0 z-[100] flex items-start justify-center overflow-y-auto bg-ink/45 px-3 py-3 backdrop-blur-md sm:items-center sm:px-6 sm:py-8"
+    >
+      <div
+        onClick={(event) => event.stopPropagation()}
+        className="flex max-h-[94vh] w-full max-w-xl flex-col overflow-hidden rounded-[1.8rem] border border-white/80 bg-white/85 shadow-[0_40px_120px_-40px_rgba(20,25,60,0.55)] backdrop-blur-2xl"
+      >
+        <div className="flex items-center justify-between gap-4 border-b border-ink/8 px-5 py-4 sm:px-6">
+          <div>
+            <span className="font-mono text-[10px] font-bold uppercase tracking-[0.2em] text-electric">
+              Paiement sécurisé
+            </span>
+            <h2 className="mt-1 text-base font-semibold tracking-tight">{title}</h2>
+          </div>
+          <div className="flex items-center gap-3">
+            <span className="text-lg font-semibold tracking-tight">{price}</span>
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Fermer le paiement"
+              className="grid h-9 w-9 place-items-center rounded-full border border-white bg-white/70 text-ink-soft transition hover:bg-white hover:text-ink"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+        <div className="min-h-0 flex-1 overflow-y-auto px-3 py-4 sm:px-5">{children}</div>
+      </div>
+    </div>
   );
 }

@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CasPratiquesRouteImport } from './routes/cas-pratiques'
 import { Route as CgvRouteImport } from './routes/cgv'
 import { Route as ConfirmationRouteImport } from './routes/confirmation'
 import { Route as MentionsLegalesRouteImport } from './routes/mentions-legales'
@@ -26,6 +27,11 @@ import { Route as ApiPublicPaymentsWebhookRouteImport } from './routes/api/publi
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CasPratiquesRoute = CasPratiquesRouteImport.update({
+  id: '/cas-pratiques',
+  path: '/cas-pratiques',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CgvRoute = CgvRouteImport.update({
@@ -93,6 +99,7 @@ const ApiPublicPaymentsWebhookRoute =
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/cas-pratiques': typeof CasPratiquesRoute
   '/cgv': typeof CgvRoute
   '/confirmation': typeof ConfirmationRoute
   '/mentions-legales': typeof MentionsLegalesRoute
@@ -108,6 +115,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/cas-pratiques': typeof CasPratiquesRoute
   '/cgv': typeof CgvRoute
   '/confirmation': typeof ConfirmationRoute
   '/mentions-legales': typeof MentionsLegalesRoute
@@ -124,6 +132,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/cas-pratiques': typeof CasPratiquesRoute
   '/cgv': typeof CgvRoute
   '/confirmation': typeof ConfirmationRoute
   '/mentions-legales': typeof MentionsLegalesRoute
@@ -141,6 +150,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/cas-pratiques'
     | '/cgv'
     | '/confirmation'
     | '/mentions-legales'
@@ -156,6 +166,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/cas-pratiques'
     | '/cgv'
     | '/confirmation'
     | '/mentions-legales'
@@ -171,6 +182,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/cas-pratiques'
     | '/cgv'
     | '/confirmation'
     | '/mentions-legales'
@@ -187,6 +199,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  CasPratiquesRoute: typeof CasPratiquesRoute
   CgvRoute: typeof CgvRoute
   ConfirmationRoute: typeof ConfirmationRoute
   MentionsLegalesRoute: typeof MentionsLegalesRoute
@@ -207,6 +220,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/cas-pratiques': {
+      id: '/cas-pratiques'
+      path: '/cas-pratiques'
+      fullPath: '/cas-pratiques'
+      preLoaderRoute: typeof CasPratiquesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cgv': {
@@ -310,6 +330,7 @@ const ReservationRouteWithChildren = ReservationRoute._addFileChildren(
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  CasPratiquesRoute: CasPratiquesRoute,
   CgvRoute: CgvRoute,
   ConfirmationRoute: ConfirmationRoute,
   MentionsLegalesRoute: MentionsLegalesRoute,
