@@ -12,6 +12,7 @@ import {
 
 import appCss from "../styles.css?url";
 import { PaymentTestModeBanner } from "@/components/PaymentTestModeBanner";
+import { CookieConsent } from "@/components/landing/CookieConsent";
 
 /* BOUTON WHATSAPP KENSHŌ STUDIO */
 function WhatsAppButton() {
@@ -40,7 +41,6 @@ function WhatsAppButton() {
         <span className="kensho-whatsapp-glass" />
         <span className="kensho-whatsapp-shine" />
 
-        {/* Logo WhatsApp officiel */}
         <img
           src="https://cdn.simpleicons.org/whatsapp/238c58"
           alt=""
@@ -376,6 +376,7 @@ function RootComponent() {
       <PaymentTestModeBanner />
       <Outlet />
       <WhatsAppButton />
+      <CookieConsent />
     </QueryClientProvider>
   );
 }
